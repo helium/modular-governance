@@ -1,0 +1,80 @@
+{
+  "extends": "./tsconfig.root.json",
+  "references": [
+    {
+      "path": "./packages/idls"
+    },
+    {
+      "path": "./packages/fanout-sdk"
+    },
+    {
+      "path": "./packages/spl-utils"
+    },
+    {
+      "path": "./packages/lazy-transactions-sdk"
+    },
+    {
+      "path": "./packages/helium-react-hooks"
+    },
+    {
+      "path": "./packages/currency-utils"
+    },
+    {
+      "path": "./packages/voter-stake-registry-sdk"
+    },
+    {
+      "path": "./packages/distributor-oracle"
+    },
+    {
+      "path": "./packages/metadata-service"
+    },
+    {
+      "path": "./packages/vsr-metadata-service"
+    },
+    {
+      "path": "./packages/fanout-metadata-service"
+    },
+    {
+      "path": "./packages/monitor-service"
+    },
+    {
+      "path": "./packages/migration-service"
+    },
+    {
+      "path": "./packages/hnt-to-rent-service"
+    },
+    {
+      "path": "./packages/treasury-management-sdk"
+    },
+    {
+      "path": "./packages/lazy-distributor-sdk"
+    },
+    {
+      "path": "./packages/helium-sub-daos-sdk"
+    },
+    {
+      "path": "./packages/helium-entity-manager-sdk"
+    },
+    {
+      "path": "./packages/mobile-entity-manager-sdk"
+    },
+    {
+      "path": "./packages/data-credits-sdk"
+    },
+    {
+      "path": "./packages/helium-admin-cli"
+    },
+    {
+      "path": "./packages/circuit-breaker-sdk"
+    },
+    {
+      "path": "./packages/price-oracle-sdk"
+    },
+    {
+      "path": "./packages/hotspot-utils"
+    },
+    {
+      "path": "./packages/hotspot-data-sink"
+    }
+  ]
+}

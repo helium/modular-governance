@@ -1,0 +1,23 @@
+[package]
+name = "proposal"
+version = "0.1.0"
+description = "Created with Anchor"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "proposal"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+default = []
+
+[dependencies]
+anchor-lang = "0.27.0"
+anchor-spl = "0.27.0"
+getrandom = { version = "0.2.9", features = ["custom"] }
+vote-hook-interface = { path = "../vote_hook_interface", features = ["no-entrypoint", "cpi"] }
+solana-program = "=1.14.17"
