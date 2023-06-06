@@ -29,6 +29,7 @@ pub struct Choice {
 #[account]
 #[derive(Default)]
 pub struct ProposalV0 {
+    pub owner: Pubkey,
     pub state: ProposalState,
     pub created_at: i64,
     /// Signer that controls voting and vote weights
@@ -46,6 +47,7 @@ pub struct ProposalV0 {
     pub name: String,
     /// URI to json containing name, description, etc
     pub uri: String,
+    pub tags: Vec<String>,
     pub choices: Vec<Choice>,
     pub bump_seed: u8,
 }

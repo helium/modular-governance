@@ -10,7 +10,7 @@ pub use instructions::*;
 pub use state::*;
 
 #[program]
-pub mod modular_governance {
+pub mod proposal {
     use super::*;
 
     pub fn initialize_proposal_v0(

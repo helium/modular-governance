@@ -14,14 +14,16 @@ pub struct VoteArgsV0 {
 #[instruction(args: VoteArgsV0)]
 pub struct VoteV0<'info> {
     pub vote_controller: Signer<'info>,
+    /// CHECK: Voter to associate this vote with. Not required, but this is useful for indexing
+    pub voter: AccountInfo<'info>,
     /// CHECK: Checked via cpi to the on vote hook, and has_ones
     #[account(mut)]
     pub state_controller: AccountInfo<'info>,
     #[account(
-    has_one = on_vote_hook,
-    has_one = state_controller,
-    has_one = vote_controller
-  )]
+      has_one = on_vote_hook,
+      has_one = state_controller,
+      has_one = vote_controller
+    )]
     pub proposal: Account<'info, ProposalV0>,
     /// CHECK: Checked via has_one
     pub on_vote_hook: AccountInfo<'info>,

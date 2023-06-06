@@ -11,7 +11,8 @@ pub struct InitializeProposalArgsV0 {
     pub name: String,
     pub uri: String,
     pub choices: Vec<Choice>,
-    pub initial_state: ProposalState,
+    // Tags which can be used to filter proposals
+    pub tags: Vec<String>,
 }
 
 #[derive(Accounts)]
@@ -19,10 +20,12 @@ pub struct InitializeProposalArgsV0 {
 pub struct InitializeProposalV0<'info> {
     #[account(mut)]
     pub payer: Signer<'info>,
+    /// Every proposal must have an owner to prevent seed collision
+    pub owner: Signer<'info>,
     #[account(
     init,
     payer = payer,
-    seeds = [b"proposal", &args.seed[..]],
+    seeds = [b"proposal", owner.key().as_ref(), &args.seed[..]],
     space = 8 + 60 + args.seed.len() + ProposalV0::INIT_SPACE + args.choices.len() * Choice::INIT_SPACE,
     bump
   )]
@@ -32,7 +35,9 @@ pub struct InitializeProposalV0<'info> {
 
 pub fn handler(ctx: Context<InitializeProposalV0>, args: InitializeProposalArgsV0) -> Result<()> {
     ctx.accounts.proposal.set_inner(ProposalV0 {
-        state: args.initial_state,
+        owner: ctx.accounts.owner.key(),
+        state: ProposalState::Voting,
+        tags: args.tags,
         created_at: Clock::get()?.unix_timestamp,
         vote_controller: args.vote_controller,
         state_controller: args.state_controller,

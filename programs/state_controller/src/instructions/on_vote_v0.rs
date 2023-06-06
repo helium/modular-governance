@@ -32,28 +32,19 @@ pub struct OnVoteV0<'info> {
 
 pub fn handler(ctx: Context<OnVoteV0>, _args: VoteArgsV0) -> Result<()> {
     let proposal = ctx.accounts.proposal.clone().into_inner();
-    if let Some(resolution) = ctx
-        .accounts
-        .state_controller
-        .settings
-        .resolution(&proposal)
-    {
+    if let Some(resolution) = ctx.accounts.state_controller.settings.resolution(&proposal) {
         update_state_v0(
             CpiContext::new_with_signer(
                 ctx.accounts.proposal_program.to_account_info().clone(),
                 UpdateStateV0 {
-                    state_controller: ctx
-                        .accounts
-                        .state_controller
-                        .to_account_info()
-                        .clone(),
+                    state_controller: ctx.accounts.state_controller.to_account_info().clone(),
                     proposal: ctx.accounts.proposal.to_account_info().clone(),
                 },
-                &[resolution_setting_seeds!(
-                    ctx.accounts.state_controller
-                )],
+                &[resolution_setting_seeds!(ctx.accounts.state_controller)],
             ),
-            UpdateStateArgsV0 { new_state: ProposalState::Resolved(resolution) },
+            UpdateStateArgsV0 {
+                new_state: ProposalState::Resolved(resolution),
+            },
         )?;
     }
 
