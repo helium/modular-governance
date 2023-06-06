@@ -9,9 +9,9 @@ pub struct ResolveArgsV0 {
 #[derive(Accounts)]
 #[instruction(args: ResolveArgsV0)]
 pub struct ResolveV0<'info> {
-    pub resolution_controller: Signer<'info>,
+    pub state_controller: Signer<'info>,
     #[account(
-    has_one = resolution_controller,
+    has_one = state_controller,
   )]
     pub proposal: Account<'info, ProposalV0>,
 }

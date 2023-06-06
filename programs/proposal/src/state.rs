@@ -33,11 +33,12 @@ pub struct ProposalV0 {
     pub created_at: i64,
     /// Signer that controls voting and vote weights
     pub vote_controller: Pubkey,
-    /// Settings for resolution. You can either use the default resolution from `resolution` smart contract
+    /// Signer that controls the transitions of `ProposalState`
+    /// You can either use the default `state-controller` smart contract
     /// Or you can implement a program that calls the `resolve_v0` method.
     /// The vote can only be resolved when this `resolution_settings` PDA signs `resolve_v0`. This allows
     /// you to trigger resolution on either (a) a vote, (b) a timestamp, or (c) some custom trigger with clockwork
-    pub resolution_controller: Pubkey,
+    pub state_controller: Pubkey,
     /// Optional program that will be called with `on_vote_v0` after every vote
     /// Defaults to the owner of `resolution_settings`, which allows it to reactively call resolve_v0
     pub on_vote_hook: Pubkey,

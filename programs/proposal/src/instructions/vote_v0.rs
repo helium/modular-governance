@@ -16,10 +16,10 @@ pub struct VoteV0<'info> {
     pub vote_controller: Signer<'info>,
     /// CHECK: Checked via cpi to the on vote hook, and has_ones
     #[account(mut)]
-    pub resolution_controller: AccountInfo<'info>,
+    pub state_controller: AccountInfo<'info>,
     #[account(
     has_one = on_vote_hook,
-    has_one = resolution_controller,
+    has_one = state_controller,
     has_one = vote_controller
   )]
     pub proposal: Account<'info, ProposalV0>,
@@ -50,7 +50,7 @@ pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
             ctx.accounts.on_vote_hook.clone(),
             OnVoteV0 {
                 vote_controller: ctx.accounts.vote_controller.to_account_info().clone(),
-                resolution_controller: ctx.accounts.resolution_controller.clone(),
+                state_controller: ctx.accounts.state_controller.clone(),
                 proposal: ctx.accounts.proposal.to_account_info().clone(),
                 proposal_program: ctx.accounts.proposal_program.to_account_info().clone(),
             },

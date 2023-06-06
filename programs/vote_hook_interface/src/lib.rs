@@ -7,7 +7,7 @@ declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 pub struct OnVoteV0<'info> {
     pub vote_controller: Signer<'info>,
     /// CHECK: Check in your impl
-    pub resolution_controller: AccountInfo<'info>,
+    pub state_controller: AccountInfo<'info>,
     /// CHECK: Check in your impl
     pub proposal: AccountInfo<'info>,
     /// CHECK: Check in your impl

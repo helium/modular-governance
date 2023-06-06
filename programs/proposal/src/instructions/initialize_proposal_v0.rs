@@ -6,7 +6,7 @@ pub struct InitializeProposalArgsV0 {
     /// Allow a custom seed for indexing
     pub seed: Vec<u8>,
     pub vote_controller: Pubkey,
-    pub resolution_settings: Pubkey,
+    pub state_controller: Pubkey,
     pub on_vote_hook: Pubkey,
     pub name: String,
     pub uri: String,
@@ -35,7 +35,7 @@ pub fn handler(ctx: Context<InitializeProposalV0>, args: InitializeProposalArgsV
         state: args.initial_state,
         created_at: Clock::get()?.unix_timestamp,
         vote_controller: args.vote_controller,
-        resolution_controller: args.resolution_settings,
+        state_controller: args.state_controller,
         on_vote_hook: args.on_vote_hook,
         seed: args.seed,
         name: args.name,

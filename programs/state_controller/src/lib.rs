@@ -9,7 +9,7 @@ pub mod state;
 pub use instructions::*;
 
 #[program]
-pub mod resolution {
+pub mod state_controller {
     use super::*;
 
     pub fn on_vote_v0(ctx: Context<OnVoteV0>, args: proposal::VoteArgsV0) -> Result<()> {

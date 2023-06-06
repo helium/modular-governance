@@ -15,9 +15,9 @@ pub struct OnVoteV0<'info> {
     pub vote_controller: Signer<'info>,
     /// CHECK: Checked via cpi to the on vote hook
     #[account(mut)]
-    pub resolution_controller: Account<'info, ResolutionSettingsV0>,
+    pub state_controller: Account<'info, ResolutionSettingsV0>,
     #[account(
-    has_one = resolution_controller,
+    has_one = state_controller,
     has_one = vote_controller,
     constraint = proposal.to_account_info().is_signer,
     constraint = proposal.state == ProposalState::Voting
@@ -34,7 +34,7 @@ pub fn handler(ctx: Context<OnVoteV0>, _args: VoteArgsV0) -> Result<()> {
     let proposal = ctx.accounts.proposal.clone().into_inner();
     if let Some(resolution) = ctx
         .accounts
-        .resolution_controller
+        .state_controller
         .settings
         .resolution(&proposal)
     {
@@ -42,15 +42,15 @@ pub fn handler(ctx: Context<OnVoteV0>, _args: VoteArgsV0) -> Result<()> {
             CpiContext::new_with_signer(
                 ctx.accounts.proposal_program.to_account_info().clone(),
                 ResolveV0 {
-                    resolution_controller: ctx
+                    state_controller: ctx
                         .accounts
-                        .resolution_controller
+                        .state_controller
                         .to_account_info()
                         .clone(),
                     proposal: ctx.accounts.proposal.to_account_info().clone(),
                 },
                 &[resolution_setting_seeds!(
-                    ctx.accounts.resolution_controller
+                    ctx.accounts.state_controller
                 )],
             ),
             ResolveArgsV0 { resolution },
