@@ -2,13 +2,13 @@ use crate::state::*;
 use anchor_lang::prelude::*;
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
-pub struct ResolveArgsV0 {
-    pub resolution: Vec<u16>,
+pub struct UpdateStateArgsV0 {
+    pub new_state: ProposalState,
 }
 
 #[derive(Accounts)]
-#[instruction(args: ResolveArgsV0)]
-pub struct ResolveV0<'info> {
+#[instruction(args: UpdateStateArgsV0)]
+pub struct UpdateStateV0<'info> {
     pub state_controller: Signer<'info>,
     #[account(
     has_one = state_controller,
@@ -16,8 +16,8 @@ pub struct ResolveV0<'info> {
     pub proposal: Account<'info, ProposalV0>,
 }
 
-pub fn handler(ctx: Context<ResolveV0>, args: ResolveArgsV0) -> Result<()> {
-    ctx.accounts.proposal.state = ProposalState::Resolved(args.resolution);
+pub fn handler(ctx: Context<UpdateStateV0>, args: UpdateStateArgsV0) -> Result<()> {
+    ctx.accounts.proposal.state = args.new_state;
 
     Ok(())
 }

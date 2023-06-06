@@ -5,8 +5,8 @@ use proposal::ProposalState;
 use proposal::ProposalV0;
 use proposal::VoteArgsV0;
 use proposal::{
-    cpi::{accounts::ResolveV0, resolve_v0},
-    ResolveArgsV0,
+    cpi::{accounts::UpdateStateV0, update_state_v0},
+    UpdateStateArgsV0,
 };
 
 #[derive(Accounts)]
@@ -38,10 +38,10 @@ pub fn handler(ctx: Context<OnVoteV0>, _args: VoteArgsV0) -> Result<()> {
         .settings
         .resolution(&proposal)
     {
-        resolve_v0(
+        update_state_v0(
             CpiContext::new_with_signer(
                 ctx.accounts.proposal_program.to_account_info().clone(),
-                ResolveV0 {
+                UpdateStateV0 {
                     state_controller: ctx
                         .accounts
                         .state_controller
@@ -53,7 +53,7 @@ pub fn handler(ctx: Context<OnVoteV0>, _args: VoteArgsV0) -> Result<()> {
                     ctx.accounts.state_controller
                 )],
             ),
-            ResolveArgsV0 { resolution },
+            UpdateStateArgsV0 { new_state: ProposalState::Resolved(resolution) },
         )?;
     }
 

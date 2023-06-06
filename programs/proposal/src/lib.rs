@@ -24,8 +24,8 @@ pub mod modular_governance {
         vote_v0::handler(ctx, args)
     }
 
-    pub fn resolve_v0(ctx: Context<ResolveV0>, args: ResolveArgsV0) -> Result<()> {
-        resolve_v0::handler(ctx, args)
+    pub fn update_state_v0(ctx: Context<UpdateStateV0>, args: UpdateStateArgsV0) -> Result<()> {
+        update_state_v0::handler(ctx, args)
     }
 }
 
