@@ -1,11 +1,17 @@
 {
-            "compilerOptions": {
-              "types": ["mocha", "chai"],
-              "typeRoots": ["./node_modules/@types"],
-              "lib": ["es2015"],
-              "module": "commonjs",
-              "target": "es6",
-              "esModuleInterop": true
-            }
-          }
-          
+  "extends": "./tsconfig.root.json",
+  "references": [
+    {
+      "path": "./packages/modular-governance-idls"
+    },
+    {
+      "path": "./packages/organizations-sdk"
+    },
+    {
+      "path": "./packages/proposal-sdk"
+    },
+    {
+      "path": "./packages/state-controller-sdk"
+    }
+  ]
+}

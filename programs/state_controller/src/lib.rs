@@ -10,18 +10,18 @@ pub use instructions::*;
 
 #[program]
 pub mod state_controller {
-    use super::*;
+  use super::*;
 
-    pub fn on_vote_v0(ctx: Context<OnVoteV0>, args: proposal::VoteArgsV0) -> Result<()> {
-        on_vote_v0::handler(ctx, args)
-    }
+  pub fn on_vote_v0(ctx: Context<OnVoteV0>, args: proposal::VoteArgsV0) -> Result<()> {
+    on_vote_v0::handler(ctx, args)
+  }
 
-    pub fn initialize_resolution_settings_v0(
-        ctx: Context<InitializeResolutionSettingsV0>,
-        args: InitializeResolutionSettingsArgsV0,
-    ) -> Result<()> {
-        initialize_resolution_settings_v0::handler(ctx, args)
-    }
+  pub fn initialize_resolution_settings_v0(
+    ctx: Context<InitializeResolutionSettingsV0>,
+    args: InitializeResolutionSettingsArgsV0,
+  ) -> Result<()> {
+    initialize_resolution_settings_v0::handler(ctx, args)
+  }
 }
 
 #[derive(Accounts)]

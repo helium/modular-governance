@@ -1078,6 +1078,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "624a8340c38c1b80fd549087862da4ba43e08858af025b236e509b6649fc13d5"
 
 [[package]]
+name = "organization-wallet"
+version = "0.1.0"
+dependencies = [
+ "anchor-lang",
+ "anchor-spl",
+ "getrandom 0.2.9",
+ "proposal",
+ "solana-program",
+]
+
+[[package]]
 name = "organizations"
 version = "0.1.0"
 dependencies = [

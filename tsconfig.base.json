@@ -13,6 +13,7 @@
     "stripInternal": true,
     "skipLibCheck": true,
     "noEmit": false,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
   }
 }

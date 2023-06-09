@@ -8,14 +8,14 @@ use instructions::*;
 declare_id!("org9nsbSiTCJzeApoS2B3uwjM2gbQH48QbUUrhAAjzG");
 
 #[program]
-pub mod organizations {
+pub mod organization_wallet {
   use super::*;
 
-  pub fn initialize_organization_v0(
-    ctx: Context<InitializeOrganizationV0>,
-    args: InitializeOrganizationArgsV0,
+  pub fn initialize_organization_wallet_v0(
+    ctx: Context<InitializeOrganizationWalletV0>,
+    args: InitializeOrganizationWalletArgsV0,
   ) -> Result<()> {
-    initialize_organization_v0::handler(ctx, args)
+    initialize_organization_wallet_v0::handler(ctx, args)
   }
 
   pub fn initialize_proposal_v0(
