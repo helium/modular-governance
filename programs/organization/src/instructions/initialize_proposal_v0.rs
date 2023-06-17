@@ -23,9 +23,6 @@ pub struct Choice {
 pub struct InitializeProposalArgsV0 {
   /// Allow a custom seed for indexing
   pub seed: Vec<u8>,
-  pub vote_controller: Option<Pubkey>,
-  pub state_controller: Option<Pubkey>,
-  pub on_vote_hook: Option<Pubkey>,
   pub name: String,
   pub uri: String,
   pub choices: Vec<Choice>,
@@ -51,6 +48,8 @@ pub struct InitializeProposalV0<'info> {
     )]
   /// CHECK: Checked via cpi
   pub proposal: AccountInfo<'info>,
+  /// CHECK: Checked via cpi
+  pub proposal_config: AccountInfo<'info>,
   #[account(
       mut,
       has_one = proposal_program,
@@ -68,6 +67,7 @@ pub fn handler(ctx: Context<InitializeProposalV0>, args: InitializeProposalArgsV
       CpiInitializeProposal {
         owner: ctx.accounts.organization.to_account_info(),
         proposal: ctx.accounts.proposal.to_account_info(),
+        proposal_config: ctx.accounts.proposal_config.to_account_info(),
         payer: ctx.accounts.payer.to_account_info(),
         system_program: ctx.accounts.system_program.to_account_info(),
       },
@@ -80,15 +80,6 @@ pub fn handler(ctx: Context<InitializeProposalV0>, args: InitializeProposalArgsV
         .num_proposals
         .to_le_bytes()
         .to_vec(),
-      vote_controller: args
-        .vote_controller
-        .unwrap_or_else(|| ctx.accounts.organization.default_vote_controller),
-      state_controller: args
-        .vote_controller
-        .unwrap_or_else(|| ctx.accounts.organization.default_state_controller),
-      on_vote_hook: args
-        .vote_controller
-        .unwrap_or_else(|| ctx.accounts.organization.default_on_vote_hook),
       name: args.name,
       uri: args.uri,
       choices: args

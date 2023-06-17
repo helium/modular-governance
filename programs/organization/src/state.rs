@@ -6,9 +6,7 @@ pub struct OrganizationV0 {
   pub num_proposals: u32,
   /// Authority to create proposals under this organization
   pub authority: Pubkey,
-  pub default_vote_controller: Pubkey,
-  pub default_state_controller: Pubkey,
-  pub default_on_vote_hook: Pubkey,
+  pub default_proposal_config: Pubkey,
   pub proposal_program: Pubkey,
   #[max_len(200)]
   pub name: String,

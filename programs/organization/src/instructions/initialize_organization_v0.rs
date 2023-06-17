@@ -16,9 +16,7 @@ pub struct Choice {
 pub struct InitializeOrganizationArgsV0 {
   pub name: String,
   pub authority: Pubkey,
-  pub default_vote_controller: Pubkey,
-  pub default_state_controller: Pubkey,
-  pub default_on_vote_hook: Pubkey,
+  pub default_proposal_config: Pubkey,
   pub proposal_program: Pubkey,
 }
 
@@ -48,9 +46,7 @@ pub fn handler(
     authority: args.authority,
     bump_seed: ctx.bumps["organization"],
     num_proposals: 0,
-    default_state_controller: args.default_state_controller,
-    default_vote_controller: args.default_vote_controller,
-    default_on_vote_hook: args.default_on_vote_hook,
+    default_proposal_config: args.default_proposal_config,
     proposal_program: args.proposal_program,
   });
   Ok(())

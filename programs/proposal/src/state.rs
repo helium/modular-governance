@@ -1,5 +1,7 @@
 use anchor_lang::prelude::*;
 
+use crate::program::Proposal;
+
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default, PartialEq)]
 pub enum ProposalState {
   #[default]
@@ -27,11 +29,8 @@ pub struct Choice {
 }
 
 #[account]
-#[derive(Default)]
-pub struct ProposalV0 {
-  pub owner: Pubkey,
-  pub state: ProposalState,
-  pub created_at: i64,
+#[derive(Default, InitSpace)]
+pub struct ProposalConfigV0 {
   /// Signer that controls voting and vote weights
   pub vote_controller: Pubkey,
   /// Signer that controls the transitions of `ProposalState`
@@ -43,6 +42,18 @@ pub struct ProposalV0 {
   /// Optional program that will be called with `on_vote_v0` after every vote
   /// Defaults to the owner of `resolution_settings`, which allows it to reactively call resolve_v0
   pub on_vote_hook: Pubkey,
+  #[max_len(200)]
+  pub name: String,
+  pub bump_seed: u8,
+}
+
+#[account]
+#[derive(Default)]
+pub struct ProposalV0 {
+  pub owner: Pubkey,
+  pub state: ProposalState,
+  pub created_at: i64,
+  pub proposal_config: Pubkey,
   pub seed: Vec<u8>,
   pub name: String,
   /// URI to json containing name, description, etc

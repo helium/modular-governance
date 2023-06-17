@@ -5,9 +5,6 @@ use anchor_lang::prelude::*;
 pub struct InitializeProposalArgsV0 {
   /// Allow a custom seed for indexing
   pub seed: Vec<u8>,
-  pub vote_controller: Pubkey,
-  pub state_controller: Pubkey,
-  pub on_vote_hook: Pubkey,
   pub name: String,
   pub uri: String,
   pub choices: Vec<Choice>,
@@ -30,6 +27,7 @@ pub struct InitializeProposalV0<'info> {
     bump
   )]
   pub proposal: Box<Account<'info, ProposalV0>>,
+  pub proposal_config: Box<Account<'info, ProposalConfigV0>>,
   pub system_program: Program<'info, System>,
 }
 
@@ -39,9 +37,7 @@ pub fn handler(ctx: Context<InitializeProposalV0>, args: InitializeProposalArgsV
     state: ProposalState::Voting,
     tags: args.tags,
     created_at: Clock::get()?.unix_timestamp,
-    vote_controller: args.vote_controller,
-    state_controller: args.state_controller,
-    on_vote_hook: args.on_vote_hook,
+    proposal_config: ctx.accounts.proposal_config.key(),
     seed: args.seed,
     name: args.name,
     uri: args.uri,

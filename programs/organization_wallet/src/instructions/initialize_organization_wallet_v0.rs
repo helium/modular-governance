@@ -1,19 +1,8 @@
 use crate::state::*;
 use anchor_lang::prelude::*;
 
-#[derive(InitSpace, AnchorSerialize, AnchorDeserialize, Clone, Default)]
-pub struct Choice {
-  /// Total vote weight behind this choice. u128 to support u64 tokens multiplied by a large multiplier (as in helium)
-  pub weight: u128,
-  #[max_len(200)]
-  pub name: String,
-  /// Any other data that you may want to put in here
-  #[max_len(200)]
-  pub uri: Option<String>,
-}
-
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
-pub struct InitializeOrganizationArgsV0 {
+pub struct InitializeOrganizationWalletArgsV0 {
   pub name: String,
   pub authority: Pubkey,
   pub default_vote_controller: Pubkey,
@@ -23,19 +12,20 @@ pub struct InitializeOrganizationArgsV0 {
 }
 
 #[derive(Accounts)]
-#[instruction(args: InitializeOrganizationArgsV0)]
-pub struct InitializeOrganizationV0<'info> {
+#[instruction(args: InitializeOrganizationWalletArgsV0)]
+pub struct InitializeOrganizationWalletV0<'info> {
   /// CHECK: Payer
   #[account(mut)]
   pub payer: Signer<'info>,
   #[account(
       init,
       payer = payer,
-      space = 8 + 60 + OrganizationV0::INIT_SPACE,
-      seeds = [b"organization", args.name.as_bytes()],
+      space = 8 + 60 + OrganizationWalletV0::INIT_SPACE,
+      seeds = [b"organization_wallet", args.name.as_bytes()],
       bump
     )]
-  pub organization: Box<Account<'info, OrganizationV0>>,
+  pub organization_wallet: Box<Account<'info, OrganizationV0>>,
+  pub organization: Account<'info, OrganizationV0>,
   pub system_program: Program<'info, System>,
 }
 

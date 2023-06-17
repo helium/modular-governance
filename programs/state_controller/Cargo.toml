@@ -16,8 +16,6 @@ cpi = ["no-entrypoint"]
 default = []
 
 [dependencies]
-anchor-lang = "0.27.0"
-anchor-spl = "0.27.0"
-getrandom = { version = "0.2.9", features = ["custom"] }
-solana-program = "=1.14.17"
+anchor-lang = "0.28.0"
+anchor-spl = "0.28.0"
 proposal = { path = "../proposal", features = ["no-entrypoint", "cpi"] }

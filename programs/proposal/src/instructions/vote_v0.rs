@@ -1,4 +1,4 @@
-use crate::{proposal_seeds, state::*};
+use crate::{program::Proposal, proposal_seeds, state::*};
 use anchor_lang::prelude::*;
 use vote_hook_interface::cpi::{accounts::OnVoteV0, on_vote_v0};
 
@@ -24,6 +24,10 @@ pub struct VoteV0<'info> {
       has_one = state_controller,
       has_one = vote_controller
     )]
+  pub proposal_config: Account<'info, ProposalConfigV0>,
+  #[account(
+    has_one = proposal_config
+  )]
   pub proposal: Account<'info, ProposalV0>,
   /// CHECK: Checked via has_one
   pub on_vote_hook: AccountInfo<'info>,

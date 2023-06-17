@@ -11,9 +11,13 @@ pub struct UpdateStateArgsV0 {
 pub struct UpdateStateV0<'info> {
   pub state_controller: Signer<'info>,
   #[account(
-    has_one = state_controller,
+    has_one = proposal_config,
   )]
   pub proposal: Account<'info, ProposalV0>,
+  #[account(
+    has_one = state_controller
+  )]
+  pub proposal_config: Account<'info, ProposalConfigV0>,
 }
 
 pub fn handler(ctx: Context<UpdateStateV0>, args: UpdateStateArgsV0) -> Result<()> {
