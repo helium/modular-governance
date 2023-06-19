@@ -1,11 +1,13 @@
 use anchor_lang::prelude::*;
 
-use crate::program::Proposal;
-
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default, PartialEq)]
 pub enum ProposalState {
+  // Allow drafting proposal, in this state can add instructions and such to it
   #[default]
-  Voting,
+  Draft,
+
+  Voting(i64),
+  /// Timestamp of when the voting started
   /// The proposal is resolved and the choice specified choice indices won
   Resolved(Vec<u16>),
   /// Allow voting controller to set to a custom state,

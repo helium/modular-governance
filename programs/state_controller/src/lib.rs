@@ -22,6 +22,10 @@ pub mod state_controller {
   ) -> Result<()> {
     initialize_resolution_settings_v0::handler(ctx, args)
   }
+
+  pub fn start_vote_v0(ctx: Context<StartVoteV0>) -> Result<()> {
+    start_vote_v0::handler(ctx)
+  }
 }
 
 #[derive(Accounts)]

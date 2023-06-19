@@ -1,14 +1,13 @@
 use crate::state::*;
 use anchor_lang::prelude::*;
+use organization::state::OrganizationV0;
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct InitializeOrganizationWalletArgsV0 {
   pub name: String,
   pub authority: Pubkey,
-  pub default_vote_controller: Pubkey,
-  pub default_state_controller: Pubkey,
-  pub default_on_vote_hook: Pubkey,
-  pub proposal_program: Pubkey,
+  pub proposal_config: Pubkey,
+  pub index: u16,
 }
 
 #[derive(Accounts)]
@@ -21,27 +20,37 @@ pub struct InitializeOrganizationWalletV0<'info> {
       init,
       payer = payer,
       space = 8 + 60 + OrganizationWalletV0::INIT_SPACE,
-      seeds = [b"organization_wallet", args.name.as_bytes()],
+      seeds = [b"organization_wallet", organization.key().as_ref(), &args.index.to_le_bytes()],
       bump
     )]
-  pub organization_wallet: Box<Account<'info, OrganizationV0>>,
+  pub organization_wallet: Box<Account<'info, OrganizationWalletV0>>,
   pub organization: Account<'info, OrganizationV0>,
   pub system_program: Program<'info, System>,
 }
 
 pub fn handler(
-  ctx: Context<InitializeOrganizationV0>,
-  args: InitializeOrganizationArgsV0,
+  ctx: Context<InitializeOrganizationWalletV0>,
+  args: InitializeOrganizationWalletArgsV0,
 ) -> Result<()> {
-  ctx.accounts.organization.set_inner(OrganizationV0 {
-    name: args.name,
-    authority: args.authority,
-    bump_seed: ctx.bumps["organization"],
-    num_proposals: 0,
-    default_state_controller: args.default_state_controller,
-    default_vote_controller: args.default_vote_controller,
-    default_on_vote_hook: args.default_on_vote_hook,
-    proposal_program: args.proposal_program,
-  });
+  let (wallet, wallet_bump) = Pubkey::find_program_address(
+    &[
+      b"wallet",
+      ctx.accounts.organization.key().as_ref(),
+      &args.index.to_le_bytes(),
+    ],
+    &crate::id(),
+  );
+  ctx
+    .accounts
+    .organization_wallet
+    .set_inner(OrganizationWalletV0 {
+      name: args.name,
+      organization: ctx.accounts.organization.key(),
+      wallet,
+      index: args.index,
+      wallet_bump_seed: wallet_bump,
+      proposal_config: args.proposal_config,
+      bump_seed: ctx.bumps["organization_wallet"],
+    });
   Ok(())
 }

@@ -1,4 +1,4 @@
-use crate::{program::Proposal, proposal_seeds, state::*};
+use crate::{proposal_seeds, state::*};
 use anchor_lang::prelude::*;
 use vote_hook_interface::cpi::{accounts::OnVoteV0, on_vote_v0};
 

@@ -1,7 +1,7 @@
 use std::collections::HashSet;
 
 use anchor_lang::prelude::*;
-use proposal::ProposalV0;
+use proposal::{ProposalState, ProposalV0};
 
 pub const PERCENTAGE_DIVISOR: u32 = 1000000000;
 
@@ -13,6 +13,8 @@ pub enum ResolutionNode {
   /// Simple: At the specified end timestamp, the proposal is resolved with the choice
   /// that has the most vote weight
   EndTimestamp(i64),
+  /// At the specified offset  from start ts, the proposal is resolved with the choice
+  OffsetFromStartTs(i64),
   /// The choice crosses this vote weight
   ChoiceVoteWeight(u128),
   /// The choice has this percentage (i32 / PERCENTAGE_DIVISOR)
@@ -29,6 +31,7 @@ impl ResolutionNode {
     match self {
       ResolutionNode::Resolved(vec) => 4 + vec.len() * 2,
       ResolutionNode::EndTimestamp(_) => 8,
+      ResolutionNode::OffsetFromStartTs(_) => 8,
       ResolutionNode::ChoiceVoteWeight(_) => 16,
       ResolutionNode::ChoicePercentage(_) => 4,
       ResolutionNode::Max => 0,
@@ -85,6 +88,23 @@ impl ResolutionStrategy {
             stack.push(None);
           }
         }
+        ResolutionNode::OffsetFromStartTs(offset) => match proposal.state {
+          ProposalState::Voting(start_ts) => {
+            if Clock::get().unwrap().unix_timestamp > start_ts + offset {
+              stack.push(Some(
+                proposal
+                  .choices
+                  .iter()
+                  .enumerate()
+                  .map(|i| i.0 as u16)
+                  .collect(),
+              ));
+            } else {
+              stack.push(None);
+            }
+          }
+          _ => stack.push(None),
+        },
         ResolutionNode::ChoiceVoteWeight(weight) => stack.push(Some(
           proposal
             .choices

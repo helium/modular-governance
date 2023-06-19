@@ -1,6 +1,7 @@
 use crate::resolution_setting_seeds;
 use crate::state::*;
 use anchor_lang::prelude::*;
+use proposal::ProposalConfigV0;
 use proposal::ProposalState;
 use proposal::ProposalV0;
 use proposal::VoteArgsV0;
@@ -17,16 +18,22 @@ pub struct OnVoteV0<'info> {
   #[account(mut)]
   pub state_controller: Account<'info, ResolutionSettingsV0>,
   #[account(
-    has_one = state_controller,
-    has_one = vote_controller,
+    mut,
+    owner = proposal_program.key(),
+    has_one = proposal_config,
     constraint = proposal.to_account_info().is_signer,
-    constraint = proposal.state == ProposalState::Voting
+    constraint = match proposal.state {
+      ProposalState::Voting(_) => true,
+      _ => false
+    }
   )]
   pub proposal: Account<'info, ProposalV0>,
-  /// CHECK: Checked via constraint
   #[account(
-      constraint = *proposal.to_account_info().owner == proposal_program.key()
-    )]
+    has_one = state_controller,
+    has_one = vote_controller,
+  )]
+  pub proposal_config: Account<'info, ProposalConfigV0>,
+  /// CHECK: Checked via `owner` on proposal
   pub proposal_program: AccountInfo<'info>,
 }
 
@@ -39,6 +46,7 @@ pub fn handler(ctx: Context<OnVoteV0>, _args: VoteArgsV0) -> Result<()> {
         UpdateStateV0 {
           state_controller: ctx.accounts.state_controller.to_account_info().clone(),
           proposal: ctx.accounts.proposal.to_account_info().clone(),
+          proposal_config: ctx.accounts.proposal_config.to_account_info().clone(),
         },
         &[resolution_setting_seeds!(ctx.accounts.state_controller)],
       ),

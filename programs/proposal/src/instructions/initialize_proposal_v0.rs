@@ -34,7 +34,7 @@ pub struct InitializeProposalV0<'info> {
 pub fn handler(ctx: Context<InitializeProposalV0>, args: InitializeProposalArgsV0) -> Result<()> {
   ctx.accounts.proposal.set_inner(ProposalV0 {
     owner: ctx.accounts.owner.key(),
-    state: ProposalState::Voting,
+    state: ProposalState::Draft,
     tags: args.tags,
     created_at: Clock::get()?.unix_timestamp,
     proposal_config: ctx.accounts.proposal_config.key(),

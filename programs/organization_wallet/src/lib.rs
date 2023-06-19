@@ -1,6 +1,8 @@
 use anchor_lang::prelude::*;
 
+pub mod error;
 pub mod instructions;
+pub mod resize_to_fit;
 pub mod state;
 
 use instructions::*;
@@ -18,10 +20,14 @@ pub mod organization_wallet {
     initialize_organization_wallet_v0::handler(ctx, args)
   }
 
-  pub fn initialize_proposal_v0(
-    ctx: Context<InitializeProposalV0>,
-    args: InitializeProposalArgsV0,
+  pub fn initialize_wallet_proposal_v0(ctx: Context<InitializeWalletProposalV0>) -> Result<()> {
+    initialize_wallet_proposal_v0::handler(ctx)
+  }
+
+  pub fn set_transactions_v0(
+    ctx: Context<SetTransactionsV0>,
+    args: SetTransactionsArgsV0,
   ) -> Result<()> {
-    initialize_proposal_v0::handler(ctx, args)
+    set_transactions_v0::handler(ctx, args)
   }
 }
