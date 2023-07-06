@@ -5,11 +5,16 @@ declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 #[derive(Accounts)]
 #[instruction(args: VoteArgsV0)]
 pub struct OnVoteV0<'info> {
+  #[account(mut)]
   pub vote_controller: Signer<'info>,
   /// CHECK: Check in your impl
+  #[account(mut)]
   pub state_controller: AccountInfo<'info>,
   /// CHECK: Check in your impl
-  pub proposal: AccountInfo<'info>,
+  #[account(mut)]
+  pub proposal: Signer<'info>,
+  /// CHECK: Check in your impl
+  pub proposal_config: AccountInfo<'info>,
   /// CHECK: Check in your impl
   pub proposal_program: AccountInfo<'info>,
 }
@@ -26,7 +31,8 @@ pub struct VoteArgsV0 {
 pub mod vote_hook_interface {
   use super::*;
 
-  pub fn on_vote_v0(_ctx: Context<OnVoteV0>, _args: VoteArgsV0) -> Result<()> {
-    Ok(())
+  /// If this hook is being run on a state controller, we can optionally resolve the vote
+  pub fn on_vote_v0(_ctx: Context<OnVoteV0>, _args: VoteArgsV0) -> Result<Option<Vec<u16>>> {
+    Ok(None)
   }
 }

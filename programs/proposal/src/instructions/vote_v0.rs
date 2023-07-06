@@ -52,14 +52,18 @@ pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
     });
   }
 
+  ctx.accounts.proposal.exit(&crate::id())?;
+
   if ctx.accounts.on_vote_hook.key() != Pubkey::default() {
-    on_vote_v0(
+    msg!("Calling on vote hook {}", ctx.accounts.on_vote_hook.key());
+    let resolution_status = on_vote_v0(
       CpiContext::new_with_signer(
         ctx.accounts.on_vote_hook.clone(),
         OnVoteV0 {
           vote_controller: ctx.accounts.vote_controller.to_account_info().clone(),
           state_controller: ctx.accounts.state_controller.clone(),
           proposal: ctx.accounts.proposal.to_account_info().clone(),
+          proposal_config: ctx.accounts.proposal_config.to_account_info().clone(),
           proposal_program: ctx.accounts.proposal_program.to_account_info().clone(),
         },
         &[proposal_seeds!(ctx.accounts.proposal)],
@@ -69,7 +73,14 @@ pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
         weight: args.weight,
         remove_vote: args.remove_vote,
       },
-    )?;
+    )?
+    .get();
+
+    if let Some(choices) = resolution_status {
+      msg!("Resolving to {:?}", choices);
+      ctx.accounts.proposal.state = ProposalState::Resolved { choices };
+    }
   }
+
   Ok(())
 }

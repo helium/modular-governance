@@ -4,7 +4,7 @@ skip-lint = false
 
 [programs.localnet]
 proposal = "propXxHSbYTCSwqJA2Vv3Sw27LTJbhBQLSGmmUVZghq"
-resolution = "resL1j3p3QXAD2oQWW14Uv18iJrfoAwrCd3qTd2QDyj"
+state_controller = "resL1j3p3QXAD2oQWW14Uv18iJrfoAwrCd3qTd2QDyj"
 vote_hook_interface = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
 
 [registry]

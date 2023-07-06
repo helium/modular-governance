@@ -5,17 +5,24 @@ pub enum ProposalState {
   // Allow drafting proposal, in this state can add instructions and such to it
   #[default]
   Draft,
+  Cancelled,
   /// Timestamp of when the voting started
-  Voting { start_ts: i64 },
+  Voting {
+    start_ts: i64,
+  },
   /// The proposal is resolved and the choice specified choice indices won
-  Resolved { choices: Vec<u16> },
+  Resolved {
+    choices: Vec<u16>,
+  },
   /// Allow voting controller to set to a custom state,
   /// this allows for the implementation of more complex
   /// states like Vetoed, drafts, signing off, etc.
   /// This could have been an int, but then UIs would need to understand
   /// the calling contract to grab an enum from it. Rather just have something clean
   /// even though it takes a bit more space.
-  Custom { state: String },
+  Custom {
+    state: String,
+  },
 }
 
 #[derive(InitSpace, AnchorSerialize, AnchorDeserialize, Clone, Default)]
@@ -40,8 +47,9 @@ pub struct ProposalConfigV0 {
   /// The vote can only be resolved when this `resolution_settings` PDA signs `resolve_v0`. This allows
   /// you to trigger resolution on either (a) a vote, (b) a timestamp, or (c) some custom trigger with clockwork
   pub state_controller: Pubkey,
-  /// Optional program that will be called with `on_vote_v0` after every vote
-  /// Defaults to the owner of `resolution_settings`, which allows it to reactively call resolve_v0
+  /// Optional program that will be called with `on_vote_v0` after every vote. This allows you to resolve
+  /// the vote eagerly. For most use cases, this should just be the owner of the state controller.
+  /// WARNING: This program has full authority to set the outcome of votes, make sure you trust it
   pub on_vote_hook: Pubkey,
   #[max_len(200)]
   pub name: String,
@@ -73,7 +81,12 @@ impl anchor_lang::Space for ProposalV0 {
 #[macro_export]
 macro_rules! proposal_seeds {
   ( $proposal:expr ) => {
-    &[b"proposal", &$proposal.seed[..], &[$proposal.bump_seed]]
+    &[
+      b"proposal",
+      $proposal.owner.as_ref(),
+      &$proposal.seed[..],
+      &[$proposal.bump_seed],
+    ]
   };
 }
 

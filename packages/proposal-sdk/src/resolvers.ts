@@ -15,7 +15,11 @@ export const proposalResolvers: anchor.CustomAccountResolver<any> = combineResol
   proposalProgramResolver,
   resolveIndividual(async ({ path, args, accounts, programId }) => {
     if (path[path.length - 1] === "proposal" && accounts.owner) {
-      return proposalKey(accounts.owner as PublicKey, args[0].seed, programId)[0]
+      return proposalKey(
+        accounts.owner as PublicKey,
+        args[0].seed,
+        programId
+      )[0];
     }
   })
 );

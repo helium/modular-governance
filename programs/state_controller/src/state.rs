@@ -6,7 +6,7 @@ use proposal::{ProposalState, ProposalV0};
 pub const PERCENTAGE_DIVISOR: u32 = 1000000000;
 
 /// Allow building complex operations to decide resolution.
-#[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
+#[derive(AnchorSerialize, AnchorDeserialize, Clone)]
 pub enum ResolutionNode {
   // Already resolved vote to a specifc choice
   Resolved {
@@ -29,11 +29,18 @@ pub enum ResolutionNode {
   ChoicePercentage {
     percentage: i32,
   },
-  /// The choice has the maximum percentage of votes (only one may pass)
-  #[default]
-  Max,
+  /// Top n choices are resolved
+  Top {
+    n: u16,
+  },
   And,
   Or,
+}
+
+impl Default for ResolutionNode {
+  fn default() -> Self {
+    ResolutionNode::Top { n: 1 }
+  }
 }
 
 impl ResolutionNode {
@@ -44,7 +51,7 @@ impl ResolutionNode {
       ResolutionNode::OffsetFromStartTs { .. } => 8,
       ResolutionNode::ChoiceVoteWeight { .. } => 16,
       ResolutionNode::ChoicePercentage { .. } => 4,
-      ResolutionNode::Max => 0,
+      ResolutionNode::Top { .. } => 4,
       ResolutionNode::And => 0,
       ResolutionNode::Or => 0,
     }
@@ -121,7 +128,7 @@ impl ResolutionStrategy {
             .iter()
             .enumerate()
             .flat_map(|(index, choice)| {
-              if choice.weight > *weight_threshold {
+              if choice.weight >= *weight_threshold {
                 Some(index as u16)
               } else {
                 None
@@ -139,6 +146,16 @@ impl ResolutionStrategy {
             .checked_mul(*percentage as u128)
             .unwrap()
             .checked_div(PERCENTAGE_DIVISOR as u128)
+            .map(|result| {
+              let remainder = total_weight
+                .checked_mul(*percentage as u128)
+                .unwrap()
+                .checked_rem(PERCENTAGE_DIVISOR as u128)
+                .unwrap();
+              result
+                .checked_add(if remainder > 0 { 1 } else { 0 })
+                .unwrap()
+            })
             .unwrap();
           let ret = Some(
             proposal
@@ -146,7 +163,7 @@ impl ResolutionStrategy {
               .iter()
               .enumerate()
               .flat_map(|(index, choice)| {
-                if choice.weight > threshold {
+                if choice.weight >= threshold {
                   Some(index as u16)
                 } else {
                   None
@@ -156,18 +173,18 @@ impl ResolutionStrategy {
           );
           stack.push(ret)
         }
-        ResolutionNode::Max => {
-          let max = proposal
-            .choices
-            .iter()
-            .enumerate()
-            .max_by(|(_, a), (_, b)| a.weight.cmp(&b.weight));
-          let ret = match max {
-            Some((index, _)) => Some(vec![index as u16]),
-            None => None,
-          };
+        ResolutionNode::Top { n } => {
+          let mut vec = proposal.choices.iter().enumerate().collect::<Vec<_>>();
 
-          stack.push(ret)
+          vec.sort_by(|(_, a), (_, b)| b.weight.cmp(&a.weight));
+
+          stack.push(Some(
+            vec
+              .iter()
+              .map(|(index, _)| *index as u16)
+              .take(*n as usize)
+              .collect(),
+          ))
         }
         ResolutionNode::And => {
           let left = stack.pop().unwrap();

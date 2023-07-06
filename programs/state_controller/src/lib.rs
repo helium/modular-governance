@@ -12,7 +12,7 @@ pub use instructions::*;
 pub mod state_controller {
   use super::*;
 
-  pub fn on_vote_v0(ctx: Context<OnVoteV0>, args: VoteArgsV0) -> Result<()> {
+  pub fn on_vote_v0(ctx: Context<OnVoteV0>, args: VoteArgsV0) -> Result<Option<Vec<u16>>> {
     on_vote_v0::handler(ctx, args)
   }
 
@@ -23,8 +23,12 @@ pub mod state_controller {
     initialize_resolution_settings_v0::handler(ctx, args)
   }
 
-  pub fn start_vote_v0(ctx: Context<StartVoteV0>) -> Result<()> {
-    start_vote_v0::handler(ctx)
+  pub fn update_state_v0(ctx: Context<UpdateStateV0>, args: UpdateStateArgsV0) -> Result<()> {
+    update_state_v0::handler(ctx, args)
+  }
+
+  pub fn resolve_v0(ctx: Context<ResolveV0>) -> Result<()> {
+    resolve_v0::handler(ctx)
   }
 }
 
