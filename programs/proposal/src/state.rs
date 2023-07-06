@@ -5,18 +5,17 @@ pub enum ProposalState {
   // Allow drafting proposal, in this state can add instructions and such to it
   #[default]
   Draft,
-
-  Voting(i64),
   /// Timestamp of when the voting started
+  Voting { start_ts: i64 },
   /// The proposal is resolved and the choice specified choice indices won
-  Resolved(Vec<u16>),
+  Resolved { choices: Vec<u16> },
   /// Allow voting controller to set to a custom state,
   /// this allows for the implementation of more complex
   /// states like Vetoed, drafts, signing off, etc.
   /// This could have been an int, but then UIs would need to understand
   /// the calling contract to grab an enum from it. Rather just have something clean
   /// even though it takes a bit more space.
-  Custom(String),
+  Custom { state: String },
 }
 
 #[derive(InitSpace, AnchorSerialize, AnchorDeserialize, Clone, Default)]
@@ -56,6 +55,8 @@ pub struct ProposalV0 {
   pub state: ProposalState,
   pub created_at: i64,
   pub proposal_config: Pubkey,
+  /// Allows for multiple selection votes
+  pub max_choices_per_voter: u16,
   pub seed: Vec<u8>,
   pub name: String,
   /// URI to json containing name, description, etc

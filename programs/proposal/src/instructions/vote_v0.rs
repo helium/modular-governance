@@ -26,6 +26,7 @@ pub struct VoteV0<'info> {
     )]
   pub proposal_config: Account<'info, ProposalConfigV0>,
   #[account(
+    mut,
     has_one = proposal_config
   )]
   pub proposal: Account<'info, ProposalV0>,
@@ -51,22 +52,24 @@ pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
     });
   }
 
-  on_vote_v0(
-    CpiContext::new_with_signer(
-      ctx.accounts.on_vote_hook.clone(),
-      OnVoteV0 {
-        vote_controller: ctx.accounts.vote_controller.to_account_info().clone(),
-        state_controller: ctx.accounts.state_controller.clone(),
-        proposal: ctx.accounts.proposal.to_account_info().clone(),
-        proposal_program: ctx.accounts.proposal_program.to_account_info().clone(),
+  if ctx.accounts.on_vote_hook.key() != Pubkey::default() {
+    on_vote_v0(
+      CpiContext::new_with_signer(
+        ctx.accounts.on_vote_hook.clone(),
+        OnVoteV0 {
+          vote_controller: ctx.accounts.vote_controller.to_account_info().clone(),
+          state_controller: ctx.accounts.state_controller.clone(),
+          proposal: ctx.accounts.proposal.to_account_info().clone(),
+          proposal_program: ctx.accounts.proposal_program.to_account_info().clone(),
+        },
+        &[proposal_seeds!(ctx.accounts.proposal)],
+      ),
+      vote_hook_interface::VoteArgsV0 {
+        choice: args.choice,
+        weight: args.weight,
+        remove_vote: args.remove_vote,
       },
-      &[proposal_seeds!(ctx.accounts.proposal)],
-    ),
-    vote_hook_interface::VoteArgsV0 {
-      choice: args.choice,
-      weight: args.weight,
-      remove_vote: args.remove_vote,
-    },
-  )?;
+    )?;
+  }
   Ok(())
 }

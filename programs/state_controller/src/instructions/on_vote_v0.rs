@@ -4,11 +4,29 @@ use anchor_lang::prelude::*;
 use proposal::ProposalConfigV0;
 use proposal::ProposalState;
 use proposal::ProposalV0;
-use proposal::VoteArgsV0;
+use proposal::VoteArgsV0 as ProposalVoteArgsV0;
 use proposal::{
   cpi::{accounts::UpdateStateV0, update_state_v0},
   UpdateStateArgsV0,
 };
+
+#[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
+pub struct VoteArgsV0 {
+  pub choice: u16,
+  pub weight: u128,
+  /// This is a remove operation
+  pub remove_vote: bool,
+}
+
+impl From<VoteArgsV0> for ProposalVoteArgsV0 {
+  fn from(args: VoteArgsV0) -> Self {
+    Self {
+      choice: args.choice,
+      weight: args.weight,
+      remove_vote: args.remove_vote,
+    }
+  }
+}
 
 #[derive(Accounts)]
 #[instruction(args: VoteArgsV0)]
@@ -23,7 +41,7 @@ pub struct OnVoteV0<'info> {
     has_one = proposal_config,
     constraint = proposal.to_account_info().is_signer,
     constraint = match proposal.state {
-      ProposalState::Voting(_) => true,
+      ProposalState::Voting { .. } => true,
       _ => false
     }
   )]
@@ -51,7 +69,9 @@ pub fn handler(ctx: Context<OnVoteV0>, _args: VoteArgsV0) -> Result<()> {
         &[resolution_setting_seeds!(ctx.accounts.state_controller)],
       ),
       UpdateStateArgsV0 {
-        new_state: ProposalState::Resolved(resolution),
+        new_state: ProposalState::Resolved {
+          choices: resolution,
+        },
       },
     )?;
   }

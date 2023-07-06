@@ -9,16 +9,26 @@ pub const PERCENTAGE_DIVISOR: u32 = 1000000000;
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub enum ResolutionNode {
   // Already resolved vote to a specifc choice
-  Resolved(Vec<u16>),
+  Resolved {
+    choices: Vec<u16>,
+  },
   /// Simple: At the specified end timestamp, the proposal is resolved with the choice
   /// that has the most vote weight
-  EndTimestamp(i64),
+  EndTimestamp {
+    end_ts: i64,
+  },
   /// At the specified offset  from start ts, the proposal is resolved with the choice
-  OffsetFromStartTs(i64),
+  OffsetFromStartTs {
+    offset: i64,
+  },
   /// The choice crosses this vote weight
-  ChoiceVoteWeight(u128),
+  ChoiceVoteWeight {
+    weight_threshold: u128,
+  },
   /// The choice has this percentage (i32 / PERCENTAGE_DIVISOR)
-  ChoicePercentage(i32),
+  ChoicePercentage {
+    percentage: i32,
+  },
   /// The choice has the maximum percentage of votes (only one may pass)
   #[default]
   Max,
@@ -29,11 +39,11 @@ pub enum ResolutionNode {
 impl ResolutionNode {
   pub fn size(&self) -> usize {
     match self {
-      ResolutionNode::Resolved(vec) => 4 + vec.len() * 2,
-      ResolutionNode::EndTimestamp(_) => 8,
-      ResolutionNode::OffsetFromStartTs(_) => 8,
-      ResolutionNode::ChoiceVoteWeight(_) => 16,
-      ResolutionNode::ChoicePercentage(_) => 4,
+      ResolutionNode::Resolved { choices } => 4 + choices.len() * 2,
+      ResolutionNode::EndTimestamp { .. } => 8,
+      ResolutionNode::OffsetFromStartTs { .. } => 8,
+      ResolutionNode::ChoiceVoteWeight { .. } => 16,
+      ResolutionNode::ChoicePercentage { .. } => 4,
       ResolutionNode::Max => 0,
       ResolutionNode::And => 0,
       ResolutionNode::Or => 0,
@@ -71,11 +81,11 @@ impl ResolutionStrategy {
     let mut stack: Vec<Option<Vec<u16>>> = vec![];
     for input in &self.nodes {
       match input {
-        ResolutionNode::Resolved(choices) => {
+        ResolutionNode::Resolved { choices } => {
           stack.push(Some(choices.clone()));
         }
-        ResolutionNode::EndTimestamp(end) => {
-          if Clock::get().unwrap().unix_timestamp > *end {
+        ResolutionNode::EndTimestamp { end_ts } => {
+          if Clock::get().unwrap().unix_timestamp > *end_ts {
             stack.push(Some(
               proposal
                 .choices
@@ -88,8 +98,8 @@ impl ResolutionStrategy {
             stack.push(None);
           }
         }
-        ResolutionNode::OffsetFromStartTs(offset) => match proposal.state {
-          ProposalState::Voting(start_ts) => {
+        ResolutionNode::OffsetFromStartTs { offset } => match proposal.state {
+          ProposalState::Voting { start_ts } => {
             if Clock::get().unwrap().unix_timestamp > start_ts + offset {
               stack.push(Some(
                 proposal
@@ -105,13 +115,13 @@ impl ResolutionStrategy {
           }
           _ => stack.push(None),
         },
-        ResolutionNode::ChoiceVoteWeight(weight) => stack.push(Some(
+        ResolutionNode::ChoiceVoteWeight { weight_threshold } => stack.push(Some(
           proposal
             .choices
             .iter()
             .enumerate()
             .flat_map(|(index, choice)| {
-              if choice.weight > *weight {
+              if choice.weight > *weight_threshold {
                 Some(index as u16)
               } else {
                 None
@@ -119,14 +129,14 @@ impl ResolutionStrategy {
             })
             .collect(),
         )),
-        ResolutionNode::ChoicePercentage(percent) => {
+        ResolutionNode::ChoicePercentage { percentage } => {
           let total_weight = proposal
             .choices
             .iter()
             .map(|choice| choice.weight)
             .sum::<u128>();
           let threshold = total_weight
-            .checked_mul(*percent as u128)
+            .checked_mul(*percentage as u128)
             .unwrap()
             .checked_div(PERCENTAGE_DIVISOR as u128)
             .unwrap();

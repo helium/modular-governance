@@ -5,13 +5,11 @@ use proposal::{
     accounts::InitializeProposalV0 as CpiInitializeProposal,
     initialize_proposal_v0 as cpi_initialize_proposal,
   },
-  Choice as CpiChoice, InitializeProposalArgsV0 as CpiInitializeProposalArgs,
+  ChoiceArg as CpiChoice, InitializeProposalArgsV0 as CpiInitializeProposalArgs,
 };
 
 #[derive(InitSpace, AnchorSerialize, AnchorDeserialize, Clone, Default)]
-pub struct Choice {
-  /// Total vote weight behind this choice. u128 to support u64 tokens multiplied by a large multiplier (as in helium)
-  pub weight: u128,
+pub struct ChoiceArg {
   #[max_len(200)]
   pub name: String,
   /// Any other data that you may want to put in here
@@ -25,7 +23,8 @@ pub struct InitializeProposalArgsV0 {
   pub seed: Vec<u8>,
   pub name: String,
   pub uri: String,
-  pub choices: Vec<Choice>,
+  pub max_choices_per_voter: u16,
+  pub choices: Vec<ChoiceArg>,
   // Tags which can be used to filter proposals
   pub tags: Vec<String>,
 }
@@ -81,12 +80,12 @@ pub fn handler(ctx: Context<InitializeProposalV0>, args: InitializeProposalArgsV
         .to_le_bytes()
         .to_vec(),
       name: args.name,
+      max_choices_per_voter: args.max_choices_per_voter,
       uri: args.uri,
       choices: args
         .choices
         .into_iter()
         .map(|c| CpiChoice {
-          weight: c.weight,
           name: c.name,
           uri: c.uri,
         })

@@ -33,7 +33,7 @@
   "dependencies": {
     "@coral-xyz/anchor": "^0.27.0",
     "@helium/modular-governance-idls": "^0.0.1",
-    "@helium/anchor-resolvers": "^0.2.1"
+    "@helium/anchor-resolvers": "^0.2.5"
   },
   "devDependencies": {
     "git-format-staged": "^2.1.3",

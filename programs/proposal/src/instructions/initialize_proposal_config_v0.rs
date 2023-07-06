@@ -18,8 +18,8 @@ pub struct InitializeProposalConfigArgsV0 {
 }
 
 #[derive(Accounts)]
-#[instruction(args: InitializeProposalArgsV0)]
-pub struct InitializeProposaConfiglV0<'info> {
+#[instruction(args: InitializeProposalConfigArgsV0)]
+pub struct InitializeProposalConfigV0<'info> {
   #[account(mut)]
   pub payer: Signer<'info>,
   /// Every proposal config must have an owner to prevent seed collision
@@ -28,15 +28,18 @@ pub struct InitializeProposaConfiglV0<'info> {
     init,
     payer = payer,
     seeds = [b"proposal_config", args.name.as_bytes()],
-    space = 8 + 60 + args.name.len() + ProposalConfigV0::INIT_SPACE + args.choices.len() * Choice::INIT_SPACE,
+    space = 8 + 60 + args.name.len() + ProposalConfigV0::INIT_SPACE,
     bump
   )]
   pub proposal_config: Box<Account<'info, ProposalConfigV0>>,
   pub system_program: Program<'info, System>,
 }
 
-pub fn handler(ctx: Context<InitializeProposalV0>, args: InitializeProposalArgsV0) -> Result<()> {
-  ctx.accounts.proposal.set_inner(ProposalConfigV0 {
+pub fn handler(
+  ctx: Context<InitializeProposalConfigV0>,
+  args: InitializeProposalConfigArgsV0,
+) -> Result<()> {
+  ctx.accounts.proposal_config.set_inner(ProposalConfigV0 {
     name: args.name,
     vote_controller: args.vote_controller,
     state_controller: args.state_controller,

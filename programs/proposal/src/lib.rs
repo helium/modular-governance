@@ -20,6 +20,13 @@ pub mod proposal {
     initialize_proposal_v0::handler(ctx, args)
   }
 
+  pub fn initialize_proposal_config_v0(
+    ctx: Context<InitializeProposalConfigV0>,
+    args: InitializeProposalConfigArgsV0,
+  ) -> Result<()> {
+    initialize_proposal_config_v0::handler(ctx, args)
+  }
+
   pub fn vote_v0(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
     vote_v0::handler(ctx, args)
   }

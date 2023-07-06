@@ -18,7 +18,7 @@ pub struct ExecuteTransactionV0<'info> {
   pub organization_wallet: Box<Account<'info, OrganizationWalletV0>>,
   #[account(
     constraint = match &proposal.state {
-      ProposalState::Resolved(choices) => choices.iter().any(|c| *c == args.choice),
+      ProposalState::Resolved { choices } => choices.iter().any(|c| *c == args.choice),
       _ => false,
     },
   )]

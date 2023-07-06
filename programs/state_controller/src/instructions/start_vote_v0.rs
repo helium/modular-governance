@@ -41,7 +41,9 @@ pub fn handler(ctx: Context<StartVoteV0>) -> Result<()> {
       &[resolution_setting_seeds!(ctx.accounts.state_controller)],
     ),
     UpdateStateArgsV0 {
-      new_state: ProposalState::Voting(Clock::get()?.unix_timestamp),
+      new_state: ProposalState::Voting {
+        start_ts: Clock::get()?.unix_timestamp,
+      },
     },
   )?;
 

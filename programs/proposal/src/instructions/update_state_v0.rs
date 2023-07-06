@@ -11,6 +11,7 @@ pub struct UpdateStateArgsV0 {
 pub struct UpdateStateV0<'info> {
   pub state_controller: Signer<'info>,
   #[account(
+    mut,
     has_one = proposal_config,
   )]
   pub proposal: Account<'info, ProposalV0>,

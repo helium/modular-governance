@@ -5,8 +5,8 @@ use proposal::{ProposalState, ProposalV0};
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct SetTransactionsArgsV0 {
-  pub choice_index: usize,
-  pub transaction_index: usize,
+  pub choice_index: u16,
+  pub transaction_index: u16,
   /// Accounts will come from remaining accounts, which allows for lookup tables
   /// and such to reduce size of txn call here
   pub instructions: Vec<CompiledInstruction>,
@@ -33,7 +33,7 @@ pub struct SetTransactionsV0<'info> {
 
 pub fn handler(ctx: Context<SetTransactionsV0>, args: SetTransactionsArgsV0) -> Result<()> {
   let mut new_choice_transactions = vec![];
-  for i in 0..=args.choice_index {
+  for i in 0..=(args.choice_index as usize) {
     new_choice_transactions.push(
       ctx
         .accounts
@@ -48,11 +48,11 @@ pub fn handler(ctx: Context<SetTransactionsV0>, args: SetTransactionsArgsV0) -> 
     .accounts
     .wallet_proposal
     .choice_transactions
-    .get(args.choice_index)
+    .get(args.choice_index as usize)
     .map(|i| i.clone())
     .unwrap_or_else(|| vec![]);
   let mut new_transactions = vec![];
-  for j in 0..args.transaction_index {
+  for j in 0..(args.transaction_index as usize) {
     new_transactions.push(
       existing_transactions
         .get(j)
@@ -65,7 +65,7 @@ pub fn handler(ctx: Context<SetTransactionsV0>, args: SetTransactionsArgsV0) -> 
     signer_seeds: args.signer_seeds,
     accounts: ctx.remaining_accounts.iter().map(|a| a.key()).collect(),
   });
-  for j in (args.transaction_index + 1)..existing_transactions.len() {
+  for j in ((args.transaction_index + 1) as usize)..existing_transactions.len() {
     new_transactions.push(
       existing_transactions
         .get(j)
@@ -74,7 +74,9 @@ pub fn handler(ctx: Context<SetTransactionsV0>, args: SetTransactionsArgsV0) -> 
     );
   }
   new_choice_transactions.push(new_transactions);
-  for i in (args.choice_index + 1)..ctx.accounts.wallet_proposal.choice_transactions.len() {
+  for i in
+    ((args.choice_index + 1) as usize)..ctx.accounts.wallet_proposal.choice_transactions.len()
+  {
     new_choice_transactions.push(
       ctx
         .accounts
