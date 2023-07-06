@@ -8,7 +8,7 @@ import { stateControllerResolvers } from "./resolvers";
 export * from "./constants";
 export * from "./pdas";
 export * from "./resolvers";
-export { SettingsBuilder } from "./settingsBuilder";
+export { SettingsBuilder, settings } from "./settingsBuilder";
 
 export async function init(
   provider: AnchorProvider,

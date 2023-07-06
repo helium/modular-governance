@@ -11,6 +11,7 @@ import {
   PROGRAM_ID,
   SettingsBuilder,
   init,
+  settings,
 } from "@helium/state-controller-sdk";
 import { expect } from "chai";
 import { ensureIdls } from "./utils";
@@ -53,7 +54,7 @@ describe("state-controller", () => {
   });
 
   describe("with proposal", () => {
-    let nodes = new SettingsBuilder().resolved([1]).build();
+    let nodes = settings().resolved([1]).build();
     let proposalConfig: PublicKey | undefined;
     let proposal: PublicKey | undefined;
     let resolutionSettings: PublicKey | undefined;
@@ -117,7 +118,7 @@ describe("state-controller", () => {
 
     describe("with resolved", () => {
       before(async () => {
-        nodes = new SettingsBuilder().resolved([1]).build();
+        nodes = settings().resolved([1]).build();
       })
 
       it("resolves to the choice selected", async () => {
@@ -130,7 +131,7 @@ describe("state-controller", () => {
 
     describe("with end passed", () => {
       before(async () => {
-        nodes = new SettingsBuilder().endTimestamp(new anchor.BN(1)).build();
+        nodes = settings().endTimestamp(new anchor.BN(1)).build();
       });
 
       it("resolves to all choices", async () => {
@@ -143,7 +144,7 @@ describe("state-controller", () => {
 
     describe("with end not passed", () => {
       before(async () => {
-        nodes = new SettingsBuilder()
+        nodes = settings()
           .endTimestamp(new anchor.BN(2688657226))
           .build();
       });
@@ -158,7 +159,7 @@ describe("state-controller", () => {
 
     describe("with offset", () => {
       before(async () => {
-        nodes = new SettingsBuilder().offsetFromStartTs(new anchor.BN(1)).build();
+        nodes = settings().offsetFromStartTs(new anchor.BN(1)).build();
       });
 
       it("resolves to all choices", async () => {
@@ -172,7 +173,7 @@ describe("state-controller", () => {
 
     describe("with choice vote weight", () => {
       before(async () => {
-        nodes = new SettingsBuilder()
+        nodes = settings()
           .choiceVoteWeight(new anchor.BN(1))
           .build();
       });
@@ -194,7 +195,7 @@ describe("state-controller", () => {
 
     describe("with choice percentage", () => {
       before(async () => {
-        nodes = new SettingsBuilder()
+        nodes = settings()
           .choicePercentage(50)
           .build();
       });
@@ -216,7 +217,7 @@ describe("state-controller", () => {
 
     describe("with top", () => {
       before(async () => {
-        nodes = new SettingsBuilder().top().build();
+        nodes = settings().top().build();
       });
 
       it("resolves to the max choice", async () => {
@@ -236,11 +237,11 @@ describe("state-controller", () => {
 
     describe("top choice with minimum vote weight of 5 at the end time", () => {
       before(async () => {
-        nodes = new SettingsBuilder().and(
-          new SettingsBuilder().offsetFromStartTs(new anchor.BN(5)),
-          new SettingsBuilder().and(
-            new SettingsBuilder().choiceVoteWeight(new anchor.BN(5)),
-            new SettingsBuilder().top()
+        nodes = settings().and(
+          settings().offsetFromStartTs(new anchor.BN(5)),
+          settings().and(
+            settings().choiceVoteWeight(new anchor.BN(5)),
+            settings().top()
           )
         ).build();
       });

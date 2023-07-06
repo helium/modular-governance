@@ -2,6 +2,10 @@ import BN from "bn.js";
 
 export const PERCENTAGE_DIVISOR = 1000000000
 
+export function settings(): SettingsBuilder {
+  return new SettingsBuilder()
+}
+
 export class SettingsBuilder {
   nodes: any[] = [];
 
