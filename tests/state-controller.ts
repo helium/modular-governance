@@ -302,6 +302,51 @@ describe("state-controller", () => {
         expect(acct.state.resolved?.choices).to.deep.eq([]);
       });
     });
+
+    describe("helium flavor governance", () => {
+      before(async () => {
+        nodes = settings()
+          .and(
+            settings().offsetFromStartTs(new anchor.BN(5)),
+            settings().and(
+              settings().and(
+                settings().choiceVoteWeight(new anchor.BN(5)),
+                settings().choicePercentage(66.6)
+              ),
+              settings().top()
+            )
+          )
+          .build();
+      });
+
+      it("resolves to the max choice when there is enough weight", async () => {
+        await proposalProgram.methods
+          .voteV0({
+            choice: 1,
+            weight: new anchor.BN(5),
+            removeVote: false,
+          })
+          .accounts({ proposal, voter: me })
+          .rpc({ skipPreflight: true });
+
+        let acct = await proposalProgram.account.proposalV0.fetch(proposal!);
+        expect(Boolean(acct.state.voting)).to.be.true;
+
+        await sleep(10000);
+
+        await proposalProgram.methods
+          .voteV0({
+            choice: 0,
+            weight: new anchor.BN(1),
+            removeVote: false,
+          })
+          .accounts({ proposal, voter: me })
+          .rpc({ skipPreflight: true });
+
+        acct = await proposalProgram.account.proposalV0.fetch(proposal!);
+        expect(acct.state.resolved?.choices).to.deep.eq([1]);
+      });
+    });
   })
 });
 
