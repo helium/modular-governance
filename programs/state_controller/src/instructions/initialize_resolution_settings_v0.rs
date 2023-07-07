@@ -17,7 +17,7 @@ pub struct InitializeResolutionSettingsV0<'info> {
     init,
     payer = payer,
     space = 8 + 60 + std::mem::size_of::<ResolutionSettingsV0>() + args.settings.nodes.iter().map(|node| node.size()).sum::<usize>(),
-    seeds = [b"resolution-settings", args.name.as_bytes()],
+    seeds = [b"resolution_settings", args.name.as_bytes()],
     bump
   )]
   pub resolution_settings: Box<Account<'info, ResolutionSettingsV0>>,

@@ -4,8 +4,9 @@ skip-lint = false
 
 [programs.localnet]
 proposal = "propXxHSbYTCSwqJA2Vv3Sw27LTJbhBQLSGmmUVZghq"
-state_controller = "resL1j3p3QXAD2oQWW14Uv18iJrfoAwrCd3qTd2QDyj"
+state_controller = "stct65Ut9aiwQ5pQNSdD4nDWxyHbhqoHugYudBDKqxx"
 vote_hook_interface = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+token_voter = "tokv9Lz2ZeH2F2qPcLokjoNPuvwNJ9gdZ3DaVQLPJcV"
 
 [registry]
 url = "https://api.apr.dev"
@@ -16,3 +17,9 @@ wallet = "/Users/nprince/.config/solana/id.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+
+[test.validator]
+url = "https://api.mainnet-beta.solana.com"
+
+[[test.validator.clone]]
+address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s" # token-metadata

@@ -5,18 +5,14 @@ declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 #[derive(Accounts)]
 #[instruction(args: VoteArgsV0)]
 pub struct OnVoteV0<'info> {
-  #[account(mut)]
   pub vote_controller: Signer<'info>,
   /// CHECK: Check in your impl
   #[account(mut)]
   pub state_controller: AccountInfo<'info>,
   /// CHECK: Check in your impl
-  #[account(mut)]
   pub proposal: Signer<'info>,
   /// CHECK: Check in your impl
   pub proposal_config: AccountInfo<'info>,
-  /// CHECK: Check in your impl
-  pub proposal_program: AccountInfo<'info>,
 }
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]

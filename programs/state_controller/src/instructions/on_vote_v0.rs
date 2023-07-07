@@ -32,7 +32,9 @@ pub struct OnVoteV0<'info> {
   pub state_controller: Account<'info, ResolutionSettingsV0>,
   #[account(
     mut,
-    owner = proposal_program.key(),
+    // Short circuit anchor owner check since we don't care the program.
+    // Allow for polymorphism
+    owner = proposal.owner,
     has_one = proposal_config,
     constraint = proposal.to_account_info().is_signer,
     constraint = match proposal.state {
@@ -46,8 +48,6 @@ pub struct OnVoteV0<'info> {
     has_one = vote_controller,
   )]
   pub proposal_config: Account<'info, ProposalConfigV0>,
-  /// CHECK: Checked via `owner` on proposal
-  pub proposal_program: AccountInfo<'info>,
 }
 
 pub fn handler(ctx: Context<OnVoteV0>, _args: VoteArgsV0) -> Result<Option<Vec<u16>>> {

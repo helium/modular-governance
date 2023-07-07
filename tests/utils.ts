@@ -8,7 +8,11 @@ export async function ensureIdls() {
     },
     {
       name: "state_controller",
-      pid: "resL1j3p3QXAD2oQWW14Uv18iJrfoAwrCd3qTd2QDyj",
+      pid: "stct65Ut9aiwQ5pQNSdD4nDWxyHbhqoHugYudBDKqxx",
+    },
+    {
+      name: "token_voter",
+      pid: "tokv9Lz2ZeH2F2qPcLokjoNPuvwNJ9gdZ3DaVQLPJcV",
     },
   ];
   await Promise.all(
@@ -26,4 +30,17 @@ export async function ensureIdls() {
       }
     })
   );
+}
+
+export function makeid(length: number) {
+  let result = "";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const charactersLength = characters.length;
+  let counter = 0;
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
+  }
+  return result;
 }

@@ -12,6 +12,8 @@
     },
     {
       "path": "./packages/state-controller-sdk"
+    }, {
+      "path": "./packages/token-voter-sdk"
     }
   ]
 }

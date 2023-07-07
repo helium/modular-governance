@@ -32,11 +32,6 @@ pub struct VoteV0<'info> {
   pub proposal: Account<'info, ProposalV0>,
   /// CHECK: Checked via has_one
   pub on_vote_hook: AccountInfo<'info>,
-  /// CHECK: Checked via constraint
-  #[account(
-    constraint = *proposal.to_account_info().owner == proposal_program.key()
-  )]
-  pub proposal_program: AccountInfo<'info>,
 }
 
 pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
@@ -64,7 +59,6 @@ pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
           state_controller: ctx.accounts.state_controller.clone(),
           proposal: ctx.accounts.proposal.to_account_info().clone(),
           proposal_config: ctx.accounts.proposal_config.to_account_info().clone(),
-          proposal_program: ctx.accounts.proposal_program.to_account_info().clone(),
         },
         &[proposal_seeds!(ctx.accounts.proposal)],
       ),

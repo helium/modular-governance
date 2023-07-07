@@ -229,7 +229,7 @@ pub struct ResolutionSettingsV0 {
 macro_rules! resolution_setting_seeds {
   ( $settings:expr ) => {
     &[
-      b"resolution-settings",
+      b"resolution_settings",
       $settings.name.as_bytes(),
       &[$settings.bump_seed],
     ]

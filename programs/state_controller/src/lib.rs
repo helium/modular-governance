@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-declare_id!("resL1j3p3QXAD2oQWW14Uv18iJrfoAwrCd3qTd2QDyj");
+declare_id!("stct65Ut9aiwQ5pQNSdD4nDWxyHbhqoHugYudBDKqxx");
 
 pub mod errors;
 pub mod instructions;
@@ -31,6 +31,3 @@ pub mod state_controller {
     resolve_v0::handler(ctx)
   }
 }
-
-#[derive(Accounts)]
-pub struct Initialize {}
