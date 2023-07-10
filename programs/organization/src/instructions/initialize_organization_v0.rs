@@ -1,23 +1,13 @@
 use crate::state::*;
 use anchor_lang::prelude::*;
 
-#[derive(InitSpace, AnchorSerialize, AnchorDeserialize, Clone, Default)]
-pub struct Choice {
-  /// Total vote weight behind this choice. u128 to support u64 tokens multiplied by a large multiplier (as in helium)
-  pub weight: u128,
-  #[max_len(200)]
-  pub name: String,
-  /// Any other data that you may want to put in here
-  #[max_len(200)]
-  pub uri: Option<String>,
-}
-
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct InitializeOrganizationArgsV0 {
   pub name: String,
   pub authority: Pubkey,
   pub default_proposal_config: Pubkey,
   pub proposal_program: Pubkey,
+  pub uri: String,
 }
 
 #[derive(Accounts)]
@@ -41,6 +31,9 @@ pub fn handler(
   ctx: Context<InitializeOrganizationV0>,
   args: InitializeOrganizationArgsV0,
 ) -> Result<()> {
+  require_gt!(32, args.name.len());
+  require_gt!(200, args.uri.len());
+
   ctx.accounts.organization.set_inner(OrganizationV0 {
     name: args.name,
     authority: args.authority,
@@ -48,6 +41,7 @@ pub fn handler(
     num_proposals: 0,
     default_proposal_config: args.default_proposal_config,
     proposal_program: args.proposal_program,
+    uri: args.uri,
   });
   Ok(())
 }

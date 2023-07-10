@@ -14,6 +14,10 @@ export async function ensureIdls() {
       name: "token_voter",
       pid: "tokv9Lz2ZeH2F2qPcLokjoNPuvwNJ9gdZ3DaVQLPJcV",
     },
+    {
+      name: "organization",
+      pid: "org9nsbSiTCJzeApoS2B3uwjM2gbQH48QbUUrhAAjzG",
+    },
   ];
   await Promise.all(
     programs.map(async (program) => {

@@ -7,6 +7,7 @@ proposal = "propXxHSbYTCSwqJA2Vv3Sw27LTJbhBQLSGmmUVZghq"
 state_controller = "stct65Ut9aiwQ5pQNSdD4nDWxyHbhqoHugYudBDKqxx"
 vote_hook_interface = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
 token_voter = "tokv9Lz2ZeH2F2qPcLokjoNPuvwNJ9gdZ3DaVQLPJcV"
+organization = "org9nsbSiTCJzeApoS2B3uwjM2gbQH48QbUUrhAAjzG"
 
 [registry]
 url = "https://api.apr.dev"

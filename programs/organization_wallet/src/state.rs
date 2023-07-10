@@ -1,13 +1,12 @@
 use anchor_lang::prelude::*;
 
 #[account]
-#[derive(Default, InitSpace)]
+#[derive(Default)]
 pub struct OrganizationWalletV0 {
   pub index: u16,
   pub organization: Pubkey,
   pub wallet: Pubkey,
-  pub proposal_config: Pubkey,
-  #[max_len(200)]
+  pub proposal_configs: Vec<Pubkey>,
   pub name: String,
   pub bump_seed: u8,
   pub wallet_bump_seed: u8,

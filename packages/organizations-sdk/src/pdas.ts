@@ -1,22 +1,15 @@
 import { PublicKey } from "@solana/web3.js";
-import { PROGRAM_ID } from "./constants";
+import { PROGRAM_ID } from "@helium/proposal-sdk";
 
-export function mintWindowedBreakerKey(mint: PublicKey, programId: PublicKey = PROGRAM_ID): [PublicKey, number] {
+export function proposalKey(organization: PublicKey, index: number, programId: PublicKey = PROGRAM_ID): [PublicKey, number] {
+  const buf = Buffer.alloc(4)
+  buf.writeUInt32LE(index, 0)
   return PublicKey.findProgramAddressSync(
     [
-      Buffer.from("mint_windowed_breaker", "utf-8"),
-      mint.toBuffer()
+      Buffer.from("proposal", "utf-8"),
+      organization.toBuffer(),
+      buf
     ],
-    programId
-  );
-}
-
-export function accountWindowedBreakerKey(
-  account: PublicKey,
-  programId: PublicKey = PROGRAM_ID
-): [PublicKey, number] {
-  return PublicKey.findProgramAddressSync(
-    [Buffer.from("account_windowed_breaker", "utf-8"), account.toBuffer()],
     programId
   );
 }

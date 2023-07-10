@@ -31,10 +31,9 @@ pub struct OnVoteV0<'info> {
   #[account(mut)]
   pub state_controller: Account<'info, ResolutionSettingsV0>,
   #[account(
-    mut,
     // Short circuit anchor owner check since we don't care the program.
     // Allow for polymorphism
-    owner = proposal.owner,
+    owner = *proposal.to_account_info().owner,
     has_one = proposal_config,
     constraint = proposal.to_account_info().is_signer,
     constraint = match proposal.state {

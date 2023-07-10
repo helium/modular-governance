@@ -19,8 +19,6 @@ pub struct ChoiceArg {
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct InitializeProposalArgsV0 {
-  /// Allow a custom seed for indexing
-  pub seed: Vec<u8>,
   pub name: String,
   pub uri: String,
   pub max_choices_per_voter: u16,
@@ -55,7 +53,11 @@ pub struct InitializeProposalV0<'info> {
       has_one = authority
     )]
   pub organization: Box<Account<'info, OrganizationV0>>,
-  pub proposal_program: Program<'info, System>,
+  /// CHECK: Checked via address constraint
+  #[account(
+    address = organization.proposal_program
+  )]
+  pub proposal_program: UncheckedAccount<'info>,
   pub system_program: Program<'info, System>,
 }
 

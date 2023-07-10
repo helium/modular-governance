@@ -8,7 +8,7 @@ use instructions::*;
 declare_id!("org9nsbSiTCJzeApoS2B3uwjM2gbQH48QbUUrhAAjzG");
 
 #[program]
-pub mod organizations {
+pub mod organization {
   use super::*;
 
   pub fn initialize_organization_v0(

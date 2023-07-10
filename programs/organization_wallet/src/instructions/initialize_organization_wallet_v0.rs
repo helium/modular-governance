@@ -6,7 +6,8 @@ use organization::state::OrganizationV0;
 pub struct InitializeOrganizationWalletArgsV0 {
   pub name: String,
   pub authority: Pubkey,
-  pub proposal_config: Pubkey,
+  /// List of valid proposal configs to execute on this wallet
+  pub proposal_configs: Vec<Pubkey>,
   pub index: u16,
 }
 
@@ -19,7 +20,7 @@ pub struct InitializeOrganizationWalletV0<'info> {
   #[account(
       init,
       payer = payer,
-      space = 8 + 60 + OrganizationWalletV0::INIT_SPACE,
+      space = 8 + 60 + std::mem::size_of::<OrganizationWalletV0>() + args.proposal_configs.len() * 32,
       seeds = [b"organization_wallet", organization.key().as_ref(), &args.index.to_le_bytes()],
       bump
     )]
@@ -49,7 +50,7 @@ pub fn handler(
       wallet,
       index: args.index,
       wallet_bump_seed: wallet_bump,
-      proposal_config: args.proposal_config,
+      proposal_configs: args.proposal_configs,
       bump_seed: ctx.bumps["organization_wallet"],
     });
   Ok(())

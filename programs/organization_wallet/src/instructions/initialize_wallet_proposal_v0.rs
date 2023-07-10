@@ -14,7 +14,8 @@ pub struct InitializeWalletProposalV0<'info> {
   pub owner: Account<'info, OrganizationV0>,
   #[account(
     constraint = proposal.state == ProposalState::Draft,
-    constraint = proposal.proposal_config == organization_wallet.proposal_config,
+    constraint = proposal.owner == organization_wallet.organization,
+    constraint = organization_wallet.proposal_configs.iter().any(|c| *c == proposal.proposal_config),
     has_one = owner
   )]
   pub proposal: Box<Account<'info, ProposalV0>>,
