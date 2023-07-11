@@ -1,9 +1,9 @@
-use crate::error::ErrorCode;
+use crate::{error::ErrorCode, metaplex::MetadataAccount};
 use anchor_lang::prelude::*;
 use anchor_spl::token::{Mint, TokenAccount};
 use proposal::{ProposalConfigV0, ProposalV0};
 
-use crate::{state::*, token_voter_seeds};
+use crate::{nft_voter_seeds, state::*};
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct VoteArgsV0 {
@@ -17,20 +17,21 @@ pub struct VoteV0<'info> {
   #[account(
     init_if_needed,
     payer = payer,
-    space = 8 + 60 + std::mem::size_of::<TokenVoterV0>(),
-    seeds = [b"marker", token_voter.key().as_ref(), mint.key().as_ref(), proposal.key().as_ref()],
+    space = 8 + 60 + std::mem::size_of::<NftVoterV0>(),
+    seeds = [b"marker", nft_voter.key().as_ref(), mint.key().as_ref(), proposal.key().as_ref()],
     bump
   )]
-  pub marker: Account<'info, VoteMarkerV0>,
-  pub token_voter: Account<'info, TokenVoterV0>,
+  pub marker: Box<Account<'info, VoteMarkerV0>>,
+  pub nft_voter: Box<Account<'info, NftVoterV0>>,
   pub voter: Signer<'info>,
-  #[account(
-    mut,
-    has_one = mint,
-    has_one = token_voter
-  )]
-  pub receipt: Box<Account<'info, ReceiptV0>>,
   pub mint: Box<Account<'info, Mint>>,
+  #[account(
+    seeds = ["metadata".as_bytes(), MetadataAccount::owner().as_ref(), mint.key().as_ref()],
+    seeds::program = MetadataAccount::owner(),
+    bump,
+    constraint = metadata.collection.as_ref().map(|col| col.verified && col.key == nft_voter.collection).unwrap_or_else(|| false)
+  )]
+  pub metadata: Box<Account<'info, MetadataAccount>>,
   #[account(
     associated_token::authority = voter,
     associated_token::mint = mint,
@@ -63,13 +64,15 @@ pub struct VoteV0<'info> {
 }
 
 pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
+  msg!("I started");
   let marker = &mut ctx.accounts.marker;
   marker.proposal = ctx.accounts.proposal.key();
   marker.bump_seed = ctx.bumps["marker"];
   marker.voter = ctx.accounts.voter.key();
+  marker.nft_voter = ctx.accounts.nft_voter.key();
   marker.mint = ctx.accounts.mint.key();
-  marker.token_voter = ctx.accounts.token_voter.key();
 
+  msg!("I set");
   // Don't allow voting for the same choice twice.
   require!(
     marker.choices.iter().all(|choice| *choice != args.choice),
@@ -82,25 +85,24 @@ pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
   );
 
   marker.choices.push(args.choice);
-
-  ctx.accounts.receipt.num_active_votes += 1;
+  msg!("I vote");
 
   proposal::cpi::vote_v0(
     CpiContext::new_with_signer(
       ctx.accounts.proposal_program.to_account_info(),
       proposal::cpi::accounts::VoteV0 {
-        vote_controller: ctx.accounts.token_voter.to_account_info(),
+        vote_controller: ctx.accounts.nft_voter.to_account_info(),
         state_controller: ctx.accounts.state_controller.to_account_info(),
         proposal_config: ctx.accounts.proposal_config.to_account_info(),
         proposal: ctx.accounts.proposal.to_account_info(),
         on_vote_hook: ctx.accounts.on_vote_hook.to_account_info(),
       },
-      &[token_voter_seeds!(ctx.accounts.token_voter)],
+      &[nft_voter_seeds!(ctx.accounts.nft_voter)],
     ),
     proposal::VoteArgsV0 {
       remove_vote: false,
       choice: args.choice,
-      weight: u128::from(ctx.accounts.receipt.amount),
+      weight: 1_u128,
     },
   )?;
 

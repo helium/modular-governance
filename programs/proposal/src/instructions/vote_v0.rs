@@ -14,8 +14,6 @@ pub struct VoteArgsV0 {
 #[instruction(args: VoteArgsV0)]
 pub struct VoteV0<'info> {
   pub vote_controller: Signer<'info>,
-  /// CHECK: Voter to associate this vote with. Not required, but this is useful for indexing
-  pub voter: AccountInfo<'info>,
   /// CHECK: Checked via cpi to the on vote hook, and has_ones
   #[account(mut)]
   pub state_controller: AccountInfo<'info>,

@@ -18,14 +18,17 @@ pub struct RelinquishVoteV0<'info> {
   pub refund: AccountInfo<'info>,
   #[account(
     mut,
-    seeds = [b"marker", proposal.key().as_ref()],
+    seeds = [b"marker", token_voter.key().as_ref(), mint.key().as_ref(), proposal.key().as_ref()],
     bump = marker.bump_seed,
+    has_one = token_voter,
+    has_one = mint
   )]
   pub marker: Account<'info, VoteMarkerV0>,
-  pub vote_controller: Account<'info, TokenVoterV0>,
+  pub token_voter: Account<'info, TokenVoterV0>,
   pub voter: Signer<'info>,
   #[account(
-    has_one = mint
+    has_one = mint,
+    has_one = token_voter
   )]
   pub receipt: Box<Account<'info, ReceiptV0>>,
   pub mint: Box<Account<'info, Mint>>,
@@ -44,7 +47,6 @@ pub struct RelinquishVoteV0<'info> {
   #[account(
     has_one = on_vote_hook,
     has_one = state_controller,
-    has_one = vote_controller,
     owner = proposal_program.key()
   )]
   pub proposal_config: Account<'info, ProposalConfigV0>,
@@ -64,6 +66,7 @@ pub struct RelinquishVoteV0<'info> {
 pub fn handler(ctx: Context<RelinquishVoteV0>, args: RelinquishVoteArgsV0) -> Result<()> {
   let marker = &mut ctx.accounts.marker;
   marker.proposal = ctx.accounts.proposal.key();
+  marker.voter = ctx.accounts.voter.key();
 
   require!(
     marker.choices.iter().any(|choice| *choice == args.choice),
@@ -81,14 +84,13 @@ pub fn handler(ctx: Context<RelinquishVoteV0>, args: RelinquishVoteArgsV0) -> Re
     CpiContext::new_with_signer(
       ctx.accounts.proposal_program.to_account_info(),
       proposal::cpi::accounts::VoteV0 {
-        vote_controller: ctx.accounts.vote_controller.to_account_info(),
-        voter: ctx.accounts.voter.to_account_info(),
+        vote_controller: ctx.accounts.token_voter.to_account_info(),
         state_controller: ctx.accounts.state_controller.to_account_info(),
         proposal_config: ctx.accounts.proposal_config.to_account_info(),
         proposal: ctx.accounts.proposal.to_account_info(),
         on_vote_hook: ctx.accounts.on_vote_hook.to_account_info(),
       },
-      &[token_voter_seeds!(ctx.accounts.vote_controller)],
+      &[token_voter_seeds!(ctx.accounts.token_voter)],
     ),
     proposal::VoteArgsV0 {
       remove_vote: true,

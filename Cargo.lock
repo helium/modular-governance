@@ -1227,6 +1227,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "nft-voter"
+version = "0.1.0"
+dependencies = [
+ "anchor-lang",
+ "anchor-spl",
+ "proposal",
+]
+
+[[package]]
 name = "num-bigint"
 version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"

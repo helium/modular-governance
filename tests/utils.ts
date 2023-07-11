@@ -15,6 +15,10 @@ export async function ensureIdls() {
       pid: "tokv9Lz2ZeH2F2qPcLokjoNPuvwNJ9gdZ3DaVQLPJcV",
     },
     {
+      name: "nft_voter",
+      pid: "nftvJPn25R8AM52AeQM7TxkN7CpgWvYVVEh5qgHPaQx",
+    },
+    {
       name: "organization",
       pid: "org9nsbSiTCJzeApoS2B3uwjM2gbQH48QbUUrhAAjzG",
     },
