@@ -5,7 +5,7 @@
       "path": "./packages/modular-governance-idls"
     },
     {
-      "path": "./packages/organizations-sdk"
+      "path": "./packages/organization-sdk"
     },
     {
       "path": "./packages/proposal-sdk"

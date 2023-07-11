@@ -1,12 +1,12 @@
 {
-  "name": "@helium/organizations-sdk",
+  "name": "@helium/organization-sdk",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "license": "Apache-2.0",
   "version": "0.0.1",
-  "description": "Interface to the organizations smart contract",
+  "description": "Interface to the organization smart contract",
   "repository": {
     "type": "git",
     "url": "https://github.com/HeliumFoundation/modular-governance"

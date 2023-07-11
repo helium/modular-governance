@@ -7,7 +7,7 @@ import {
   PROGRAM_ID as PROPOSAL_PID,
   init as initProposal,
 } from "@helium/proposal-sdk";
-import { PROGRAM_ID, init, proposalKey } from "@helium/organizations-sdk";
+import { PROGRAM_ID, init, proposalKey } from "@helium/organization-sdk";
 import { expect } from "chai";
 import { ensureIdls, makeid } from "./utils";
 
