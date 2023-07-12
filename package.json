@@ -6,7 +6,10 @@
     "watch": "lerna run --parallel prebuild && tsc --build --watch",
     "clean": "npx shx rm -rf {.,packages/*}/{node_modules,lib,dist}",
     "fmt": "cargo fmt --check",
-    "clippy": "cargo clippy --all-targets -- -D warnings -A clippy::result_large_err -A clippy::too_many_arguments"
+    "clippy": "cargo clippy --all-targets -- -D warnings -A clippy::result_large_err -A clippy::too_many_arguments",
+    "docs": "typedoc",
+    "docs-all": "npm run docs --workspaces --if-present && npm run migrate-docs",
+    "migrate-docs": "ts-node -T scripts/migrate-docs.ts"
   },
   "workspaces": [
     "packages/*"
