@@ -1,0 +1,5705 @@
+{
+	"id": 0,
+	"name": "Modular Governance",
+	"variant": "project",
+	"kind": 1,
+	"flags": {},
+	"children": [
+		{
+			"id": 1,
+			"name": "@helium/nft-voter-sdk",
+			"variant": "declaration",
+			"kind": 2,
+			"flags": {},
+			"children": [
+				{
+					"id": 2,
+					"name": "PROGRAM_ID",
+					"variant": "declaration",
+					"kind": 32,
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/nft-voter-sdk/src/constants.ts",
+							"line": 3,
+							"character": 13,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/nft-voter-sdk/src/constants.ts#L3"
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+							"qualifiedName": "\"@solana/web3.js\".PublicKey"
+						},
+						"name": "PublicKey",
+						"package": "@solana/web3.js",
+						"qualifiedName": "\"@solana/web3.js\".PublicKey"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 3,
+					"name": "deposit",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/nft-voter-sdk/src/functions/deposit.ts",
+							"line": 36,
+							"character": 22,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/nft-voter-sdk/src/functions/deposit.ts#L36"
+						}
+					],
+					"signatures": [
+						{
+							"id": 4,
+							"name": "deposit",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/nft-voter-sdk/src/functions/deposit.ts",
+									"line": 36,
+									"character": 0,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/nft-voter-sdk/src/functions/deposit.ts#L36"
+								}
+							],
+							"parameters": [
+								{
+									"id": 5,
+									"name": "__namedParameters",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "intrinsic",
+										"name": "any"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 6,
+					"name": "init",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/nft-voter-sdk/src/index.ts",
+							"line": 13,
+							"character": 22,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/nft-voter-sdk/src/index.ts#L13"
+						}
+					],
+					"signatures": [
+						{
+							"id": 7,
+							"name": "init",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/nft-voter-sdk/src/index.ts",
+									"line": 13,
+									"character": 0,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/nft-voter-sdk/src/index.ts#L13"
+								}
+							],
+							"parameters": [
+								{
+									"id": 8,
+									"name": "provider",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@coral-xyz/anchor/src/provider.ts",
+											"qualifiedName": "AnchorProvider"
+										},
+										"name": "AnchorProvider",
+										"package": "@coral-xyz/anchor"
+									}
+								},
+								{
+									"id": 9,
+									"name": "programId",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									},
+									"defaultValue": "PROGRAM_ID"
+								},
+								{
+									"id": 10,
+									"name": "idl",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@coral-xyz/anchor/src/idl.ts",
+											"qualifiedName": "Idl"
+										},
+										"name": "Idl",
+										"package": "@coral-xyz/anchor"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/index.ts",
+											"qualifiedName": "Program"
+										},
+										"typeArguments": [
+											{
+												"type": "reference",
+												"target": {
+													"sourceFileName": "\u0000",
+													"qualifiedName": "unknown"
+												},
+												"name": "NftVoter",
+												"qualifiedName": "unknown"
+											}
+										],
+										"name": "Program",
+										"package": "@coral-xyz/anchor"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 11,
+					"name": "nftVoterProgramResolver",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/nft-voter-sdk/src/resolvers.ts",
+							"line": 10,
+							"character": 13,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/nft-voter-sdk/src/resolvers.ts#L10"
+						}
+					],
+					"signatures": [
+						{
+							"id": 12,
+							"name": "nftVoterProgramResolver",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+									"line": 11,
+									"character": 53
+								}
+							],
+							"parameters": [
+								{
+									"id": 13,
+									"name": "params",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 14,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 15,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 13,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 16,
+													"name": "args",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 12,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "array",
+														"elementType": {
+															"type": "intrinsic",
+															"name": "any"
+														}
+													}
+												},
+												{
+													"id": 17,
+													"name": "idlIx",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 16,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "any"
+													}
+												},
+												{
+													"id": 18,
+													"name": "programId",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 15,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+															"qualifiedName": "\"@solana/web3.js\".PublicKey"
+														},
+														"name": "PublicKey",
+														"package": "@solana/web3.js",
+														"qualifiedName": "\"@solana/web3.js\".PublicKey"
+													}
+												},
+												{
+													"id": 19,
+													"name": "provider",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 14,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/provider.ts",
+															"qualifiedName": "default"
+														},
+														"name": "default",
+														"package": "@coral-xyz/anchor"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														15,
+														16,
+														17,
+														18,
+														19
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 11,
+													"character": 62
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 20,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 21,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 18,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 22,
+													"name": "resolved",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 19,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														21,
+														22
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 17,
+													"character": 14
+												}
+											]
+										}
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 23,
+					"name": "nftVoterResolvers",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/nft-voter-sdk/src/resolvers.ts",
+							"line": 19,
+							"character": 13,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/nft-voter-sdk/src/resolvers.ts#L19"
+						}
+					],
+					"signatures": [
+						{
+							"id": 24,
+							"name": "nftVoterResolvers",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+									"line": 11,
+									"character": 53
+								}
+							],
+							"parameters": [
+								{
+									"id": 25,
+									"name": "params",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 26,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 27,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 13,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 28,
+													"name": "args",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 12,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "array",
+														"elementType": {
+															"type": "intrinsic",
+															"name": "any"
+														}
+													}
+												},
+												{
+													"id": 29,
+													"name": "idlIx",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 16,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "any"
+													}
+												},
+												{
+													"id": 30,
+													"name": "programId",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 15,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+															"qualifiedName": "\"@solana/web3.js\".PublicKey"
+														},
+														"name": "PublicKey",
+														"package": "@solana/web3.js",
+														"qualifiedName": "\"@solana/web3.js\".PublicKey"
+													}
+												},
+												{
+													"id": 31,
+													"name": "provider",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 14,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/provider.ts",
+															"qualifiedName": "default"
+														},
+														"name": "default",
+														"package": "@coral-xyz/anchor"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														27,
+														28,
+														29,
+														30,
+														31
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 11,
+													"character": 62
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 32,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 33,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 18,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 34,
+													"name": "resolved",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 19,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														33,
+														34
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 17,
+													"character": 14
+												}
+											]
+										}
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 35,
+					"name": "receiptKey",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/nft-voter-sdk/src/pdas.ts",
+							"line": 4,
+							"character": 16,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/nft-voter-sdk/src/pdas.ts#L4"
+						}
+					],
+					"signatures": [
+						{
+							"id": 36,
+							"name": "receiptKey",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/nft-voter-sdk/src/pdas.ts",
+									"line": 4,
+									"character": 0,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/nft-voter-sdk/src/pdas.ts#L4"
+								}
+							],
+							"parameters": [
+								{
+									"id": 37,
+									"name": "mint",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									}
+								},
+								{
+									"id": 38,
+									"name": "programId",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									},
+									"defaultValue": "PROGRAM_ID"
+								}
+							],
+							"type": {
+								"type": "tuple",
+								"elements": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									},
+									{
+										"type": "intrinsic",
+										"name": "number"
+									}
+								]
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Variables",
+					"children": [
+						2
+					]
+				},
+				{
+					"title": "Functions",
+					"children": [
+						3,
+						6,
+						11,
+						23,
+						35
+					]
+				}
+			],
+			"packageVersion": "0.0.1"
+		},
+		{
+			"id": 39,
+			"name": "@helium/organization-sdk",
+			"variant": "declaration",
+			"kind": 2,
+			"flags": {},
+			"children": [
+				{
+					"id": 40,
+					"name": "PROGRAM_ID",
+					"variant": "declaration",
+					"kind": 32,
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/organization-sdk/src/constants.ts",
+							"line": 3,
+							"character": 13,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/organization-sdk/src/constants.ts#L3"
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+							"qualifiedName": "\"@solana/web3.js\".PublicKey"
+						},
+						"name": "PublicKey",
+						"package": "@solana/web3.js",
+						"qualifiedName": "\"@solana/web3.js\".PublicKey"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 41,
+					"name": "init",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/organization-sdk/src/init.ts",
+							"line": 7,
+							"character": 22,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/organization-sdk/src/init.ts#L7"
+						}
+					],
+					"signatures": [
+						{
+							"id": 42,
+							"name": "init",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/organization-sdk/src/init.ts",
+									"line": 7,
+									"character": 0,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/organization-sdk/src/init.ts#L7"
+								}
+							],
+							"parameters": [
+								{
+									"id": 43,
+									"name": "provider",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@coral-xyz/anchor/src/provider.ts",
+											"qualifiedName": "AnchorProvider"
+										},
+										"name": "AnchorProvider",
+										"package": "@coral-xyz/anchor"
+									}
+								},
+								{
+									"id": 44,
+									"name": "programId",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									},
+									"defaultValue": "PROGRAM_ID"
+								},
+								{
+									"id": 45,
+									"name": "idl",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@coral-xyz/anchor/src/idl.ts",
+											"qualifiedName": "Idl"
+										},
+										"name": "Idl",
+										"package": "@coral-xyz/anchor"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/index.ts",
+											"qualifiedName": "Program"
+										},
+										"typeArguments": [
+											{
+												"type": "reference",
+												"target": {
+													"sourceFileName": "\u0000",
+													"qualifiedName": "unknown"
+												},
+												"name": "Organization",
+												"qualifiedName": "unknown"
+											}
+										],
+										"name": "Program",
+										"package": "@coral-xyz/anchor"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 46,
+					"name": "organizationsProgramResolver",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/organization-sdk/src/resolvers.ts",
+							"line": 8,
+							"character": 13,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/organization-sdk/src/resolvers.ts#L8"
+						}
+					],
+					"signatures": [
+						{
+							"id": 47,
+							"name": "organizationsProgramResolver",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+									"line": 11,
+									"character": 53
+								}
+							],
+							"parameters": [
+								{
+									"id": 48,
+									"name": "params",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 49,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 50,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 13,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 51,
+													"name": "args",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 12,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "array",
+														"elementType": {
+															"type": "intrinsic",
+															"name": "any"
+														}
+													}
+												},
+												{
+													"id": 52,
+													"name": "idlIx",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 16,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "any"
+													}
+												},
+												{
+													"id": 53,
+													"name": "programId",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 15,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+															"qualifiedName": "\"@solana/web3.js\".PublicKey"
+														},
+														"name": "PublicKey",
+														"package": "@solana/web3.js",
+														"qualifiedName": "\"@solana/web3.js\".PublicKey"
+													}
+												},
+												{
+													"id": 54,
+													"name": "provider",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 14,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/provider.ts",
+															"qualifiedName": "default"
+														},
+														"name": "default",
+														"package": "@coral-xyz/anchor"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														50,
+														51,
+														52,
+														53,
+														54
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 11,
+													"character": 62
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 55,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 56,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 18,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 57,
+													"name": "resolved",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 19,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														56,
+														57
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 17,
+													"character": 14
+												}
+											]
+										}
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 58,
+					"name": "organizationsResolvers",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/organization-sdk/src/resolvers.ts",
+							"line": 15,
+							"character": 13,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/organization-sdk/src/resolvers.ts#L15"
+						}
+					],
+					"signatures": [
+						{
+							"id": 59,
+							"name": "organizationsResolvers",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+									"line": 11,
+									"character": 53
+								}
+							],
+							"parameters": [
+								{
+									"id": 60,
+									"name": "params",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 61,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 62,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 13,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 63,
+													"name": "args",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 12,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "array",
+														"elementType": {
+															"type": "intrinsic",
+															"name": "any"
+														}
+													}
+												},
+												{
+													"id": 64,
+													"name": "idlIx",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 16,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "any"
+													}
+												},
+												{
+													"id": 65,
+													"name": "programId",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 15,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+															"qualifiedName": "\"@solana/web3.js\".PublicKey"
+														},
+														"name": "PublicKey",
+														"package": "@solana/web3.js",
+														"qualifiedName": "\"@solana/web3.js\".PublicKey"
+													}
+												},
+												{
+													"id": 66,
+													"name": "provider",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 14,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/provider.ts",
+															"qualifiedName": "default"
+														},
+														"name": "default",
+														"package": "@coral-xyz/anchor"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														62,
+														63,
+														64,
+														65,
+														66
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 11,
+													"character": 62
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 67,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 68,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 18,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 69,
+													"name": "resolved",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 19,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														68,
+														69
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 17,
+													"character": 14
+												}
+											]
+										}
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 70,
+					"name": "proposalKey",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/organization-sdk/src/pdas.ts",
+							"line": 4,
+							"character": 16,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/organization-sdk/src/pdas.ts#L4"
+						}
+					],
+					"signatures": [
+						{
+							"id": 71,
+							"name": "proposalKey",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/organization-sdk/src/pdas.ts",
+									"line": 4,
+									"character": 0,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/organization-sdk/src/pdas.ts#L4"
+								}
+							],
+							"parameters": [
+								{
+									"id": 72,
+									"name": "organization",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									}
+								},
+								{
+									"id": 73,
+									"name": "index",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 74,
+									"name": "programId",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									},
+									"defaultValue": "PROGRAM_ID"
+								}
+							],
+							"type": {
+								"type": "tuple",
+								"elements": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									},
+									{
+										"type": "intrinsic",
+										"name": "number"
+									}
+								]
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Variables",
+					"children": [
+						40
+					]
+				},
+				{
+					"title": "Functions",
+					"children": [
+						41,
+						46,
+						58,
+						70
+					]
+				}
+			],
+			"packageVersion": "0.0.1"
+		},
+		{
+			"id": 75,
+			"name": "@helium/proposal-sdk",
+			"variant": "declaration",
+			"kind": 2,
+			"flags": {},
+			"children": [
+				{
+					"id": 76,
+					"name": "PROGRAM_ID",
+					"variant": "declaration",
+					"kind": 32,
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/proposal-sdk/src/constants.ts",
+							"line": 3,
+							"character": 13,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/proposal-sdk/src/constants.ts#L3"
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+							"qualifiedName": "\"@solana/web3.js\".PublicKey"
+						},
+						"name": "PublicKey",
+						"package": "@solana/web3.js",
+						"qualifiedName": "\"@solana/web3.js\".PublicKey"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 77,
+					"name": "init",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/proposal-sdk/src/index.ts",
+							"line": 13,
+							"character": 22,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/proposal-sdk/src/index.ts#L13"
+						}
+					],
+					"signatures": [
+						{
+							"id": 78,
+							"name": "init",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/proposal-sdk/src/index.ts",
+									"line": 13,
+									"character": 0,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/proposal-sdk/src/index.ts#L13"
+								}
+							],
+							"parameters": [
+								{
+									"id": 79,
+									"name": "provider",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@coral-xyz/anchor/src/provider.ts",
+											"qualifiedName": "AnchorProvider"
+										},
+										"name": "AnchorProvider",
+										"package": "@coral-xyz/anchor"
+									}
+								},
+								{
+									"id": 80,
+									"name": "programId",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									},
+									"defaultValue": "PROGRAM_ID"
+								},
+								{
+									"id": 81,
+									"name": "idl",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@coral-xyz/anchor/src/idl.ts",
+											"qualifiedName": "Idl"
+										},
+										"name": "Idl",
+										"package": "@coral-xyz/anchor"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/index.ts",
+											"qualifiedName": "Program"
+										},
+										"typeArguments": [
+											{
+												"type": "reference",
+												"target": {
+													"sourceFileName": "\u0000",
+													"qualifiedName": "unknown"
+												},
+												"name": "Proposal",
+												"qualifiedName": "unknown"
+											}
+										],
+										"name": "Program",
+										"package": "@coral-xyz/anchor"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 82,
+					"name": "proposalKey",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/proposal-sdk/src/pdas.ts",
+							"line": 4,
+							"character": 16,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/proposal-sdk/src/pdas.ts#L4"
+						}
+					],
+					"signatures": [
+						{
+							"id": 83,
+							"name": "proposalKey",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/proposal-sdk/src/pdas.ts",
+									"line": 4,
+									"character": 0,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/proposal-sdk/src/pdas.ts#L4"
+								}
+							],
+							"parameters": [
+								{
+									"id": 84,
+									"name": "owner",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									}
+								},
+								{
+									"id": 85,
+									"name": "seed",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@types/node/buffer.d.ts",
+											"qualifiedName": "__global.Buffer"
+										},
+										"name": "Buffer",
+										"package": "@types/node",
+										"qualifiedName": "__global.Buffer"
+									}
+								},
+								{
+									"id": 86,
+									"name": "programId",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									},
+									"defaultValue": "PROGRAM_ID"
+								}
+							],
+							"type": {
+								"type": "tuple",
+								"elements": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									},
+									{
+										"type": "intrinsic",
+										"name": "number"
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"id": 87,
+					"name": "proposalProgramResolver",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/proposal-sdk/src/resolvers.ts",
+							"line": 7,
+							"character": 13,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/proposal-sdk/src/resolvers.ts#L7"
+						}
+					],
+					"signatures": [
+						{
+							"id": 88,
+							"name": "proposalProgramResolver",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+									"line": 11,
+									"character": 53
+								}
+							],
+							"parameters": [
+								{
+									"id": 89,
+									"name": "params",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 90,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 91,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 13,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 92,
+													"name": "args",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 12,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "array",
+														"elementType": {
+															"type": "intrinsic",
+															"name": "any"
+														}
+													}
+												},
+												{
+													"id": 93,
+													"name": "idlIx",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 16,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "any"
+													}
+												},
+												{
+													"id": 94,
+													"name": "programId",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 15,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+															"qualifiedName": "\"@solana/web3.js\".PublicKey"
+														},
+														"name": "PublicKey",
+														"package": "@solana/web3.js",
+														"qualifiedName": "\"@solana/web3.js\".PublicKey"
+													}
+												},
+												{
+													"id": 95,
+													"name": "provider",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 14,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/provider.ts",
+															"qualifiedName": "default"
+														},
+														"name": "default",
+														"package": "@coral-xyz/anchor"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														91,
+														92,
+														93,
+														94,
+														95
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 11,
+													"character": 62
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 96,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 97,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 18,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 98,
+													"name": "resolved",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 19,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														97,
+														98
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 17,
+													"character": 14
+												}
+											]
+										}
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 99,
+					"name": "proposalResolvers",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/proposal-sdk/src/resolvers.ts",
+							"line": 14,
+							"character": 13,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/proposal-sdk/src/resolvers.ts#L14"
+						}
+					],
+					"signatures": [
+						{
+							"id": 100,
+							"name": "proposalResolvers",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+									"line": 11,
+									"character": 53
+								}
+							],
+							"parameters": [
+								{
+									"id": 101,
+									"name": "params",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 102,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 103,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 13,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 104,
+													"name": "args",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 12,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "array",
+														"elementType": {
+															"type": "intrinsic",
+															"name": "any"
+														}
+													}
+												},
+												{
+													"id": 105,
+													"name": "idlIx",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 16,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "any"
+													}
+												},
+												{
+													"id": 106,
+													"name": "programId",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 15,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+															"qualifiedName": "\"@solana/web3.js\".PublicKey"
+														},
+														"name": "PublicKey",
+														"package": "@solana/web3.js",
+														"qualifiedName": "\"@solana/web3.js\".PublicKey"
+													}
+												},
+												{
+													"id": 107,
+													"name": "provider",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 14,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/provider.ts",
+															"qualifiedName": "default"
+														},
+														"name": "default",
+														"package": "@coral-xyz/anchor"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														103,
+														104,
+														105,
+														106,
+														107
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 11,
+													"character": 62
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 108,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 109,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 18,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 110,
+													"name": "resolved",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 19,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														109,
+														110
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 17,
+													"character": 14
+												}
+											]
+										}
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Variables",
+					"children": [
+						76
+					]
+				},
+				{
+					"title": "Functions",
+					"children": [
+						77,
+						82,
+						87,
+						99
+					]
+				}
+			],
+			"packageVersion": "0.0.1"
+		},
+		{
+			"id": 111,
+			"name": "@helium/state-controller-sdk",
+			"variant": "declaration",
+			"kind": 2,
+			"flags": {},
+			"children": [
+				{
+					"id": 112,
+					"name": "SettingsBuilder",
+					"variant": "declaration",
+					"kind": 128,
+					"flags": {},
+					"children": [
+						{
+							"id": 113,
+							"name": "constructor",
+							"variant": "declaration",
+							"kind": 512,
+							"flags": {},
+							"signatures": [
+								{
+									"id": 114,
+									"name": "new SettingsBuilder",
+									"variant": "signature",
+									"kind": 16384,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": 112,
+										"name": "SettingsBuilder",
+										"package": "@helium/state-controller-sdk"
+									}
+								}
+							]
+						},
+						{
+							"id": 115,
+							"name": "nodes",
+							"variant": "declaration",
+							"kind": 1024,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+									"line": 10,
+									"character": 2,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L10"
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "any"
+								}
+							},
+							"defaultValue": "[]"
+						},
+						{
+							"id": 116,
+							"name": "and",
+							"variant": "declaration",
+							"kind": 2048,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+									"line": 58,
+									"character": 2,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L58"
+								}
+							],
+							"signatures": [
+								{
+									"id": 117,
+									"name": "and",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+											"line": 58,
+											"character": 2,
+											"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L58"
+										}
+									],
+									"parameters": [
+										{
+											"id": 118,
+											"name": "left",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"target": 112,
+												"name": "SettingsBuilder",
+												"package": "@helium/state-controller-sdk"
+											}
+										},
+										{
+											"id": 119,
+											"name": "right",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"target": 112,
+												"name": "SettingsBuilder",
+												"package": "@helium/state-controller-sdk"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"target": 112,
+										"name": "SettingsBuilder",
+										"package": "@helium/state-controller-sdk"
+									}
+								}
+							]
+						},
+						{
+							"id": 120,
+							"name": "build",
+							"variant": "declaration",
+							"kind": 2048,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+									"line": 72,
+									"character": 2,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L72"
+								}
+							],
+							"signatures": [
+								{
+									"id": 121,
+									"name": "build",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+											"line": 72,
+											"character": 2,
+											"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L72"
+										}
+									],
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "intrinsic",
+											"name": "any"
+										}
+									}
+								}
+							]
+						},
+						{
+							"id": 122,
+							"name": "choicePercentage",
+							"variant": "declaration",
+							"kind": 2048,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+									"line": 41,
+									"character": 2,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L41"
+								}
+							],
+							"signatures": [
+								{
+									"id": 123,
+									"name": "choicePercentage",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+											"line": 41,
+											"character": 2,
+											"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L41"
+										}
+									],
+									"parameters": [
+										{
+											"id": 124,
+											"name": "percentage",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {},
+											"type": {
+												"type": "union",
+												"types": [
+													{
+														"type": "intrinsic",
+														"name": "number"
+													},
+													{
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@types/bn.js/index.d.ts",
+															"qualifiedName": "BN"
+														},
+														"name": "BN",
+														"package": "@types/bn.js"
+													}
+												]
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"target": 112,
+										"name": "SettingsBuilder",
+										"package": "@helium/state-controller-sdk"
+									}
+								}
+							]
+						},
+						{
+							"id": 125,
+							"name": "choiceVoteWeight",
+							"variant": "declaration",
+							"kind": 2048,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+									"line": 33,
+									"character": 2,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L33"
+								}
+							],
+							"signatures": [
+								{
+									"id": 126,
+									"name": "choiceVoteWeight",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+											"line": 33,
+											"character": 2,
+											"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L33"
+										}
+									],
+									"parameters": [
+										{
+											"id": 127,
+											"name": "weightThreshold",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "node_modules/@types/bn.js/index.d.ts",
+													"qualifiedName": "BN"
+												},
+												"name": "BN",
+												"package": "@types/bn.js"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"target": 112,
+										"name": "SettingsBuilder",
+										"package": "@helium/state-controller-sdk"
+									}
+								}
+							]
+						},
+						{
+							"id": 128,
+							"name": "endTimestamp",
+							"variant": "declaration",
+							"kind": 2048,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+									"line": 19,
+									"character": 2,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L19"
+								}
+							],
+							"signatures": [
+								{
+									"id": 129,
+									"name": "endTimestamp",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+											"line": 19,
+											"character": 2,
+											"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L19"
+										}
+									],
+									"parameters": [
+										{
+											"id": 130,
+											"name": "endTs",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "node_modules/@types/bn.js/index.d.ts",
+													"qualifiedName": "BN"
+												},
+												"name": "BN",
+												"package": "@types/bn.js"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"target": 112,
+										"name": "SettingsBuilder",
+										"package": "@helium/state-controller-sdk"
+									}
+								}
+							]
+						},
+						{
+							"id": 131,
+							"name": "offsetFromStartTs",
+							"variant": "declaration",
+							"kind": 2048,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+									"line": 26,
+									"character": 2,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L26"
+								}
+							],
+							"signatures": [
+								{
+									"id": 132,
+									"name": "offsetFromStartTs",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+											"line": 26,
+											"character": 2,
+											"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L26"
+										}
+									],
+									"parameters": [
+										{
+											"id": 133,
+											"name": "offset",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"target": {
+													"sourceFileName": "node_modules/@types/bn.js/index.d.ts",
+													"qualifiedName": "BN"
+												},
+												"name": "BN",
+												"package": "@types/bn.js"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"target": 112,
+										"name": "SettingsBuilder",
+										"package": "@helium/state-controller-sdk"
+									}
+								}
+							]
+						},
+						{
+							"id": 134,
+							"name": "or",
+							"variant": "declaration",
+							"kind": 2048,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+									"line": 65,
+									"character": 2,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L65"
+								}
+							],
+							"signatures": [
+								{
+									"id": 135,
+									"name": "or",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+											"line": 65,
+											"character": 2,
+											"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L65"
+										}
+									],
+									"parameters": [
+										{
+											"id": 136,
+											"name": "left",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"target": 112,
+												"name": "SettingsBuilder",
+												"package": "@helium/state-controller-sdk"
+											}
+										},
+										{
+											"id": 137,
+											"name": "right",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"target": 112,
+												"name": "SettingsBuilder",
+												"package": "@helium/state-controller-sdk"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"target": 112,
+										"name": "SettingsBuilder",
+										"package": "@helium/state-controller-sdk"
+									}
+								}
+							]
+						},
+						{
+							"id": 138,
+							"name": "resolved",
+							"variant": "declaration",
+							"kind": 2048,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+									"line": 12,
+									"character": 2,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L12"
+								}
+							],
+							"signatures": [
+								{
+									"id": 139,
+									"name": "resolved",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+											"line": 12,
+											"character": 2,
+											"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L12"
+										}
+									],
+									"parameters": [
+										{
+											"id": 140,
+											"name": "choices",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {},
+											"type": {
+												"type": "array",
+												"elementType": {
+													"type": "intrinsic",
+													"name": "number"
+												}
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"target": 112,
+										"name": "SettingsBuilder",
+										"package": "@helium/state-controller-sdk"
+									}
+								}
+							]
+						},
+						{
+							"id": 141,
+							"name": "top",
+							"variant": "declaration",
+							"kind": 2048,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+									"line": 51,
+									"character": 2,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L51"
+								}
+							],
+							"signatures": [
+								{
+									"id": 142,
+									"name": "top",
+									"variant": "signature",
+									"kind": 4096,
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+											"line": 51,
+											"character": 2,
+											"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L51"
+										}
+									],
+									"parameters": [
+										{
+											"id": 143,
+											"name": "n",
+											"variant": "param",
+											"kind": 32768,
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											},
+											"defaultValue": "1"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"target": 112,
+										"name": "SettingsBuilder",
+										"package": "@helium/state-controller-sdk"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"children": [
+								113
+							]
+						},
+						{
+							"title": "Properties",
+							"children": [
+								115
+							]
+						},
+						{
+							"title": "Methods",
+							"children": [
+								116,
+								120,
+								122,
+								125,
+								128,
+								131,
+								134,
+								138,
+								141
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+							"line": 9,
+							"character": 13,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L9"
+						}
+					]
+				},
+				{
+					"id": 144,
+					"name": "PROGRAM_ID",
+					"variant": "declaration",
+					"kind": 32,
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/state-controller-sdk/src/constants.ts",
+							"line": 3,
+							"character": 13,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/constants.ts#L3"
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+							"qualifiedName": "\"@solana/web3.js\".PublicKey"
+						},
+						"name": "PublicKey",
+						"package": "@solana/web3.js",
+						"qualifiedName": "\"@solana/web3.js\".PublicKey"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 145,
+					"name": "init",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/state-controller-sdk/src/index.ts",
+							"line": 13,
+							"character": 22,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/index.ts#L13"
+						}
+					],
+					"signatures": [
+						{
+							"id": 146,
+							"name": "init",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/state-controller-sdk/src/index.ts",
+									"line": 13,
+									"character": 0,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/index.ts#L13"
+								}
+							],
+							"parameters": [
+								{
+									"id": 147,
+									"name": "provider",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@coral-xyz/anchor/src/provider.ts",
+											"qualifiedName": "AnchorProvider"
+										},
+										"name": "AnchorProvider",
+										"package": "@coral-xyz/anchor"
+									}
+								},
+								{
+									"id": 148,
+									"name": "programId",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									},
+									"defaultValue": "PROGRAM_ID"
+								},
+								{
+									"id": 149,
+									"name": "idl",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@coral-xyz/anchor/src/idl.ts",
+											"qualifiedName": "Idl"
+										},
+										"name": "Idl",
+										"package": "@coral-xyz/anchor"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/index.ts",
+											"qualifiedName": "Program"
+										},
+										"typeArguments": [
+											{
+												"type": "reference",
+												"target": {
+													"sourceFileName": "\u0000",
+													"qualifiedName": "unknown"
+												},
+												"name": "StateController",
+												"qualifiedName": "unknown"
+											}
+										],
+										"name": "Program",
+										"package": "@coral-xyz/anchor"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 150,
+					"name": "resolutionSettingsKey",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/state-controller-sdk/src/pdas.ts",
+							"line": 4,
+							"character": 16,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/pdas.ts#L4"
+						}
+					],
+					"signatures": [
+						{
+							"id": 151,
+							"name": "resolutionSettingsKey",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/state-controller-sdk/src/pdas.ts",
+									"line": 4,
+									"character": 0,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/pdas.ts#L4"
+								}
+							],
+							"parameters": [
+								{
+									"id": 152,
+									"name": "name",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+											"qualifiedName": "String"
+										},
+										"name": "String",
+										"package": "typescript"
+									}
+								},
+								{
+									"id": 153,
+									"name": "programId",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									},
+									"defaultValue": "PROGRAM_ID"
+								}
+							],
+							"type": {
+								"type": "tuple",
+								"elements": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									},
+									{
+										"type": "intrinsic",
+										"name": "number"
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"id": 154,
+					"name": "settings",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+							"line": 5,
+							"character": 16,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L5"
+						}
+					],
+					"signatures": [
+						{
+							"id": 155,
+							"name": "settings",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+									"line": 5,
+									"character": 0,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/settingsBuilder.ts#L5"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": 112,
+								"name": "SettingsBuilder",
+								"package": "@helium/state-controller-sdk"
+							}
+						}
+					]
+				},
+				{
+					"id": 156,
+					"name": "stateControllerProgramResolver",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/state-controller-sdk/src/resolvers.ts",
+							"line": 6,
+							"character": 13,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/resolvers.ts#L6"
+						}
+					],
+					"signatures": [
+						{
+							"id": 157,
+							"name": "stateControllerProgramResolver",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+									"line": 11,
+									"character": 53
+								}
+							],
+							"parameters": [
+								{
+									"id": 158,
+									"name": "params",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 159,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 160,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 13,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 161,
+													"name": "args",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 12,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "array",
+														"elementType": {
+															"type": "intrinsic",
+															"name": "any"
+														}
+													}
+												},
+												{
+													"id": 162,
+													"name": "idlIx",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 16,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "any"
+													}
+												},
+												{
+													"id": 163,
+													"name": "programId",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 15,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+															"qualifiedName": "\"@solana/web3.js\".PublicKey"
+														},
+														"name": "PublicKey",
+														"package": "@solana/web3.js",
+														"qualifiedName": "\"@solana/web3.js\".PublicKey"
+													}
+												},
+												{
+													"id": 164,
+													"name": "provider",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 14,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/provider.ts",
+															"qualifiedName": "default"
+														},
+														"name": "default",
+														"package": "@coral-xyz/anchor"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														160,
+														161,
+														162,
+														163,
+														164
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 11,
+													"character": 62
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 165,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 166,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 18,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 167,
+													"name": "resolved",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 19,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														166,
+														167
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 17,
+													"character": 14
+												}
+											]
+										}
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 168,
+					"name": "stateControllerResolvers",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/state-controller-sdk/src/resolvers.ts",
+							"line": 13,
+							"character": 13,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/state-controller-sdk/src/resolvers.ts#L13"
+						}
+					],
+					"signatures": [
+						{
+							"id": 169,
+							"name": "stateControllerResolvers",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+									"line": 11,
+									"character": 53
+								}
+							],
+							"parameters": [
+								{
+									"id": 170,
+									"name": "params",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 171,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 172,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 13,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 173,
+													"name": "args",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 12,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "array",
+														"elementType": {
+															"type": "intrinsic",
+															"name": "any"
+														}
+													}
+												},
+												{
+													"id": 174,
+													"name": "idlIx",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 16,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "any"
+													}
+												},
+												{
+													"id": 175,
+													"name": "programId",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 15,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+															"qualifiedName": "\"@solana/web3.js\".PublicKey"
+														},
+														"name": "PublicKey",
+														"package": "@solana/web3.js",
+														"qualifiedName": "\"@solana/web3.js\".PublicKey"
+													}
+												},
+												{
+													"id": 176,
+													"name": "provider",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 14,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/provider.ts",
+															"qualifiedName": "default"
+														},
+														"name": "default",
+														"package": "@coral-xyz/anchor"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														172,
+														173,
+														174,
+														175,
+														176
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 11,
+													"character": 62
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 177,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 178,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 18,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 179,
+													"name": "resolved",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 19,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														178,
+														179
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 17,
+													"character": 14
+												}
+											]
+										}
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Classes",
+					"children": [
+						112
+					]
+				},
+				{
+					"title": "Variables",
+					"children": [
+						144
+					]
+				},
+				{
+					"title": "Functions",
+					"children": [
+						145,
+						150,
+						154,
+						156,
+						168
+					]
+				}
+			],
+			"packageVersion": "0.0.1"
+		},
+		{
+			"id": 180,
+			"name": "@helium/token-voter-sdk",
+			"variant": "declaration",
+			"kind": 2,
+			"flags": {},
+			"children": [
+				{
+					"id": 181,
+					"name": "PROGRAM_ID",
+					"variant": "declaration",
+					"kind": 32,
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "packages/token-voter-sdk/src/constants.ts",
+							"line": 3,
+							"character": 13,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/token-voter-sdk/src/constants.ts#L3"
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": {
+							"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+							"qualifiedName": "\"@solana/web3.js\".PublicKey"
+						},
+						"name": "PublicKey",
+						"package": "@solana/web3.js",
+						"qualifiedName": "\"@solana/web3.js\".PublicKey"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 182,
+					"name": "deposit",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/token-voter-sdk/src/functions/deposit.ts",
+							"line": 36,
+							"character": 22,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/token-voter-sdk/src/functions/deposit.ts#L36"
+						}
+					],
+					"signatures": [
+						{
+							"id": 183,
+							"name": "deposit",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/token-voter-sdk/src/functions/deposit.ts",
+									"line": 36,
+									"character": 0,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/token-voter-sdk/src/functions/deposit.ts#L36"
+								}
+							],
+							"parameters": [
+								{
+									"id": 184,
+									"name": "__namedParameters",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "intrinsic",
+										"name": "any"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 185,
+					"name": "init",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/token-voter-sdk/src/index.ts",
+							"line": 13,
+							"character": 22,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/token-voter-sdk/src/index.ts#L13"
+						}
+					],
+					"signatures": [
+						{
+							"id": 186,
+							"name": "init",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/token-voter-sdk/src/index.ts",
+									"line": 13,
+									"character": 0,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/token-voter-sdk/src/index.ts#L13"
+								}
+							],
+							"parameters": [
+								{
+									"id": 187,
+									"name": "provider",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@coral-xyz/anchor/src/provider.ts",
+											"qualifiedName": "AnchorProvider"
+										},
+										"name": "AnchorProvider",
+										"package": "@coral-xyz/anchor"
+									}
+								},
+								{
+									"id": 188,
+									"name": "programId",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									},
+									"defaultValue": "PROGRAM_ID"
+								},
+								{
+									"id": 189,
+									"name": "idl",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@coral-xyz/anchor/src/idl.ts",
+											"qualifiedName": "Idl"
+										},
+										"name": "Idl",
+										"package": "@coral-xyz/anchor"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/index.ts",
+											"qualifiedName": "Program"
+										},
+										"typeArguments": [
+											{
+												"type": "reference",
+												"target": {
+													"sourceFileName": "\u0000",
+													"qualifiedName": "unknown"
+												},
+												"name": "TokenVoter",
+												"qualifiedName": "unknown"
+											}
+										],
+										"name": "Program",
+										"package": "@coral-xyz/anchor"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 190,
+					"name": "receiptKey",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/token-voter-sdk/src/pdas.ts",
+							"line": 4,
+							"character": 16,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/token-voter-sdk/src/pdas.ts#L4"
+						}
+					],
+					"signatures": [
+						{
+							"id": 191,
+							"name": "receiptKey",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "packages/token-voter-sdk/src/pdas.ts",
+									"line": 4,
+									"character": 0,
+									"url": "https://github.com/helium/modular-governance/blob/098440d/packages/token-voter-sdk/src/pdas.ts#L4"
+								}
+							],
+							"parameters": [
+								{
+									"id": 192,
+									"name": "mint",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									}
+								},
+								{
+									"id": 193,
+									"name": "programId",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									},
+									"defaultValue": "PROGRAM_ID"
+								}
+							],
+							"type": {
+								"type": "tuple",
+								"elements": [
+									{
+										"type": "reference",
+										"target": {
+											"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+											"qualifiedName": "\"@solana/web3.js\".PublicKey"
+										},
+										"name": "PublicKey",
+										"package": "@solana/web3.js",
+										"qualifiedName": "\"@solana/web3.js\".PublicKey"
+									},
+									{
+										"type": "intrinsic",
+										"name": "number"
+									}
+								]
+							}
+						}
+					]
+				},
+				{
+					"id": 194,
+					"name": "tokenVoterProgramResolver",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/token-voter-sdk/src/resolvers.ts",
+							"line": 6,
+							"character": 13,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/token-voter-sdk/src/resolvers.ts#L6"
+						}
+					],
+					"signatures": [
+						{
+							"id": 195,
+							"name": "tokenVoterProgramResolver",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+									"line": 11,
+									"character": 53
+								}
+							],
+							"parameters": [
+								{
+									"id": 196,
+									"name": "params",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 197,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 198,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 13,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 199,
+													"name": "args",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 12,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "array",
+														"elementType": {
+															"type": "intrinsic",
+															"name": "any"
+														}
+													}
+												},
+												{
+													"id": 200,
+													"name": "idlIx",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 16,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "any"
+													}
+												},
+												{
+													"id": 201,
+													"name": "programId",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 15,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+															"qualifiedName": "\"@solana/web3.js\".PublicKey"
+														},
+														"name": "PublicKey",
+														"package": "@solana/web3.js",
+														"qualifiedName": "\"@solana/web3.js\".PublicKey"
+													}
+												},
+												{
+													"id": 202,
+													"name": "provider",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 14,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/provider.ts",
+															"qualifiedName": "default"
+														},
+														"name": "default",
+														"package": "@coral-xyz/anchor"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														198,
+														199,
+														200,
+														201,
+														202
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 11,
+													"character": 62
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 203,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 204,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 18,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 205,
+													"name": "resolved",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 19,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														204,
+														205
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 17,
+													"character": 14
+												}
+											]
+										}
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 206,
+					"name": "tokenVoterResolvers",
+					"variant": "declaration",
+					"kind": 64,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "packages/token-voter-sdk/src/resolvers.ts",
+							"line": 15,
+							"character": 13,
+							"url": "https://github.com/helium/modular-governance/blob/098440d/packages/token-voter-sdk/src/resolvers.ts#L15"
+						}
+					],
+					"signatures": [
+						{
+							"id": 207,
+							"name": "tokenVoterResolvers",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+									"line": 11,
+									"character": 53
+								}
+							],
+							"parameters": [
+								{
+									"id": 208,
+									"name": "params",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 209,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 210,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 13,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 211,
+													"name": "args",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 12,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "array",
+														"elementType": {
+															"type": "intrinsic",
+															"name": "any"
+														}
+													}
+												},
+												{
+													"id": 212,
+													"name": "idlIx",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 16,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "any"
+													}
+												},
+												{
+													"id": 213,
+													"name": "programId",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 15,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@solana/web3.js/lib/index.d.ts",
+															"qualifiedName": "\"@solana/web3.js\".PublicKey"
+														},
+														"name": "PublicKey",
+														"package": "@solana/web3.js",
+														"qualifiedName": "\"@solana/web3.js\".PublicKey"
+													}
+												},
+												{
+													"id": 214,
+													"name": "provider",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 14,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/provider.ts",
+															"qualifiedName": "default"
+														},
+														"name": "default",
+														"package": "@coral-xyz/anchor"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														210,
+														211,
+														212,
+														213,
+														214
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 11,
+													"character": 62
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"sourceFileName": "packages/docs/node_modules/typescript/lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 215,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 216,
+													"name": "accounts",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 18,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+															"qualifiedName": "AccountsGeneric"
+														},
+														"name": "AccountsGeneric",
+														"package": "@coral-xyz/anchor"
+													}
+												},
+												{
+													"id": 217,
+													"name": "resolved",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isExternal": true
+													},
+													"sources": [
+														{
+															"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+															"line": 19,
+															"character": 4
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														216,
+														217
+													]
+												}
+											],
+											"sources": [
+												{
+													"fileName": "node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts",
+													"line": 17,
+													"character": 14
+												}
+											]
+										}
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Variables",
+					"children": [
+						181
+					]
+				},
+				{
+					"title": "Functions",
+					"children": [
+						182,
+						185,
+						190,
+						194,
+						206
+					]
+				}
+			],
+			"packageVersion": "0.0.1"
+		}
+	],
+	"symbolIdMap": {
+		"1": {
+			"sourceFileName": "packages/nft-voter-sdk/src/index.ts",
+			"qualifiedName": ""
+		},
+		"2": {
+			"sourceFileName": "packages/nft-voter-sdk/src/constants.ts",
+			"qualifiedName": "PROGRAM_ID"
+		},
+		"3": {
+			"sourceFileName": "packages/nft-voter-sdk/src/functions/deposit.ts",
+			"qualifiedName": "deposit"
+		},
+		"4": {
+			"sourceFileName": "packages/nft-voter-sdk/src/functions/deposit.ts",
+			"qualifiedName": "deposit"
+		},
+		"5": {
+			"sourceFileName": "packages/nft-voter-sdk/src/functions/deposit.ts",
+			"qualifiedName": "__0"
+		},
+		"6": {
+			"sourceFileName": "packages/nft-voter-sdk/src/index.ts",
+			"qualifiedName": "init"
+		},
+		"7": {
+			"sourceFileName": "packages/nft-voter-sdk/src/index.ts",
+			"qualifiedName": "init"
+		},
+		"8": {
+			"sourceFileName": "packages/nft-voter-sdk/src/index.ts",
+			"qualifiedName": "provider"
+		},
+		"9": {
+			"sourceFileName": "packages/nft-voter-sdk/src/index.ts",
+			"qualifiedName": "programId"
+		},
+		"10": {
+			"sourceFileName": "packages/nft-voter-sdk/src/index.ts",
+			"qualifiedName": "idl"
+		},
+		"11": {
+			"sourceFileName": "packages/nft-voter-sdk/src/resolvers.ts",
+			"qualifiedName": "nftVoterProgramResolver"
+		},
+		"12": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "nftVoterProgramResolver"
+		},
+		"13": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "params"
+		},
+		"14": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"15": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"16": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.args"
+		},
+		"17": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.idlIx"
+		},
+		"18": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.programId"
+		},
+		"19": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.provider"
+		},
+		"20": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"21": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"22": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.resolved"
+		},
+		"23": {
+			"sourceFileName": "packages/nft-voter-sdk/src/resolvers.ts",
+			"qualifiedName": "nftVoterResolvers"
+		},
+		"24": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "nftVoterResolvers"
+		},
+		"25": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "params"
+		},
+		"26": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"27": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"28": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.args"
+		},
+		"29": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.idlIx"
+		},
+		"30": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.programId"
+		},
+		"31": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.provider"
+		},
+		"32": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"33": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"34": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.resolved"
+		},
+		"35": {
+			"sourceFileName": "packages/nft-voter-sdk/src/pdas.ts",
+			"qualifiedName": "receiptKey"
+		},
+		"36": {
+			"sourceFileName": "packages/nft-voter-sdk/src/pdas.ts",
+			"qualifiedName": "receiptKey"
+		},
+		"37": {
+			"sourceFileName": "packages/nft-voter-sdk/src/pdas.ts",
+			"qualifiedName": "mint"
+		},
+		"38": {
+			"sourceFileName": "packages/nft-voter-sdk/src/pdas.ts",
+			"qualifiedName": "programId"
+		},
+		"39": {
+			"sourceFileName": "packages/organization-sdk/src/index.ts",
+			"qualifiedName": ""
+		},
+		"40": {
+			"sourceFileName": "packages/organization-sdk/src/constants.ts",
+			"qualifiedName": "PROGRAM_ID"
+		},
+		"41": {
+			"sourceFileName": "packages/organization-sdk/src/init.ts",
+			"qualifiedName": "init"
+		},
+		"42": {
+			"sourceFileName": "packages/organization-sdk/src/init.ts",
+			"qualifiedName": "init"
+		},
+		"43": {
+			"sourceFileName": "packages/organization-sdk/src/init.ts",
+			"qualifiedName": "provider"
+		},
+		"44": {
+			"sourceFileName": "packages/organization-sdk/src/init.ts",
+			"qualifiedName": "programId"
+		},
+		"45": {
+			"sourceFileName": "packages/organization-sdk/src/init.ts",
+			"qualifiedName": "idl"
+		},
+		"46": {
+			"sourceFileName": "packages/organization-sdk/src/resolvers.ts",
+			"qualifiedName": "organizationsProgramResolver"
+		},
+		"47": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "organizationsProgramResolver"
+		},
+		"48": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "params"
+		},
+		"49": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"50": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"51": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.args"
+		},
+		"52": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.idlIx"
+		},
+		"53": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.programId"
+		},
+		"54": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.provider"
+		},
+		"55": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"56": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"57": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.resolved"
+		},
+		"58": {
+			"sourceFileName": "packages/organization-sdk/src/resolvers.ts",
+			"qualifiedName": "organizationsResolvers"
+		},
+		"59": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "organizationsResolvers"
+		},
+		"60": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "params"
+		},
+		"61": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"62": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"63": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.args"
+		},
+		"64": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.idlIx"
+		},
+		"65": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.programId"
+		},
+		"66": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.provider"
+		},
+		"67": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"68": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"69": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.resolved"
+		},
+		"70": {
+			"sourceFileName": "packages/organization-sdk/src/pdas.ts",
+			"qualifiedName": "proposalKey"
+		},
+		"71": {
+			"sourceFileName": "packages/organization-sdk/src/pdas.ts",
+			"qualifiedName": "proposalKey"
+		},
+		"72": {
+			"sourceFileName": "packages/organization-sdk/src/pdas.ts",
+			"qualifiedName": "organization"
+		},
+		"73": {
+			"sourceFileName": "packages/organization-sdk/src/pdas.ts",
+			"qualifiedName": "index"
+		},
+		"74": {
+			"sourceFileName": "packages/organization-sdk/src/pdas.ts",
+			"qualifiedName": "programId"
+		},
+		"75": {
+			"sourceFileName": "packages/proposal-sdk/src/index.ts",
+			"qualifiedName": ""
+		},
+		"76": {
+			"sourceFileName": "packages/proposal-sdk/src/constants.ts",
+			"qualifiedName": "PROGRAM_ID"
+		},
+		"77": {
+			"sourceFileName": "packages/proposal-sdk/src/index.ts",
+			"qualifiedName": "init"
+		},
+		"78": {
+			"sourceFileName": "packages/proposal-sdk/src/index.ts",
+			"qualifiedName": "init"
+		},
+		"79": {
+			"sourceFileName": "packages/proposal-sdk/src/index.ts",
+			"qualifiedName": "provider"
+		},
+		"80": {
+			"sourceFileName": "packages/proposal-sdk/src/index.ts",
+			"qualifiedName": "programId"
+		},
+		"81": {
+			"sourceFileName": "packages/proposal-sdk/src/index.ts",
+			"qualifiedName": "idl"
+		},
+		"82": {
+			"sourceFileName": "packages/proposal-sdk/src/pdas.ts",
+			"qualifiedName": "proposalKey"
+		},
+		"83": {
+			"sourceFileName": "packages/proposal-sdk/src/pdas.ts",
+			"qualifiedName": "proposalKey"
+		},
+		"84": {
+			"sourceFileName": "packages/proposal-sdk/src/pdas.ts",
+			"qualifiedName": "owner"
+		},
+		"85": {
+			"sourceFileName": "packages/proposal-sdk/src/pdas.ts",
+			"qualifiedName": "seed"
+		},
+		"86": {
+			"sourceFileName": "packages/proposal-sdk/src/pdas.ts",
+			"qualifiedName": "programId"
+		},
+		"87": {
+			"sourceFileName": "packages/proposal-sdk/src/resolvers.ts",
+			"qualifiedName": "proposalProgramResolver"
+		},
+		"88": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "proposalProgramResolver"
+		},
+		"89": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "params"
+		},
+		"90": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"91": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"92": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.args"
+		},
+		"93": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.idlIx"
+		},
+		"94": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.programId"
+		},
+		"95": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.provider"
+		},
+		"96": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"97": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"98": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.resolved"
+		},
+		"99": {
+			"sourceFileName": "packages/proposal-sdk/src/resolvers.ts",
+			"qualifiedName": "proposalResolvers"
+		},
+		"100": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "proposalResolvers"
+		},
+		"101": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "params"
+		},
+		"102": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"103": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"104": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.args"
+		},
+		"105": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.idlIx"
+		},
+		"106": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.programId"
+		},
+		"107": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.provider"
+		},
+		"108": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"109": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"110": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.resolved"
+		},
+		"111": {
+			"sourceFileName": "packages/state-controller-sdk/src/index.ts",
+			"qualifiedName": ""
+		},
+		"112": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder"
+		},
+		"115": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.nodes"
+		},
+		"116": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.and"
+		},
+		"117": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.and"
+		},
+		"118": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "left"
+		},
+		"119": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "right"
+		},
+		"120": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.build"
+		},
+		"121": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.build"
+		},
+		"122": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.choicePercentage"
+		},
+		"123": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.choicePercentage"
+		},
+		"124": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "percentage"
+		},
+		"125": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.choiceVoteWeight"
+		},
+		"126": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.choiceVoteWeight"
+		},
+		"127": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "weightThreshold"
+		},
+		"128": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.endTimestamp"
+		},
+		"129": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.endTimestamp"
+		},
+		"130": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "endTs"
+		},
+		"131": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.offsetFromStartTs"
+		},
+		"132": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.offsetFromStartTs"
+		},
+		"133": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "offset"
+		},
+		"134": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.or"
+		},
+		"135": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.or"
+		},
+		"136": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "left"
+		},
+		"137": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "right"
+		},
+		"138": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.resolved"
+		},
+		"139": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.resolved"
+		},
+		"140": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "choices"
+		},
+		"141": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.top"
+		},
+		"142": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "SettingsBuilder.top"
+		},
+		"143": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "n"
+		},
+		"144": {
+			"sourceFileName": "packages/state-controller-sdk/src/constants.ts",
+			"qualifiedName": "PROGRAM_ID"
+		},
+		"145": {
+			"sourceFileName": "packages/state-controller-sdk/src/index.ts",
+			"qualifiedName": "init"
+		},
+		"146": {
+			"sourceFileName": "packages/state-controller-sdk/src/index.ts",
+			"qualifiedName": "init"
+		},
+		"147": {
+			"sourceFileName": "packages/state-controller-sdk/src/index.ts",
+			"qualifiedName": "provider"
+		},
+		"148": {
+			"sourceFileName": "packages/state-controller-sdk/src/index.ts",
+			"qualifiedName": "programId"
+		},
+		"149": {
+			"sourceFileName": "packages/state-controller-sdk/src/index.ts",
+			"qualifiedName": "idl"
+		},
+		"150": {
+			"sourceFileName": "packages/state-controller-sdk/src/pdas.ts",
+			"qualifiedName": "resolutionSettingsKey"
+		},
+		"151": {
+			"sourceFileName": "packages/state-controller-sdk/src/pdas.ts",
+			"qualifiedName": "resolutionSettingsKey"
+		},
+		"152": {
+			"sourceFileName": "packages/state-controller-sdk/src/pdas.ts",
+			"qualifiedName": "name"
+		},
+		"153": {
+			"sourceFileName": "packages/state-controller-sdk/src/pdas.ts",
+			"qualifiedName": "programId"
+		},
+		"154": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "settings"
+		},
+		"155": {
+			"sourceFileName": "packages/state-controller-sdk/src/settingsBuilder.ts",
+			"qualifiedName": "settings"
+		},
+		"156": {
+			"sourceFileName": "packages/state-controller-sdk/src/resolvers.ts",
+			"qualifiedName": "stateControllerProgramResolver"
+		},
+		"157": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "stateControllerProgramResolver"
+		},
+		"158": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "params"
+		},
+		"159": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"160": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"161": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.args"
+		},
+		"162": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.idlIx"
+		},
+		"163": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.programId"
+		},
+		"164": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.provider"
+		},
+		"165": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"166": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"167": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.resolved"
+		},
+		"168": {
+			"sourceFileName": "packages/state-controller-sdk/src/resolvers.ts",
+			"qualifiedName": "stateControllerResolvers"
+		},
+		"169": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "stateControllerResolvers"
+		},
+		"170": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "params"
+		},
+		"171": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"172": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"173": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.args"
+		},
+		"174": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.idlIx"
+		},
+		"175": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.programId"
+		},
+		"176": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.provider"
+		},
+		"177": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"178": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"179": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.resolved"
+		},
+		"180": {
+			"sourceFileName": "packages/token-voter-sdk/src/index.ts",
+			"qualifiedName": ""
+		},
+		"181": {
+			"sourceFileName": "packages/token-voter-sdk/src/constants.ts",
+			"qualifiedName": "PROGRAM_ID"
+		},
+		"182": {
+			"sourceFileName": "packages/token-voter-sdk/src/functions/deposit.ts",
+			"qualifiedName": "deposit"
+		},
+		"183": {
+			"sourceFileName": "packages/token-voter-sdk/src/functions/deposit.ts",
+			"qualifiedName": "deposit"
+		},
+		"184": {
+			"sourceFileName": "packages/token-voter-sdk/src/functions/deposit.ts",
+			"qualifiedName": "__0"
+		},
+		"185": {
+			"sourceFileName": "packages/token-voter-sdk/src/index.ts",
+			"qualifiedName": "init"
+		},
+		"186": {
+			"sourceFileName": "packages/token-voter-sdk/src/index.ts",
+			"qualifiedName": "init"
+		},
+		"187": {
+			"sourceFileName": "packages/token-voter-sdk/src/index.ts",
+			"qualifiedName": "provider"
+		},
+		"188": {
+			"sourceFileName": "packages/token-voter-sdk/src/index.ts",
+			"qualifiedName": "programId"
+		},
+		"189": {
+			"sourceFileName": "packages/token-voter-sdk/src/index.ts",
+			"qualifiedName": "idl"
+		},
+		"190": {
+			"sourceFileName": "packages/token-voter-sdk/src/pdas.ts",
+			"qualifiedName": "receiptKey"
+		},
+		"191": {
+			"sourceFileName": "packages/token-voter-sdk/src/pdas.ts",
+			"qualifiedName": "receiptKey"
+		},
+		"192": {
+			"sourceFileName": "packages/token-voter-sdk/src/pdas.ts",
+			"qualifiedName": "mint"
+		},
+		"193": {
+			"sourceFileName": "packages/token-voter-sdk/src/pdas.ts",
+			"qualifiedName": "programId"
+		},
+		"194": {
+			"sourceFileName": "packages/token-voter-sdk/src/resolvers.ts",
+			"qualifiedName": "tokenVoterProgramResolver"
+		},
+		"195": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "tokenVoterProgramResolver"
+		},
+		"196": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "params"
+		},
+		"197": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"198": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"199": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.args"
+		},
+		"200": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.idlIx"
+		},
+		"201": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.programId"
+		},
+		"202": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.provider"
+		},
+		"203": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"204": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"205": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.resolved"
+		},
+		"206": {
+			"sourceFileName": "packages/token-voter-sdk/src/resolvers.ts",
+			"qualifiedName": "tokenVoterResolvers"
+		},
+		"207": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "tokenVoterResolvers"
+		},
+		"208": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "params"
+		},
+		"209": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"210": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"211": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.args"
+		},
+		"212": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.idlIx"
+		},
+		"213": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.programId"
+		},
+		"214": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.provider"
+		},
+		"215": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type"
+		},
+		"216": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.accounts"
+		},
+		"217": {
+			"sourceFileName": "node_modules/@coral-xyz/anchor/src/program/accounts-resolver.ts",
+			"qualifiedName": "__type.resolved"
+		}
+	}
+}

@@ -1,0 +1,13 @@
+{
+  "entryPoints": ["packages/**"],
+  "name": "Modular Governance",
+  "entryPointStrategy": "packages",
+  "includeVersion": true,
+  "skipErrorChecking": true,
+  "json": "docs.json",
+  "pretty": true,
+  "exclude": ["packages/docs", "packages/modular-governance-idls"]
+
+  // Potentially useful for debugging
+  // "logLevel": "Verbose"
+}
