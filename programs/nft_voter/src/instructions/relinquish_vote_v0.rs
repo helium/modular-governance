@@ -1,7 +1,4 @@
-use crate::{
-  error::ErrorCode,
-  metaplex::{Metadata, MetadataAccount},
-};
+use crate::{error::ErrorCode, metaplex::MetadataAccount};
 use anchor_lang::prelude::*;
 use anchor_spl::token::{Mint, TokenAccount};
 use proposal::{ProposalConfigV0, ProposalV0};

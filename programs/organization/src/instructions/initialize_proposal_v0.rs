@@ -33,6 +33,8 @@ pub struct InitializeProposalV0<'info> {
   #[account(mut)]
   pub payer: Signer<'info>,
   pub authority: Signer<'info>,
+  /// CHECK: Setting this account, does not need a check. Putting here instead of args to save tx space
+  pub owner: UncheckedAccount<'info>,
   #[account(
       mut,
       seeds = [
@@ -66,7 +68,8 @@ pub fn handler(ctx: Context<InitializeProposalV0>, args: InitializeProposalArgsV
     CpiContext::new_with_signer(
       ctx.accounts.proposal_program.to_account_info(),
       CpiInitializeProposal {
-        owner: ctx.accounts.organization.to_account_info(),
+        namespace: ctx.accounts.organization.to_account_info(),
+        owner: ctx.accounts.owner.to_account_info(),
         proposal: ctx.accounts.proposal.to_account_info(),
         proposal_config: ctx.accounts.proposal_config.to_account_info(),
         payer: ctx.accounts.payer.to_account_info(),
@@ -95,5 +98,8 @@ pub fn handler(ctx: Context<InitializeProposalV0>, args: InitializeProposalArgsV
       tags: args.tags,
     },
   )?;
+
+  ctx.accounts.organization.num_proposals += 1;
+
   Ok(())
 }

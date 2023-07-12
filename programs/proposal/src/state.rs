@@ -59,6 +59,7 @@ pub struct ProposalConfigV0 {
 #[account]
 #[derive(Default)]
 pub struct ProposalV0 {
+  pub namespace: Pubkey,
   pub owner: Pubkey,
   pub state: ProposalState,
   pub created_at: i64,

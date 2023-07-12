@@ -37,6 +37,10 @@ export const organizationsResolvers: anchor.CustomAccountResolver<any> =
           accounts.organization as PublicKey
         );
         return org.defaultProposalConfig;
+      } else if (path[path.length - 1] == "owner") {
+        if ((provider as anchor.AnchorProvider).wallet) {
+          return (provider as anchor.AnchorProvider).wallet.publicKey;
+        }
       }
     })
   );

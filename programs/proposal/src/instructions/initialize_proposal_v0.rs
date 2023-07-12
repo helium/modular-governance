@@ -38,22 +38,25 @@ pub struct InitializeProposalArgsV0 {
 pub struct InitializeProposalV0<'info> {
   #[account(mut)]
   pub payer: Signer<'info>,
-  /// Every proposal must have an owner to prevent seed collision
-  pub owner: Signer<'info>,
+  /// Every proposal must have a namespace to prevent seed collision
+  pub namespace: Signer<'info>,
   #[account(
     init,
     payer = payer,
-    seeds = [b"proposal", owner.key().as_ref(), &args.seed[..]],
+    seeds = [b"proposal", namespace.key().as_ref(), &args.seed[..]],
     space = 8 + 60 + args.seed.len() + ProposalV0::INIT_SPACE + args.choices.len() * Choice::INIT_SPACE,
     bump
   )]
   pub proposal: Box<Account<'info, ProposalV0>>,
+  /// CHECK: Setting this account, does not need a check. Putting here instead of args to save tx space
+  pub owner: UncheckedAccount<'info>,
   pub proposal_config: Box<Account<'info, ProposalConfigV0>>,
   pub system_program: Program<'info, System>,
 }
 
 pub fn handler(ctx: Context<InitializeProposalV0>, args: InitializeProposalArgsV0) -> Result<()> {
   ctx.accounts.proposal.set_inner(ProposalV0 {
+    namespace: ctx.accounts.namespace.key(),
     owner: ctx.accounts.owner.key(),
     state: ProposalState::Draft,
     tags: args.tags,
