@@ -1,0 +1,44 @@
+@import 'tailwindcss/base';
+@import './fonts.css';
+@import './prism.css';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  [inert] ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+:root {
+  --bg-opacity-light: 0.5;
+  --bg-opacity-dark: 0.2;
+}
+
+#trail-nav::before {
+  clip-path: inset(0 95% 0 0);
+  content: '';
+  border-left: 2px solid #333333;
+  border-bottom: 2px solid #333333;
+  border-bottom-left-radius: .625rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  height: calc(100% - 10px);
+}
+
+#trail-nav-link::before {
+  clip-path: inset(0 10% 0 0);
+  position: absolute;
+  content: '';
+  border-left: 2px solid #333333;
+  border-bottom: 2px solid #333333;
+  border-bottom-left-radius: .625rem;
+  top: 0;
+  left: 0;
+  width: 10px;
+  pointer-events: none;
+  height: calc(100% - 10px);
+}
