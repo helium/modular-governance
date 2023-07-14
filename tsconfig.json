@@ -16,6 +16,8 @@
       "path": "./packages/token-voter-sdk"
     }, {
       "path": "./packages/nft-voter-sdk"
+    }, {
+      "path": "./packages/modular-governance-hooks"
     }
   ]
 }

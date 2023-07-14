@@ -17,7 +17,7 @@ pub struct VoteV0<'info> {
   #[account(
     init_if_needed,
     payer = payer,
-    space = 8 + 60 + std::mem::size_of::<NftVoterV0>(),
+    space = 8 + 60 + std::mem::size_of::<VoteMarkerV0>(),
     seeds = [b"marker", nft_voter.key().as_ref(), mint.key().as_ref(), proposal.key().as_ref()],
     bump
   )]
