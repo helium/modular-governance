@@ -28,6 +28,20 @@ module.exports = {
       maxWidth: {
         '8xl': '88rem',
       },
+      keyframes: {
+        breathe: {
+          '0%, 100%': { transform: 'scale(0.9)' },
+          '50%': { transform: 'scale(1)' },
+        },
+        slowBounce: {
+          '0%, 100%': { transform: 'translateY(-15px) scale(1)' },
+          '50%': { transform: 'translateY(0) scale(1)' },
+        },
+      },
+      animation: {
+        'breathe': 'breathe 5s ease-in-out infinite',
+        'slow-bounce': 'slowBounce 5s ease-in-out infinite',
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],
