@@ -25,7 +25,7 @@ export function Navigation({ navigation, className }) {
                     id="trail-nav-link"
                     href={link.href}
                     className={clsx(
-                      'block w-full pl-3.5 before:ring-zinc-800 before:ring-2',
+                      'block w-full pl-3.5 before:ring-[#202020] before:ring-2',
                       link.href === router.pathname
                         ? 'font-semibold text-teal-300'
                         : 'text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300'

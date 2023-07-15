@@ -163,11 +163,11 @@ export function Layout({ children, title, tableOfContents }) {
           <div className="absolute inset-y-0 right-0 w-[50vw] bg-zinc-50 dark:hidden" />
           <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-zinc-800 dark:block" />
           <div className="absolute bottom-0 right-0 top-28 hidden w-px bg-zinc-800 dark:block" />
-          <div className="sticky top-[3rem] -ml-0.5 h-[calc(100vh-3rem)] w-64 overflow-y-auto overflow-x-hidden bg-[#202020] py-10 pl-0.5 pr-8 xl:w-72 xl:pl-10 xl:pr-16">
+          <div className="sticky top-[3rem] -ml-0.5 h-[calc(100vh-3rem)] w-64 overflow-y-auto overflow-x-hidden bg-[#202020] py-10 pl-8 pr-8 xl:w-64 xl:pl-10">
             <Navigation navigation={navigation} />
           </div>
         </div>
-        <div className="min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none lg:pl-8 lg:pr-0 xl:px-16">
+        <div className="min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none lg:px-8 xl:px-16">
           <div className="lg:max-w-5xl">
             <article>
               {(title || section) && (
@@ -275,7 +275,7 @@ export function Layout({ children, title, tableOfContents }) {
             </div>
           </footer>
         </div>
-        <div className="hidden xl:sticky xl:top-[3rem] xl:-mr-6 xl:block xl:h-[calc(100vh-3rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pr-6 border-l border-zinc-800 pl-4">
+        <div className="hidden xl:sticky xl:top-[3rem] xl:-mr-6 xl:block xl:h-[calc(100vh-3rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pr-6 border-l border-zinc-800 pl-6">
           <nav aria-labelledby="on-this-page-title" className="w-56">
             {tableOfContents.length > 0 && (
               <>
