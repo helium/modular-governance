@@ -11,22 +11,22 @@ export const features = [
     },
     {
         title: 'Maximum compatibility',
-        description: 'Designed to be compatible with existing systems like GovernorBravo, ensuring seamless integration.',
+        description: 'Designed to be compatible with existing systems like Solana Token Program and NFTs, ensuring seamless integration.',
         icon: "icon-voter"
     },
     {
         title: 'Efficient',
-        description: 'Designed to be compatible with existing systems like GovernorBravo, ensuring seamless integration.',
+        description: 'Built with efficiency in mind, the SDKs are lightweight and optimized for speed.',
         icon: "icon-voter"
     },
     {
-        title: 'Time-lock',
-        description: 'Timelock governance decisions for better security and user control.',
+        title: 'Secure',
+        description: 'Built with security in mind, the SDKs are audited and tested to ensure that your governance is safe.',
         icon: "icon-voter"
     },
     {
-        title: 'Time-locktwo',
-        description: 'Timelock governance decisions for better security and user control.',
+        title: 'Custom State',
+        description: 'The state of the governance can be customized to fit your needs, allowing for a wide range of use cases.',
         icon: "icon-voter"
     },
 ]
