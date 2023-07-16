@@ -1,120 +1,162 @@
-[@helium/proposal-sdk - v0.0.1](README) / Exports
+# Proposal SDK
 
-# @helium/proposal-sdk - v0.0.1
+## Instructions
 
-## Table of contents
+### initializeProposalV0
 
-### Variables
+#### Accounts
 
-- [PROGRAM\_ID](proposal-sdk#program\_id)
+| Name           | Mutability | Signer | Docs                                                           |
+| -------------- | ---------- | ------ | -------------------------------------------------------------- |
+| payer          | mut        | yes    |                                                                |
+| namespace      | immut      | yes    | Every proposal must have a namespace to prevent seed collision |
+| proposal       | mut        | no     |                                                                |
+| owner          | immut      | no     |                                                                |
+| proposalConfig | immut      | no     |                                                                |
+| systemProgram  | immut      | no     |                                                                |
 
-### Functions
+#### Args
 
-- [init](proposal-sdk#init)
-- [proposalKey](proposal-sdk#proposal-key)
-- [proposalProgramResolver](proposal-sdk#proposal-program-resolver)
-- [proposalResolvers](proposal-sdk#proposal-resolvers)
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-## Variables
+### initializeProposalConfigV0
 
-### PROGRAM\_ID
+#### Accounts
 
-• `Const` **PROGRAM\_ID**: `PublicKey`
+| Name           | Mutability | Signer | Docs                                                               |
+| -------------- | ---------- | ------ | ------------------------------------------------------------------ |
+| payer          | mut        | yes    |                                                                    |
+| owner          | immut      | yes    | Every proposal config must have an owner to prevent seed collision |
+| proposalConfig | mut        | no     |                                                                    |
+| systemProgram  | immut      | no     |                                                                    |
 
-#### Defined in
+#### Args
 
-[packages/proposal-sdk/src/constants.ts:3](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/proposal-sdk/src/constants.ts#L3)
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-## Functions
+### voteV0
 
-### init
+#### Accounts
 
-▸ **init**(`provider`, `programId?`, `idl?`): `Promise`<`Program`<`Proposal`\>\>
+| Name            | Mutability | Signer | Docs |
+| --------------- | ---------- | ------ | ---- |
+| voteController  | immut      | yes    |      |
+| stateController | mut        | no     |      |
+| proposalConfig  | immut      | no     |      |
+| proposal        | mut        | no     |      |
+| onVoteHook      | immut      | no     |      |
 
-#### Parameters
+#### Args
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `provider` | `AnchorProvider` | `undefined` |
-| `programId` | `PublicKey` | `PROGRAM_ID` |
-| `idl?` | `Idl` | `undefined` |
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-#### Returns
+### updateStateV0
 
-`Promise`<`Program`<`Proposal`\>\>
+#### Accounts
 
-#### Defined in
+| Name            | Mutability | Signer | Docs |
+| --------------- | ---------- | ------ | ---- |
+| stateController | immut      | yes    |      |
+| proposal        | mut        | no     |      |
+| proposalConfig  | immut      | no     |      |
 
-[packages/proposal-sdk/src/index.ts:13](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/proposal-sdk/src/index.ts#L13)
+#### Args
 
-___
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-### proposalKey
+## Accounts
 
-▸ **proposalKey**(`owner`, `seed`, `programId?`): [`PublicKey`, `number`]
+| Name               | Type            | Docs  |
+| ------------------ | --------------- | ----- | ---- |
+| ProposalConfigV0   |                 | Field | Type |
+| -----              | ----            |
+| voteController     | publicKey       |
+| stateController    | publicKey       |
+| onVoteHook         | publicKey       |
+| name               | string          |
+| bumpSeed           | u8              |
+|                    |
+| ProposalV0         |                 | Field | Type |
+| -----              | ----            |
+| namespace          | publicKey       |
+| owner              | publicKey       |
+| state              | [object Object] |
+| createdAt          | i64             |
+| proposalConfig     | publicKey       |
+| maxChoicesPerVoter | u16             |
+| seed               | bytes           |
+| name               | string          |
+| uri                | string          |
+| tags               | [object Object] |
+| choices            | [object Object] |
+| bumpSeed           | u8              |
+|                    |
 
-#### Parameters
+## Types
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `owner` | `PublicKey` | `undefined` |
-| `seed` | `Buffer` | `undefined` |
-| `programId` | `PublicKey` | `PROGRAM_ID` |
+### InitializeProposalConfigArgsV0
 
-#### Returns
+| Field           | Type      |
+| --------------- | --------- |
+| name            | string    |
+| voteController  | publicKey |
+| stateController | publicKey |
+| onVoteHook      | publicKey |
 
-[`PublicKey`, `number`]
+### ChoiceArg
 
-#### Defined in
+| Field | Type            |
+| ----- | --------------- |
+| name  | string          |
+| uri   | [object Object] |
 
-[packages/proposal-sdk/src/pdas.ts:4](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/proposal-sdk/src/pdas.ts#L4)
+### InitializeProposalArgsV0
 
-___
+| Field              | Type            |
+| ------------------ | --------------- |
+| seed               | bytes           |
+| name               | string          |
+| uri                | string          |
+| maxChoicesPerVoter | u16             |
+| choices            | [object Object] |
+| tags               | [object Object] |
 
-### proposalProgramResolver
+### UpdateStateArgsV0
 
-▸ **proposalProgramResolver**(`params`): `Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
+| Field    | Type            |
+| -------- | --------------- |
+| newState | [object Object] |
 
-#### Parameters
+### VoteArgsV0
 
-| Name | Type |
-| :------ | :------ |
-| `params` | `Object` |
-| `params.accounts` | `AccountsGeneric` |
-| `params.args` | `any`[] |
-| `params.idlIx` | `any` |
-| `params.programId` | `PublicKey` |
-| `params.provider` | `default` |
+| Field      | Type |
+| ---------- | ---- |
+| choice     | u16  |
+| weight     | u128 |
+| removeVote | bool |
 
-#### Returns
+### Choice
 
-`Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
+| Field  | Type            |
+| ------ | --------------- |
+| weight | u128            |
+| name   | string          |
+| uri    | [object Object] |
 
-#### Defined in
+### ProposalState
 
-node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts:11
-
-___
-
-### proposalResolvers
-
-▸ **proposalResolvers**(`params`): `Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `params` | `Object` |
-| `params.accounts` | `AccountsGeneric` |
-| `params.args` | `any`[] |
-| `params.idlIx` | `any` |
-| `params.programId` | `PublicKey` |
-| `params.provider` | `default` |
-
-#### Returns
-
-`Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Defined in
-
-node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts:11
+| Variant   | Fields                   |
+| --------- | ------------------------ |
+| Draft     |                          |
+| Cancelled |                          |
+| Voting    | start_ts: i64            |
+| Resolved  | choices: [object Object] |
+| Custom    | state: string            |

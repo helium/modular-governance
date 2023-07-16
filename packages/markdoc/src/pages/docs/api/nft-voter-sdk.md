@@ -1,157 +1,162 @@
-[@helium/nft-voter-sdk - v0.0.1](README) / Exports
+# Nft Voter SDK
 
-# @helium/nft-voter-sdk - v0.0.1
+## Instructions
 
-## Table of contents
+### initializeNftVoterV0
 
-### Variables
+#### Accounts
 
-- [PROGRAM\_ID](nft-voter-sdk#program\_id)
+| Name          | Mutability | Signer | Docs |
+| ------------- | ---------- | ------ | ---- |
+| payer         | mut        | yes    |      |
+| nftVoter      | mut        | no     |      |
+| collection    | immut      | no     |      |
+| systemProgram | immut      | no     |      |
 
-### Functions
+#### Args
 
-- [deposit](nft-voter-sdk#deposit)
-- [init](nft-voter-sdk#init)
-- [nftVoterProgramResolver](nft-voter-sdk#nft-voter-program-resolver)
-- [nftVoterResolvers](nft-voter-sdk#nft-voter-resolvers)
-- [receiptKey](nft-voter-sdk#receipt-key)
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-## Variables
+### relinquishVoteV0
 
-### PROGRAM\_ID
+#### Accounts
 
-• `Const` **PROGRAM\_ID**: `PublicKey`
+| Name            | Mutability | Signer | Docs                                              |
+| --------------- | ---------- | ------ | ------------------------------------------------- |
+| refund          | mut        | no     | Account to receive sol refund if marker is closed |
+| marker          | mut        | no     |                                                   |
+| nftVoter        | immut      | no     |                                                   |
+| voter           | immut      | yes    |                                                   |
+| mint            | immut      | no     |                                                   |
+| metadata        | immut      | no     |                                                   |
+| tokenAccount    | immut      | no     |                                                   |
+| proposal        | mut        | no     |                                                   |
+| proposalConfig  | immut      | no     |                                                   |
+| stateController | mut        | no     |                                                   |
+| onVoteHook      | immut      | no     |                                                   |
+| proposalProgram | immut      | no     |                                                   |
+| systemProgram   | immut      | no     |                                                   |
 
-#### Defined in
+#### Args
 
-[packages/nft-voter-sdk/src/constants.ts:3](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/nft-voter-sdk/src/constants.ts#L3)
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-## Functions
+### voteV0
 
-### deposit
+#### Accounts
 
-▸ **deposit**(`«destructured»`): `Promise`<`any`\>
+| Name            | Mutability | Signer | Docs |
+| --------------- | ---------- | ------ | ---- |
+| payer           | mut        | yes    |      |
+| marker          | mut        | no     |      |
+| nftVoter        | immut      | no     |      |
+| voter           | immut      | yes    |      |
+| mint            | immut      | no     |      |
+| metadata        | immut      | no     |      |
+| tokenAccount    | immut      | no     |      |
+| proposal        | mut        | no     |      |
+| proposalConfig  | immut      | no     |      |
+| stateController | mut        | no     |      |
+| onVoteHook      | immut      | no     |      |
+| proposalProgram | immut      | no     |      |
+| systemProgram   | immut      | no     |      |
 
-#### Parameters
+#### Args
 
-| Name | Type |
-| :------ | :------ |
-| `«destructured»` | `any` |
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-#### Returns
+## Accounts
 
-`Promise`<`any`\>
+| Name         | Type            | Docs  |
+| ------------ | --------------- | ----- | ---- |
+| NftVoterV0   |                 | Field | Type |
+| -----        | ----            |
+| authority    | publicKey       |
+| collection   | publicKey       |
+| name         | string          |
+| bumpSeed     | u8              |
+|              |
+| VoteMarkerV0 |                 | Field | Type |
+| -----        | ----            |
+| voter        | publicKey       |
+| nftVoter     | publicKey       |
+| proposal     | publicKey       |
+| mint         | publicKey       |
+| choices      | [object Object] |
+| bumpSeed     | u8              |
+|              |
 
-#### Defined in
+## Types
 
-[packages/nft-voter-sdk/src/functions/deposit.ts:36](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/nft-voter-sdk/src/functions/deposit.ts#L36)
+### InitializeNftVoterArgsV0
 
-___
+| Field     | Type      |
+| --------- | --------- |
+| name      | string    |
+| authority | publicKey |
 
-### init
+### RelinquishVoteArgsV0
 
-▸ **init**(`provider`, `programId?`, `idl?`): `Promise`<`Program`<`NftVoter`\>\>
+| Field  | Type |
+| ------ | ---- |
+| choice | u16  |
 
-Init the NFT Voter Sdk example
+### VoteArgsV0
 
-```ts
-import * as anchor from "@coral-xyz/anchor";
-import { Program } from "@coral-xyz/anchor";
-import { PROGRAM_ID, init } from "@helium/nft-voter-sdk";
+| Field  | Type |
+| ------ | ---- |
+| choice | u16  |
 
-// run typedoc --help for a list of supported languages
-// Configure the client to use the local cluster.
-anchor.setProvider(anchor.AnchorProvider.env());
-const provider = anchor.getProvider() as anchor.AnchorProvider;
-const me = provider.wallet.publicKey;
-let proposalProgram: Program<Proposal>;
-let program: Program<NftVoter>;
-program = await init(provider, PROGRAM_ID, anchor.workspace.NftVoter.idl);
-```
+### Key
 
-#### Parameters
+| Variant                   | Fields |
+| ------------------------- | ------ |
+| Uninitialized             |        |
+| EditionV1                 |        |
+| MasterEditionV1           |        |
+| ReservationListV1         |        |
+| MetadataV1                |        |
+| ReservationListV2         |        |
+| MasterEditionV2           |        |
+| EditionMarker             |        |
+| UseAuthorityRecord        |        |
+| CollectionAuthorityRecord |        |
+| TokenOwnedEscrow          |        |
+| TokenRecord               |        |
+| MetadataDelegate          |        |
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `provider` | `AnchorProvider` | `undefined` |
-| `programId` | `PublicKey` | `PROGRAM_ID` |
-| `idl?` | `Idl` | `undefined` |
+### CollectionDetails
 
-#### Returns
+| Variant | Fields    |
+| ------- | --------- |
+| V1      | size: u64 |
 
-`Promise`<`Program`<`NftVoter`\>\>
+### ProgrammableConfig
 
-#### Defined in
+| Variant | Fields                    |
+| ------- | ------------------------- |
+| V1      | rule_set: [object Object] |
 
-[packages/nft-voter-sdk/src/index.ts:30](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/nft-voter-sdk/src/index.ts#L30)
+### UseMethod
 
-___
+| Variant  | Fields |
+| -------- | ------ |
+| Burn     |        |
+| Multiple |        |
+| Single   |        |
 
-### nftVoterProgramResolver
+### TokenStandard
 
-▸ **nftVoterProgramResolver**(`params`): `Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `params` | `Object` |
-| `params.accounts` | `AccountsGeneric` |
-| `params.args` | `any`[] |
-| `params.idlIx` | `any` |
-| `params.programId` | `PublicKey` |
-| `params.provider` | `default` |
-
-#### Returns
-
-`Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Defined in
-
-node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts:11
-
-___
-
-### nftVoterResolvers
-
-▸ **nftVoterResolvers**(`params`): `Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `params` | `Object` |
-| `params.accounts` | `AccountsGeneric` |
-| `params.args` | `any`[] |
-| `params.idlIx` | `any` |
-| `params.programId` | `PublicKey` |
-| `params.provider` | `default` |
-
-#### Returns
-
-`Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Defined in
-
-node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts:11
-
-___
-
-### receiptKey
-
-▸ **receiptKey**(`mint`, `programId?`): [`PublicKey`, `number`]
-
-#### Parameters
-
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `mint` | `PublicKey` | `undefined` |
-| `programId` | `PublicKey` | `PROGRAM_ID` |
-
-#### Returns
-
-[`PublicKey`, `number`]
-
-#### Defined in
-
-[packages/nft-voter-sdk/src/pdas.ts:4](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/nft-voter-sdk/src/pdas.ts#L4)
+| Variant                 | Fields |
+| ----------------------- | ------ |
+| NonFungible             |        |
+| FungibleAsset           |        |
+| Fungible                |        |
+| NonFungibleEdition      |        |
+| ProgrammableNonFungible |        |

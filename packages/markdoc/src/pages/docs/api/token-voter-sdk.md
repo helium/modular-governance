@@ -1,140 +1,216 @@
-[@helium/token-voter-sdk - v0.0.1](README) / Exports
+# Token Voter SDK
 
-# @helium/token-voter-sdk - v0.0.1
+## Instructions
 
-## Table of contents
+### initializeTokenVoterV0
 
-### Variables
+#### Accounts
 
-- [PROGRAM\_ID](token-voter-sdk#program\_id)
+| Name                   | Mutability | Signer | Docs |
+| ---------------------- | ---------- | ------ | ---- |
+| payer                  | mut        | yes    |      |
+| tokenVoter             | mut        | no     |      |
+| collection             | mut        | no     |      |
+| metadata               | mut        | no     |      |
+| masterEdition          | mut        | no     |      |
+| tokenAccount           | mut        | no     |      |
+| mint                   | immut      | no     |      |
+| rent                   | immut      | no     |      |
+| tokenProgram           | immut      | no     |      |
+| associatedTokenProgram | immut      | no     |      |
+| tokenMetadataProgram   | immut      | no     |      |
+| systemProgram          | immut      | no     |      |
 
-### Functions
+#### Args
 
-- [deposit](token-voter-sdk#deposit)
-- [init](token-voter-sdk#init)
-- [receiptKey](token-voter-sdk#receipt-key)
-- [tokenVoterProgramResolver](token-voter-sdk#token-voter-program-resolver)
-- [tokenVoterResolvers](token-voter-sdk#token-voter-resolvers)
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-## Variables
+### depositV0
 
-### PROGRAM\_ID
+#### Accounts
 
-• `Const` **PROGRAM\_ID**: `PublicKey`
+| Name                    | Mutability | Signer | Docs |
+| ----------------------- | ---------- | ------ | ---- |
+| tokenVoter              | immut      | no     |      |
+| collection              | immut      | no     |      |
+| collectionMetadata      | mut        | no     |      |
+| collectionMasterEdition | mut        | no     |      |
+| receipt                 | mut        | no     |      |
+| mint                    | mut        | no     |      |
+| metadata                | mut        | no     |      |
+| masterEdition           | mut        | no     |      |
+| receiptTokenAccount     | mut        | no     |      |
+| recipient               | immut      | no     |      |
+| vault                   | mut        | no     |      |
+| tokenAccount            | mut        | no     |      |
+| payer                   | mut        | yes    |      |
+| depositMint             | immut      | no     |      |
+| systemProgram           | immut      | no     |      |
+| tokenProgram            | immut      | no     |      |
+| associatedTokenProgram  | immut      | no     |      |
+| tokenMetadataProgram    | immut      | no     |      |
+| rent                    | immut      | no     |      |
 
-#### Defined in
+#### Args
 
-[packages/token-voter-sdk/src/constants.ts:3](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/token-voter-sdk/src/constants.ts#L3)
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-## Functions
+### relinquishVoteV0
 
-### deposit
+#### Accounts
 
-▸ **deposit**(`«destructured»`): `Promise`<`any`\>
+| Name            | Mutability | Signer | Docs                                              |
+| --------------- | ---------- | ------ | ------------------------------------------------- |
+| refund          | mut        | no     | Account to receive sol refund if marker is closed |
+| marker          | mut        | no     |                                                   |
+| tokenVoter      | immut      | no     |                                                   |
+| voter           | immut      | yes    |                                                   |
+| receipt         | immut      | no     |                                                   |
+| mint            | immut      | no     |                                                   |
+| tokenAccount    | immut      | no     |                                                   |
+| proposal        | mut        | no     |                                                   |
+| proposalConfig  | immut      | no     |                                                   |
+| stateController | mut        | no     |                                                   |
+| onVoteHook      | immut      | no     |                                                   |
+| proposalProgram | immut      | no     |                                                   |
+| systemProgram   | immut      | no     |                                                   |
 
-#### Parameters
+#### Args
 
-| Name | Type |
-| :------ | :------ |
-| `«destructured»` | `any` |
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-#### Returns
+### voteV0
 
-`Promise`<`any`\>
+#### Accounts
 
-#### Defined in
+| Name            | Mutability | Signer | Docs |
+| --------------- | ---------- | ------ | ---- |
+| payer           | mut        | yes    |      |
+| marker          | mut        | no     |      |
+| tokenVoter      | immut      | no     |      |
+| voter           | immut      | yes    |      |
+| receipt         | mut        | no     |      |
+| mint            | immut      | no     |      |
+| tokenAccount    | immut      | no     |      |
+| proposal        | mut        | no     |      |
+| proposalConfig  | immut      | no     |      |
+| stateController | mut        | no     |      |
+| onVoteHook      | immut      | no     |      |
+| proposalProgram | immut      | no     |      |
+| systemProgram   | immut      | no     |      |
 
-[packages/token-voter-sdk/src/functions/deposit.ts:36](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/token-voter-sdk/src/functions/deposit.ts#L36)
+#### Args
 
-___
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-### init
+### withdrawV0
 
-▸ **init**(`provider`, `programId?`, `idl?`): `Promise`<`Program`<`TokenVoter`\>\>
+#### Accounts
 
-#### Parameters
+| Name                   | Mutability | Signer | Docs |
+| ---------------------- | ---------- | ------ | ---- |
+| tokenVoter             | immut      | no     |      |
+| collection             | immut      | no     |      |
+| collectionMetadata     | mut        | no     |      |
+| receipt                | mut        | no     |      |
+| mint                   | mut        | no     |      |
+| metadata               | mut        | no     |      |
+| masterEdition          | mut        | no     |      |
+| receiptTokenAccount    | mut        | no     |      |
+| vault                  | mut        | no     |      |
+| tokenAccount           | mut        | no     |      |
+| payer                  | mut        | yes    |      |
+| refund                 | mut        | no     |      |
+| owner                  | immut      | yes    |      |
+| depositMint            | immut      | no     |      |
+| systemProgram          | immut      | no     |      |
+| tokenProgram           | immut      | no     |      |
+| associatedTokenProgram | immut      | no     |      |
+| tokenMetadataProgram   | immut      | no     |      |
+| rent                   | immut      | no     |      |
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `provider` | `AnchorProvider` | `undefined` |
-| `programId` | `PublicKey` | `PROGRAM_ID` |
-| `idl?` | `Idl` | `undefined` |
+#### Args
 
-#### Returns
+| Name | Type | Docs |
+| ---- | ---- | ---- |
 
-`Promise`<`Program`<`TokenVoter`\>\>
+## Accounts
 
-#### Defined in
+| Name           | Type            | Docs  |
+| -------------- | --------------- | ----- | ---- |
+| TokenVoterV0   |                 | Field | Type |
+| -----          | ----            |
+| authority      | publicKey       |
+| depositMint    | publicKey       |
+| collection     | publicKey       |
+| name           | string          |
+| bumpSeed       | u8              |
+|                |
+| ReceiptV0      |                 | Field | Type |
+| -----          | ----            |
+| tokenVoter     | publicKey       |
+| mint           | publicKey       |
+| amount         | u64             |
+| numActiveVotes | u64             |
+| bumpSeed       | u8              |
+|                |
+| VoteMarkerV0   |                 | Field | Type |
+| -----          | ----            |
+| voter          | publicKey       |
+| tokenVoter     | publicKey       |
+| proposal       | publicKey       |
+| mint           | publicKey       |
+| choices        | [object Object] |
+| bumpSeed       | u8              |
+|                |
 
-[packages/token-voter-sdk/src/index.ts:13](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/token-voter-sdk/src/index.ts#L13)
+## Types
 
-___
+### DepositArgsV0
 
-### receiptKey
+| Field       | Type   |
+| ----------- | ------ |
+| amount      | u64    |
+| metadataUri | string |
 
-▸ **receiptKey**(`mint`, `programId?`): [`PublicKey`, `number`]
+### InitializeTokenVoterArgsV0
 
-#### Parameters
+| Field         | Type      |
+| ------------- | --------- |
+| name          | string    |
+| authority     | publicKey |
+| collectionUri | string    |
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `mint` | `PublicKey` | `undefined` |
-| `programId` | `PublicKey` | `PROGRAM_ID` |
+### RelinquishVoteArgsV0
 
-#### Returns
+| Field  | Type |
+| ------ | ---- |
+| choice | u16  |
 
-[`PublicKey`, `number`]
+### VoteArgsV0
 
-#### Defined in
+| Field  | Type |
+| ------ | ---- |
+| choice | u16  |
 
-[packages/token-voter-sdk/src/pdas.ts:4](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/token-voter-sdk/src/pdas.ts#L4)
+### UseMethod
 
-___
+| Variant  | Fields |
+| -------- | ------ |
+| Burn     |        |
+| Multiple |        |
+| Single   |        |
 
-### tokenVoterProgramResolver
+### CollectionDetails
 
-▸ **tokenVoterProgramResolver**(`params`): `Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `params` | `Object` |
-| `params.accounts` | `AccountsGeneric` |
-| `params.args` | `any`[] |
-| `params.idlIx` | `any` |
-| `params.programId` | `PublicKey` |
-| `params.provider` | `default` |
-
-#### Returns
-
-`Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Defined in
-
-node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts:11
-
-___
-
-### tokenVoterResolvers
-
-▸ **tokenVoterResolvers**(`params`): `Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `params` | `Object` |
-| `params.accounts` | `AccountsGeneric` |
-| `params.args` | `any`[] |
-| `params.idlIx` | `any` |
-| `params.programId` | `PublicKey` |
-| `params.provider` | `default` |
-
-#### Returns
-
-`Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Defined in
-
-node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts:11
+| Variant | Fields    |
+| ------- | --------- |
+| V1      | size: u64 |

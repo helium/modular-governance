@@ -4,17 +4,11 @@ sidebar_position: 1
 
 # React
 
-The Strata SDK comes with a suite of useful ReactJS hooks.
+The Helium Modular Governance SDK comes with a suite of useful ReactJS hooks.
 
 ## Setup
 
-You'll want to set up [solana-wallet-adapter](https://github.com/solana-labs/wallet-adapter), the Strata SDK Provider, and the Strata AccountProvider (an intelligent caching layer on Solana's rpc).
-
-You can also use one of our starter repos!
-
-[Next.js Strata Starter](https://github.com/StrataFoundation/react-strata-nextjs-starter)
-
-[Create React App Strata Starter](https://github.com/StrataFoundation/react-strata-starter)
+You'll want to set up [solana-wallet-adapter](https://github.com/solana-labs/wallet-adapter), the Helium SDK Provider, and the Helium AccountProvider (an intelligent caching layer on Solana's rpc).
 
 First, setup Solana wallet adapters:
 
@@ -24,15 +18,6 @@ import {
   ConnectionProvider,
   WalletProvider,
 } from '@solana/wallet-adapter-react'
-import {
-  LedgerWalletAdapter,
-  PhantomWalletAdapter,
-  SlopeWalletAdapter,
-  SolflareWalletAdapter,
-  SolletExtensionWalletAdapter,
-  SolletWalletAdapter,
-  TorusWalletAdapter,
-} from '@solana/wallet-adapter-wallets'
 import { clusterApiUrl } from '@solana/web3.js'
 import React, { FC, useMemo } from 'react'
 
@@ -46,85 +31,62 @@ export const Wallet: FC = ({ children }) => {
   // You can also provide a custom RPC endpoint
   const endpoint = useMemo(() => clusterApiUrl(network), [network])
 
-  // @solana/wallet-adapter-wallets includes all the adapters but supports tree shaking --
-  // Only the wallets you configure here will be compiled into your application
-  const wallets = useMemo(
-    () => [
-      new PhantomWalletAdapter(),
-      new SlopeWalletAdapter(),
-      new SolflareWalletAdapter(),
-      new TorusWalletAdapter(),
-      new LedgerWalletAdapter(),
-      new SolletWalletAdapter({ network }),
-      new SolletExtensionWalletAdapter({ network }),
-    ],
-    [network]
-  )
-
   return (
     <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={wallets} autoConnect>
-        {children}
-      </WalletProvider>
+      <WalletProvider autoConnect>{children}</WalletProvider>
     </ConnectionProvider>
   )
 }
 ```
 
-Then, setup Strata:
+Then, setup the Helium SDK Provider:
 
 ```jsx
-import { StrataProviders } from '@strata-foundation/react'
+import { AccountProvider } from '@helium/helium-react-hooks'
 import { Wallet } from './Wallet'
 
 export const App: FC = ({ children }) => (
   <Wallet>
-    <StrataProviders>{children}</StrataProviders>
+    <AccountProvider>{children}</AccountProvider>
   </Wallet>
 )
 ```
 
-# Displaying a Social Token
+## Displaying an organization
 
-Let's create a simple social token for testing, then display it:
+Let's create a simple organization for testing, then display it:
 
-```jsx async name=create_social
-var { ownerTokenRef, tokenBonding, targetMint } =
-  await tokenCollectiveSdk.createSocialToken({
-    ignoreIfExists: true, // If a Social Token already exists for this wallet, ignore.
-    metadata: {
-      name: 'Learning Strata Token',
-      symbol: 'luvSTRAT',
-      uri: 'https://strataprotocol.com/luvSTRAT.json',
-    },
-    tokenBondingParams: {
-      buyBaseRoyaltyPercentage: 0,
-      buyTargetRoyaltyPercentage: 10,
-      sellBaseRoyaltyPercentage: 0,
-      sellTargetRoyaltyPercentage: 0,
-    },
-  })
+```jsx async name=create_organization
+var {
+  pubkeys: { organization },
+} = await program.methods.initializeOrganizationV0({
+  name: 'Test',
+  authority: provider.wallet.publicKey,
+  defaultProposalConfig: PublicKey.default,
+  proposalProgram: proposalProgram.programId,
+  uri: 'https://example.com',
+})
 ```
 
 Now display it in React! We can use an advanced, pre-canned trade form:
 
 ```js
-import { Swap, StrataProviders } from '@strata-foundation/react'
+import { AccountProvider } from '@helium/helium-react-hooks'
 import ReactShadow from 'react-shadow/emotion'
 import { CSSReset } from '@chakra-ui/react'
 ```
 
 ```jsx live
-function TokenDisplay() {
-  const { targetMint } = useVariables() // Getting token bonding from above code;
+function OrgDisplay() {
+  const org = useOrganization(organization) // Getting organization from above code;
 
-  if (tokenBonding) {
+  if (org) {
     // Shadow div and css reset are not required, but will make sure our styles do not conflict with yours
     return (
       <ReactShadow.div>
-        <StrataProviders resetCSS onError={(e) => console.error(e)}>
-          <Swap id={targetMint} />
-        </StrataProviders>
+        <AccountProvider resetCSS onError={(e) => console.error(e)}>
+          <div>{org}</div>
+        </AccountProvider>
       </ReactShadow.div>
     )
   }
@@ -133,95 +95,49 @@ function TokenDisplay() {
 }
 ```
 
-Or, we can render it ourselves using hooks:
+## Displaying an organization's proposals
 
-```js
-import {
-  useBondedTokenPrice,
-  useTokenMetadata,
-  useTokenRef,
-  useBondingPricing,
-  useErrorHandler,
-} from '@strata-foundation/react'
-import { NATIVE_MINT } from '@solana/spl-token'
-```
+Using the same organization from above, we can display its proposals:
 
 ```jsx live
-function TokenDisplay() {
-  const { tokenBonding: tokenBondingKey } = useVariables() // Getting tokenBonding from above
+function OrgProposals() {
+  const proposals = useOrganizationProposals(organization) // Getting organization from above code;
 
-  const {
-    pricing,
-    tokenBonding,
-    loading: loadingPricing,
-    error,
-  } = useBondingPricing(tokenBondingKey)
-  const {
-    image,
-    metadata,
-    loading: metaLoading,
-  } = useTokenMetadata(tokenBonding && tokenBonding.targetMint)
-  const { metadata: baseMetadata, loading: baseMetaLoading } = useTokenMetadata(
-    tokenBonding && tokenBonding.baseMint
-  )
-  const baseSymbol = baseMetadata && baseMetadata.data.symbol
-  const solPrice = useBondedTokenPrice(
-    tokenBonding && tokenBonding.targetMint,
-    NATIVE_MINT
-  )
-
-  // Use strata error handler to show toast notifications
-  const { handleErrors } = useErrorHandler()
-  handleErrors(error)
-
-  if (metaLoading || loadingPricing || baseMetaLoading) {
-    return <div>Loading...</div>
+  if (proposals) {
+    // Shadow div and css reset are not required, but will make sure our styles do not conflict with yours
+    return (
+      <ReactShadow.div>
+        <AccountProvider resetCSS onError={(e) => console.error(e)}>
+          <div>{proposals}</div>
+        </AccountProvider>
+      </ReactShadow.div>
+    )
   }
 
-  return (
-    <div>
-      <img src={image} />
-      {metadata && (
-        <div>
-          <div>
-            <b>{metadata.data.name}</b>
-          </div>
-          <div>{metadata.data.symbol}</div>
-        </div>
-      )}
-      {pricing && (
-        <div>
-          <div>
-            Current Price: {pricing.current()} {baseSymbol}, or {solPrice} SOL
-          </div>
-          <div>
-            Value Locked: {pricing.locked()} {baseSymbol}
-          </div>
-          <div>
-            Price to buy 10: {pricing.buyTargetAmount(10)} {baseSymbol}
-          </div>
-        </div>
-      )}
-    </div>
-  )
+  return <div>Please run the code block above</div>
 }
 ```
 
-We can use the token metadata sdk to update the token symbol, name, and image:
+## Displaying a proposal
 
-```jsx async name=update deps=create_social
-var ownerTokenRefAcct = await tokenCollectiveSdk.getTokenRef(ownerTokenRef)
+Using the same organization from above, we can display a proposal:
 
-await tokenMetadataSdk.updateMetadata({
-  metadata: ownerTokenRefAcct.tokenMetadata,
-  data: new DataV2({
-    name: 'Learned Strata Token',
-    symbol: 'learnStrat',
-    uri: 'https://strataprotocol.com/learnSTRAT.json',
-    sellerFeeBasisPoint: 0,
-    creators: null,
-    uses: null,
-    collection: null,
-  }),
-})
+```jsx live
+function ProposalDisplay() {
+  const proposals = useOrganizationProposals(organization) // Getting organization from above code;
+  const proposal = useProposal(proposals[0]) // Getting proposal from above code;
+
+  if (proposal) {
+    // Shadow div and css reset are not required, but will make sure our styles do not conflict with yours
+    return (
+      <ReactShadow.div>
+        <AccountProvider resetCSS onError={(e) => console.error(e)}>
+          <div>{proposal}</div>
+        </AccountProvider>
+      </ReactShadow.div>
+    )
+  }
+
+  return <div>Please run the code block above</div>
+}
 ```

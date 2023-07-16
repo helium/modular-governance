@@ -23,8 +23,7 @@
     "precommit": "npx git-format-staged -f 'prettier --ignore-unknown --stdin --stdin-filepath \"{}\"' .",
     "clean": "npx shx rm -rf **/tsconfig*.tsbuildinfo && npx shx rm -rf lib && npx shx mkdir -p lib/cjs lib/esm",
     "package": "npx shx mkdir -p lib/cjs lib/esm",
-    "prebuild": "npm run clean && npm run package",
-    "docs": "typedoc"
+    "prebuild": "npm run clean && npm run package"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.27.0",

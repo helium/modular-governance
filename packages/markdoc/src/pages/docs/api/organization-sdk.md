@@ -1,142 +1,84 @@
-[@helium/organization-sdk - v0.0.1](README) / Exports
+# Organization SDK
 
-# @helium/organization-sdk - v0.0.1
+## Instructions
 
-## Table of contents
+### initializeOrganizationV0
 
-### Variables
+#### Accounts
 
-- [PROGRAM\_ID](organization-sdk#program\_id)
+| Name          | Mutability | Signer | Docs |
+| ------------- | ---------- | ------ | ---- |
+| payer         | mut        | yes    |      |
+| organization  | mut        | no     |      |
+| systemProgram | immut      | no     |      |
 
-### Functions
+#### Args
 
-- [init](organization-sdk#init)
-- [organizationKey](organization-sdk#organization-key)
-- [organizationsProgramResolver](organization-sdk#organizations-program-resolver)
-- [organizationsResolvers](organization-sdk#organizations-resolvers)
-- [proposalKey](organization-sdk#proposal-key)
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-## Variables
+### initializeProposalV0
 
-### PROGRAM\_ID
+#### Accounts
 
-• `Const` **PROGRAM\_ID**: `PublicKey`
+| Name            | Mutability | Signer | Docs |
+| --------------- | ---------- | ------ | ---- |
+| payer           | mut        | yes    |      |
+| authority       | immut      | yes    |      |
+| owner           | immut      | no     |      |
+| proposal        | mut        | no     |      |
+| proposalConfig  | immut      | no     |      |
+| organization    | mut        | no     |      |
+| proposalProgram | immut      | no     |      |
+| systemProgram   | immut      | no     |      |
 
-#### Defined in
+#### Args
 
-[packages/organization-sdk/src/constants.ts:3](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/organization-sdk/src/constants.ts#L3)
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-## Functions
+## Accounts
 
-### init
+| Name                  | Type      | Docs  |
+| --------------------- | --------- | ----- | ---- |
+| OrganizationV0        |           | Field | Type |
+| -----                 | ----      |
+| numProposals          | u32       |
+| authority             | publicKey |
+| defaultProposalConfig | publicKey |
+| proposalProgram       | publicKey |
+| name                  | string    |
+| uri                   | string    |
+| bumpSeed              | u8        |
+|                       |
 
-▸ **init**(`provider`, `programId?`, `idl?`): `Promise`<`Program`<`Organization`\>\>
+## Types
 
-#### Parameters
+### InitializeOrganizationArgsV0
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `provider` | `AnchorProvider` | `undefined` |
-| `programId` | `PublicKey` | `PROGRAM_ID` |
-| `idl?` | `Idl` | `undefined` |
+| Field                 | Type      |
+| --------------------- | --------- |
+| name                  | string    |
+| authority             | publicKey |
+| defaultProposalConfig | publicKey |
+| proposalProgram       | publicKey |
+| uri                   | string    |
 
-#### Returns
+### ChoiceArg
 
-`Promise`<`Program`<`Organization`\>\>
+| Field | Type            |
+| ----- | --------------- |
+| name  | string          |
+| uri   | [object Object] |
 
-#### Defined in
+### InitializeProposalArgsV0
 
-[packages/organization-sdk/src/init.ts:7](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/organization-sdk/src/init.ts#L7)
-
-___
-
-### organizationKey
-
-▸ **organizationKey**(`name`, `programId?`): [`PublicKey`, `number`]
-
-#### Parameters
-
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `name` | `String` | `undefined` |
-| `programId` | `PublicKey` | `PROGRAM_ID` |
-
-#### Returns
-
-[`PublicKey`, `number`]
-
-#### Defined in
-
-[packages/organization-sdk/src/pdas.ts:18](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/organization-sdk/src/pdas.ts#L18)
-
-___
-
-### organizationsProgramResolver
-
-▸ **organizationsProgramResolver**(`params`): `Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `params` | `Object` |
-| `params.accounts` | `AccountsGeneric` |
-| `params.args` | `any`[] |
-| `params.idlIx` | `any` |
-| `params.programId` | `PublicKey` |
-| `params.provider` | `default` |
-
-#### Returns
-
-`Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Defined in
-
-node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts:11
-
-___
-
-### organizationsResolvers
-
-▸ **organizationsResolvers**(`params`): `Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `params` | `Object` |
-| `params.accounts` | `AccountsGeneric` |
-| `params.args` | `any`[] |
-| `params.idlIx` | `any` |
-| `params.programId` | `PublicKey` |
-| `params.provider` | `default` |
-
-#### Returns
-
-`Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Defined in
-
-node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts:11
-
-___
-
-### proposalKey
-
-▸ **proposalKey**(`organization`, `index`, `programId?`): [`PublicKey`, `number`]
-
-#### Parameters
-
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `organization` | `PublicKey` | `undefined` |
-| `index` | `number` | `undefined` |
-| `programId` | `PublicKey` | `PROPOSAL_PROGRAM_ID` |
-
-#### Returns
-
-[`PublicKey`, `number`]
-
-#### Defined in
-
-[packages/organization-sdk/src/pdas.ts:5](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/organization-sdk/src/pdas.ts#L5)
+| Field              | Type            |
+| ------------------ | --------------- |
+| name               | string          |
+| uri                | string          |
+| maxChoicesPerVoter | u16             |
+| choices            | [object Object] |
+| tags               | [object Object] |

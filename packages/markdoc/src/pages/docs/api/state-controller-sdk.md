@@ -1,138 +1,132 @@
-[@helium/state-controller-sdk - v0.0.1](README) / Exports
+# State Controller SDK
 
-# @helium/state-controller-sdk - v0.0.1
+## Instructions
 
-## Table of contents
+### onVoteV0
 
-### Classes
+#### Accounts
 
-- [SettingsBuilder](classes/SettingsBuilder)
+| Name            | Mutability | Signer | Docs |
+| --------------- | ---------- | ------ | ---- |
+| voteController  | immut      | yes    |      |
+| stateController | mut        | no     |      |
+| proposal        | immut      | no     |      |
+| proposalConfig  | immut      | no     |      |
 
-### Variables
+#### Args
 
-- [PROGRAM\_ID](state-controller-sdk#program\_id)
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-### Functions
+### initializeResolutionSettingsV0
 
-- [init](state-controller-sdk#init)
-- [resolutionSettingsKey](state-controller-sdk#resolution-settings-key)
-- [settings](state-controller-sdk#settings)
-- [stateControllerProgramResolver](state-controller-sdk#state-controller-program-resolver)
-- [stateControllerResolvers](state-controller-sdk#state-controller-resolvers)
+#### Accounts
 
-## Variables
+| Name               | Mutability | Signer | Docs |
+| ------------------ | ---------- | ------ | ---- |
+| payer              | mut        | yes    |      |
+| resolutionSettings | mut        | no     |      |
+| systemProgram      | immut      | no     |      |
 
-### PROGRAM\_ID
+#### Args
 
-• `Const` **PROGRAM\_ID**: `PublicKey`
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-#### Defined in
+### updateStateV0
 
-[packages/state-controller-sdk/src/constants.ts:3](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/state-controller-sdk/src/constants.ts#L3)
+#### Accounts
 
-## Functions
+| Name            | Mutability | Signer | Docs |
+| --------------- | ---------- | ------ | ---- |
+| owner           | immut      | yes    |      |
+| proposal        | mut        | no     |      |
+| proposalConfig  | immut      | no     |      |
+| stateController | immut      | no     |      |
+| proposalProgram | immut      | no     |      |
 
-### init
+#### Args
 
-▸ **init**(`provider`, `programId?`, `idl?`): `Promise`<`Program`<`StateController`\>\>
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-#### Parameters
+### resolveV0
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `provider` | `AnchorProvider` | `undefined` |
-| `programId` | `PublicKey` | `PROGRAM_ID` |
-| `idl?` | `Idl` | `undefined` |
+#### Accounts
 
-#### Returns
+| Name            | Mutability | Signer | Docs |
+| --------------- | ---------- | ------ | ---- |
+| stateController | mut        | no     |      |
+| proposal        | mut        | no     |      |
+| proposalConfig  | immut      | no     |      |
+| proposalProgram | immut      | no     |      |
 
-`Promise`<`Program`<`StateController`\>\>
+#### Args
 
-#### Defined in
+| Name | Type | Docs |
+| ---- | ---- | ---- |
 
-[packages/state-controller-sdk/src/index.ts:13](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/state-controller-sdk/src/index.ts#L13)
+## Accounts
 
-___
+| Name                 | Type            | Docs  |
+| -------------------- | --------------- | ----- | ---- |
+| ResolutionSettingsV0 |                 | Field | Type |
+| -----                | ----            |
+| name                 | string          |
+| settings             | [object Object] |
+| bumpSeed             | u8              |
+|                      |
 
-### resolutionSettingsKey
+## Types
 
-▸ **resolutionSettingsKey**(`name`, `programId?`): [`PublicKey`, `number`]
+### InitializeResolutionSettingsArgsV0
 
-#### Parameters
+| Field    | Type            |
+| -------- | --------------- |
+| name     | string          |
+| settings | [object Object] |
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `name` | `String` | `undefined` |
-| `programId` | `PublicKey` | `PROGRAM_ID` |
+### VoteArgsV0
 
-#### Returns
+| Field      | Type |
+| ---------- | ---- |
+| choice     | u16  |
+| weight     | u128 |
+| removeVote | bool |
 
-[`PublicKey`, `number`]
+### UpdateStateArgsV0
 
-#### Defined in
+| Field    | Type            |
+| -------- | --------------- |
+| newState | [object Object] |
 
-[packages/state-controller-sdk/src/pdas.ts:4](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/state-controller-sdk/src/pdas.ts#L4)
+### ResolutionStrategy
 
-___
+| Field | Type            |
+| ----- | --------------- |
+| nodes | [object Object] |
 
-### settings
+### ProposalState
 
-▸ **settings**(): [`SettingsBuilder`](classes/SettingsBuilder)
+| Variant   | Fields        |
+| --------- | ------------- |
+| Draft     |               |
+| Cancelled |               |
+| Voting    |               |
+| Custom    | state: string |
 
-#### Returns
+### ResolutionNode
 
-[`SettingsBuilder`](classes/SettingsBuilder)
-
-#### Defined in
-
-[packages/state-controller-sdk/src/settingsBuilder.ts:5](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/state-controller-sdk/src/settingsBuilder.ts#L5)
-
-___
-
-### stateControllerProgramResolver
-
-▸ **stateControllerProgramResolver**(`params`): `Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `params` | `Object` |
-| `params.accounts` | `AccountsGeneric` |
-| `params.args` | `any`[] |
-| `params.idlIx` | `any` |
-| `params.programId` | `PublicKey` |
-| `params.provider` | `default` |
-
-#### Returns
-
-`Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Defined in
-
-node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts:11
-
-___
-
-### stateControllerResolvers
-
-▸ **stateControllerResolvers**(`params`): `Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `params` | `Object` |
-| `params.accounts` | `AccountsGeneric` |
-| `params.args` | `any`[] |
-| `params.idlIx` | `any` |
-| `params.programId` | `PublicKey` |
-| `params.provider` | `default` |
-
-#### Returns
-
-`Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
-
-#### Defined in
-
-node_modules/@coral-xyz/anchor/dist/cjs/program/accounts-resolver.d.ts:11
+| Variant           | Fields                   |
+| ----------------- | ------------------------ |
+| Resolved          | choices: [object Object] |
+| EndTimestamp      | end_ts: i64              |
+| OffsetFromStartTs | offset: i64              |
+| ChoiceVoteWeight  | weight_threshold: u128   |
+| ChoicePercentage  | percentage: i32          |
+| Top               | n: u16                   |
+| And               |                          |
+| Or                |                          |
