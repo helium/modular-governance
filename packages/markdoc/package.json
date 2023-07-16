@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "contributors": [
+    "Luis Perrone",
+    "Agnel Nieves"
+  ],
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
     "@algolia/autocomplete-core": "^1.9.2",

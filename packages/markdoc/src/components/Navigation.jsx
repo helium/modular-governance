@@ -22,9 +22,9 @@ export function Navigation({ navigation, className }) {
               {section.links.map((link) => (
                 <li key={link.href} className="relative">
                   <Link
-                    id="trail-nav-link"
                     href={link.href}
                     className={clsx(
+                      'trail-nav-link',
                       'block w-full pl-3.5 before:ring-[#202020] before:ring-2',
                       link.href === router.pathname
                         ? 'font-semibold text-teal-300'

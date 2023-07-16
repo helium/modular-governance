@@ -33,6 +33,10 @@ module.exports = {
           '0%, 100%': { transform: 'scale(0.9)' },
           '50%': { transform: 'scale(1)' },
         },
+        breatheInverted: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(0.9)' },
+        },
         slowBounce: {
           '0%, 100%': { transform: 'translateY(-15px) scale(1)' },
           '50%': { transform: 'translateY(0) scale(1)' },
@@ -40,6 +44,7 @@ module.exports = {
       },
       animation: {
         'breathe': 'breathe 5s ease-in-out infinite',
+        'breathe-reverse': 'breatheInverted 5s ease-in-out infinite reverse',
         'slow-bounce': 'slowBounce 5s ease-in-out infinite',
       },
     },
