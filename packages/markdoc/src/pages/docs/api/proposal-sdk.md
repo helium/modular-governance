@@ -1,94 +1,94 @@
-[@helium/proposal-sdk](README.md) / Exports
+[@helium/proposal-sdk - v0.0.1](README) / Exports
 
-# @helium/proposal-sdk
+# @helium/proposal-sdk - v0.0.1
 
 ## Table of contents
 
 ### Variables
 
-- [PROGRAM\_ID](undefined)
+- [PROGRAM\_ID](proposal-sdk#program\_id)
 
 ### Functions
 
-- [init](undefined)
-- [proposalKey](undefined)
-- [proposalProgramResolver](undefined)
-- [proposalResolvers](undefined)
+- [init](proposal-sdk#init)
+- [proposalKey](proposal-sdk#proposal-key)
+- [proposalProgramResolver](proposal-sdk#proposal-program-resolver)
+- [proposalResolvers](proposal-sdk#proposal-resolvers)
 
 ## Variables
 
 ### PROGRAM\_ID
 
-• `Const` **PROGRAM\_ID**: PublicKey
+• `Const` **PROGRAM\_ID**: `PublicKey`
 
 #### Defined in
 
-[packages/proposal-sdk/src/constants.ts:3](https://github.com/helium/modular-governance/blob/098440d/packages/proposal-sdk/src/constants.ts#L3)
+[packages/proposal-sdk/src/constants.ts:3](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/proposal-sdk/src/constants.ts#L3)
 
 ## Functions
 
 ### init
 
-▸ **init**(`provider`, `programId?`, `idl?`): Promise<Program<Proposal\>\>
+▸ **init**(`provider`, `programId?`, `idl?`): `Promise`<`Program`<`Proposal`\>\>
 
 #### Parameters
 
 | Name | Type | Default value |
 | :------ | :------ | :------ |
-| `provider` | AnchorProvider | `undefined` |
-| `programId` | PublicKey | `PROGRAM_ID` |
-| `idl?` | Idl | `undefined` |
+| `provider` | `AnchorProvider` | `undefined` |
+| `programId` | `PublicKey` | `PROGRAM_ID` |
+| `idl?` | `Idl` | `undefined` |
 
 #### Returns
 
-Promise<Program<Proposal\>\>
+`Promise`<`Program`<`Proposal`\>\>
 
 #### Defined in
 
-[packages/proposal-sdk/src/index.ts:13](https://github.com/helium/modular-governance/blob/098440d/packages/proposal-sdk/src/index.ts#L13)
+[packages/proposal-sdk/src/index.ts:13](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/proposal-sdk/src/index.ts#L13)
 
 ___
 
 ### proposalKey
 
-▸ **proposalKey**(`owner`, `seed`, `programId?`): [PublicKey, number]
+▸ **proposalKey**(`owner`, `seed`, `programId?`): [`PublicKey`, `number`]
 
 #### Parameters
 
 | Name | Type | Default value |
 | :------ | :------ | :------ |
-| `owner` | PublicKey | `undefined` |
-| `seed` | Buffer | `undefined` |
-| `programId` | PublicKey | `PROGRAM_ID` |
+| `owner` | `PublicKey` | `undefined` |
+| `seed` | `Buffer` | `undefined` |
+| `programId` | `PublicKey` | `PROGRAM_ID` |
 
 #### Returns
 
-[PublicKey, number]
+[`PublicKey`, `number`]
 
 #### Defined in
 
-[packages/proposal-sdk/src/pdas.ts:4](https://github.com/helium/modular-governance/blob/098440d/packages/proposal-sdk/src/pdas.ts#L4)
+[packages/proposal-sdk/src/pdas.ts:4](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/proposal-sdk/src/pdas.ts#L4)
 
 ___
 
 ### proposalProgramResolver
 
-▸ **proposalProgramResolver**(`params`): Promise<Object\>
+▸ **proposalProgramResolver**(`params`): `Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `params` | Object |
-| `params.accounts` | AccountsGeneric |
-| `params.args` | any[] |
-| `params.idlIx` | any |
-| `params.programId` | PublicKey |
-| `params.provider` | default |
+| `params` | `Object` |
+| `params.accounts` | `AccountsGeneric` |
+| `params.args` | `any`[] |
+| `params.idlIx` | `any` |
+| `params.programId` | `PublicKey` |
+| `params.provider` | `default` |
 
 #### Returns
 
-Promise<Object\>
+`Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
 
 #### Defined in
 
@@ -98,22 +98,22 @@ ___
 
 ### proposalResolvers
 
-▸ **proposalResolvers**(`params`): Promise<Object\>
+▸ **proposalResolvers**(`params`): `Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `params` | Object |
-| `params.accounts` | AccountsGeneric |
-| `params.args` | any[] |
-| `params.idlIx` | any |
-| `params.programId` | PublicKey |
-| `params.provider` | default |
+| `params` | `Object` |
+| `params.accounts` | `AccountsGeneric` |
+| `params.args` | `any`[] |
+| `params.idlIx` | `any` |
+| `params.programId` | `PublicKey` |
+| `params.provider` | `default` |
 
 #### Returns
 
-Promise<Object\>
+`Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
 
 #### Defined in
 

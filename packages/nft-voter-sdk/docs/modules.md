@@ -1,56 +1,56 @@
-[@helium/nft-voter-sdk](README.md) / Exports
+[@helium/nft-voter-sdk - v0.0.1](README) / Exports
 
-# @helium/nft-voter-sdk
+# @helium/nft-voter-sdk - v0.0.1
 
 ## Table of contents
 
 ### Variables
 
-- [PROGRAM\_ID](undefined)
+- [PROGRAM\_ID](nft-voter-sdk#program\_id)
 
 ### Functions
 
-- [deposit](undefined)
-- [init](undefined)
-- [nftVoterProgramResolver](undefined)
-- [nftVoterResolvers](undefined)
-- [receiptKey](undefined)
+- [deposit](nft-voter-sdk#deposit)
+- [init](nft-voter-sdk#init)
+- [nftVoterProgramResolver](nft-voter-sdk#nft-voter-program-resolver)
+- [nftVoterResolvers](nft-voter-sdk#nft-voter-resolvers)
+- [receiptKey](nft-voter-sdk#receipt-key)
 
 ## Variables
 
 ### PROGRAM\_ID
 
-• `Const` **PROGRAM\_ID**: PublicKey
+• `Const` **PROGRAM\_ID**: `PublicKey`
 
 #### Defined in
 
-[packages/nft-voter-sdk/src/constants.ts:3](https://github.com/helium/modular-governance/blob/098440d/packages/nft-voter-sdk/src/constants.ts#L3)
+[packages/nft-voter-sdk/src/constants.ts:3](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/nft-voter-sdk/src/constants.ts#L3)
 
 ## Functions
 
 ### deposit
 
-▸ **deposit**(`«destructured»`): Promise<any\>
+▸ **deposit**(`«destructured»`): `Promise`<`any`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `«destructured»` | any |
+| `«destructured»` | `any` |
 
 #### Returns
 
-Promise<any\>
+`Promise`<`any`\>
 
 #### Defined in
 
-[packages/nft-voter-sdk/src/functions/deposit.ts:36](https://github.com/helium/modular-governance/blob/098440d/packages/nft-voter-sdk/src/functions/deposit.ts#L36)
+[packages/nft-voter-sdk/src/functions/deposit.ts:36](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/nft-voter-sdk/src/functions/deposit.ts#L36)
 
 ___
 
 ### init
 
-▸ **init**(`provider`, `programId?`, `idl?`): Promise<Program<NftVoter\>\>
+▸ **init**(`provider`, `programId?`, `idl?`): `Promise`<`Program`<`NftVoter`\>\>
 
 Init the NFT Voter Sdk example
 
@@ -73,38 +73,38 @@ program = await init(provider, PROGRAM_ID, anchor.workspace.NftVoter.idl);
 
 | Name | Type | Default value |
 | :------ | :------ | :------ |
-| `provider` | AnchorProvider | `undefined` |
-| `programId` | PublicKey | `PROGRAM_ID` |
-| `idl?` | Idl | `undefined` |
+| `provider` | `AnchorProvider` | `undefined` |
+| `programId` | `PublicKey` | `PROGRAM_ID` |
+| `idl?` | `Idl` | `undefined` |
 
 #### Returns
 
-Promise<Program<NftVoter\>\>
+`Promise`<`Program`<`NftVoter`\>\>
 
 #### Defined in
 
-[packages/nft-voter-sdk/src/index.ts:30](https://github.com/helium/modular-governance/blob/098440d/packages/nft-voter-sdk/src/index.ts#L30)
+[packages/nft-voter-sdk/src/index.ts:30](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/nft-voter-sdk/src/index.ts#L30)
 
 ___
 
 ### nftVoterProgramResolver
 
-▸ **nftVoterProgramResolver**(`params`): Promise<Object\>
+▸ **nftVoterProgramResolver**(`params`): `Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `params` | Object |
-| `params.accounts` | AccountsGeneric |
-| `params.args` | any[] |
-| `params.idlIx` | any |
-| `params.programId` | PublicKey |
-| `params.provider` | default |
+| `params` | `Object` |
+| `params.accounts` | `AccountsGeneric` |
+| `params.args` | `any`[] |
+| `params.idlIx` | `any` |
+| `params.programId` | `PublicKey` |
+| `params.provider` | `default` |
 
 #### Returns
 
-Promise<Object\>
+`Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
 
 #### Defined in
 
@@ -114,22 +114,22 @@ ___
 
 ### nftVoterResolvers
 
-▸ **nftVoterResolvers**(`params`): Promise<Object\>
+▸ **nftVoterResolvers**(`params`): `Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `params` | Object |
-| `params.accounts` | AccountsGeneric |
-| `params.args` | any[] |
-| `params.idlIx` | any |
-| `params.programId` | PublicKey |
-| `params.provider` | default |
+| `params` | `Object` |
+| `params.accounts` | `AccountsGeneric` |
+| `params.args` | `any`[] |
+| `params.idlIx` | `any` |
+| `params.programId` | `PublicKey` |
+| `params.provider` | `default` |
 
 #### Returns
 
-Promise<Object\>
+`Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
 
 #### Defined in
 
@@ -139,19 +139,19 @@ ___
 
 ### receiptKey
 
-▸ **receiptKey**(`mint`, `programId?`): [PublicKey, number]
+▸ **receiptKey**(`mint`, `programId?`): [`PublicKey`, `number`]
 
 #### Parameters
 
 | Name | Type | Default value |
 | :------ | :------ | :------ |
-| `mint` | PublicKey | `undefined` |
-| `programId` | PublicKey | `PROGRAM_ID` |
+| `mint` | `PublicKey` | `undefined` |
+| `programId` | `PublicKey` | `PROGRAM_ID` |
 
 #### Returns
 
-[PublicKey, number]
+[`PublicKey`, `number`]
 
 #### Defined in
 
-[packages/nft-voter-sdk/src/pdas.ts:4](https://github.com/helium/modular-governance/blob/098440d/packages/nft-voter-sdk/src/pdas.ts#L4)
+[packages/nft-voter-sdk/src/pdas.ts:4](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/nft-voter-sdk/src/pdas.ts#L4)

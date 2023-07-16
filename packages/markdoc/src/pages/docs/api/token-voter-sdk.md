@@ -1,114 +1,114 @@
-[@helium/token-voter-sdk](README.md) / Exports
+[@helium/token-voter-sdk - v0.0.1](README) / Exports
 
-# @helium/token-voter-sdk
+# @helium/token-voter-sdk - v0.0.1
 
 ## Table of contents
 
 ### Variables
 
-- [PROGRAM\_ID](undefined)
+- [PROGRAM\_ID](token-voter-sdk#program\_id)
 
 ### Functions
 
-- [deposit](undefined)
-- [init](undefined)
-- [receiptKey](undefined)
-- [tokenVoterProgramResolver](undefined)
-- [tokenVoterResolvers](undefined)
+- [deposit](token-voter-sdk#deposit)
+- [init](token-voter-sdk#init)
+- [receiptKey](token-voter-sdk#receipt-key)
+- [tokenVoterProgramResolver](token-voter-sdk#token-voter-program-resolver)
+- [tokenVoterResolvers](token-voter-sdk#token-voter-resolvers)
 
 ## Variables
 
 ### PROGRAM\_ID
 
-• `Const` **PROGRAM\_ID**: PublicKey
+• `Const` **PROGRAM\_ID**: `PublicKey`
 
 #### Defined in
 
-[packages/token-voter-sdk/src/constants.ts:3](https://github.com/helium/modular-governance/blob/098440d/packages/token-voter-sdk/src/constants.ts#L3)
+[packages/token-voter-sdk/src/constants.ts:3](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/token-voter-sdk/src/constants.ts#L3)
 
 ## Functions
 
 ### deposit
 
-▸ **deposit**(`«destructured»`): Promise<any\>
+▸ **deposit**(`«destructured»`): `Promise`<`any`\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `«destructured»` | any |
+| `«destructured»` | `any` |
 
 #### Returns
 
-Promise<any\>
+`Promise`<`any`\>
 
 #### Defined in
 
-[packages/token-voter-sdk/src/functions/deposit.ts:36](https://github.com/helium/modular-governance/blob/098440d/packages/token-voter-sdk/src/functions/deposit.ts#L36)
+[packages/token-voter-sdk/src/functions/deposit.ts:36](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/token-voter-sdk/src/functions/deposit.ts#L36)
 
 ___
 
 ### init
 
-▸ **init**(`provider`, `programId?`, `idl?`): Promise<Program<TokenVoter\>\>
+▸ **init**(`provider`, `programId?`, `idl?`): `Promise`<`Program`<`TokenVoter`\>\>
 
 #### Parameters
 
 | Name | Type | Default value |
 | :------ | :------ | :------ |
-| `provider` | AnchorProvider | `undefined` |
-| `programId` | PublicKey | `PROGRAM_ID` |
-| `idl?` | Idl | `undefined` |
+| `provider` | `AnchorProvider` | `undefined` |
+| `programId` | `PublicKey` | `PROGRAM_ID` |
+| `idl?` | `Idl` | `undefined` |
 
 #### Returns
 
-Promise<Program<TokenVoter\>\>
+`Promise`<`Program`<`TokenVoter`\>\>
 
 #### Defined in
 
-[packages/token-voter-sdk/src/index.ts:13](https://github.com/helium/modular-governance/blob/098440d/packages/token-voter-sdk/src/index.ts#L13)
+[packages/token-voter-sdk/src/index.ts:13](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/token-voter-sdk/src/index.ts#L13)
 
 ___
 
 ### receiptKey
 
-▸ **receiptKey**(`mint`, `programId?`): [PublicKey, number]
+▸ **receiptKey**(`mint`, `programId?`): [`PublicKey`, `number`]
 
 #### Parameters
 
 | Name | Type | Default value |
 | :------ | :------ | :------ |
-| `mint` | PublicKey | `undefined` |
-| `programId` | PublicKey | `PROGRAM_ID` |
+| `mint` | `PublicKey` | `undefined` |
+| `programId` | `PublicKey` | `PROGRAM_ID` |
 
 #### Returns
 
-[PublicKey, number]
+[`PublicKey`, `number`]
 
 #### Defined in
 
-[packages/token-voter-sdk/src/pdas.ts:4](https://github.com/helium/modular-governance/blob/098440d/packages/token-voter-sdk/src/pdas.ts#L4)
+[packages/token-voter-sdk/src/pdas.ts:4](https://github.com/DeWiCats/modular-governance/blob/9f88f14/packages/token-voter-sdk/src/pdas.ts#L4)
 
 ___
 
 ### tokenVoterProgramResolver
 
-▸ **tokenVoterProgramResolver**(`params`): Promise<Object\>
+▸ **tokenVoterProgramResolver**(`params`): `Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `params` | Object |
-| `params.accounts` | AccountsGeneric |
-| `params.args` | any[] |
-| `params.idlIx` | any |
-| `params.programId` | PublicKey |
-| `params.provider` | default |
+| `params` | `Object` |
+| `params.accounts` | `AccountsGeneric` |
+| `params.args` | `any`[] |
+| `params.idlIx` | `any` |
+| `params.programId` | `PublicKey` |
+| `params.provider` | `default` |
 
 #### Returns
 
-Promise<Object\>
+`Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
 
 #### Defined in
 
@@ -118,22 +118,22 @@ ___
 
 ### tokenVoterResolvers
 
-▸ **tokenVoterResolvers**(`params`): Promise<Object\>
+▸ **tokenVoterResolvers**(`params`): `Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `params` | Object |
-| `params.accounts` | AccountsGeneric |
-| `params.args` | any[] |
-| `params.idlIx` | any |
-| `params.programId` | PublicKey |
-| `params.provider` | default |
+| `params` | `Object` |
+| `params.accounts` | `AccountsGeneric` |
+| `params.args` | `any`[] |
+| `params.idlIx` | `any` |
+| `params.programId` | `PublicKey` |
+| `params.provider` | `default` |
 
 #### Returns
 
-Promise<Object\>
+`Promise`<{ `accounts`: `AccountsGeneric` ; `resolved`: `number`  }\>
 
 #### Defined in
 

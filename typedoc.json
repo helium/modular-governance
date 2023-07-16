@@ -6,7 +6,7 @@
   "skipErrorChecking": true,
   "json": "docs.json",
   "pretty": true,
-  "exclude": ["packages/docs", "packages/modular-governance-idls"]
+  "exclude": ["packages/docsite"]
 
   // Potentially useful for debugging
   // "logLevel": "Verbose"
