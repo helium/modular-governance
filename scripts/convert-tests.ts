@@ -7,7 +7,7 @@ const docSitePath = path.join(
   __dirname,
   "..",
   "packages",
-  "markdoc",
+  "docsite",
   "src",
   "pages",
   "docs",
