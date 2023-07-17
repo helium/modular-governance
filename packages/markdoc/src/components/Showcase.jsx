@@ -6,7 +6,7 @@ export default function Showcase() {
             title: 'DewiCats',
             href: 'https://dewicats.xyz',
             imageUrl:
-                'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80',
+                '/showcase/dewicats.jpg',
             category: 'NFT',
         },
     ]
@@ -45,7 +45,7 @@ function ShowcaseCard({ project, isSubmitNew }) {
                     <img
                         src={project.imageUrl}
                         alt=""
-                        className="aspect-[16/9] w-full rounded-xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
+                        className="aspect-[16/9] w-full rounded-xl object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
                     />
                 )
             }
