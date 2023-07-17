@@ -77,42 +77,34 @@ export default function Home() {
                     fill="none"
                 >
                     <path
-                        className="origin-center animate-breathe duration-300"
-                        fill="url(#a)"
+                        stroke="var(--hero-shape-stroke)" strokeLinejoin="round"
+                        className="path origin-center animate-breathe"
+                        fill="#262626"
                         d="M649.235-517.13c87.415-50.493 195.115-50.493 282.53 0l507.965 293.417C1527.15-173.22 1581-79.903 1581 21.083v586.834c0 100.987-53.85 194.302-141.27 244.796L931.765 1146.13c-87.415 50.49-195.115 50.49-282.53 0l-507.97-293.417C53.85 802.219 0 708.904 0 607.917V21.083C0-79.904 53.85-173.22 141.265-223.713l507.97-293.417Z"
-                        opacity=".4"
+                        opacity=".2"
                     />
                     <path
-                        className="origin-center animate-breathe duration-200"
+                        stroke="var(--hero-shape-stroke)" strokeLinejoin="round"
+                        className="path origin-center animate-breathe"
                         fill="#262626"
                         d="M676.398-357.403c70.607-40.796 157.598-40.796 228.204 0L1314.9-120.341C1385.5-79.546 1429-4.153 1429 77.438v474.124c0 81.591-43.5 156.984-114.1 197.779L904.602 986.403c-70.606 40.797-157.597 40.797-228.204 0L266.102 749.341C195.496 708.546 152 633.153 152 551.562V77.438c0-81.59 43.496-156.984 114.102-197.779l410.296-237.062Z"
-                        opacity=".4"
+                        opacity=".3"
                     />
 
                     <path
-                        className="origin-center animate-breathe duration-150"
+                        stroke="var(--hero-shape-stroke)" strokeLinejoin="round"
+                        className="path origin-center animate-breathe"
                         fill="#262626"
                         d="M709.994-159.419c49.817-28.775 111.195-28.775 161.012 0L1160.49 7.79C1210.31 36.564 1241 89.742 1241 147.29v334.418c0 57.549-30.69 110.727-80.51 139.501L871.006 788.419c-49.817 28.775-111.195 28.775-161.012 0L420.506 621.21C370.689 592.436 340 539.258 340 481.709V147.291c0-57.549 30.689-110.727 80.506-139.501L709.994-159.42Z"
                         opacity=".4"
-                    />
+                        />
                     <path
-                        className="origin-center animate-breathe duration-1000"
+                        stroke="var(--hero-shape-stroke)" strokeLinejoin="round"
+                        className="path origin-center animate-breathe"
                         fill="#262626"
+                        opacity="1"
                         d="M740.499 23.262a99.013 99.013 0 0 1 99.002 0L1017.5 126.017c30.63 17.683 49.5 50.362 49.5 85.728v205.51c0 35.366-18.87 68.045-49.5 85.728L839.501 605.738a99.012 99.012 0 0 1-99.002 0L562.501 502.983C531.87 485.3 513 452.621 513 417.255v-205.51c0-35.366 18.87-68.045 49.501-85.728L740.499 23.262Z"
                     />
-                    <defs>
-                        <linearGradient
-                            id="a"
-                            x1="790.5"
-                            x2="790.5"
-                            y1="-555"
-                            y2="1184"
-                            gradientUnits="userSpaceOnUse"
-                        >
-                            <stop stopColor="#262626" />
-                            <stop offset="1" stopColor="#262626" stopOpacity="1" />
-                        </linearGradient>
-                    </defs>
                 </svg>
 
                 <div className="relative z-10 flex w-full flex-col items-center">
@@ -124,19 +116,19 @@ export default function Home() {
                         fill="none"
                     >
                         <path
-                            className='origin-center animate-breathe'
+                            // className='origin-center animate-breathe'
                             fill="url(#a2)"
                             d="M85.054 5.321a39.719 39.719 0 0 1 39.719 0l65.195 37.64a39.72 39.72 0 0 1 19.86 34.398v75.28a39.72 39.72 0 0 1-19.86 34.398l-65.195 37.64a39.715 39.715 0 0 1-39.719 0l-65.194-37.64A39.718 39.718 0 0 1 0 152.639v-75.28a39.72 39.72 0 0 1 19.86-34.398l65.194-37.64Z"
                         />
                         <path
-                            className="origin-center animate-breathe-reverse"
+                            className="origin-center animate-slow-bounce"
                             fill="#474DFF"
                             d="M92.005 39.042a25.817 25.817 0 0 1 25.817 0l46.419 26.8A25.817 25.817 0 0 1 177.149 88.2v53.599c0 9.224-4.92 17.747-12.908 22.359l-46.419 26.799a25.816 25.816 0 0 1-25.817 0l-46.418-26.799a25.818 25.818 0 0 1-12.909-22.359v-53.6c0-9.223 4.92-17.746 12.909-22.358l46.418-26.8Z"
                         />
                         <g
                             filter="url(#b)"
                             opacity=".7"
-                            className="origin-center animate-breathe-reverse"
+                            className="origin-center animate-slow-bounce"
                         >
                             <path
                                 fill="#000"
@@ -147,7 +139,7 @@ export default function Home() {
                         <g
                             filter="url(#c)"
                             opacity=".7"
-                            className="origin-center animate-breathe-reverse"
+                            className="origin-center animate-slow-bounce"
                         >
                             <path
                                 fill="#000"
@@ -246,7 +238,7 @@ export default function Home() {
 
             <Showcase />
             <div className='p-8 pt-0'>
-                <Footer />
+                <Footer noDivider />
             </div>
         </div>
     )

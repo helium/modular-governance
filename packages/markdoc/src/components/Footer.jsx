@@ -1,8 +1,8 @@
 import Link from "next/link"
 
-export default function Footer() {
+export default function Footer({ noDivider = false }) {
     return (
-        <footer className="flex mt-8 flex-col items-center justify-between gap-5 border-t border-zinc-900/5 pt-8 dark:border-white/5 sm:flex-row">
+        <footer className={`flex flex-col items-center justify-between gap-5 pt-8 dark:border-white/5 sm:flex-row ${!noDivider && 'mt-8 border-t border-zinc-900/5'}`}>
             <p className="text-xs text-zinc-600 dark:text-zinc-400">
               © Copyright {new Date().getFullYear()}. Helium Foundation.
             </p>

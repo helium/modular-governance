@@ -30,16 +30,16 @@ module.exports = {
       },
       keyframes: {
         breathe: {
-          '0%, 100%': { transform: 'scale(0.9)' },
-          '50%': { transform: 'scale(1)' },
+          '0%, 100%': { transform: 'scale(0.9)', stroke: 'rgba(32, 222, 176, .2)' },
+          '50%': { transform: 'scale(1)', stroke: 'rgba(32, 222, 176, 0)' },
         },
         breatheInverted: {
-          '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(0.9)' },
+          '0%, 100%': { transform: 'scale(1)', stroke: 2000 },
+          '50%': { transform: 'scale(0.9)', stroke: 0 },
         },
         slowBounce: {
-          '0%, 100%': { transform: 'translateY(-15px) scale(1)' },
-          '50%': { transform: 'translateY(0) scale(1)' },
+          '0%, 100%': { transform: 'translateY(-10px)' },
+          '50%': { transform: 'translateY(0)' },
         },
       },
       animation: {
