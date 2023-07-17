@@ -5,7 +5,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "license": "Apache-2.0",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Interface to the token voter smart contract",
   "repository": {
     "type": "git",
@@ -33,7 +33,7 @@
   "dependencies": {
     "@coral-xyz/anchor": "^0.27.0",
     "@helium/anchor-resolvers": "^0.2.5",
-    "@helium/modular-governance-idls": "^0.0.1",
+    "@helium/modular-governance-idls": "^0.0.2",
     "@solana/spl-token": "^0.3.8"
   },
   "devDependencies": {
