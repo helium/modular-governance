@@ -52,6 +52,10 @@ const generateIdlDocs = (idlJson: any) => {
 
   let mdFile = `# ${realFileName} SDK
 
+  {% callout title="Quick tip" %}
+If you are looking for a quick start guide, check out the [Getting Started](/docs/learn/getting_started) guide. We also have some react examples [here](/docs/learn/react).
+{% /callout %}
+
 ## Instructions
 
 `;

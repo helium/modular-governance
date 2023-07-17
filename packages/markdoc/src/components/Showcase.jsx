@@ -25,8 +25,8 @@ export default function Showcase() {
                             key={project.href}
                             project={project}
                         />
-                        ))}
-                        <ShowcaseCard isSubmitNew={true}/>
+                    ))}
+                    <ShowcaseCard isSubmitNew={true} />
                 </div>
             </div>
         </section>
@@ -50,7 +50,7 @@ function ShowcaseCard({ project, isSubmitNew }) {
                 )
             }
             <h3 className="mt-2.5 text-lg font-semibold leading-6 text-white group-hover:text-gray-200">
-                <Link href={isSubmitNew ? '#' : project.href}>
+                <Link href={isSubmitNew ? "https://github.com/helium/modular-governance/pulls" : project.href}>
                     <span className="absolute inset-0" />
                     {isSubmitNew ? 'Don\'t see your project?' : project.title}
                 </Link>
