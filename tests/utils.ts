@@ -4,15 +4,15 @@ export async function ensureIdls() {
   let programs = [
     {
       name: "proposal",
-      pid: "propXxHSbYTCSwqJA2Vv3Sw27LTJbhBQLSGmmUVZghq",
+      pid: "propFYxqmVcufMhk5esNMrexq2ogHbbC2kP9PU1qxKs",
     },
     {
       name: "state_controller",
-      pid: "stct65Ut9aiwQ5pQNSdD4nDWxyHbhqoHugYudBDKqxx",
+      pid: "stcfiqW3fwD9QCd8Bqr1NBLrs7dftZHBQe7RiMMA4aM",
     },
     {
       name: "token_voter",
-      pid: "tokv9Lz2ZeH2F2qPcLokjoNPuvwNJ9gdZ3DaVQLPJcV",
+      pid: "tokvN2E37T6NgLi6uQ8uj32959TZPUf2Jo8dXjLKBjF",
     },
     {
       name: "nft_voter",
@@ -20,7 +20,7 @@ export async function ensureIdls() {
     },
     {
       name: "organization",
-      pid: "org9nsbSiTCJzeApoS2B3uwjM2gbQH48QbUUrhAAjzG",
+      pid: "orgdXvHVLkWgBYerptASkAwkZAE563CJUu717dMNx5f",
     },
   ];
   await Promise.all(

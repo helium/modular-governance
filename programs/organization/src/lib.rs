@@ -5,7 +5,7 @@ pub mod state;
 
 use instructions::*;
 
-declare_id!("org9nsbSiTCJzeApoS2B3uwjM2gbQH48QbUUrhAAjzG");
+declare_id!("orgdXvHVLkWgBYerptASkAwkZAE563CJUu717dMNx5f");
 
 #[program]
 pub mod organization {
