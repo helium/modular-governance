@@ -7,9 +7,9 @@
     "clean": "npx shx rm -rf {.,packages/*}/{node_modules,lib,dist}",
     "fmt": "cargo fmt --check",
     "clippy": "cargo clippy --all-targets -- -D warnings -A clippy::result_large_err -A clippy::too_many_arguments",
-    "migrate-docs": "ts-node -T scripts/migrate-docs.ts",
     "convert-tests": "ts-node -T scripts/convert-tests.ts",
-    "generate-idl-docs": "ts-node -T scripts/generate-idl-docs.ts"
+    "generate-idl-docs": "ts-node -T scripts/generate-idl-docs.ts",
+    "start-docs": "npm run build -w governance-docs && npm run start -w governance-docs"
   },
   "workspaces": [
     "packages/*"
