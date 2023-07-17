@@ -1,7 +1,7 @@
 import { useEffect, useId, useState, forwardRef, useRef, Fragment } from 'react'
 import { useRouter } from 'next/router'
 import { createAutocomplete } from '@algolia/autocomplete-core'
-import { Dialog } from '@headlessui/react'
+import { Dialog, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import Highlighter from 'react-highlight-words'
 import { navigation } from '@/data/navigation'
@@ -258,49 +258,70 @@ function SearchDialog({ open, setOpen, className }) {
   }, [open, setOpen])
 
   return (
-    <Dialog
-      open={open}
-      onClose={() => {
-        setOpen(false)
-        autocomplete.setQuery('')
-      }}
-      className={clsx('fixed inset-0 z-50', className)}
-    >
-      <div className="fixed inset-0 bg-zinc-900/50 backdrop-blur" />
+    <Transition.Root show={open} as={Fragment} appear>
+      <Dialog
+        onClose={() => {
+          setOpen(false)
+          autocomplete.setQuery('')
+        }}
+        className={clsx('fixed inset-0 z-50', className)}
+      >
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="fixed inset-0 bg-zinc-900/50 backdrop-blur" />
+        </Transition.Child>
 
-      <div className="fixed inset-0 overflow-y-auto px-4 py-4 sm:px-6 sm:py-20 md:py-32 lg:px-8 lg:py-[15vh]">
-        <Dialog.Panel className="mx-auto overflow-hidden rounded-xl bg-white shadow-xl dark:bg-zinc-800 dark:ring-1 dark:ring-zinc-700 sm:max-w-xl">
-          <div {...autocomplete.getRootProps({})}>
-            <form
-              ref={formRef}
-              {...autocomplete.getFormProps({
-                inputElement: inputRef.current,
-              })}
-            >
-              <SearchInput
-                ref={inputRef}
-                autocomplete={autocomplete}
-                autocompleteState={autocompleteState}
-                onClose={() => setOpen(false)}
-              />
-              <div
-                ref={panelRef}
-                className="border-t border-zinc-200 bg-white px-2 py-3 empty:hidden dark:border-zinc-400/10 dark:bg-zinc-800"
-                {...autocomplete.getPanelProps({})}
-              >
-                {autocompleteState.isOpen && (
-                  <SearchResults
+        <div className="fixed inset-0 overflow-y-auto px-4 py-4 sm:px-6 sm:py-20 md:py-32 lg:px-8 lg:py-[15vh]">
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
+          >
+            <Dialog.Panel className="mx-auto overflow-hidden rounded-xl bg-white shadow-xl dark:bg-zinc-800 dark:ring-1 dark:ring-zinc-700 sm:max-w-xl">
+              <div {...autocomplete.getRootProps({})}>
+                <form
+                  ref={formRef}
+                  {...autocomplete.getFormProps({
+                    inputElement: inputRef.current,
+                  })}
+                >
+                  <SearchInput
+                    ref={inputRef}
                     autocomplete={autocomplete}
-                    query={autocompleteState.query}
-                    collection={autocompleteState.collections[0]}
+                    autocompleteState={autocompleteState}
+                    onClose={() => setOpen(false)}
                   />
-                )}
+                  <div
+                    ref={panelRef}
+                    className="border-t border-zinc-200 bg-white px-2 py-3 empty:hidden dark:border-zinc-400/10 dark:bg-zinc-800"
+                    {...autocomplete.getPanelProps({})}
+                  >
+                    {autocompleteState.isOpen && (
+                      <SearchResults
+                        autocomplete={autocomplete}
+                        query={autocompleteState.query}
+                        collection={autocompleteState.collections[0]}
+                      />
+                    )}
+                  </div>
+                </form>
               </div>
-            </form>
-          </div>
-        </Dialog.Panel>
-      </div>
-    </Dialog>
+            </Dialog.Panel>
+          </Transition.Child>
+        </div>
+      </Dialog>
+    </Transition.Root>
   )
 }
 

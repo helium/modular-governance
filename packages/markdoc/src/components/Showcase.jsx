@@ -11,15 +11,15 @@ export default function Showcase() {
         },
     ]
     return (
-        <section className="bg-[#1A1A1A] py-24 sm:py-32">
+        <section className="bg-[#1A1A1A] py-24 sm:py-32 px-6 lg:px-8">
             <div className="mx-auto max-w-xl sm:text-center mb-12">
-                <h2 className="text-base font-semibold leading-7 text-teal-400">Showcase</h2>
-                <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                <h2 data-aos="fade" className="text-base font-semibold leading-7 text-teal-400">Showcase</h2>
+                <p data-aos="fade" data-aos-delay="150" className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
                     Meet websites built with our Governance SDK
                 </p>
             </div>
-            <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+            <div className="mx-auto max-w-7xl">
+                <div data-aos="fade" className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                     {projects.map((project) => (
                         <ShowcaseCard
                             key={project.href}
@@ -35,7 +35,7 @@ export default function Showcase() {
 
 function ShowcaseCard({ project, isSubmitNew }) {
     return (
-        <article className="group relative max-w-xl flex flex-col items-start justify-between bg-[#262626] p-4 rounded-2xl border border-[#333333]">
+        <article className="group hover:translate-y-0.5 transition duration-400 relative max-w-xl flex flex-col items-start justify-between bg-[#262626] p-4 rounded-2xl border border-[#333333]">
             {
                 isSubmitNew ? (
                     <div className='bg-[#1A1A1A] flex justify-center items-center border border-[#333333] w-full rounded-xl aspect-[16/9] sm:aspect-[2/1] lg:aspect-[3/2]'>

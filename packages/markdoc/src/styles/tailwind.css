@@ -15,7 +15,7 @@
   --bg-opacity-dark: 0.2;
   --color-borders: #333333;
   --color-nav-drawer-bg: #202020;
-  --hero-shape-stroke: #0D5D4A;
+  --hero-shape-stroke: red;
 }
 
 #trail-nav::before {

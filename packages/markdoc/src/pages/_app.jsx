@@ -1,6 +1,10 @@
 import Head from 'next/head'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { slugifyWithCounter } from '@sindresorhus/slugify'
+
+import Aos from 'aos'
+import 'aos/dist/aos.css';
 
 import { Layout } from '@/components/Layout'
 
@@ -65,6 +69,11 @@ export default function App({ Component, pageProps }) {
   let tableOfContents = pageProps.markdoc?.content
     ? collectHeadings(pageProps.markdoc.content)
     : []
+
+
+  useEffect(() => {
+    Aos.init({ offset: 80, duration: 1200, easing: 'ease-in-out', once: true });
+  }, []);
 
   return (
     <>
