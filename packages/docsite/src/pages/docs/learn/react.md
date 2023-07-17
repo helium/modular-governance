@@ -71,9 +71,8 @@ var {
 Now display it in React! We can use an advanced, pre-canned trade form:
 
 ```js
-import { AccountProvider } from '@helium/helium-react-hooks'
-import ReactShadow from 'react-shadow/emotion'
 import { CSSReset } from '@chakra-ui/react'
+import { useOrganization } from '@helium/modular-governance-hooks'
 ```
 
 ```jsx live

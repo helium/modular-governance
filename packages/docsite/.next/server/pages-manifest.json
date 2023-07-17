@@ -1,10 +1,5 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/docs/learn/getting_started": "pages/docs/learn/getting_started.js",
-  "/": "pages/index.js",
-  "/docs/api/token-voter-sdk": "pages/docs/api/token-voter-sdk.js",
-  "/docs/overview": "pages/docs/overview.js",
-  "/docs/installation": "pages/docs/installation.js"
+  "/_document": "pages/_document.js"
 }

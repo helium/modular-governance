@@ -74,7 +74,7 @@ export default function Home() {
             <div>
                 <Header navigation={navigation} />
                 {/* ---- HERO --- */}
-                <section className="relative flex pb-32 md:min-h-[90vh] flex-col items-center gap-6 overflow-hidden md:overflow-visible px-8 pt-32 before:absolute before:-top-16 before:h-64 before:w-full before:bg-gradient-to-b before:from-[#1D1D1D] before:to-transparent lg:pt-36">
+                <section className="relative flex pb-32 md:min-h-[90vh] flex-col items-center gap-6 overflow-hidden md:overflow-visible px-8 pt-32 lg:pt-36">
                     <svg
                         className="absolute top-0 -z-10 hidden -translate-y-16 dark:block"
                         xmlns="http://www.w3.org/2000/svg"
