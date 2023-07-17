@@ -1,1 +1,1 @@
-web: npm run start-docs
+web: yarn workspace governance-docs start
