@@ -144,11 +144,11 @@ export function Layout({ children, title, tableOfContents }) {
             <Navigation navigation={navigation} />
           </div>
         </div>
-        <div className="min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none lg:px-8 xl:px-16">
+        <div className="min-w-0 max-w-2xl flex-auto px-4 py-10 lg:max-w-none lg:px-8 xl:px-16">
           <div className="lg:max-w-5xl">
             <article>
               {(title || section) && (
-                <header className="mb-9 space-y-1">
+                <header className="mb-2 space-y-1">
                   {section && (
                     <p className="font-display text-sm font-medium text-teal-500">
                       {section.title}
@@ -212,7 +212,7 @@ export function Layout({ children, title, tableOfContents }) {
           </dl>
           <Footer />
         </div>
-        <div className="hidden xl:sticky xl:top-[3.5rem] xl:-mr-6 xl:block xl:h-[calc(100vh-3.5rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pr-6 border-l border-zinc-800 pl-6">
+        <div className="hidden xl:sticky xl:top-[3.5rem] xl:block xl:h-[calc(100vh-3.5rem)] xl:flex-none xl:overflow-y-auto xl:py-10 xl:pr-6 border-l border-zinc-800 pl-6">
           <nav aria-labelledby="on-this-page-title" className="w-56">
             {tableOfContents.length > 0 && (
               <>
