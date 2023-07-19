@@ -30,6 +30,7 @@ describe("organization", () => {
       anchor.workspace.Organization.idl
     );
 
+    // @ts-ignore
     proposalProgram = await initProposal(
       provider,
       PROPOSAL_PID,
@@ -37,7 +38,7 @@ describe("organization", () => {
     );
   });
 
-  it("initializes an organizatiopn by name", async () => {
+  it("initializes an organization by name", async () => {
     const {
       pubkeys: { organization },
     } = await program.methods
@@ -123,6 +124,43 @@ describe("organization", () => {
       expect(acct.tags[1]).to.eq("tags");
 
       expect(proposal?.toBase58()).to.eq(proposalKey(organization!, 0)[0].toBase58())
+    });
+
+    describe("with proposal", () => {
+      let proposal: PublicKey | undefined;
+      beforeEach(async () => {
+        ({
+          pubkeys: { proposal },
+        } = await program.methods
+          .initializeProposalV0({
+            maxChoicesPerVoter: 1,
+            name,
+            uri: "https://example.com",
+            choices: [
+              {
+                name: "Yes",
+                uri: null,
+              },
+              {
+                name: "No",
+                uri: null,
+              },
+            ],
+            tags: ["test", "tags"],
+          })
+          .accounts({ organization })
+          .rpcAndKeys({ skipPreflight: true }));
+      })
+      it("allows voting on the proposal", async () => {
+        await proposalProgram.methods
+          .voteV0({
+            choice: 0,
+            weight: new anchor.BN(1),
+            removeVote: false,
+          })
+          .accounts({ proposal, voter: me })
+          .rpc({ skipPreflight: true });
+      });
     });
   });
 });

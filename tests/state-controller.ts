@@ -27,12 +27,14 @@ describe("state-controller", () => {
   let name: string;
   beforeEach(async () => {
     name = makeid(10);
+    // @ts-ignore
     program = await init(
       provider,
       PROGRAM_ID,
       anchor.workspace.StateController.idl
     );
 
+    // @ts-ignore
     proposalProgram = await initProposal(
       provider,
       PROPOSAL_PID,

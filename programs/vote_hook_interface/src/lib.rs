@@ -5,6 +5,8 @@ declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 #[derive(Accounts)]
 #[instruction(args: VoteArgsV0)]
 pub struct OnVoteV0<'info> {
+  /// CHECK: Check in your impl
+  pub voter: AccountInfo<'info>,
   pub vote_controller: Signer<'info>,
   /// CHECK: Check in your impl
   #[account(mut)]

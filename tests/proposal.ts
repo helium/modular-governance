@@ -16,6 +16,7 @@ describe("proposal", () => {
   let name: string;
   beforeEach(async () => {
     name = makeid(10);
+    // @ts-ignore
     program = await init(provider, PROGRAM_ID, anchor.workspace.Proposal.idl);
   });
 

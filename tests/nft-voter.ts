@@ -28,6 +28,7 @@ describe("nft-voter", () => {
     name = makeid(10);
     program = await init(provider, PROGRAM_ID, anchor.workspace.NftVoter.idl);
 
+    // @ts-ignore
     proposalProgram = await initProposal(
       provider,
       PROPOSAL_PID,

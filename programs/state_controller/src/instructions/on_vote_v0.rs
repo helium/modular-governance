@@ -26,6 +26,8 @@ impl From<VoteArgsV0> for ProposalVoteArgsV0 {
 #[derive(Accounts)]
 #[instruction(args: VoteArgsV0)]
 pub struct OnVoteV0<'info> {
+  /// CHECK: not used
+  pub voter: AccountInfo<'info>,
   pub vote_controller: Signer<'info>,
   /// CHECK: Checked via cpi to the on vote hook
   #[account(mut)]

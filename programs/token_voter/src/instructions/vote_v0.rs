@@ -89,6 +89,7 @@ pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
     CpiContext::new_with_signer(
       ctx.accounts.proposal_program.to_account_info(),
       proposal::cpi::accounts::VoteV0 {
+        voter: ctx.accounts.voter.to_account_info(),
         vote_controller: ctx.accounts.token_voter.to_account_info(),
         state_controller: ctx.accounts.state_controller.to_account_info(),
         proposal_config: ctx.accounts.proposal_config.to_account_info(),

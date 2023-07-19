@@ -84,7 +84,7 @@ macro_rules! proposal_seeds {
   ( $proposal:expr ) => {
     &[
       b"proposal",
-      $proposal.owner.as_ref(),
+      $proposal.namespace.as_ref(),
       &$proposal.seed[..],
       &[$proposal.bump_seed],
     ]

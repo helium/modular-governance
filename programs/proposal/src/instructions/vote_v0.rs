@@ -14,6 +14,8 @@ pub struct VoteArgsV0 {
 #[instruction(args: VoteArgsV0)]
 pub struct VoteV0<'info> {
   pub vote_controller: Signer<'info>,
+  /// CHECK: Just for indexing
+  pub voter: AccountInfo<'info>,
   /// CHECK: Checked via cpi to the on vote hook, and has_ones
   #[account(mut)]
   pub state_controller: AccountInfo<'info>,
@@ -25,7 +27,11 @@ pub struct VoteV0<'info> {
   pub proposal_config: Account<'info, ProposalConfigV0>,
   #[account(
     mut,
-    has_one = proposal_config
+    has_one = proposal_config,
+    constraint = match proposal.state {
+      ProposalState::Voting { .. } => true,
+      _ => false,
+    }
   )]
   pub proposal: Account<'info, ProposalV0>,
   /// CHECK: Checked via has_one
@@ -53,6 +59,7 @@ pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
       CpiContext::new_with_signer(
         ctx.accounts.on_vote_hook.clone(),
         OnVoteV0 {
+          voter: ctx.accounts.voter.to_account_info().clone(),
           vote_controller: ctx.accounts.vote_controller.to_account_info().clone(),
           state_controller: ctx.accounts.state_controller.clone(),
           proposal: ctx.accounts.proposal.to_account_info().clone(),
