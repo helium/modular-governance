@@ -27,6 +27,7 @@ pub struct RelinquishVoteV0<'info> {
   pub token_voter: Account<'info, TokenVoterV0>,
   pub voter: Signer<'info>,
   #[account(
+    mut,
     has_one = mint,
     has_one = token_voter
   )]
@@ -67,6 +68,7 @@ pub fn handler(ctx: Context<RelinquishVoteV0>, args: RelinquishVoteArgsV0) -> Re
   let marker = &mut ctx.accounts.marker;
   marker.proposal = ctx.accounts.proposal.key();
   marker.voter = ctx.accounts.voter.key();
+  ctx.accounts.receipt.num_active_votes -= 1;
 
   require!(
     marker.choices.iter().any(|choice| *choice == args.choice),
