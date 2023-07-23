@@ -188,6 +188,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /******/ 		__webpack_require__.h = function() { return "0cfcece935c50270"; }
 =======
 /******/ 		__webpack_require__.h = function() { return "86ce819f3843f9f7"; }
@@ -204,6 +205,9 @@
 =======
 /******/ 		__webpack_require__.h = function() { return "2b9b8c7af8c5d527"; }
 >>>>>>> c2c3559 (Address comments)
+=======
+/******/ 		__webpack_require__.h = function() { return "76012b58ccff54dc"; }
+>>>>>>> 86d0035 (Remove .next)
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
