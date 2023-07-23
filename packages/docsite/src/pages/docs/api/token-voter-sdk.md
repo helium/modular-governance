@@ -73,7 +73,7 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | marker          | mut        | no     |                                                   |
 | tokenVoter      | immut      | no     |                                                   |
 | voter           | immut      | yes    |                                                   |
-| receipt         | immut      | no     |                                                   |
+| receipt         | mut        | no     |                                                   |
 | mint            | immut      | no     |                                                   |
 | tokenAccount    | immut      | no     |                                                   |
 | proposal        | mut        | no     |                                                   |

@@ -35,7 +35,7 @@
     "@coral-xyz/anchor": "^0.26.0",
     "@helium/account-fetch-cache": "^0.2.5",
     "@helium/account-fetch-cache-hooks": "^0.2.5",
-    "@helium/helium-react-hooks": "^0.2.5",
+    "@helium/helium-react-hooks": "^0.2.11",
     "@helium/modular-governance-idls": "^0.0.2",
     "@helium/organization-sdk": "^0.0.2",
     "@solana/web3.js": "^1.66.2"

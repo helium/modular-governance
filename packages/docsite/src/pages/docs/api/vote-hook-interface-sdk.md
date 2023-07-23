@@ -12,6 +12,7 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 | Name            | Mutability | Signer | Docs |
 | --------------- | ---------- | ------ | ---- |
+| voter           | immut      | no     |      |
 | voteController  | immut      | yes    |      |
 | stateController | mut        | no     |      |
 | proposal        | immut      | yes    |      |

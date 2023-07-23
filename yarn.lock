@@ -541,7 +541,7 @@
   dependencies:
     client-only "^0.0.1"
 
-"@helium/account-fetch-cache-hooks@^0.2.5":
+"@helium/account-fetch-cache-hooks@^0.2.11", "@helium/account-fetch-cache-hooks@^0.2.5":
   version "0.2.11"
   resolved "https://registry.yarnpkg.com/@helium/account-fetch-cache-hooks/-/account-fetch-cache-hooks-0.2.11.tgz#133aaa92e88055add27c16162ea308eeb4f4980b"
   integrity sha512-pHHbsQlZQjS/P2y96oWC1Mne+U+W1axmuHixzI6GpRK+MZSaffegqtGbuANS8dR1HMU/lpef2Izz6n0MwhFNIg==
@@ -574,17 +574,18 @@
     "@solana/spl-token" "^0.3.6"
     "@solana/web3.js" "^1.43.4"
 
-"@helium/helium-react-hooks@^0.2.5":
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/@helium/helium-react-hooks/-/helium-react-hooks-0.2.5.tgz#ad1119c1a05e6476265ee04b12390fc952a02e94"
-  integrity sha512-nGQzs34HHoVn/xIzqPTbJVy0/gomEKPQQRDUjrFDf/wXHPYGyAARuVut1JZTEwknr4kF+PQs7uNbo0u9Jlr7SQ==
+"@helium/helium-react-hooks@^0.2.11":
+  version "0.2.11"
+  resolved "https://registry.yarnpkg.com/@helium/helium-react-hooks/-/helium-react-hooks-0.2.11.tgz#1dd66acf4abf269b4d42974a663d537a08afcd9b"
+  integrity sha512-smfZR0iOr41HFW4xUoIb0vd9vrGGWYrCmak5eMmLB8btNRQxtQ/Df2qSjQkT/DpUsnJFlNL9OCt6AJWyiM55UQ==
   dependencies:
     "@coral-xyz/anchor" "^0.26.0"
     "@helium/account-fetch-cache" "^0.2.5"
-    "@helium/account-fetch-cache-hooks" "^0.2.5"
+    "@helium/account-fetch-cache-hooks" "^0.2.11"
     "@solana/spl-token" "^0.3.6"
     "@solana/web3.js" "^1.66.2"
     bs58 "^5.0.0"
+    pako "^2.0.3"
     react-async-hook "^4.0.0"
 
 "@helium/spl-utils@^0.2.13":

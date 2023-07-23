@@ -49,6 +49,7 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | Name            | Mutability | Signer | Docs |
 | --------------- | ---------- | ------ | ---- |
 | voteController  | immut      | yes    |      |
+| voter           | immut      | no     |      |
 | stateController | mut        | no     |      |
 | proposalConfig  | immut      | no     |      |
 | proposal        | mut        | no     |      |
