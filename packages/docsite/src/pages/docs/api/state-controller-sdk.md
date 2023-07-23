@@ -19,9 +19,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 #### Args
 
-| Name | Type            | Docs |
-| ---- | --------------- | ---- |
-| args | [object Object] |      |
+| Name | Type       | Docs |
+| ---- | ---------- | ---- |
+| args | VoteArgsV0 |      |
 
 ### initializeResolutionSettingsV0
 
@@ -35,9 +35,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 #### Args
 
-| Name | Type            | Docs |
-| ---- | --------------- | ---- |
-| args | [object Object] |      |
+| Name | Type                               | Docs |
+| ---- | ---------------------------------- | ---- |
+| args | InitializeResolutionSettingsArgsV0 |      |
 
 ### updateStateV0
 
@@ -53,9 +53,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 #### Args
 
-| Name | Type            | Docs |
-| ---- | --------------- | ---- |
-| args | [object Object] |      |
+| Name | Type              | Docs |
+| ---- | ----------------- | ---- |
+| args | UpdateStateArgsV0 |      |
 
 ### resolveV0
 

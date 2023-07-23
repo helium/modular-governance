@@ -18,9 +18,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 #### Args
 
-| Name | Type            | Docs |
-| ---- | --------------- | ---- |
-| args | [object Object] |      |
+| Name | Type                         | Docs |
+| ---- | ---------------------------- | ---- |
+| args | InitializeOrganizationArgsV0 |      |
 
 ### initializeProposalV0
 
@@ -39,9 +39,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 #### Args
 
-| Name | Type            | Docs |
-| ---- | --------------- | ---- |
-| args | [object Object] |      |
+| Name | Type                     | Docs |
+| ---- | ------------------------ | ---- |
+| args | InitializeProposalArgsV0 |      |
 
 ## Accounts
 

@@ -19,9 +19,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 #### Args
 
-| Name | Type            | Docs |
-| ---- | --------------- | ---- |
-| args | [object Object] |      |
+| Name | Type                               | Docs |
+| ---- | ---------------------------------- | ---- |
+| args | InitializeOrganizationWalletArgsV0 |      |
 
 ### initializeWalletProposalV0
 
@@ -57,9 +57,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 #### Args
 
-| Name | Type            | Docs |
-| ---- | --------------- | ---- |
-| args | [object Object] |      |
+| Name | Type                  | Docs |
+| ---- | --------------------- | ---- |
+| args | SetTransactionsArgsV0 |      |
 
 ## Accounts
 

@@ -19,9 +19,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 #### Args
 
-| Name | Type            | Docs |
-| ---- | --------------- | ---- |
-| args | [object Object] |      |
+| Name | Type                     | Docs |
+| ---- | ------------------------ | ---- |
+| args | InitializeNftVoterArgsV0 |      |
 
 ### relinquishVoteV0
 
@@ -45,9 +45,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 #### Args
 
-| Name | Type            | Docs |
-| ---- | --------------- | ---- |
-| args | [object Object] |      |
+| Name | Type                 | Docs |
+| ---- | -------------------- | ---- |
+| args | RelinquishVoteArgsV0 |      |
 
 ### voteV0
 
@@ -71,9 +71,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 #### Args
 
-| Name | Type            | Docs |
-| ---- | --------------- | ---- |
-| args | [object Object] |      |
+| Name | Type       | Docs |
+| ---- | ---------- | ---- |
+| args | VoteArgsV0 |      |
 
 ## Accounts
 

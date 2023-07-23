@@ -27,9 +27,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 #### Args
 
-| Name | Type            | Docs |
-| ---- | --------------- | ---- |
-| args | [object Object] |      |
+| Name | Type                       | Docs |
+| ---- | -------------------------- | ---- |
+| args | InitializeTokenVoterArgsV0 |      |
 
 ### depositV0
 
@@ -59,9 +59,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 #### Args
 
-| Name | Type            | Docs |
-| ---- | --------------- | ---- |
-| args | [object Object] |      |
+| Name | Type          | Docs |
+| ---- | ------------- | ---- |
+| args | DepositArgsV0 |      |
 
 ### relinquishVoteV0
 
@@ -85,9 +85,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 #### Args
 
-| Name | Type            | Docs |
-| ---- | --------------- | ---- |
-| args | [object Object] |      |
+| Name | Type                 | Docs |
+| ---- | -------------------- | ---- |
+| args | RelinquishVoteArgsV0 |      |
 
 ### voteV0
 
@@ -111,9 +111,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 #### Args
 
-| Name | Type            | Docs |
-| ---- | --------------- | ---- |
-| args | [object Object] |      |
+| Name | Type       | Docs |
+| ---- | ---------- | ---- |
+| args | VoteArgsV0 |      |
 
 ### withdrawV0
 

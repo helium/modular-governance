@@ -83,7 +83,7 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | ---- | ---- | ---- |
 `;
     instruction.args.forEach((arg) => {
-      mdFile += `| ${arg.name} | ${generateType(arg.type, types)} | ${
+      mdFile += `| ${arg.name} | ${generateType(arg.type, types).defined} | ${
         arg.docs ? arg.docs.join(" ") : ""
       } |
 `;

@@ -33,6 +33,8 @@ import { PROGRAM_ID, init, proposalKey } from '@helium/organization-sdk'
 
 const provider = anchor.getProvider()
 
+// Create unique name
+const name = `DAO Test ${Math.floor(Math.random() * 1000)}`
 const organizationSdk = await init(provider, PROGRAM_ID)
 const proposalSdk = await initProposal(provider, PROPOSAL_PID)
 ```
@@ -52,11 +54,11 @@ Let's create an organization named TEST
 ```jsx async name=create_organization
 var {
   pubkeys: { organization },
-} = await program.methods.initializeOrganizationV0({
-  name: 'Test',
+} = await organizationSdk.methods.initializeOrganizationV0({
+  name,
   authority: provider.wallet.publicKey,
   defaultProposalConfig: PublicKey.default,
-  proposalProgram: proposalProgram.programId,
+  proposalProgram: proposalSdk.programId,
   uri: 'https://example.com',
 })
 ```
@@ -68,7 +70,7 @@ When creating an organization you also can specify a default proposal config. Th
 ```jsx async name=create_organization
 var {
   pubkeys: { proposalConfig },
-} = await proposalProgram.methods.initializeProposalConfigV0({
+} = await proposalSdk.methods.initializeProposalConfigV0({
   name,
   voteController: provider.wallet.publicKey,
   stateController: provider.wallet.publicKey,
@@ -77,11 +79,11 @@ var {
 
 var {
     pubkeys: { organization },
-} = await program.methods.initializeOrganizationV0({
+} = await organizationSdk.methods.initializeOrganizationV0({
     name,
-    authority: me,
+    authority: provider.wallet.publicKey,
     defaultProposalConfig: proposalConfig!,
-    proposalProgram: proposalProgram.programId,
+    proposalProgram: proposalSdk.programId,
     uri: "https://example.com",
 })
 ```
@@ -100,7 +102,7 @@ Now, we can create a proposal with the default config:
 var {
   pubkeys: { proposal },
 } = await program.methods
-  .initializeProposalV0({
+  .organizationSdk({
     maxChoicesPerVoter: 1,
     name: 'Proposal Test',
     uri: 'https://example.com',
@@ -116,7 +118,7 @@ var {
     ],
     tags: ['test', 'tags'],
   })
-  .accounts({ organization })
+  .accounts({ organization, proposalConfig })
 ```
 
 Now we can fetch the proposal we just created:
@@ -144,9 +146,25 @@ await proposalSdk.methods
 Now, we can progress the state on the proposal using the state controller:
 
 ```jsx async name=progress deps=vote
-await program.methods
+await proposalSdk.methods
   .updateStateV0({
     newState: { custom: { state: 'hello' } },
+  })
+  .accounts({ proposal })
+```
+
+## Update the voting state on a proposal
+
+In order to allow voting on a proposal, we need to update the voting state on the proposal:
+
+```jsx async name=update_voting_state deps=progress
+await proposalSdk.methods
+  .updateStateV0({
+    newState: {
+      voting: {
+        startTs: new anchor.BN(0),
+      },
+    },
   })
   .accounts({ proposal })
 ```

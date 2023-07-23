@@ -47,6 +47,8 @@ The state controller contract is built to handle all types of proposal states su
 
 Proposal lifecycles can be customized by replacing the state controller and on vote hook contracts in the proposal config. This allows for the implementation of more complex states like Vetoed, drafts, signing off, etc.
 
+Its important to note that proposals can be created without an organization. In this case, the proposal will not be associated with an organization and will not be able to use the organization's default proposal config. This was done in order to offer max amount of flexibility to the user. Additionally, proposals can be created with an organization and in this case only the organization owner can create proposals. If you would like to allow any voter to create a proposal this can be done by forking the state-controller contract.
+
 ### Cast a Vote
 
 Once a proposal is active, voters can cast their vote. In the case of the governance token being a mint such as a Helium Token then the token-voter contract will be used. If the governance token is a NFT then the nft-voter contract will be used. The token-voter and nft-voter contracts are initialized with a name and authority.

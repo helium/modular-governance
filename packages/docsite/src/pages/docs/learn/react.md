@@ -59,7 +59,7 @@ Let's create a simple organization for testing, then display it:
 ```jsx async name=create_organization
 var {
   pubkeys: { organization },
-} = await program.methods.initializeOrganizationV0({
+} = await organizationSdk.methods.initializeOrganizationV0({
   name: 'Test',
   authority: provider.wallet.publicKey,
   defaultProposalConfig: PublicKey.default,
