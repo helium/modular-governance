@@ -53,6 +53,7 @@ export const features = [
   },
   {
     title: 'Secure',
+    comingSoon: true,
     description:
       'Built with security in mind, the SDKs are audited and tested to ensure that your governance is safe.',
     icon: <svg xmlns="http://www.w3.org/2000/svg" width="45" height="44" fill="none"><path fill="#fff" d="M22.035 35.098c-5.433-2.285-11.223-9.242-11.223-19.348 0-.965.56-1.828 1.473-2.234l9.75-4.063a2.956 2.956 0 0 1 1.88 0l9.75 4.063c.913.406 1.523 1.27 1.523 2.234 0 11.273-6.907 17.52-11.274 19.348-.61.254-1.27.254-1.879 0ZM23 11.688l-9.75 4.062c0 8.633 4.773 15.031 9.75 17.063 4.723-1.981 9.75-8.227 9.75-17.063L23 11.687Z" opacity=".4"/></svg>

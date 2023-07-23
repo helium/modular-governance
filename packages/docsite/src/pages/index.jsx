@@ -239,6 +239,7 @@ export default function Home() {
                                 data-aos="fade" data-aos-delay={idx * 50}
                                 key={feature.title}
                                 icon={feature.icon}
+                                comingSoon={feature.comingSoon}
                                 title={feature.title}
                                 description={feature.description}
                             />
@@ -247,7 +248,7 @@ export default function Home() {
                 </section>
 
                 <Showcase />
-                <div className='p-8 pt-0'>
+                <div className='p-8 pb-4 pt-0'>
                     <Footer noDivider />
                 </div>
             </div>
@@ -260,15 +261,22 @@ function FeatureCard(props) {
     return (
         <div
             {...props}
-            className="flex flex-col gap-2 overflow-hidden rounded-2xl border border-[#333333] bg-[#262626] p-4"
+            className="relative flex flex-col gap-2 overflow-hidden rounded-2xl border border-[#333333] bg-[#262626] p-4"
         >
+            {props.comingSoon && (
+                <div className="absolute inset-0 h-full w-full bg-[rgba(38,38,38,.8)] flex flex-col items-center justify-center text-white backdrop-blur-sm text-lg">
+                    {props.icon}
+                    <span className="font-bold">Audited contracts</span>
+                    <span className='font-regular text-gray-400'>coming soon</span>
+                </div>
+            )}
             <div className="bg-neutral/10 flex h-12 w-12 items-center justify-center rounded-full dark:bg-white/10">
                 {props.icon}
             </div>
             <h3 className="text-lg font-bold text-black dark:text-white">
                 {props.title}
             </h3>
-            <p className="pl-1 text-gray-500 dark:text-gray-400">
+            <p className="pl-1 text-gray-400">
                 {props.description}
             </p>
         </div>
