@@ -33,7 +33,11 @@ Creating an organization ensures that all proposals are neatly contained under t
 
 ### Proposals
 
-Proposals are created by the organization or by any account holding a governance token. Proposals can be created with a proposal config or without a proposal config. If a proposal config is provided it will override the default proposal config of the organization. If no proposal config is provided the default proposal config of the organization will be used.
+A raw proposal can be created by anyone. However, a proposal under an organization must be approved by the organization's `authority`. This `authority` allows for custom validation logic around proposal creation, like gating proposal creation to a minimum amount of governance tokens.
+
+Organization proposals can be created with a proposal config or without a proposal config. If a proposal config is provided it will override the default proposal config of the organization. If no proposal config is provided the default proposal config of the organization will be used.
+
+This is intended to allow certain votes to have different parameters, like faster ending time, or a different subset of tokens/nfts.
 
 ### Vote Controller
 
