@@ -4,7 +4,7 @@ export default function Showcase() {
     const projects = [
         {
             title: 'DewiCats',
-            href: 'https://dewicats.xyz',
+            href: 'https://www.dewicats.xyz',
             imageUrl:
                 '/showcase/dewicats.jpg',
             category: 'NFT',
