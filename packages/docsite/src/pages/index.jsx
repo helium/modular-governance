@@ -75,23 +75,20 @@ export default function Home() {
             <div className='overflow-hidden'>
                 <Header navigation={navigation} />
                 {/* ---- HERO --- */}
-                <section className="relative flex pb-32 md:min-h-[90vh] flex-col items-center gap-6 md:overflow-visible px-8 pt-32 lg:pt-36">
-                    <div className='absolute -z-10 top-0 hidden -translate-y-0 dark:block w-full h-full flex justify-center items-center'>
+                <section className="relative flex pb-32 flex-col items-center gap-6 md:overflow-visible px-8 pt-32 lg:pt-36">
+                    <div className='absolute -z-10 top-[80px] lg:top-[100px] hidden -translate-y-0 dark:block w-full h-full flex justify-center items-center'>
                         <div>
                             <div className="animation-wrapper relative -z-[7]" data-aos="zoom-out" data-aos-easing="ease-in-out" data-aos-delay="250">
-                                <Hexagon className="animate-breathe absolute top-[10vh]" scale={1} color="#292929" />
+                                <Hexagon className="animate-breathe absolute" scale={1} color="#292929" />
                             </div>
                             <div className="animation-wrapper relative -z-[8]" data-aos="zoom-out" data-aos-easing="ease-in-out" data-aos-delay="350">
-                                <Hexagon className="animate-breathe absolute top-[10vh]" animationDelay={550} scale={2} color="#262626" />
+                                <Hexagon className="animate-breathe absolute" animationDelay={550} scale={2} color="#262626" />
                             </div>
                             <div className="animation-wrapper relative -z-[9]" data-aos="zoom-out" data-aos-easing="ease-in-out" data-aos-delay="450">
-                                <Hexagon className="animate-breathe absolute top-[10vh]" animationDelay={650} scale={3} color="#242424" />
+                                <Hexagon className="animate-breathe absolute" animationDelay={650} scale={3} color="#242424" />
                             </div>
                             <div className="animation-wrapper relative -z-[10]" data-aos="zoom-out" data-aos-easing="ease-in-out" data-aos-delay="550">
-                                <Hexagon className="animate-breathe absolute top-[10vh]" animationDelay={750} scale={4} color="#212121" />
-                            </div>
-                            <div className="animation-wrapper relative -z-[11]" data-aos="zoom-out" data-aos-easing="ease-in-out" data-aos-delay="650">
-                                <Hexagon className="animate-breathe absolute top-[10vh]" animationDelay={850} scale={5} color="#171717" />
+                                <Hexagon className="animate-breathe absolute" animationDelay={750} scale={4} color="#212121" />
                             </div>
                         </div>
                     </div>
