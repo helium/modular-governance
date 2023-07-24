@@ -37,15 +37,15 @@ const provider = anchor.getProvider()
 
 // Create unique name
 const name = `DAO Test ${Math.floor(Math.random() * 1000)}`
-const organizationSdk = await init(provider, PROGRAM_ID)
+const organizationProgram = await init(provider, PROGRAM_ID)
 const proposalProgram = await initProposal(provider, PROPOSAL_PID)
 ```
 
 ## Creating and Managing Proposals
 
-An Organization is not required for a proposal. This allows maximum flexibility, allowing builders to create their own hierarchical structures outside of the organization smart contract. Let's create a simple Yes/No proposal.
+An Organization is not required for a proposal. This allows maximum flexibility, builders can create their own hierarchical structures outside of the organization smart contract. Let's create a simple Yes/No proposal.
 
-First, create a proposal config. This tells a proposal how votes will be tallied and how state progression occurs. By setting ourself as the vote and state controller, we control both. Using our wallet, we can add/remove votes and move the proposal from Draft to Voting to Resolved.
+First, create a proposal config. This tells a proposal how votes will be tallied and how state progression occurs. By setting ourself as the vote and state controller, we control both. Using our wallet, we can add/remove votes and move the proposal from `Draft` to `Voting` to `Resolved`.
 
 ```js async name=proposal-config
 const {
@@ -65,30 +65,33 @@ Now lets create the proposal:
 
 ```js async name=create-proposal deps=proposal-config
 const {
-        pubkeys: { proposal },
-      } = await proposalProgram.methods
-        .initializeProposalV0({
-          seed: Buffer.from(name, "utf-8"),
-          // Allows for voters to vote for more than one choice
-          maxChoicesPerVoter: 1,
-          name,
-          // Optionally put additional JSON information about the proposal here.
-          uri: "https://example.com",
-          choices: [
-            {
-              name: "Yes",
-              // Optionally put additional JSON information about the choice here. This is useful for long form markdown choices
-              uri: null,
-            },
-            {
-              name: "No",
-              uri: null,
-            },
-          ],
-          tags: ["test", "tags"],
-        })
-        .accounts({ proposalConfig })
-        .rpcAndKeys();
+  pubkeys: { proposal },
+} = await proposalProgram.methods
+  .initializeProposalV0({
+    // Seeds are unique per `namespace`. The `namespace` account defaults to the calling wallet.
+    // The Organization uses this feature to delineate proposals by a unique `id` index. Ex `namespace, proposal 0`, `namespace, proposal 1`.
+    // The `namespace` must sign for creating proposals. This prevents malicious collisions
+    seed: Buffer.from(name, "utf-8"),
+    // Allows for voters to vote for more than one choice
+    maxChoicesPerVoter: 1,
+    name,
+    // Optionally put additional JSON information about the proposal here.
+    uri: "https://example.com",
+    choices: [
+      {
+        name: "Yes",
+        // Optionally put additional JSON information about the choice here. This is useful for long form markdown choices
+        uri: null,
+      },
+      {
+        name: "No",
+        uri: null,
+      },
+    ],
+    tags: ["test", "tags"],
+  })
+  .accounts({ proposalConfig })
+  .rpcAndKeys();
 ```
 
 Notice that every Anchor call only requires a minimum subset of accounts. Modular-governance's smart resolvers remove the pain of account munging! Just specify the accounts that you think are necessary, and it is most likely sufficient.
@@ -158,7 +161,7 @@ Proposals on their own are powerful, but we need a way to organize them. Organiz
 ```jsx async name=create_organization
 var {
   pubkeys: { organization },
-} = await organizationSdk.methods.initializeOrganizationV0({
+} = await organizationProgram.methods.initializeOrganizationV0({
   name,
   authority: provider.wallet.publicKey,
   // Reuse the proposal config from above
