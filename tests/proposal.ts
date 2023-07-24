@@ -146,14 +146,14 @@ describe("proposal", () => {
       it("allows the state controller to prorgess the state", async () => {
         await program.methods
           .updateStateV0({
-            newState: { custom: { state: "hello" } },
+            newState: { custom: { name: "hello", bin: Buffer.from([]) } },
           })
           .accounts({ proposal })
           .rpc({ skipPreflight: true });
 
 
         const acct = await program.account.proposalV0.fetch(proposal);
-        expect(acct.state.custom?.state).to.eq("hello");
+        expect(acct.state.custom?.name).to.eq("hello");
       });
     });
   });

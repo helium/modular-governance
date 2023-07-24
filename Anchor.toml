@@ -8,6 +8,7 @@ state_controller = "stcfiqW3fwD9QCd8Bqr1NBLrs7dftZHBQe7RiMMA4aM"
 token_voter = "tokvN2E37T6NgLi6uQ8uj32959TZPUf2Jo8dXjLKBjF"
 nft_voter = "nftvJPn25R8AM52AeQM7TxkN7CpgWvYVVEh5qgHPaQx"
 organization = "orgdXvHVLkWgBYerptASkAwkZAE563CJUu717dMNx5f"
+organization_wallet = "orgwPMqJs9xft8UefUdKfyBwg6GDnN6oLhpMaKa6nJg"
 
 [registry]
 url = "https://api.apr.dev"

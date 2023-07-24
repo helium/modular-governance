@@ -9,7 +9,7 @@
   "description": "Interface to the organization smart contract",
   "repository": {
     "type": "git",
-    "url": "https://github.com/HeliumFoundation/modular-governance"
+    "url": "https://github.com/helium/modular-governance"
   },
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/src/index.js",

@@ -483,10 +483,10 @@
   dependencies:
     "@solana/web3.js" "^1.43.4"
 
-"@helium/address@^4.8.1":
-  version "4.11.1"
-  resolved "https://registry.yarnpkg.com/@helium/address/-/address-4.11.1.tgz#e6c6debaee2f50ed16383d5660ba81d29e604948"
-  integrity sha512-QMrdBx5l5XIy0K9fL3R64Whuk556BLz/pa6yhOQtog1hb3C904m1ykAU8eg2hgiA265Yp98XZkIK3GKTHbH+0A==
+"@helium/address@^4.10.2":
+  version "4.10.2"
+  resolved "https://registry.yarnpkg.com/@helium/address/-/address-4.10.2.tgz#56960b118fceb6b6ddabe3e4ecec467d9ae50e26"
+  integrity sha512-qCswC7Z3GXuJyHv36RcOSnffeghjqJQx0fdu2Lxpf9fgOnIi1JZO2tjjk1mBaqOwCyp+0YzrTPUoEukL/WCtsA==
   dependencies:
     bs58 "^5.0.0"
     js-sha256 "^0.9.0"
@@ -513,14 +513,14 @@
     bs58 "^5.0.0"
     react-async-hook "^4.0.0"
 
-"@helium/spl-utils@^0.2.6":
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/@helium/spl-utils/-/spl-utils-0.2.6.tgz#20b136f13d9e1d58e7032b4c55b5cc0c1ad9f6dc"
-  integrity sha512-Ut1bdWRMyru4YOYFB4NS31fbSGYTtW3gMxEg3/c+SKMwAfoZcRIOE8FgOV1nugSrFJ570zsx8R7lHIQYfAOmog==
+"@helium/spl-utils@^0.2.13":
+  version "0.2.13"
+  resolved "https://registry.yarnpkg.com/@helium/spl-utils/-/spl-utils-0.2.13.tgz#71efe6093940dd9b8ecc7f24a656335a55d0c747"
+  integrity sha512-N68djQJI3HiX6MFLfjAteYzpxhd6pAee0rzy92OdoK0vT6iIL4F0Q9kx385n+Wtda8xbItWtqsNHKkdra8rSCg==
   dependencies:
     "@coral-xyz/anchor" "^0.26.0"
     "@helium/account-fetch-cache" "^0.2.5"
-    "@helium/address" "^4.8.1"
+    "@helium/address" "^4.10.2"
     "@helium/anchor-resolvers" "^0.2.5"
     "@metaplex-foundation/mpl-token-metadata" "^2.5.2"
     "@solana/spl-account-compression" "^0.1.7"
@@ -1818,7 +1818,7 @@
     "@wallet-standard/base" "^1.0.1"
     "@wallet-standard/features" "^1.0.3"
 
-"@solana/web3.js@^1.21.0", "@solana/web3.js@^1.36.0", "@solana/web3.js@^1.50.1", "@solana/web3.js@^1.56.2", "@solana/web3.js@^1.63.1", "@solana/web3.js@^1.66.2":
+"@solana/web3.js@^1.21.0", "@solana/web3.js@^1.36.0", "@solana/web3.js@^1.50.1", "@solana/web3.js@^1.56.2", "@solana/web3.js@^1.63.1", "@solana/web3.js@^1.66.2", "@solana/web3.js@^1.78.0":
   version "1.78.0"
   resolved "https://registry.yarnpkg.com/@solana/web3.js/-/web3.js-1.78.0.tgz#82058f040c7706674d88db0afb8fbb2826f48bb6"
   integrity sha512-CSjCjo+RELJ5puoZALfznN5EF0YvL1V8NQrQYovsdjE1lCV6SqbKAIZD0+9LlqCBoa1ibuUaR7G2SooYzvzmug==
@@ -1839,7 +1839,7 @@
     rpc-websockets "^7.5.1"
     superstruct "^0.14.2"
 
-"@solana/web3.js@^1.32.0", "@solana/web3.js@^1.43.4", "@solana/web3.js@^1.68.0", "@solana/web3.js@^1.77.3":
+"@solana/web3.js@^1.32.0", "@solana/web3.js@^1.43.4", "@solana/web3.js@^1.68.0":
   version "1.77.3"
   resolved "https://registry.yarnpkg.com/@solana/web3.js/-/web3.js-1.77.3.tgz#2cbeaa1dd24f8fa386ac924115be82354dfbebab"
   integrity sha512-PHaO0BdoiQRPpieC1p31wJsBaxwIOWLh8j2ocXNKX8boCQVldt26Jqm2tZE4KlrvnCIV78owPLv1pEUgqhxZ3w==

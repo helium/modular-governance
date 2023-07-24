@@ -23,7 +23,8 @@ pub enum ProposalState {
   /// the calling contract to grab an enum from it. Rather just have something clean
   /// even though it takes a bit more space.
   Custom {
-    state: String,
+    name: String,
+    bin: Vec<u8>,
   },
 }
 
@@ -35,7 +36,7 @@ impl From<ProposalState> for CpiProposalState {
       ProposalState::Voting => CpiProposalState::Voting {
         start_ts: Clock::get().unwrap().unix_timestamp,
       },
-      ProposalState::Custom { state } => CpiProposalState::Custom { state },
+      ProposalState::Custom { name, bin } => CpiProposalState::Custom { name, bin },
     }
   }
 }

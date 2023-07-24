@@ -11,6 +11,9 @@
       "path": "./packages/proposal-sdk"
     },
     {
+      "path": "./packages/organization-wallet-sdk"
+    },
+    {
       "path": "./packages/state-controller-sdk"
     }, {
       "path": "./packages/token-voter-sdk"

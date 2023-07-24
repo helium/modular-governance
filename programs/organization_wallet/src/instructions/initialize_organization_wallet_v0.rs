@@ -5,7 +5,6 @@ use organization::state::OrganizationV0;
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct InitializeOrganizationWalletArgsV0 {
   pub name: String,
-  pub authority: Pubkey,
   /// List of valid proposal configs to execute on this wallet
   pub proposal_configs: Vec<Pubkey>,
   pub index: u16,
@@ -25,7 +24,11 @@ pub struct InitializeOrganizationWalletV0<'info> {
       bump
     )]
   pub organization_wallet: Box<Account<'info, OrganizationWalletV0>>,
+  #[account(
+    has_one = authority
+  )]
   pub organization: Account<'info, OrganizationV0>,
+  pub authority: Signer<'info>,
   pub system_program: Program<'info, System>,
 }
 

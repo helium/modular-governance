@@ -41,8 +41,22 @@ macro_rules! wallet_seeds {
 pub struct WalletProposalV0 {
   pub proposal: Pubkey,
   pub organization_wallet: Pubkey,
+  pub num_transactions_by_choice: Vec<u16>,
+}
+
+#[account]
+#[derive(Default)]
+pub struct ChoiceTransactionV0 {
+  pub wallet_proposal: Pubkey,
+  pub proposal: Pubkey,
+  pub organization_wallet: Pubkey,
+  pub choice_index: u16,
+  // Cannot be executed until this offset from proposal end
+  pub allow_execution_offset: u32,
+  // Cannot be executed after this offset
+  pub disable_execution_offset: u32,
   pub bump_seed: u8,
-  pub choice_transactions: Vec<Vec<CompiledTransaction>>,
+  pub transaction: CompiledTransactionV0,
 }
 
 #[macro_export]
@@ -58,7 +72,7 @@ macro_rules! wallet_proposal_seeds {
 }
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
-pub struct CompiledInstruction {
+pub struct CompiledInstructionV0 {
   /// Index into the transaction keys array indicating the program account that executes this instruction.
   pub program_id_index: u8,
   /// Ordered indices into the transaction keys array indicating which accounts to pass to the program.
@@ -67,16 +81,24 @@ pub struct CompiledInstruction {
   pub data: Vec<u8>,
 }
 
-impl CompiledInstruction {
+impl CompiledInstructionV0 {
   pub fn size(&self) -> usize {
     1 + self.accounts.len() + self.data.len()
   }
 }
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
-pub struct CompiledTransaction {
+pub struct CompiledTransactionV0 {
+  // Accounts are ordered as follows:
+  // 1. Writable signer accounts
+  // 2. Read only signer accounts
+  // 3. writable accounts
+  // 4. read only accounts
+  pub num_rw_signers: u8,
+  pub num_ro_signers: u8,
+  pub num_rw: u8,
   pub accounts: Vec<Pubkey>,
-  pub instructions: Vec<CompiledInstruction>,
+  pub instructions: Vec<CompiledInstructionV0>,
   /// Additional signer seeds. Should include bump. Useful for things like initializing a mint where
   /// you cannot pass a keypair.
   /// Note that these seeds will be prefixed with "custom", org_wallet.index
@@ -90,7 +112,7 @@ pub struct OrganizationWalletPropoalV0 {
   pub organization_wallet: Pubkey,
   pub proposal: Pubkey,
   pub accounts: Vec<Pubkey>,
-  pub transactions_by_choice: Vec<Vec<CompiledTransaction>>,
+  pub transactions_by_choice: Vec<Vec<CompiledTransactionV0>>,
   pub bump_seed: u8,
 }
 

@@ -22,6 +22,10 @@ export async function ensureIdls() {
       name: "organization",
       pid: "orgdXvHVLkWgBYerptASkAwkZAE563CJUu717dMNx5f",
     },
+    {
+      name: "organization_wallet",
+      pid: "orgwPMqJs9xft8UefUdKfyBwg6GDnN6oLhpMaKa6nJg"
+    }
   ];
   await Promise.all(
     programs.map(async (program) => {

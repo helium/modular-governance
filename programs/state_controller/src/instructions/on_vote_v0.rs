@@ -1,3 +1,4 @@
+use crate::error::ErrorCode;
 use crate::state::*;
 use anchor_lang::prelude::*;
 use proposal::ProposalConfigV0;
@@ -51,7 +52,16 @@ pub struct OnVoteV0<'info> {
   pub proposal_config: Account<'info, ProposalConfigV0>,
 }
 
-pub fn handler(ctx: Context<OnVoteV0>, _args: VoteArgsV0) -> Result<Option<Vec<u16>>> {
+pub fn handler(ctx: Context<OnVoteV0>, args: VoteArgsV0) -> Result<Option<Vec<u16>>> {
+  let mut proposal_pre_vote = ctx.accounts.proposal.clone().into_inner();
+  proposal_pre_vote.choices[args.choice as usize].weight -= args.weight;
+  let resolution = ctx
+    .accounts
+    .state_controller
+    .settings
+    .resolution(&proposal_pre_vote);
+  require!(resolution.is_none(), ErrorCode::ProposalAlreadyResolved);
+
   let proposal = ctx.accounts.proposal.clone().into_inner();
   let resolution = ctx.accounts.state_controller.settings.resolution(&proposal);
 

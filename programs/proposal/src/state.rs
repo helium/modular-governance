@@ -21,7 +21,9 @@ pub enum ProposalState {
   /// the calling contract to grab an enum from it. Rather just have something clean
   /// even though it takes a bit more space.
   Custom {
-    state: String,
+    name: String,
+    // Allow storing arbitrary data in here
+    bin: Vec<u8>,
   },
 }
 
