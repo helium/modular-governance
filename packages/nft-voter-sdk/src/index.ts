@@ -4,7 +4,6 @@ import { PublicKey } from "@solana/web3.js";
 import { PROGRAM_ID } from "./constants";
 import { nftVoterResolvers } from "./resolvers";
 
-
 export * from "./constants";
 export * from "./pdas";
 export * from "./resolvers";

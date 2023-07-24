@@ -2,11 +2,13 @@
   "scripts": {
     "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
     "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check",
-    "build": "lerna run --parallel prebuild && tsc --build",
+    "build": "lerna run --parallel prebuild && tsc --build && yarn generate-idl-docs",
+    "heroku-postbuild": "npm run build -w governance-docs",
     "watch": "lerna run --parallel prebuild && tsc --build --watch",
     "clean": "npx shx rm -rf {.,packages/*}/{node_modules,lib,dist}",
     "fmt": "cargo fmt --check",
-    "clippy": "cargo clippy --all-targets -- -D warnings -A clippy::result_large_err -A clippy::too_many_arguments"
+    "clippy": "cargo clippy --all-targets -- -D warnings -A clippy::result_large_err -A clippy::too_many_arguments",
+    "generate-idl-docs": "ts-node -T scripts/generate-idl-docs.ts"
   },
   "workspaces": [
     "packages/*"
@@ -27,6 +29,7 @@
     "@types/chai": "^4.3.0",
     "@types/chai-as-promised": "^7.1.5",
     "@types/mocha": "^9.0.0",
+    "anchor-client-gen": "^0.28.1",
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
     "lerna": "^5.5.4",

@@ -21,7 +21,7 @@ describe("nft-voter", () => {
   let proposalProgram: Program<Proposal>;
   let program: Program<NftVoter>;
   const metaplex = new Metaplex(provider.connection);
-  metaplex.use(walletAdapterIdentity(provider.wallet))
+  metaplex.use(walletAdapterIdentity(provider.wallet));
 
   let name: string;
   beforeEach(async () => {
