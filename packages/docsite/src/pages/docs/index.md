@@ -8,7 +8,7 @@ Modular Governance is a set of smart contracts that can be used to create a gove
 ---
 
 {% callout type="warning" title="DISCLAIMER" %}
-It is important to know that Helium Modular Governance is till in Alpha stages and is subject to change. We are working hard to make sure that the contracts are secure and that the API is stable. If you have any questions or concerns please reach out to us on [Discord](https://discord.gg/3Xk3F2Q6).
+It is important to know that Helium Modular Governance is still in Alpha stages and is subject to change. We are working hard to make sure that the contracts are secure and that the API is stable. If you have any questions or concerns please reach out to us on [Discord](https://discord.gg/3Xk3F2Q6).
 {% /callout %}
 
 ## Install the SDKs

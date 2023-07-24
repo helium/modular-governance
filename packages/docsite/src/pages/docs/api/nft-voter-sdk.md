@@ -77,24 +77,25 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ## Accounts
 
-| Name         | Type            | Docs  |
-| ------------ | --------------- | ----- | ---- |
-| NftVoterV0   |                 | Field | Type |
-| -----        | ----            |
-| authority    | publicKey       |
-| collection   | publicKey       |
-| name         | string          |
-| bumpSeed     | u8              |
-|              |
-| VoteMarkerV0 |                 | Field | Type |
-| -----        | ----            |
-| voter        | publicKey       |
-| nftVoter     | publicKey       |
-| proposal     | publicKey       |
-| mint         | publicKey       |
-| choices      | [object Object] |
-| bumpSeed     | u8              |
-|              |
+### NftVoterV0
+
+| Field      | Type      |
+| ---------- | --------- |
+| authority  | publicKey |
+| collection | publicKey |
+| name       | string    |
+| bumpSeed   | u8        |
+
+### VoteMarkerV0
+
+| Field    | Type      |
+| -------- | --------- |
+| voter    | publicKey |
+| nftVoter | publicKey |
+| proposal | publicKey |
+| mint     | publicKey |
+| choices  | u16       |
+| bumpSeed | u8        |
 
 ## Types
 

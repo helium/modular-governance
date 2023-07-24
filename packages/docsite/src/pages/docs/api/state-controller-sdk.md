@@ -76,23 +76,22 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ## Accounts
 
-| Name                 | Type            | Docs  |
-| -------------------- | --------------- | ----- | ---- |
-| ResolutionSettingsV0 |                 | Field | Type |
-| -----                | ----            |
-| name                 | string          |
-| settings             | [object Object] |
-| bumpSeed             | u8              |
-|                      |
+### ResolutionSettingsV0
+
+| Field    | Type               |
+| -------- | ------------------ |
+| name     | string             |
+| settings | ResolutionStrategy |
+| bumpSeed | u8                 |
 
 ## Types
 
 ### InitializeResolutionSettingsArgsV0
 
-| Field    | Type            |
-| -------- | --------------- |
-| name     | string          |
-| settings | [object Object] |
+| Field    | Type               |
+| -------- | ------------------ |
+| name     | string             |
+| settings | ResolutionStrategy |
 
 ### VoteArgsV0
 
@@ -104,24 +103,24 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ### UpdateStateArgsV0
 
-| Field    | Type            |
-| -------- | --------------- |
-| newState | [object Object] |
+| Field    | Type          |
+| -------- | ------------- |
+| newState | ProposalState |
 
 ### ResolutionStrategy
 
-| Field | Type            |
-| ----- | --------------- |
-| nodes | [object Object] |
+| Field | Type           |
+| ----- | -------------- |
+| nodes | ResolutionNode |
 
 ### ProposalState
 
-| Variant   | Fields        |
-| --------- | ------------- |
-| Draft     |               |
-| Cancelled |               |
-| Voting    |               |
-| Custom    | state: string |
+| Variant   | Fields                   |
+| --------- | ------------------------ |
+| Draft     |                          |
+| Cancelled |                          |
+| Voting    |                          |
+| Custom    | name: string, bin: bytes |
 
 ### ResolutionNode
 
@@ -133,5 +132,6 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | ChoiceVoteWeight  | weight_threshold: u128   |
 | ChoicePercentage  | percentage: i32          |
 | Top               | n: u16                   |
+| NumResolved       | n: u16                   |
 | And               |                          |
 | Or                |                          |

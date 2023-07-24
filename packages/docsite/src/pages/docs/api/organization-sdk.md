@@ -45,10 +45,10 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ## Accounts
 
-| Name                  | Type      | Docs  |
-| --------------------- | --------- | ----- | ---- |
-| OrganizationV0        |           | Field | Type |
-| -----                 | ----      |
+### OrganizationV0
+
+| Field                 | Type      |
+| --------------------- | --------- |
 | numProposals          | u32       |
 | authority             | publicKey |
 | defaultProposalConfig | publicKey |
@@ -56,7 +56,6 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | name                  | string    |
 | uri                   | string    |
 | bumpSeed              | u8        |
-|                       |
 
 ## Types
 
@@ -72,17 +71,17 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ### ChoiceArg
 
-| Field | Type            |
-| ----- | --------------- |
-| name  | string          |
-| uri   | [object Object] |
+| Field | Type   |
+| ----- | ------ |
+| name  | string |
+| uri   | string |
 
 ### InitializeProposalArgsV0
 
-| Field              | Type            |
-| ------------------ | --------------- |
-| name               | string          |
-| uri                | string          |
-| maxChoicesPerVoter | u16             |
-| choices            | [object Object] |
-| tags               | [object Object] |
+| Field              | Type      |
+| ------------------ | --------- |
+| name               | string    |
+| uri                | string    |
+| maxChoicesPerVoter | u16       |
+| choices            | ChoiceArg |
+| tags               | string    |

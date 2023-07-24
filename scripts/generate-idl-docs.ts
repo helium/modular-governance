@@ -94,13 +94,12 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
   mdFile += `## Accounts
 
 `;
-  mdFile += `| Name | Type | Docs |
-| ---- | ---- | ---- |  
-`;
   accounts?.forEach((account) => {
-    mdFile += `| ${account.name} | ${generateType(account.type, types)} | ${
-      account.docs ? account.docs.join(" ") : ""
-    } |
+    mdFile += `### ${account.name}
+
+`;
+    mdFile += generateType(account.type, types);
+    mdFile += `
 `;
   });
   mdFile += `
@@ -141,7 +140,24 @@ const generateType = (type: Type, types: Type[]) => {
 | ----- | ---- |
 `;
     type?.fields?.forEach((field) => {
-      mdFile += `| ${field.name} | ${generateType(field.type, types)} |
+      const type = generateType(field.type, types);
+
+      let typeToDisplay = type;
+      if (type?.vec?.defined) {
+        typeToDisplay = type.vec.defined;
+      } else if (type?.vec?.vec) {
+        typeToDisplay = type.vec.vec;
+      } else if (type?.vec?.vec?.defined) {
+        typeToDisplay = type.vec.vec.defined;
+      } else if (type?.vec) {
+        typeToDisplay = type.vec;
+      } else if (type?.defined) {
+        typeToDisplay = type.defined;
+      } else if (type?.option) {
+        typeToDisplay = type.option;
+      }
+
+      mdFile += `| ${field.name} | ${typeToDisplay} |
 `;
     });
     return mdFile;

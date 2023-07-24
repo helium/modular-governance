@@ -79,31 +79,32 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ## Accounts
 
-| Name               | Type            | Docs  |
-| ------------------ | --------------- | ----- | ---- |
-| ProposalConfigV0   |                 | Field | Type |
-| -----              | ----            |
-| voteController     | publicKey       |
-| stateController    | publicKey       |
-| onVoteHook         | publicKey       |
-| name               | string          |
-| bumpSeed           | u8              |
-|                    |
-| ProposalV0         |                 | Field | Type |
-| -----              | ----            |
-| namespace          | publicKey       |
-| owner              | publicKey       |
-| state              | [object Object] |
-| createdAt          | i64             |
-| proposalConfig     | publicKey       |
-| maxChoicesPerVoter | u16             |
-| seed               | bytes           |
-| name               | string          |
-| uri                | string          |
-| tags               | [object Object] |
-| choices            | [object Object] |
-| bumpSeed           | u8              |
-|                    |
+### ProposalConfigV0
+
+| Field           | Type      |
+| --------------- | --------- |
+| voteController  | publicKey |
+| stateController | publicKey |
+| onVoteHook      | publicKey |
+| name            | string    |
+| bumpSeed        | u8        |
+
+### ProposalV0
+
+| Field              | Type          |
+| ------------------ | ------------- |
+| namespace          | publicKey     |
+| owner              | publicKey     |
+| state              | ProposalState |
+| createdAt          | i64           |
+| proposalConfig     | publicKey     |
+| maxChoicesPerVoter | u16           |
+| seed               | bytes         |
+| name               | string        |
+| uri                | string        |
+| tags               | string        |
+| choices            | Choice        |
+| bumpSeed           | u8            |
 
 ## Types
 
@@ -118,27 +119,27 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ### ChoiceArg
 
-| Field | Type            |
-| ----- | --------------- |
-| name  | string          |
-| uri   | [object Object] |
+| Field | Type   |
+| ----- | ------ |
+| name  | string |
+| uri   | string |
 
 ### InitializeProposalArgsV0
 
-| Field              | Type            |
-| ------------------ | --------------- |
-| seed               | bytes           |
-| name               | string          |
-| uri                | string          |
-| maxChoicesPerVoter | u16             |
-| choices            | [object Object] |
-| tags               | [object Object] |
+| Field              | Type      |
+| ------------------ | --------- |
+| seed               | bytes     |
+| name               | string    |
+| uri                | string    |
+| maxChoicesPerVoter | u16       |
+| choices            | ChoiceArg |
+| tags               | string    |
 
 ### UpdateStateArgsV0
 
-| Field    | Type            |
-| -------- | --------------- |
-| newState | [object Object] |
+| Field    | Type          |
+| -------- | ------------- |
+| newState | ProposalState |
 
 ### VoteArgsV0
 
@@ -150,18 +151,18 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ### Choice
 
-| Field  | Type            |
-| ------ | --------------- |
-| weight | u128            |
-| name   | string          |
-| uri    | [object Object] |
+| Field  | Type   |
+| ------ | ------ |
+| weight | u128   |
+| name   | string |
+| uri    | string |
 
 ### ProposalState
 
-| Variant   | Fields                   |
-| --------- | ------------------------ |
-| Draft     |                          |
-| Cancelled |                          |
-| Voting    | start_ts: i64            |
-| Resolved  | choices: [object Object] |
-| Custom    | state: string            |
+| Variant   | Fields                                |
+| --------- | ------------------------------------- |
+| Draft     |                                       |
+| Cancelled |                                       |
+| Voting    | start_ts: i64                         |
+| Resolved  | choices: [object Object], end_ts: i64 |
+| Custom    | name: string, bin: bytes              |
