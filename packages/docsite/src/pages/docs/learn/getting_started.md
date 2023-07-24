@@ -314,7 +314,7 @@ const {
 Next, we can initiate voting via the state controller
 
 ```js
-await proposalProgram.methods
+await stateControllerProgram.methods
   .updateStateV0({
     newState: { voting: {} },
   })
@@ -441,11 +441,13 @@ await proposalProgram.methods
 Next, the user deposits their tokens:
 
 ```js
+import { deposit } from "@helium/vote-controller-sdk";
+
 const {
   pubkeys: { receipt },
 } = await (
   await deposit({
-    program,
+    program: voteControllerProgram,
     amount: toBN(10, 0),
     // The JSON metadata for the receipt NFT.
     metadataUri: "https://example.com",
@@ -457,7 +459,7 @@ const {
 Now vote:
 
 ```js
-await program.methods
+await voteControllerProgram.methods
   .voteV0({
     choice: 0,
   })
@@ -468,7 +470,7 @@ await program.methods
 To withdraw our tokens, we need to relinquish all active votes:
 
 ```js
-await program.methods
+await voteControllerProgram.methods
   .relinquishVoteV0({
     choice: 0,
   })
@@ -479,7 +481,7 @@ await program.methods
 
 Now we can withdraw:
 ```js
-await program.methods
+await voteControllerProgram.methods
   .withdrawV0()
   .accounts({ receipt, refund: me })
   .rpc({ skipPreflight: true })
