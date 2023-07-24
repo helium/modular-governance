@@ -1,9 +1,9 @@
 import BN from "bn.js";
 
-export const PERCENTAGE_DIVISOR = 1000000000
+export const PERCENTAGE_DIVISOR = 1000000000;
 
 export function settings(): SettingsBuilder {
-  return new SettingsBuilder()
+  return new SettingsBuilder();
 }
 
 export class SettingsBuilder {
@@ -26,6 +26,13 @@ export class SettingsBuilder {
   offsetFromStartTs(offset: BN): SettingsBuilder {
     this.nodes.push({
       offsetFromStartTs: { offset },
+    });
+    return this;
+  }
+
+  numResolved(num: number = 1): SettingsBuilder {
+    this.nodes.push({
+      numResolved: { n: num },
     });
     return this;
   }

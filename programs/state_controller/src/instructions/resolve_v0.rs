@@ -47,6 +47,7 @@ pub fn handler(ctx: Context<ResolveV0>) -> Result<()> {
       UpdateStateArgsV0 {
         new_state: ProposalState::Resolved {
           choices: resolution,
+          end_ts: Clock::get()?.unix_timestamp,
         },
       },
     )?;

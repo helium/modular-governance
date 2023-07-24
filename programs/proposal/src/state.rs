@@ -13,6 +13,7 @@ pub enum ProposalState {
   /// The proposal is resolved and the choice specified choice indices won
   Resolved {
     choices: Vec<u16>,
+    end_ts: i64,
   },
   /// Allow voting controller to set to a custom state,
   /// this allows for the implementation of more complex
@@ -27,7 +28,7 @@ pub enum ProposalState {
   },
 }
 
-#[derive(InitSpace, AnchorSerialize, AnchorDeserialize, Clone, Default)]
+#[derive(InitSpace, AnchorSerialize, AnchorDeserialize, Clone, Default, Debug)]
 pub struct Choice {
   /// Total vote weight behind this choice. u128 to support u64 tokens multiplied by a large multiplier (as in helium)
   pub weight: u128,

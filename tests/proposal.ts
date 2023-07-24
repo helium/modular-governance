@@ -119,6 +119,16 @@ describe("proposal", () => {
 
       it("allows the vote controller to vote", async () => {
         await program.methods
+          .updateStateV0({
+            newState: {
+              voting: {
+                startTs: new anchor.BN(0),
+              },
+            },
+          })
+          .accounts({ proposal })
+          .rpc();
+        await program.methods
           .voteV0({
             choice: 1,
             weight: new anchor.BN(2),
@@ -150,7 +160,6 @@ describe("proposal", () => {
           })
           .accounts({ proposal })
           .rpc({ skipPreflight: true });
-
 
         const acct = await program.account.proposalV0.fetch(proposal);
         expect(acct.state.custom?.name).to.eq("hello");

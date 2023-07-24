@@ -123,7 +123,9 @@ describe("organization", () => {
       expect(acct.tags[0]).to.eq("test");
       expect(acct.tags[1]).to.eq("tags");
 
-      expect(proposal?.toBase58()).to.eq(proposalKey(organization!, 0)[0].toBase58())
+      expect(proposal?.toBase58()).to.eq(
+        proposalKey(organization!, 0)[0].toBase58()
+      );
     });
 
     describe("with proposal", () => {
@@ -150,7 +152,17 @@ describe("organization", () => {
           })
           .accounts({ organization })
           .rpcAndKeys({ skipPreflight: true }));
-      })
+        await proposalProgram.methods
+          .updateStateV0({
+            newState: {
+              voting: {
+                startTs: new anchor.BN(0),
+              },
+            },
+          })
+          .accounts({ proposal })
+          .rpc();
+      });
       it("allows voting on the proposal", async () => {
         await proposalProgram.methods
           .voteV0({

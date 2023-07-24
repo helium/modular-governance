@@ -77,7 +77,10 @@ pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
 
     if let Some(choices) = resolution_status {
       msg!("Resolving to {:?}", choices);
-      ctx.accounts.proposal.state = ProposalState::Resolved { choices };
+      ctx.accounts.proposal.state = ProposalState::Resolved {
+        end_ts: Clock::get()?.unix_timestamp,
+        choices,
+      };
     }
   }
 

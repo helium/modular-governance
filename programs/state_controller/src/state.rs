@@ -33,6 +33,11 @@ pub enum ResolutionNode {
   Top {
     n: u16,
   },
+  /// Requires that a number of choices are resolved by other resolvers
+  /// before returning non None
+  NumResolved {
+    n: u16,
+  },
   And,
   Or,
 }
@@ -54,6 +59,7 @@ impl ResolutionNode {
       ResolutionNode::Top { .. } => 4,
       ResolutionNode::And => 0,
       ResolutionNode::Or => 0,
+      ResolutionNode::NumResolved { .. } => 4,
     }
   }
 }
@@ -163,7 +169,9 @@ impl ResolutionStrategy {
               .iter()
               .enumerate()
               .flat_map(|(index, choice)| {
-                if choice.weight >= threshold {
+                if threshold == 0 {
+                  return None;
+                } else if choice.weight >= threshold {
                   Some(index as u16)
                 } else {
                   None
@@ -209,6 +217,13 @@ impl ResolutionStrategy {
           };
 
           stack.push(ret)
+        }
+        ResolutionNode::NumResolved { n } => {
+          let curr = stack.get(0).unwrap();
+          match curr {
+            Some(vec) if vec.len() >= *n as usize => stack.push(Some(vec.clone())),
+            _ => stack.push(None),
+          }
         }
       }
     }

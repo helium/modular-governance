@@ -12,7 +12,7 @@ pub struct ExecuteTransactionV0<'info> {
   pub organization_wallet: Box<Account<'info, OrganizationWalletV0>>,
   #[account(
     constraint = match &proposal.state {
-      ProposalState::Resolved { choices } => choices.iter().any(|c| *c == choice_transaction.choice_index),
+      ProposalState::Resolved { choices, .. } => choices.iter().any(|c| *c == choice_transaction.choice_index),
       _ => false,
     },
   )]
@@ -22,6 +22,15 @@ pub struct ExecuteTransactionV0<'info> {
     close = refund,
     has_one = proposal,
     has_one = organization_wallet,
+    constraint = match &proposal.state {
+      ProposalState::Resolved { end_ts, .. } => {
+        let curr_ts = Clock::get()?.unix_timestamp;
+        let allow_exec_ts = choice_transaction.allow_execution_offset as i64 + end_ts;
+        let disable_exec_ts = choice_transaction.disable_execution_offset as i64 + end_ts;
+        curr_ts >= allow_exec_ts && curr_ts < disable_exec_ts
+      }
+      _ => false,
+    },
   )]
   pub choice_transaction: Box<Account<'info, ChoiceTransactionV0>>,
   /// CHECK: Checked via has one

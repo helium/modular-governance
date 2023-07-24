@@ -49,7 +49,7 @@ describe("state-controller", () => {
     let resolutionSettings: PublicKey | undefined;
     beforeEach(async () => {
       await ensureIdls();
-      
+
       ({
         pubkeys: { resolutionSettings },
       } = await program.methods
@@ -60,42 +60,38 @@ describe("state-controller", () => {
           },
         })
         .rpcAndKeys({ skipPreflight: true }));
-      (
-        ({
-          pubkeys: { proposalConfig },
-        } = await proposalProgram.methods
-          .initializeProposalConfigV0({
-            name,
-            voteController: me,
-            stateController: resolutionSettings!,
-            onVoteHook: PROGRAM_ID,
-          })
-          .rpcAndKeys({ skipPreflight: true }))
-      );
-      (
-        ({
-          pubkeys: { proposal },
-        } = await proposalProgram.methods
-          .initializeProposalV0({
-            seed: Buffer.from(name, "utf-8"),
-            maxChoicesPerVoter: 1,
-            name,
-            uri: "https://example.com",
-            choices: [
-              {
-                name: "Yes",
-                uri: null,
-              },
-              {
-                name: "No",
-                uri: null,
-              },
-            ],
-            tags: ["test", "tags"],
-          })
-          .accounts({ proposalConfig })
-          .rpcAndKeys({ skipPreflight: true }))
-      );
+      ({
+        pubkeys: { proposalConfig },
+      } = await proposalProgram.methods
+        .initializeProposalConfigV0({
+          name,
+          voteController: me,
+          stateController: resolutionSettings!,
+          onVoteHook: PROGRAM_ID,
+        })
+        .rpcAndKeys({ skipPreflight: true }));
+      ({
+        pubkeys: { proposal },
+      } = await proposalProgram.methods
+        .initializeProposalV0({
+          seed: Buffer.from(name, "utf-8"),
+          maxChoicesPerVoter: 1,
+          name,
+          uri: "https://example.com",
+          choices: [
+            {
+              name: "Yes",
+              uri: null,
+            },
+            {
+              name: "No",
+              uri: null,
+            },
+          ],
+          tags: ["test", "tags"],
+        })
+        .accounts({ proposalConfig })
+        .rpcAndKeys({ skipPreflight: true }));
 
       await program.methods
         .updateStateV0({
@@ -108,15 +104,15 @@ describe("state-controller", () => {
     describe("with resolved", () => {
       before(async () => {
         nodes = settings().resolved([1]).build();
-      })
+      });
 
       it("resolves to the choice selected", async () => {
         await program.methods.resolveV0().accounts({ proposal }).rpc();
 
         const acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(acct.state.resolved?.choices).to.deep.eq([1]);
-      })
-    })
+      });
+    });
 
     describe("with end passed", () => {
       before(async () => {
@@ -133,9 +129,7 @@ describe("state-controller", () => {
 
     describe("with end not passed", () => {
       before(async () => {
-        nodes = settings()
-          .endTimestamp(new anchor.BN(2688657226))
-          .build();
+        nodes = settings().endTimestamp(new anchor.BN(2688657226)).build();
       });
 
       it("not resolve", async () => {
@@ -152,7 +146,7 @@ describe("state-controller", () => {
       });
 
       it("resolves to all choices", async () => {
-        await sleep(3000)
+        await sleep(3000);
         await program.methods.resolveV0().accounts({ proposal }).rpc();
 
         const acct = await proposalProgram.account.proposalV0.fetch(proposal!);
@@ -163,7 +157,10 @@ describe("state-controller", () => {
     describe("with choice vote weight", () => {
       before(async () => {
         nodes = settings()
-          .choiceVoteWeight(new anchor.BN(1))
+          .and(
+            settings().choiceVoteWeight(new anchor.BN(1)),
+            settings().numResolved()
+          )
           .build();
       });
 
@@ -175,7 +172,7 @@ describe("state-controller", () => {
             removeVote: false,
           })
           .accounts({ proposal, voter: me })
-          .rpc( { skipPreflight: true});
+          .rpc({ skipPreflight: true });
 
         const acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(acct.state.resolved?.choices).to.deep.eq([0]);
@@ -185,7 +182,7 @@ describe("state-controller", () => {
     describe("with choice percentage", () => {
       before(async () => {
         nodes = settings()
-          .choicePercentage(50)
+          .and(settings().choicePercentage(51), settings().numResolved(1))
           .build();
       });
 
@@ -206,7 +203,18 @@ describe("state-controller", () => {
 
     describe("with top", () => {
       before(async () => {
-        nodes = settings().top().build();
+        // Note that top would immediately resolve.
+        // To prevent that, we need to ensure at least 1 choice
+        // has been voted on.
+        nodes = settings()
+          .and(
+            settings().and(
+              settings().choicePercentage(51),
+              settings().numResolved(1)
+            ),
+            settings().top()
+          )
+          .build();
       });
 
       it("resolves to the max choice", async () => {
@@ -226,13 +234,18 @@ describe("state-controller", () => {
 
     describe("top choice with minimum vote weight of 5 at the end time", () => {
       before(async () => {
-        nodes = settings().and(
-          settings().offsetFromStartTs(new anchor.BN(5)),
-          settings().and(
-            settings().choiceVoteWeight(new anchor.BN(5)),
-            settings().top()
+        nodes = settings()
+          .and(
+            settings().offsetFromStartTs(new anchor.BN(5)),
+            settings().and(
+              settings().and(
+                settings().choiceVoteWeight(new anchor.BN(5)),
+                settings().numResolved(1)
+              ),
+              settings().top()
+            )
           )
-        ).build();
+          .build();
       });
 
       it("resolves to the max choice when there is enough weight", async () => {
@@ -248,8 +261,6 @@ describe("state-controller", () => {
         let acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(Boolean(acct.state.voting)).to.be.true;
 
-        await sleep(10000)
-
         await proposalProgram.methods
           .voteV0({
             choice: 0,
@@ -258,6 +269,10 @@ describe("state-controller", () => {
           })
           .accounts({ proposal, voter: me })
           .rpc({ skipPreflight: true });
+
+        await sleep(10000);
+
+        await program.methods.resolveV0().accounts({ proposal }).rpc();
 
         acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(acct.state.resolved?.choices).to.deep.eq([1]);
@@ -276,8 +291,6 @@ describe("state-controller", () => {
         let acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(Boolean(acct.state.voting)).to.be.true;
 
-        await sleep(10000);
-
         await proposalProgram.methods
           .voteV0({
             choice: 0,
@@ -286,6 +299,9 @@ describe("state-controller", () => {
           })
           .accounts({ proposal, voter: me })
           .rpc({ skipPreflight: true });
+
+        await sleep(10000);
+        await program.methods.resolveV0().accounts({ proposal }).rpc();
 
         acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(acct.state.resolved?.choices).to.deep.eq([]);
@@ -321,8 +337,6 @@ describe("state-controller", () => {
         let acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(Boolean(acct.state.voting)).to.be.true;
 
-        await sleep(10000);
-
         await proposalProgram.methods
           .voteV0({
             choice: 0,
@@ -332,14 +346,16 @@ describe("state-controller", () => {
           .accounts({ proposal, voter: me })
           .rpc({ skipPreflight: true });
 
+        await sleep(10000);
+        await program.methods.resolveV0().accounts({ proposal }).rpc();
+
         acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(acct.state.resolved?.choices).to.deep.eq([1]);
       });
     });
-  })
+  });
 });
 
 function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
-

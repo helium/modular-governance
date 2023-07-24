@@ -213,9 +213,15 @@ describe("organization wallet", () => {
             organizationWallet,
           })
           .rpcAndKeys({ skipPreflight: true });
+          
         await proposalProgram.methods
           .updateStateV0({
-            newState: { resolved: { choices: [0] } },
+            newState: {
+              resolved: {
+                choices: [0],
+                endTs: new anchor.BN(Math.floor(new Date().valueOf() / 1000) - 100),
+              },
+            },
           })
           .accounts({
             proposal,
