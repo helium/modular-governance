@@ -427,7 +427,7 @@ const {
     tags: ["test", "tags"],
   })
   .accounts({ proposalConfig })
-  .rpcAndKeys({ skipPreflight: true }));
+  .rpcAndKeys());
 
 await proposalProgram.methods
   .updateStateV0({
@@ -467,7 +467,7 @@ await voteControllerProgram.methods
     choice: 0,
   })
   .accounts({ receipt, proposal })
-  .rpcAndKeys({ skipPreflight: true })
+  .rpcAndKeys()
 ```
 
 To withdraw our tokens, we need to relinquish all active votes:
@@ -487,12 +487,88 @@ Now we can withdraw:
 await voteControllerProgram.methods
   .withdrawV0()
   .accounts({ receipt, refund: me })
-  .rpc({ skipPreflight: true })
+  .rpc()
 ```
 
 
 The `nft-voter` contract works similarly to the `token-voter`, but does not require deposits and withdrawals. Simply
 initialize `nft-voter` with your NFT collection, and issue vote/relinquish vote with any NFT in that collection.
+
+## Executable Proposals
+
+A common use case for governance is to execute stored procedures once a proposal passes. This could include treasury management operations, program upgrades, etc.
+
+The `organization-wallet` smart contract allows associating multiple wallets with an organization, and executing
+transactions using that wallet.
+
+First, set up the sdk
+
+```js
+import { init, walletKey, compileTransaction, executeTransaction } from "@helium/organization-wallet-sdk";
+
+const organizationWalletProgram = await init(provider)
+```
+
+Next, let's create a wallet:
+
+```js
+const {
+  pubkeys: { organizationWallet },
+} = await organizationWalletProgram.methods
+  .initializeOrganizationWalletV0({
+    index: 0,
+    name: "First Org Wallet",
+    proposalConfigs: [proposalConfig!],
+  })
+  .accounts({
+    organization,
+  })
+  .rpcAndKeys();
+
+// Getting the wallet address for this org wallet
+const wallet = walletKey(organization, 0)[0]
+```
+
+While a proposal is in `Draft` state, we can add transactions by forming arrays of instructions:
+
+```js
+const instructions = [... your logic to for a transaction ...];
+const { transaction, remainingAccounts } = await compileTransaction(
+  instructions,
+  [] // Optional ephemeral signers. This can be useful for operations like creating mints, which require a signer keypair
+);
+const {
+  pubkeys: { choiceTransaction },
+} = await organizationWalletProgram.methods
+  .setTransactionsV0({
+    // This transaction is associated with choice 0 passing
+    choiceIndex: 0,
+    // This is the first transaction on choice 0. There can be multiple txns associated with a choice
+    transactionIndex: 0,
+    transaction,
+    // Time lock. Allow the tx to execute 0 seconds (immediately) after the proposal finishes 
+    allowExecutionOffset: 0,
+    // Stop allowing execution after 1 week. This prevents malicious stale instructions executing at a much later point
+    disableExecutionOffset: 60 * 60 * 24 * 7,
+  })
+  .remainingAccounts(remainingAccounts)
+  .accounts({
+    proposal,
+    organizationWallet,
+  })
+  .rpcAndKeys();
+```
+
+Once the proposal passes and resolves to choice 0, we can execute the transaction:
+
+```js
+await (
+  await executeTransaction({
+    program: organizationWalletProgram,
+    choiceTransaction,
+  })
+).rpc()
+```
 
 ## Next Steps
 

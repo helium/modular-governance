@@ -61,6 +61,8 @@ Once a proposal is active, voters can cast their vote. In the case of the govern
 
 Once the voting period is over, if quorum was reached (enough voting power participated) and the majority voted in favor (depending on the resolution settings of the state controller), the proposal is considered successful.
 
-### Attaching Transactions to Proposals
+### Attaching Transactions to Proposals (Organizatin Wallet)
 
-In some cases, a passing proposal should result in instructions executed on chain. This work is still in progress. Check back later for updates!
+In some cases, a passing proposal should result in instructions executed on chain. This happens through the `organization-wallet` smart contract.
+
+This contract allows attaching multiple wallets to an organization. These wallets can then programmatically sign to execute transactions after a vote has resolved with a given choice. Multiple transactions can be attached to each choice, and these transactions will only be executed if the vote passes and that choice is selected. This contract also allows for timelocks on transaction execution.
