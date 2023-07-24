@@ -7,6 +7,7 @@ import { features } from '@/data/home'
 
 import { MobileNavigation } from '@/components/MobileNavigation'
 import Showcase from '@/components/Showcase'
+import Hexagon from '@/components/Hexagon'
 
 import Link from 'next/link'
 
@@ -75,12 +76,23 @@ export default function Home() {
                 <Header navigation={navigation} />
                 {/* ---- HERO --- */}
                 <section className="relative flex pb-32 md:min-h-[90vh] flex-col items-center gap-6 md:overflow-visible px-8 pt-32 lg:pt-36">
-                    <div className='absolute -z-10 top-0 hidden -translate-y-16 dark:block w-full h-full flex justify-center items-center'>
-                        <div data-aos="fade" data-aos-delay="250">
-                            <svg className='animate-breathe delay-[0] absolute top-[2.5vh] left-[calc(50%-277px)] -z-[7]' xmlns="http://www.w3.org/2000/svg" width="554" height="609" fill="none"><path fill="#262626" d="M227.5 13.26a99.01 99.01 0 0 1 99 0l178 102.76a98.99 98.99 0 0 1 49.5 85.73v205.5a98.99 98.99 0 0 1-49.5 85.73l-178 102.76a99.01 99.01 0 0 1-99 0l-178-102.76A98.99 98.99 0 0 1 0 407.25v-205.5a98.99 98.99 0 0 1 49.5-85.73l178-102.76Z" /></svg>
-                            <svg style={{ animationDelay: '550ms' }} className='animate-breathe absolute top-0 left-[calc(50%-450.5px)] -top-[160px] -z-[8]' xmlns="http://www.w3.org/2000/svg" width="901" height="991" fill="none"><path fill="#242424" d="M370 21.58a160.95 160.95 0 0 1 161 0L820.5 188.8a161.1 161.1 0 0 1 80.5 139.5v334.42a161.1 161.1 0 0 1-80.5 139.5L531 969.41a160.95 160.95 0 0 1-161 0L80.5 802.22A161.1 161.1 0 0 1 0 662.71V328.29a161.1 161.1 0 0 1 80.5-139.5L370 21.59Z" /></svg>
-                            <svg style={{ animationDelay: '1050ms' }} className='animate-breathe absolute top-0 left-[calc(50%-638.5px)] -top-[360px] -z-[9]' xmlns="http://www.w3.org/2000/svg" width="1277" height="1405" fill="none"><path fill="#212121" d="M524.4 30.6a228.05 228.05 0 0 1 228.2 0l410.3 237.06A228.42 228.42 0 0 1 1277 465.44v474.12c0 81.59-43.5 156.99-114.1 197.78L752.6 1374.4a228.03 228.03 0 0 1-228.2 0l-410.3-237.06A228.4 228.4 0 0 1 0 939.56V465.44a228.4 228.4 0 0 1 114.1-197.78L524.4 30.6Z" /></svg>
-                            <svg style={{ animationDelay: '1550ms' }} className='animate-breathe absolute top-0 left-[calc(50%-790.5px)] -top-[460px] -z-[10]' xmlns="http://www.w3.org/2000/svg" width="1581" height="1739" fill="none"><path fill="#1E1E1E" d="M649.24 37.87a282.41 282.41 0 0 1 282.52 0l507.97 293.42A282.68 282.68 0 0 1 1581 576.09v586.83a282.68 282.68 0 0 1-141.27 244.79l-507.97 293.42a282.43 282.43 0 0 1-282.52 0l-507.98-293.42A282.69 282.69 0 0 1 0 1162.92V576.08a282.7 282.7 0 0 1 141.26-244.8L649.25 37.88Z" /></svg>
+                    <div className='absolute -z-10 top-0 hidden -translate-y-0 dark:block w-full h-full flex justify-center items-center'>
+                        <div>
+                            <div className="animation-wrapper relative -z-[7]" data-aos="zoom-out" data-aos-easing="ease-in-out" data-aos-delay="250">
+                                <Hexagon className="animate-breathe absolute top-[10vh]" scale={1} color="#292929" />
+                            </div>
+                            <div className="animation-wrapper relative -z-[8]" data-aos="zoom-out" data-aos-easing="ease-in-out" data-aos-delay="350">
+                                <Hexagon className="animate-breathe absolute top-[10vh]" animationDelay={550} scale={2} color="#262626" />
+                            </div>
+                            <div className="animation-wrapper relative -z-[9]" data-aos="zoom-out" data-aos-easing="ease-in-out" data-aos-delay="450">
+                                <Hexagon className="animate-breathe absolute top-[10vh]" animationDelay={650} scale={3} color="#242424" />
+                            </div>
+                            <div className="animation-wrapper relative -z-[10]" data-aos="zoom-out" data-aos-easing="ease-in-out" data-aos-delay="550">
+                                <Hexagon className="animate-breathe absolute top-[10vh]" animationDelay={750} scale={4} color="#212121" />
+                            </div>
+                            <div className="animation-wrapper relative -z-[11]" data-aos="zoom-out" data-aos-easing="ease-in-out" data-aos-delay="650">
+                                <Hexagon className="animate-breathe absolute top-[10vh]" animationDelay={850} scale={5} color="#171717" />
+                            </div>
                         </div>
                     </div>
 
@@ -178,7 +190,7 @@ export default function Home() {
                                 </linearGradient>
                             </defs>
                         </svg>
-                        <h1 data-aos="fade" data-aos-delay="500" className="mt-12 max-w-2xl text-center text-3xl font-bold text-white md:text-6xl">
+                        <h1 data-aos="fade" data-aos-delay="600" className="mt-12 max-w-2xl text-center text-3xl font-bold text-white md:text-6xl">
                             <span className='text-zinc-400'>Unleash Communities with</span> Helium Modular Governance SDK
                         </h1>
                         <div data-aos="fade" data-aos-delay="750" className='mt-10 flex flex-col sm:flex-row flex-wrap gap-3 w-full max-w-sm justify-center'>

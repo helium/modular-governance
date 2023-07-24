@@ -30,8 +30,8 @@ module.exports = {
       },
       keyframes: {
         breathe: {
-          '0%, 100%': { transform: 'scale(0.9)', stroke: 'rgba(83, 230, 194, 0.10)' },
-          '50%': { transform: 'scale(1)', stroke: 'rgba(83, 230, 194, 0)' },
+          '0%, 100%': { transform: 'scale(1)', stroke: 'rgba(83, 230, 194, 0.0)' },
+          '50%': { transform: 'scale(.9)', stroke: 'rgba(83, 230, 194, 0.10)' },
         },
         breatheInverted: {
           '0%, 100%': { transform: 'scale(1)', stroke: 2000 },
