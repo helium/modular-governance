@@ -7,6 +7,7 @@ import { features } from '@/data/home'
 
 import { MobileNavigation } from '@/components/MobileNavigation'
 import Showcase from '@/components/Showcase'
+import Hexagon from '@/components/Hexagon'
 
 import Link from 'next/link'
 
@@ -71,48 +72,26 @@ export default function Home() {
             <Head>
                 <title>Home | Helium Modular Governance</title>
             </Head>
-            <div>
+            <div className='overflow-hidden'>
                 <Header navigation={navigation} />
                 {/* ---- HERO --- */}
-                <section className="relative flex pb-32 md:min-h-[90vh] flex-col items-center gap-6 overflow-hidden md:overflow-visible px-8 pt-32 lg:pt-36">
-                    <svg
-                        className="absolute top-0 -z-10 hidden -translate-y-16 dark:block"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1581"
-                        height="1184"
-                        fill="none"
-                    >
-                        <path
-                            data-aos="fade" data-aos-delay="550"
-                            stroke="red" strokeLinejoin="round"
-                            className="path origin-center animate-breathe"
-                            fill="#1E1E1E"
-                            d="M649.235-517.13c87.415-50.493 195.115-50.493 282.53 0l507.965 293.417C1527.15-173.22 1581-79.903 1581 21.083v586.834c0 100.987-53.85 194.302-141.27 244.796L931.765 1146.13c-87.415 50.49-195.115 50.49-282.53 0l-507.97-293.417C53.85 802.219 0 708.904 0 607.917V21.083C0-79.904 53.85-173.22 141.265-223.713l507.97-293.417Z"
-                            opacity=".2"
-                        />
-                        <path
-                            data-aos="fade" data-aos-delay="550"
-                            className="path origin-center animate-breathe"
-                            fill="#212121"
-                            d="M676.398-357.403c70.607-40.796 157.598-40.796 228.204 0L1314.9-120.341C1385.5-79.546 1429-4.153 1429 77.438v474.124c0 81.591-43.5 156.984-114.1 197.779L904.602 986.403c-70.606 40.797-157.597 40.797-228.204 0L266.102 749.341C195.496 708.546 152 633.153 152 551.562V77.438c0-81.59 43.496-156.984 114.102-197.779l410.296-237.062Z"
-                            opacity=".3"
-                        />
-
-                        <path
-                            data-aos="fade" data-aos-delay="550"
-                            className="path origin-center animate-breathe"
-                            fill="#242424"
-                            d="M709.994-159.419c49.817-28.775 111.195-28.775 161.012 0L1160.49 7.79C1210.31 36.564 1241 89.742 1241 147.29v334.418c0 57.549-30.69 110.727-80.51 139.501L871.006 788.419c-49.817 28.775-111.195 28.775-161.012 0L420.506 621.21C370.689 592.436 340 539.258 340 481.709V147.291c0-57.549 30.689-110.727 80.506-139.501L709.994-159.42Z"
-                            opacity=".4"
-                        />
-                        <path
-                            data-aos="fade" data-aos-delay="550"
-                            className="path origin-center animate-breathe"
-                            fill="#262626"
-                            opacity="1"
-                            d="M740.499 23.262a99.013 99.013 0 0 1 99.002 0L1017.5 126.017c30.63 17.683 49.5 50.362 49.5 85.728v205.51c0 35.366-18.87 68.045-49.5 85.728L839.501 605.738a99.012 99.012 0 0 1-99.002 0L562.501 502.983C531.87 485.3 513 452.621 513 417.255v-205.51c0-35.366 18.87-68.045 49.501-85.728L740.499 23.262Z"
-                        />
-                    </svg>
+                <section className="relative flex pb-32 flex-col items-center gap-6 md:overflow-visible px-8 pt-32 lg:pt-36">
+                    <div className='absolute -z-10 top-[80px] lg:top-[100px] hidden -translate-y-0 dark:block w-full h-full flex justify-center items-center'>
+                        <div>
+                            <div className="animation-wrapper relative -z-[7]" data-aos="zoom-out" data-aos-easing="ease-in-out" data-aos-delay="250">
+                                <Hexagon className="animate-breathe absolute" scale={1} color="#292929" />
+                            </div>
+                            <div className="animation-wrapper relative -z-[8]" data-aos="zoom-out" data-aos-easing="ease-in-out" data-aos-delay="350">
+                                <Hexagon className="animate-breathe absolute" animationDelay={550} scale={2} color="#262626" />
+                            </div>
+                            <div className="animation-wrapper relative -z-[9]" data-aos="zoom-out" data-aos-easing="ease-in-out" data-aos-delay="450">
+                                <Hexagon className="animate-breathe absolute" animationDelay={650} scale={3} color="#242424" />
+                            </div>
+                            <div className="animation-wrapper relative -z-[10]" data-aos="zoom-out" data-aos-easing="ease-in-out" data-aos-delay="550">
+                                <Hexagon className="animate-breathe absolute" animationDelay={750} scale={4} color="#212121" />
+                            </div>
+                        </div>
+                    </div>
 
                     <div className="relative z-10 flex w-full flex-col items-center">
                         <svg
@@ -208,16 +187,16 @@ export default function Home() {
                                 </linearGradient>
                             </defs>
                         </svg>
-                        <h1 data-aos="fade" data-aos-delay="500" className="mt-12 max-w-2xl text-center text-4xl font-bold text-white md:text-6xl">
+                        <h1 data-aos="fade" data-aos-delay="600" className="mt-12 max-w-2xl text-center text-3xl font-bold text-white md:text-6xl">
                             <span className='text-zinc-400'>Unleash Communities with</span> Helium Modular Governance SDK
                         </h1>
-                        <div data-aos="fade" data-aos-delay="750" className='mt-10 flex flex-wrap gap-3'>
+                        <div data-aos="fade" data-aos-delay="750" className='mt-10 flex flex-col sm:flex-row flex-wrap gap-3 w-full max-w-sm justify-center'>
                             <Link href="/docs/installation"
-                                className="rounded-xl bg-teal-500 px-5 py-4 text-lg font-semibold text-teal-950 shadow-sm hover:translate-y-0.5 transition duration-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400">
+                                className="rounded-xl bg-teal-500 w-full px-3 py-3 text-base text-center sm:text-left sm:w-max sm:px-5 sm:py-4 sm:text-lg font-semibold text-teal-950 shadow-sm hover:translate-y-0.5 transition duration-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400">
                                 Get started
                             </Link>
                             <Link href="#features"
-                                className="rounded-xl bg-zinc-700 px-5 py-4 text-lg font-semibold text-white shadow-sm hover:translate-y-0.5 transition duration-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400">
+                                className="rounded-xl bg-zinc-700 w-full px-3 py-3 text-base text-center sm:text-left sm:w-max sm:px-5 sm:py-4 sm:text-lg font-semibold text-white shadow-sm hover:translate-y-0.5 transition duration-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400">
                                 Learn more
                             </Link>
                         </div>
