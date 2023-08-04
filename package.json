@@ -18,12 +18,12 @@
   ],
   "private": true,
   "dependencies": {
-    "@coral-xyz/anchor": "^0.27.0",
+    "@coral-xyz/anchor": "^0.28.0",
     "@helium/anchor-resolvers": "^0.2.",
     "@solana/web3.js": "^1.78.0"
   },
   "devDependencies": {
-    "@helium/spl-utils": "^0.2.13",
+    "@helium/spl-utils": "^0.2.17",
     "@metaplex-foundation/js": "^0.19.4",
     "@types/bn.js": "^5.1.0",
     "@types/chai": "^4.3.0",
