@@ -89,6 +89,26 @@ describe("organization", () => {
         .rpcAndKeys({ skipPreflight: true }));
     });
 
+    it("allows updating the organization", async () => {
+      await program.methods
+        .updateOrganizationV0({
+          uri: "https://foo.com",
+          defaultProposalConfig: me,
+          proposalProgram: me,
+          authority: PublicKey.default,
+        })
+        .accounts({ organization })
+        .rpc({ skipPreflight: true });
+
+      const acct = await program.account.organizationV0.fetch(organization!);
+      expect(acct.defaultProposalConfig.toBase58()).to.eq(
+        me.toBase58()
+      );
+      expect(acct.authority.toBase58()).to.eq(PublicKey.default.toBase58());
+      expect(acct.name).to.eq(name);
+      expect(acct.uri).to.eq("https://foo.com");
+    });
+
     it("creates a proposal with the default config", async () => {
       const {
         pubkeys: { proposal },
