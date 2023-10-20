@@ -44,7 +44,7 @@ pub struct InitializeProposalV0<'info> {
     init,
     payer = payer,
     seeds = [b"proposal", namespace.key().as_ref(), &args.seed[..]],
-    space = 8 + 60 + args.seed.len() + std::mem::size_of::<ProposalV0>() + args.choices.len() * Choice::INIT_SPACE + args.tags.iter().map(|tag| tag.len() as usize).sum::<usize>(),
+    space = 8 + 60 + args.seed.len() + ProposalV0::INIT_SPACE + args.choices.len() * Choice::INIT_SPACE + args.tags.iter().map(|tag| tag.len() as usize).sum::<usize>(),
     bump
   )]
   pub proposal: Box<Account<'info, ProposalV0>>,
