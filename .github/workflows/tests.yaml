@@ -3,10 +3,10 @@ name: Tests
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
       - develop
 env:
   SOLANA_CLI_VERSION: 1.16.13
