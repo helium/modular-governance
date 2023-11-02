@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.28.0",
-    "@solana/web3.js": "^1.43.4"
+    "@solana/web3.js": "^1.78.4"
   },
   "devDependencies": {
     "ts-loader": "^9.2.3",
