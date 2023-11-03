@@ -7,8 +7,7 @@ import { expect } from "chai";
 import { makeid } from "./utils";
 
 describe("proposal", () => {
-  // Configure the client to use the local cluster.
-  anchor.setProvider(anchor.AnchorProvider.env());
+  anchor.setProvider(anchor.AnchorProvider.local("http://127.0.0.1:8899"));
   const provider = anchor.getProvider() as anchor.AnchorProvider;
   const me = provider.wallet.publicKey;
   let program: Program<Proposal>;
