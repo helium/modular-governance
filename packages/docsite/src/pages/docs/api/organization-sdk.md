@@ -43,6 +43,21 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | ---- | ------------------------ | ---- |
 | args | InitializeProposalArgsV0 |      |
 
+### updateOrganizationV0
+
+#### Accounts
+
+| Name         | Mutability | Signer | Docs |
+| ------------ | ---------- | ------ | ---- |
+| organization | mut        | no     |      |
+| authority    | immut      | yes    |      |
+
+#### Args
+
+| Name | Type                     | Docs |
+| ---- | ------------------------ | ---- |
+| args | UpdateOrganizationArgsV0 |      |
+
 ## Accounts
 
 ### OrganizationV0
@@ -85,3 +100,12 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | maxChoicesPerVoter | u16       |
 | choices            | ChoiceArg |
 | tags               | string    |
+
+### UpdateOrganizationArgsV0
+
+| Field                 | Type      |
+| --------------------- | --------- |
+| authority             | publicKey |
+| defaultProposalConfig | publicKey |
+| proposalProgram       | publicKey |
+| uri                   | string    |

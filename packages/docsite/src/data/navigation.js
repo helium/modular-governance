@@ -84,8 +84,6 @@ export const navigation = [
 
       { title: "Proposal", href: "/docs/api/proposal-sdk" },
 
-      { title: "Organizations", href: "/docs/api/organizations-sdk" },
-
       {
         title: "Organization wallet",
         href: "/docs/api/organization-wallet-sdk",
