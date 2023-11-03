@@ -17,10 +17,7 @@ pub struct ResolveV0<'info> {
     mut,
     owner = proposal_program.key(),
     has_one = proposal_config,
-    constraint = match proposal.state {
-      ProposalState::Voting { .. } => true,
-      _ => false
-    }
+    constraint = matches!(proposal.state, ProposalState::Voting { .. })
   )]
   pub proposal: Account<'info, ProposalV0>,
   #[account(
