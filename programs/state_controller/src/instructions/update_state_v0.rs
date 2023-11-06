@@ -55,11 +55,7 @@ pub struct UpdateStateV0<'info> {
     owner = proposal_program.key(),
     has_one = owner,
     has_one = proposal_config,
-    constraint = match proposal.state {
-      CpiProposalState::Voting { .. } => false,
-      CpiProposalState::Resolved { .. } => false,
-      _ => true
-    }
+    constraint = !matches!(proposal.state, CpiProposalState::Voting { .. } | CpiProposalState::Resolved { .. })
   )]
   pub proposal: Account<'info, ProposalV0>,
   #[account(

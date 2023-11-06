@@ -39,10 +39,7 @@ pub struct OnVoteV0<'info> {
     owner = *proposal.to_account_info().owner,
     has_one = proposal_config,
     constraint = proposal.to_account_info().is_signer,
-    constraint = match proposal.state {
-      ProposalState::Voting { .. } => true,
-      _ => false
-    }
+    constraint = matches!(proposal.state, ProposalState::Voting { .. })
   )]
   pub proposal: Account<'info, ProposalV0>,
   #[account(

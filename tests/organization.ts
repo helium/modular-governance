@@ -12,8 +12,7 @@ import { expect } from "chai";
 import { ensureIdls, makeid } from "./utils";
 
 describe("organization", () => {
-  // Configure the client to use the local cluster.
-  anchor.setProvider(anchor.AnchorProvider.env());
+  anchor.setProvider(anchor.AnchorProvider.local("http://127.0.0.1:8899"));
   const provider = anchor.getProvider() as anchor.AnchorProvider;
   const me = provider.wallet.publicKey;
   let proposalProgram: Program<Proposal>;
@@ -101,9 +100,7 @@ describe("organization", () => {
         .rpc({ skipPreflight: true });
 
       const acct = await program.account.organizationV0.fetch(organization!);
-      expect(acct.defaultProposalConfig.toBase58()).to.eq(
-        me.toBase58()
-      );
+      expect(acct.defaultProposalConfig.toBase58()).to.eq(me.toBase58());
       expect(acct.authority.toBase58()).to.eq(PublicKey.default.toBase58());
       expect(acct.name).to.eq(name);
       expect(acct.uri).to.eq("https://foo.com");

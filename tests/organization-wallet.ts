@@ -37,8 +37,7 @@ import {
 } from "@helium/spl-utils";
 
 describe("organization wallet", () => {
-  // Configure the client to use the local cluster.
-  anchor.setProvider(anchor.AnchorProvider.env());
+  anchor.setProvider(anchor.AnchorProvider.local("http://127.0.0.1:8899"));
   const provider = anchor.getProvider() as anchor.AnchorProvider;
   const me = provider.wallet.publicKey;
   let proposalProgram: Program<Proposal>;
@@ -213,13 +212,15 @@ describe("organization wallet", () => {
             organizationWallet,
           })
           .rpcAndKeys({ skipPreflight: true });
-          
+
         await proposalProgram.methods
           .updateStateV0({
             newState: {
               resolved: {
                 choices: [0],
-                endTs: new anchor.BN(Math.floor(new Date().valueOf() / 1000) - 100),
+                endTs: new anchor.BN(
+                  Math.floor(new Date().valueOf() / 1000) - 100
+                ),
               },
             },
           })
