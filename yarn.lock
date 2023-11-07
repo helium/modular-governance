@@ -498,12 +498,12 @@
   dependencies:
     client-only "^0.0.1"
 
-"@helium/account-fetch-cache-hooks@^0.4.3":
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/@helium/account-fetch-cache-hooks/-/account-fetch-cache-hooks-0.4.3.tgz#792b34acaf3a79a5705aa035a0839925300de409"
-  integrity sha512-dL/nKiUZQCnPdTW2qwIdNLr664UARA4Rz8mGfrdDcS5NHP+3tyms0GCCwwSR/sZuGD/FGT89TsZRoxSZlRDe9g==
+"@helium/account-fetch-cache-hooks@^0.4.5":
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/@helium/account-fetch-cache-hooks/-/account-fetch-cache-hooks-0.4.5.tgz#45ef5a0cd99e270f0b7442d85f78a7c0186771e5"
+  integrity sha512-fZtWppLdE+WUn1hqnOS+diIyGeaZrb2Hk49KbGgrv2C1A29WY6PoXwjLzKsDTpQO2s8iQ5UzTnoRCCqMmZnvxQ==
   dependencies:
-    "@helium/account-fetch-cache" "^0.4.3"
+    "@helium/account-fetch-cache" "^0.4.5"
     "@solana/web3.js" "^1.78.4"
     react-async-hook "^4.0.0"
 
@@ -511,6 +511,13 @@
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/@helium/account-fetch-cache/-/account-fetch-cache-0.4.3.tgz#279d50ebf8a0d0d677017d487e7d6e28d9fb5af4"
   integrity sha512-Oywq02vNCeP44c5gwrIw5I6MqMRqX4p+gi8UYsx7tQiqrp1LxxQcZItg6rjJUM7fMFU38o1Qz2BeZkQYU/kybA==
+  dependencies:
+    "@solana/web3.js" "^1.78.4"
+
+"@helium/account-fetch-cache@^0.4.5":
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/@helium/account-fetch-cache/-/account-fetch-cache-0.4.5.tgz#f5eaea05ba8f38041eab015374ab3aa624fee545"
+  integrity sha512-zxIMXiL5O+uu7fpysqCwtIwE+NSbUQyKryYAbBpQMADQKLzCiZKksPDjpRfBpgZ97tkbZBBt7UDGZc11gcBwtg==
   dependencies:
     "@solana/web3.js" "^1.78.4"
 
@@ -539,14 +546,22 @@
     "@solana/spl-token" "^0.3.8"
     "@solana/web3.js" "^1.78.4"
 
-"@helium/helium-react-hooks@^0.4.3":
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/@helium/helium-react-hooks/-/helium-react-hooks-0.4.3.tgz#17c63eaf6f16198cc93b019882b1b4ce30bdfbb1"
-  integrity sha512-L84yxlFSWeocMdjQqUA9Cs7QIfEBaZeqQLlJ/w/hZcH8njg4OKX5Foa4eDMxdT2akPxGW3BghgLRcb0F77GBpA==
+"@helium/anchor-resolvers@^0.4.5":
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/@helium/anchor-resolvers/-/anchor-resolvers-0.4.5.tgz#d2d9f7c8fc6bbf3e08ccc17c6d1c368665e573ad"
+  integrity sha512-CFfOASnmxCTswB0uaMRY9oNhNTzDZ1HFlJfnZ6tdae/k1f/Pu2b42z1zbp21d2boE5p02bYfELMXogzt742XqA==
+  dependencies:
+    "@solana/spl-token" "^0.3.8"
+    "@solana/web3.js" "^1.78.4"
+
+"@helium/helium-react-hooks@^0.4.5":
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/@helium/helium-react-hooks/-/helium-react-hooks-0.4.5.tgz#6b6692f19db4cfa68b2e2299d144363d23068738"
+  integrity sha512-23i4du838S6RWK/DjzFsf5OnNnjyY3P1OtoAr1FJ9a7RQBuDa2E2kjFeRjVEko0uWjycT/DRCMV/7rQzrde+pQ==
   dependencies:
     "@coral-xyz/anchor" "^0.28.0"
-    "@helium/account-fetch-cache" "^0.4.3"
-    "@helium/account-fetch-cache-hooks" "^0.4.3"
+    "@helium/account-fetch-cache" "^0.4.5"
+    "@helium/account-fetch-cache-hooks" "^0.4.5"
     "@solana/spl-token" "^0.3.8"
     "@solana/web3.js" "^1.78.4"
     bs58 "^4.0.1"
@@ -8679,7 +8694,7 @@ typescript-collections@^1.3.3:
   resolved "https://registry.yarnpkg.com/typescript-collections/-/typescript-collections-1.3.3.tgz#62d50d93c018c094d425eabee649f00ec5cc0fea"
   integrity sha512-7sI4e/bZijOzyURng88oOFZCISQPTHozfE2sUu5AviFYk5QV7fYGb6YiDl+vKjF/pICA354JImBImL9XJWUvdQ==
 
-"typescript@^3 || ^4", typescript@^4.3.4, typescript@^4.3.5:
+"typescript@^3 || ^4", typescript@^4.3.5:
   version "4.9.5"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
   integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
