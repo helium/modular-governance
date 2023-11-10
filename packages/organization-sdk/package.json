@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.28.0",
-    "@helium/anchor-resolvers": "^0.4.5",
+    "@helium/anchor-resolvers": "^0.5.0",
     "@helium/modular-governance-idls": "^0.0.7",
     "@helium/proposal-sdk": "^0.0.7"
   },
