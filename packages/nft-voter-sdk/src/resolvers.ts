@@ -2,6 +2,7 @@ import { ataResolver, combineResolvers, resolveIndividual } from "@helium/anchor
 import { PROGRAM_ID } from "./constants";
 import * as anchor from "@coral-xyz/anchor";
 import { PublicKey } from "@solana/web3.js";
+import { nftDelegationResolvers } from "@helium/nft-delegation-sdk";
 
 const METADATA_PROGRAM_ID = new PublicKey(
   "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
@@ -18,6 +19,7 @@ export const nftVoterProgramResolver: anchor.CustomAccountResolver<any> =
 
 export const nftVoterResolvers: anchor.CustomAccountResolver<any> = combineResolvers(
   nftVoterProgramResolver,
+  nftDelegationResolvers,
   resolveIndividual(async ({ path, provider, accounts, programId }) => {
     if (path[path.length - 1] == "proposalProgram" && accounts.proposal) {
       const acct = await provider.connection.getAccountInfo(

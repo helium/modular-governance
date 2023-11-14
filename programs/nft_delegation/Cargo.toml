@@ -1,12 +1,12 @@
 [package]
-name = "nft-voter"
+name = "nft-delegation"
 version = "0.1.0"
 description = "Created with Anchor"
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "lib"]
-name = "nft_voter"
+name = "nft_delegation"
 
 [features]
 no-entrypoint = []
@@ -18,5 +18,4 @@ default = []
 [dependencies]
 anchor-lang = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism", features = ["init-if-needed"] }
 anchor-spl = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism", features = ["token"] }
-proposal = { path = "../proposal", features = ["no-entrypoint", "cpi"] }
-nft-delegation = { path = "../nft_delegation", features = ["cpi"] }
+bytemuck = "1.14.0"
