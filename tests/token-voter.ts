@@ -19,8 +19,7 @@ import { ensureIdls, makeid } from "./utils";
 import { BN } from "bn.js";
 
 describe("token-voter", () => {
-  // Configure the client to use the local cluster.
-  anchor.setProvider(anchor.AnchorProvider.env());
+  anchor.setProvider(anchor.AnchorProvider.local("http://127.0.0.1:8899"));
   const provider = anchor.getProvider() as anchor.AnchorProvider;
   const me = provider.wallet.publicKey;
   let proposalProgram: Program<Proposal>;
@@ -146,7 +145,8 @@ describe("token-voter", () => {
           .accounts({ receipt, refund: me })
           .rpc({ skipPreflight: true });
 
-        expect(await program.account.receiptV0.fetchNullable(receipt!)).to.be.null
+        expect(await program.account.receiptV0.fetchNullable(receipt!)).to.be
+          .null;
       });
 
       it("allows voting on and relinquishing votes on the proposal", async () => {

@@ -80,53 +80,6 @@ jobs:
       - name: Run bootstrap script
         run: ./scripts/bootstrap.sh
 
-  test-docker-builds:
-    needs: build
-    name: Test Docker Builds
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        test:
-          - utils/ecc-sig-verifier
-          - packages/monitor-service
-          - packages/faucet-service
-          - packages/metadata-service
-          - packages/distributor-oracle
-          - packages/account-postgres-sink-service
-          - packages/active-device-oracle
-          - packages/fanout-metadata-service
-          - packages/tokens-to-rent-service
-          - packages/rewards-oracle-faucet-service
-          - packages/vsr-metadata-service
-    steps:
-      - uses: actions/checkout@v3
-      - run: cd $DOCKER_PATH && docker build .
-        env:
-          DOCKER_PATH: ${{ matrix.test }}
-
-  test-rust-builds:
-    needs: build
-    name: Test Rust Builds
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        test:
-          - utils/ecc-sig-verifier
-          - utils/bulk-claim-rewards
-          - utils/hpl-utils
-          - utils/migration-tx-executor
-          - utils/vehnt
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/build-anchor/
-        with:
-          testing: true
-      - run: cd $RUST_PATH && cargo build
-        env:
-          RUST_PATH: ${{ matrix.test }}
-
   test-contracts:
     needs: build
     name: Test Anchor Contracts
@@ -135,16 +88,12 @@ jobs:
       fail-fast: false
       matrix:
         test:
-          - tests/circuit-breaker.ts
-          - tests/data-credits.ts
-          - tests/distributor-oracle.ts
-          - tests/helium-entity-manager.ts
-          - tests/mobile-entity-manager.ts
-          - tests/lazy-distributor.ts
-          - tests/lazy-transactions.ts
-          - tests/treasury-management.ts
-          - tests/voter-stake-registry.ts
-          - tests/fanout.ts
+          - tests/nft-voter.ts
+          - tests/organization-wallet.ts
+          - tests/organization.ts
+          - tests/proposal.ts
+          - tests/state-controller.ts
+          - tests/token-voter.ts
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/build-anchor/
