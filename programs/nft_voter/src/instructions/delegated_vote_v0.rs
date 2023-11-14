@@ -20,7 +20,8 @@ pub struct DelegatedVoteV0<'info> {
   pub marker: Box<Account<'info, VoteMarkerV0>>,
   #[account(
     has_one = owner,
-    constraint = delegation.next_owner == Pubkey::default()
+    // only the current or earlier delegates can change vote. Or if proposal not set, this was an `init` for the marker
+    constraint = delegation.index <= marker.delegation_index || marker.proposal == Pubkey::default()
   )]
   pub delegation: Box<Account<'info, DelegationV0>>,
   pub nft_voter: Box<Account<'info, NftVoterV0>>,
@@ -60,11 +61,15 @@ pub struct DelegatedVoteV0<'info> {
 
 pub fn handler(ctx: Context<DelegatedVoteV0>, args: VoteArgsV0) -> Result<()> {
   let marker = &mut ctx.accounts.marker;
+  if marker.rent_refund == Pubkey::default() {
+    marker.rent_refund = ctx.accounts.payer.key();
+  }
   marker.proposal = ctx.accounts.proposal.key();
   marker.bump_seed = ctx.bumps["marker"];
   marker.voter = ctx.accounts.owner.key();
   marker.nft_voter = ctx.accounts.nft_voter.key();
   marker.mint = ctx.accounts.mint.key();
+  marker.delegation_index = ctx.accounts.delegation.index;
 
   // Don't allow voting for the same choice twice.
   require!(

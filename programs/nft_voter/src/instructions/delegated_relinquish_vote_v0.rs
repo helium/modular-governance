@@ -9,14 +9,15 @@ use crate::{nft_voter_seeds, state::*};
 #[derive(Accounts)]
 pub struct DelegatedRelinquishVoteV0<'info> {
   /// CHECK: You're getting sol why do you care?
-  /// Account to receive sol refund if marker is closed
+  /// Account to receive sol rent_refund if marker is closed
   #[account(mut)]
-  pub refund: AccountInfo<'info>,
+  pub rent_refund: AccountInfo<'info>,
   #[account(
     mut,
     seeds = [b"marker", nft_voter.key().as_ref(), mint.key().as_ref(), proposal.key().as_ref()],
     bump = marker.bump_seed,
-    has_one = nft_voter
+    has_one = nft_voter,
+    has_one = rent_refund
   )]
   pub marker: Account<'info, VoteMarkerV0>,
   pub nft_voter: Account<'info, NftVoterV0>,
@@ -31,7 +32,7 @@ pub struct DelegatedRelinquishVoteV0<'info> {
   pub metadata: Box<Account<'info, MetadataAccount>>,
   #[account(
     has_one = owner,
-    constraint = delegation.next_owner == Pubkey::default()
+    constraint = delegation.index <= marker.delegation_index
   )]
   pub delegation: Box<Account<'info, DelegationV0>>,
   #[account(
@@ -97,7 +98,7 @@ pub fn handler(ctx: Context<DelegatedRelinquishVoteV0>, args: RelinquishVoteArgs
   )?;
 
   if marker.choices.len() == 0 {
-    marker.close(ctx.accounts.refund.to_account_info())?;
+    marker.close(ctx.accounts.rent_refund.to_account_info())?;
   }
 
   Ok(())

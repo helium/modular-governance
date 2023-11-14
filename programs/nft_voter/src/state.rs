@@ -19,6 +19,11 @@ pub struct VoteMarkerV0 {
   pub mint: Pubkey,
   pub choices: Vec<u16>,
   pub bump_seed: u8,
+  // Keep track of which delegation index voted on this marker,
+  // earlier delegators can override
+  pub delegation_index: u16,
+  // Ensure the refund goes to whoever paid to create the marker when closing
+  pub rent_refund: Pubkey,
 }
 
 #[macro_export]
