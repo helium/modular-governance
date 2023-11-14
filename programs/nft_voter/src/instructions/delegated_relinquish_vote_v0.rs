@@ -97,7 +97,7 @@ pub fn handler(ctx: Context<DelegatedRelinquishVoteV0>, args: RelinquishVoteArgs
     },
   )?;
 
-  if marker.choices.len() == 0 {
+  if marker.choices.is_empty() {
     marker.close(ctx.accounts.rent_refund.to_account_info())?;
   }
 
