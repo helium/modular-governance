@@ -576,14 +576,6 @@
     pako "^2.0.3"
     react-async-hook "^4.0.0"
 
-"@helium/modular-governance-idls@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@helium/modular-governance-idls/-/modular-governance-idls-0.0.5.tgz#eedbed0a4975c1f14d5cfc218ed5d01117acc2b7"
-  integrity sha512-/pzNtQyKirVMz5VZAM23b0ajwSNJanrXIXHkUEBax2xC5oqoETOrblqODsHh8TOr0hKEaTRY8DRIAe+Qfv66BQ==
-  dependencies:
-    "@coral-xyz/anchor" "^0.28.0"
-    "@solana/web3.js" "^1.43.4"
-
 "@helium/spl-utils@^0.4.3":
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/@helium/spl-utils/-/spl-utils-0.4.3.tgz#9da76c006182e1e8a356234e6c583b1b09a733ed"

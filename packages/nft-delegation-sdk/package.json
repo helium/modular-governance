@@ -33,7 +33,7 @@
   "dependencies": {
     "@coral-xyz/anchor": "^0.28.0",
     "@helium/anchor-resolvers": "^0.2.17",
-    "@helium/modular-governance-idls": "^0.0.5",
+    "@helium/modular-governance-idls": "^0.0.9",
     "@solana/spl-token": "^0.3.8"
   },
   "devDependencies": {
