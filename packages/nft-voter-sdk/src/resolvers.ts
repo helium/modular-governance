@@ -39,17 +39,6 @@ export const nftVoterResolvers: anchor.CustomAccountResolver<any> = combineResol
     } else if (path[path.length - 1] == "delegation" && accounts.nftVoter && accounts.owner && accounts.mint) {
       const program = await init(provider as any, programId)
       const nftVoter = await program.account.nftVoterV0.fetch(accounts.nftVoter as PublicKey)
-      console.log(
-        "HEHEH",
-        nftVoter.delegationConfig,
-        accounts.mint,
-        accounts.owner,
-        delegationKey(
-          nftVoter.delegationConfig,
-          accounts.mint as PublicKey,
-          accounts.owner as PublicKey
-        )[0]
-      );
       return delegationKey(
         nftVoter.delegationConfig,
         accounts.mint as PublicKey,
