@@ -87,6 +87,7 @@ describe("nft-voter", () => {
         .initializeDelegationConfigV0({
           maxDelegationTime: new BN(1000000000000),
           name: makeid(10),
+          seasons: [new BN(new Date().valueOf() / 1000 + 100000)]
         })
         .accounts({
           authority: me
@@ -185,7 +186,7 @@ describe("nft-voter", () => {
       beforeEach(async () => {
         await delegateProgram.methods
           .delegateV0({
-            expirationTime: new BN(new Date().valueOf() + 10000)
+            expirationTime: new BN(new Date().valueOf() / 1000 + 10000)
           })
           .accounts({
             delegationConfig,

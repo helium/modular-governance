@@ -5,6 +5,7 @@ use anchor_lang::prelude::*;
 pub struct InitializeDelegationConfigArgsV0 {
   pub name: String,
   pub max_delegation_time: i64,
+  pub seasons: Vec<i64>,
 }
 
 #[derive(Accounts)]
@@ -17,7 +18,7 @@ pub struct InitializeDelegationConfigV0<'info> {
   #[account(
     init,
     payer = payer,
-    space = 60 + DelegationConfigV0::INIT_SPACE,
+    space = 60 + std::mem::size_of::<DelegationConfigV0>() + args.name.len() + args.seasons.len() * 8,
     seeds = [b"delegation_config".as_ref(), args.name.as_bytes()],
     bump
   )]
@@ -36,6 +37,7 @@ pub fn handler(
       authority: ctx.accounts.authority.key(),
       name: args.name,
       max_delegation_time: args.max_delegation_time,
+      seasons: args.seasons,
     });
 
   Ok(())

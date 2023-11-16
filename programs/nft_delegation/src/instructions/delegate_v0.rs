@@ -57,16 +57,29 @@ pub struct DelegateV0<'info> {
 }
 
 pub fn handler(ctx: Context<DelegateV0>, args: DelegateArgsV0) -> Result<()> {
+  let curr_ts = Clock::get().unwrap().unix_timestamp;
   let total_delegation_time = args
     .expiration_time
-    .checked_sub(Clock::get().unwrap().unix_timestamp)
+    .checked_sub(curr_ts)
     .ok_or_else(|| error!(ErrorCode::ExpirationPast))?;
 
   require_gt!(
-    total_delegation_time,
     ctx.accounts.delegation_config.max_delegation_time,
+    total_delegation_time,
     ErrorCode::ExpirationExceedsMax
   );
+
+  if let Some(current_season_end) = ctx
+    .accounts
+    .delegation_config
+    .get_current_season_end(curr_ts)
+  {
+    require_gt!(
+      current_season_end,
+      args.expiration_time,
+      ErrorCode::ExpirationExceedsSeasonMax
+    );
+  }
 
   ctx.accounts.current_delegation.set_inner(DelegationV0 {
     index: ctx.accounts.current_delegation.index,

@@ -23,7 +23,7 @@ pub struct DelegatedVoteV0<'info> {
     constraint = delegation.delegation_config == nft_voter.delegation_config,
     // only the current or earlier delegates can change vote. Or if proposal not set, this was an `init` for the marker
     constraint = delegation.index <= marker.delegation_index || marker.proposal == Pubkey::default(),
-    constraint = delegation.expiration_time < Clock::get().unwrap().unix_timestamp,
+    constraint = delegation.expiration_time > Clock::get().unwrap().unix_timestamp,
   )]
   pub delegation: Box<Account<'info, DelegationV0>>,
   pub nft_voter: Box<Account<'info, NftVoterV0>>,
