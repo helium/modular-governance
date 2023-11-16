@@ -2,7 +2,8 @@ import { ataResolver, combineResolvers, resolveIndividual } from "@helium/anchor
 import { PROGRAM_ID } from "./constants";
 import * as anchor from "@coral-xyz/anchor";
 import { PublicKey } from "@solana/web3.js";
-import { nftDelegationResolvers } from "@helium/nft-delegation-sdk";
+import { delegationKey, nftDelegationResolvers } from "@helium/nft-delegation-sdk";
+import { init } from ".";
 
 const METADATA_PROGRAM_ID = new PublicKey(
   "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
@@ -35,6 +36,25 @@ export const nftVoterResolvers: anchor.CustomAccountResolver<any> = combineResol
         ],
         METADATA_PROGRAM_ID
       )[0];
+    } else if (path[path.length - 1] == "delegation" && accounts.nftVoter && accounts.owner && accounts.mint) {
+      const program = await init(provider as any, programId)
+      const nftVoter = await program.account.nftVoterV0.fetch(accounts.nftVoter as PublicKey)
+      console.log(
+        "HEHEH",
+        nftVoter.delegationConfig,
+        accounts.mint,
+        accounts.owner,
+        delegationKey(
+          nftVoter.delegationConfig,
+          accounts.mint as PublicKey,
+          accounts.owner as PublicKey
+        )[0]
+      );
+      return delegationKey(
+        nftVoter.delegationConfig,
+        accounts.mint as PublicKey,
+        accounts.owner as PublicKey,
+      )[0]
     }
   }),
   ataResolver({

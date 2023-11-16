@@ -32,7 +32,9 @@ pub struct DelegatedRelinquishVoteV0<'info> {
   pub metadata: Box<Account<'info, MetadataAccount>>,
   #[account(
     has_one = owner,
-    constraint = delegation.index <= marker.delegation_index
+    constraint = delegation.delegation_config == nft_voter.delegation_config,
+    constraint = delegation.index <= marker.delegation_index,
+    constraint = delegation.expiration_time < Clock::get().unwrap().unix_timestamp,
   )]
   pub delegation: Box<Account<'info, DelegationV0>>,
   #[account(

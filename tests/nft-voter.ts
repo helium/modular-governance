@@ -49,6 +49,7 @@ describe("nft-voter", () => {
   });
 
   describe("with proposal", () => {
+    let delegationConfig: PublicKey | undefined;
     let proposalConfig: PublicKey | undefined;
     let proposal: PublicKey | undefined;
     let nftVoter: PublicKey | undefined;
@@ -81,6 +82,18 @@ describe("nft-voter", () => {
       ).nft.address;
 
       ({
+        pubkeys: { delegationConfig },
+      } = await delegateProgram.methods
+        .initializeDelegationConfigV0({
+          maxDelegationTime: new BN(1000000000000),
+          name: makeid(10),
+        })
+        .accounts({
+          authority: me
+        })
+        .rpcAndKeys());
+
+      ({
         pubkeys: { nftVoter },
       } = await program.methods
         .initializeNftVoterV0({
@@ -89,8 +102,10 @@ describe("nft-voter", () => {
         })
         .accounts({
           collection,
+          delegationConfig,
         })
         .rpcAndKeys({ skipPreflight: true }));
+
       ({
         pubkeys: { proposalConfig },
       } = await proposalProgram.methods
@@ -169,8 +184,11 @@ describe("nft-voter", () => {
 
       beforeEach(async () => {
         await delegateProgram.methods
-          .delegateV0()
+          .delegateV0({
+            expirationTime: new BN(new Date().valueOf() + 10000)
+          })
           .accounts({
+            delegationConfig,
             mint,
             recipient: delegatee.publicKey,
           })
@@ -271,8 +289,8 @@ describe("nft-voter", () => {
       });
 
       it("allows the original owner to undelegate", async () => {
-        const toUndelegate = delegationKey(mint, delegatee.publicKey)[0];
-        const myDelegation = delegationKey(mint, me)[0];
+        const toUndelegate = delegationKey(delegationConfig!, mint, delegatee.publicKey)[0];
+        const myDelegation = delegationKey(delegationConfig!, mint, me)[0];
         await delegateProgram.methods
           .undelegateV0()
           .accounts({

@@ -9,8 +9,6 @@ export const nftDelegationResolvers: anchor.CustomAccountResolver<any> = combine
        return (await provider.connection.getTokenLargestAccounts(
         accounts.mint as PublicKey,
       )).value[0].address;
-    } else if (path[path.length - 1] === "delegation" && accounts.owner && accounts.mint) {
-      return delegationKey(accounts.mint as PublicKey, accounts.owner as PublicKey)[0]
     }
   }),
 );

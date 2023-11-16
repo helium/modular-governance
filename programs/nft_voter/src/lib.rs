@@ -41,4 +41,8 @@ pub mod nft_voter {
   pub fn delegated_vote_v0(ctx: Context<DelegatedVoteV0>, args: VoteArgsV0) -> Result<()> {
     delegated_vote_v0::handler(ctx, args)
   }
+
+  pub fn update_nft_voter_v0(ctx: Context<UpdateNftVoterV0>) -> Result<()> {
+    update_nft_voter_v0::handler(ctx)
+  }
 }

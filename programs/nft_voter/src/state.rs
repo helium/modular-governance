@@ -8,6 +8,7 @@ pub struct NftVoterV0 {
   #[max_len(32)]
   pub name: String,
   pub bump_seed: u8,
+  pub delegation_config: Pubkey,
 }
 
 #[account]
