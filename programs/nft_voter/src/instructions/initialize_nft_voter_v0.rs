@@ -40,7 +40,7 @@ pub fn handler(ctx: Context<InitializeNftVoterV0>, args: InitializeNftVoterArgsV
     name: args.name,
     authority: args.authority,
     collection: ctx.accounts.collection.key(),
-    delegation_config: delegation_config,
+    delegation_config,
   });
 
   Ok(())
