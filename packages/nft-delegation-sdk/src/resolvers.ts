@@ -26,7 +26,6 @@ export const nftDelegationResolvers: anchor.CustomAccountResolver<any> =
             provider.connection,
             accounts.tokenAccount as PublicKey
           );
-          console.log(ta.owner, accounts.approver)
           // Primary delegation, owner is default pubkey
           if (ta.owner.equals(accounts.approver as PublicKey)) {
             return PublicKey.default;
