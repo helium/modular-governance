@@ -1,4 +1,5 @@
 use anchor_lang::prelude::*;
+use anchor_spl::token::{Mint, TokenAccount};
 
 use crate::state::DelegationV0;
 
@@ -10,9 +11,26 @@ pub struct UndelegateV0<'info> {
   /// CHECK: Receiving rent for closing
   #[account(mut)]
   pub rent_refund: AccountInfo<'info>,
-  pub owner: Signer<'info>,
+  pub asset: Box<Account<'info, Mint>>,
+  #[account(
+    constraint = token_account.owner == approver.key() || current_delegation.owner == approver.key()
+  )]
+  pub approver: Signer<'info>,
+  /// CHECK: This is the owner of the current delegation. May be the same as approver,
+  /// or in the case of a primary delegation (first in the line), Pubkey::default
+  #[account(
+    constraint = (current_delegation.index != 0 && current_delegation.owner == owner.key())
+             || (current_delegation.index == 0 && owner.key() == Pubkey::default())
+  )]
+  pub owner: AccountInfo<'info>,
+  #[account(
+    constraint = token_account.mint == asset.key(),
+    constraint = token_account.amount == 1,
+  )]
+  pub token_account: Box<Account<'info, TokenAccount>>,
   #[account(
     has_one = owner,
+    has_one = asset,
   )]
   pub current_delegation: Box<Account<'info, DelegationV0>>,
   #[account(

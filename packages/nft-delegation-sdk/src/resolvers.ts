@@ -1,14 +1,39 @@
 import * as anchor from "@coral-xyz/anchor";
 import { combineResolvers, resolveIndividual } from "@helium/anchor-resolvers";
 import { PublicKey } from "@solana/web3.js";
-import { delegationKey } from "./pdas";
+import { getAccount } from "@solana/spl-token";
 
-export const nftDelegationResolvers: anchor.CustomAccountResolver<any> = combineResolvers(
-  resolveIndividual(async ({ path, provider, accounts, idlIx }) => {
-    if (path[path.length - 1] === "tokenAccount" && idlIx.name === "delegateV0" && accounts.mint) {
-       return (await provider.connection.getTokenLargestAccounts(
-        accounts.mint as PublicKey,
-      )).value[0].address;
-    }
-  }),
-);
+export const nftDelegationResolvers: anchor.CustomAccountResolver<any> =
+  combineResolvers(
+    resolveIndividual(
+      async ({ path, provider, accounts, idlIx, programId }) => {
+        if (
+          path[path.length - 1] === "tokenAccount" &&
+          accounts.asset
+        ) {
+          return (
+            await provider.connection.getTokenLargestAccounts(
+              accounts.asset as PublicKey
+            )
+          ).value[0].address;
+        } else if (
+          path[path.length - 1] === "owner" &&
+          idlIx.name === "delegateV0" &&
+          accounts.tokenAccount &&
+          accounts.approver
+        ) {
+          const ta = await getAccount(
+            provider.connection,
+            accounts.tokenAccount as PublicKey
+          );
+          console.log(ta.owner, accounts.approver)
+          // Primary delegation, owner is default pubkey
+          if (ta.owner.equals(accounts.approver as PublicKey)) {
+            return PublicKey.default;
+          }
+
+          return accounts.approver as PublicKey;
+        }
+      }
+    )
+  );

@@ -17,15 +17,24 @@ pub struct DelegateV0<'info> {
   #[account(
     // Either match the current delegation, or if it is being initialized we will set it later
     // This works because asset can only be Pubkey default when this is a new account
-    constraint = current_delegation.asset == mint.key() || current_delegation.asset == Pubkey::default()
+    constraint = current_delegation.asset == asset.key() || current_delegation.asset == Pubkey::default(),
+    constraint = asset.supply == 1,
+    constraint = asset.decimals == 0
   )]
-  pub mint: Box<Account<'info, Mint>>,
+  pub asset: Box<Account<'info, Mint>>,
   #[account(
-    constraint = token_account.owner == owner.key() || current_delegation.owner == owner.key()
+    constraint = token_account.owner == approver.key() || current_delegation.owner == approver.key()
   )]
-  pub owner: Signer<'info>,
+  pub approver: Signer<'info>,
+  /// CHECK: This is the owner of the current delegation. May be the same as approver,
+  /// or in the case of a primary delegation (first in the line), Pubkey::default
   #[account(
-    constraint = token_account.mint == mint.key(),
+    constraint = (current_delegation.index != 0 && current_delegation.owner == owner.key())
+             || (current_delegation.index == 0 && owner.key() == Pubkey::default())
+  )]
+  pub owner: AccountInfo<'info>,
+  #[account(
+    constraint = token_account.mint == asset.key(),
     constraint = token_account.amount == 1,
   )]
   pub token_account: Box<Account<'info, TokenAccount>>,
@@ -35,7 +44,10 @@ pub struct DelegateV0<'info> {
     // owner delegating, this wont yet exist.
     init_if_needed,
     payer = payer,
-    seeds = [b"delegation", delegation_config.key().as_ref(), mint.key().as_ref(), owner.key().as_ref()],
+    // Note that owner part of the PDA key for the first delegation is Pubkey::default. This ensures
+    // that the holder can freely transfer the NFT without an disruption to the line. There is
+    // exactly 1 primary delegation per NFT.
+    seeds = [b"delegation", delegation_config.key().as_ref(), asset.key().as_ref(), owner.key().as_ref()],
     space = DelegationV0::INIT_SPACE + 60,
     bump,
     // You can only delegate when it is not currently delegated to someone else.
@@ -44,11 +56,17 @@ pub struct DelegateV0<'info> {
   )]
   pub current_delegation: Box<Account<'info, DelegationV0>>,
   /// CHECK: The wallet being delegated to
+  #[account(
+    // No creating loops! Cannot delegate back to the original owner
+    // This is just best effort, loops don't break the system. Someone could, theoretically,
+    // delegate to someone and then transfer that NFT to them.
+    constraint = recipient.key() != token_account.owner
+  )]
   pub recipient: AccountInfo<'info>,
   #[account(
     init,
     payer = payer,
-    seeds = [b"delegation", delegation_config.key().as_ref(), mint.key().as_ref(), recipient.key().as_ref()],
+    seeds = [b"delegation", delegation_config.key().as_ref(), asset.key().as_ref(), recipient.key().as_ref()],
     space = DelegationV0::INIT_SPACE + 60,
     bump,
   )]
@@ -83,7 +101,7 @@ pub fn handler(ctx: Context<DelegateV0>, args: DelegateArgsV0) -> Result<()> {
 
   ctx.accounts.current_delegation.set_inner(DelegationV0 {
     index: ctx.accounts.current_delegation.index,
-    asset: ctx.accounts.mint.key(),
+    asset: ctx.accounts.asset.key(),
     delegation_config: ctx.accounts.delegation_config.key(),
     owner: ctx.accounts.owner.key(),
     next_owner: ctx.accounts.recipient.key(),
@@ -104,7 +122,7 @@ pub fn handler(ctx: Context<DelegateV0>, args: DelegateArgsV0) -> Result<()> {
 
   ctx.accounts.next_delegation.set_inner(DelegationV0 {
     index: ctx.accounts.current_delegation.index + 1,
-    asset: ctx.accounts.mint.key(),
+    asset: ctx.accounts.asset.key(),
     delegation_config: ctx.accounts.delegation_config.key(),
     owner: ctx.accounts.recipient.key(),
     next_owner: Pubkey::default(),

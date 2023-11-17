@@ -190,7 +190,7 @@ describe("nft-voter", () => {
           })
           .accounts({
             delegationConfig,
-            mint,
+            asset: mint,
             recipient: delegatee.publicKey,
           })
           .rpc({ skipPreflight: true });
@@ -254,14 +254,13 @@ describe("nft-voter", () => {
         expect(markerA?.delegationIndex).to.eq(1);
 
         await program.methods
-          .delegatedRelinquishVoteV0({
+          .relinquishVoteV0({
             choice: 0,
           })
           .accounts({
             mint,
             proposal,
             nftVoter,
-            owner: me,
           })
           .rpc({ skipPreflight: true });
 
@@ -271,14 +270,13 @@ describe("nft-voter", () => {
         expect(markerA).to.be.null;
 
         await program.methods
-          .delegatedVoteV0({
+          .voteV0({
             choice: 1,
           })
           .accounts({
             mint,
             proposal,
             nftVoter,
-            owner: me,
           })
           .rpcAndKeys({ skipPreflight: true });
 
@@ -291,7 +289,7 @@ describe("nft-voter", () => {
 
       it("allows the original owner to undelegate", async () => {
         const toUndelegate = delegationKey(delegationConfig!, mint, delegatee.publicKey)[0];
-        const myDelegation = delegationKey(delegationConfig!, mint, me)[0];
+        const myDelegation = delegationKey(delegationConfig!, mint, PublicKey.default)[0];
         await delegateProgram.methods
           .undelegateV0()
           .accounts({
