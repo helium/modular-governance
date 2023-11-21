@@ -18,7 +18,7 @@ export const nftDelegationResolvers: anchor.CustomAccountResolver<any> =
           ).value[0].address;
         } else if (
           path[path.length - 1] === "owner" &&
-          idlIx.name === "delegateV0" &&
+          (idlIx.name === "delegateV0" || idlIx.name === "undelegateV0") &&
           accounts.tokenAccount &&
           accounts.approver
         ) {
