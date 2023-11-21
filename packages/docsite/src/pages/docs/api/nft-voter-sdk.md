@@ -29,7 +29,7 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 | Name            | Mutability | Signer | Docs                                              |
 | --------------- | ---------- | ------ | ------------------------------------------------- |
-| refund          | mut        | no     | Account to receive sol refund if marker is closed |
+| rentRefund      | mut        | no     | Account to receive sol refund if marker is closed |
 | marker          | mut        | no     |                                                   |
 | nftVoter        | immut      | no     |                                                   |
 | voter           | immut      | yes    |                                                   |
@@ -75,6 +75,58 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | ---- | ---------- | ---- |
 | args | VoteArgsV0 |      |
 
+### delegatedRelinquishVoteV0
+
+#### Accounts
+
+| Name            | Mutability | Signer | Docs                                                   |
+| --------------- | ---------- | ------ | ------------------------------------------------------ |
+| rentRefund      | mut        | no     | Account to receive sol rent_refund if marker is closed |
+| marker          | mut        | no     |                                                        |
+| nftVoter        | immut      | no     |                                                        |
+| owner           | immut      | yes    |                                                        |
+| mint            | immut      | no     |                                                        |
+| metadata        | immut      | no     |                                                        |
+| delegation      | immut      | no     |                                                        |
+| proposal        | mut        | no     |                                                        |
+| proposalConfig  | immut      | no     |                                                        |
+| stateController | mut        | no     |                                                        |
+| onVoteHook      | immut      | no     |                                                        |
+| proposalProgram | immut      | no     |                                                        |
+| systemProgram   | immut      | no     |                                                        |
+
+#### Args
+
+| Name | Type                 | Docs |
+| ---- | -------------------- | ---- |
+| args | RelinquishVoteArgsV0 |      |
+
+### delegatedVoteV0
+
+#### Accounts
+
+| Name            | Mutability | Signer | Docs |
+| --------------- | ---------- | ------ | ---- |
+| payer           | mut        | yes    |      |
+| marker          | mut        | no     |      |
+| delegation      | immut      | no     |      |
+| nftVoter        | immut      | no     |      |
+| owner           | immut      | yes    |      |
+| mint            | immut      | no     |      |
+| metadata        | immut      | no     |      |
+| proposal        | mut        | no     |      |
+| proposalConfig  | immut      | no     |      |
+| stateController | mut        | no     |      |
+| onVoteHook      | immut      | no     |      |
+| proposalProgram | immut      | no     |      |
+| systemProgram   | immut      | no     |      |
+
+#### Args
+
+| Name | Type       | Docs |
+| ---- | ---------- | ---- |
+| args | VoteArgsV0 |      |
+
 ## Accounts
 
 ### NftVoterV0
@@ -88,14 +140,16 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ### VoteMarkerV0
 
-| Field    | Type      |
-| -------- | --------- |
-| voter    | publicKey |
-| nftVoter | publicKey |
-| proposal | publicKey |
-| mint     | publicKey |
-| choices  | u16       |
-| bumpSeed | u8        |
+| Field           | Type      |
+| --------------- | --------- |
+| voter           | publicKey |
+| nftVoter        | publicKey |
+| proposal        | publicKey |
+| mint            | publicKey |
+| choices         | u16       |
+| bumpSeed        | u8        |
+| delegationIndex | u16       |
+| rentRefund      | publicKey |
 
 ## Types
 
@@ -144,9 +198,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ### ProgrammableConfig
 
-| Variant | Fields                   |
-| ------- | ------------------------ |
-| V1      | ruleSet: [object Object] |
+| Variant | Fields                    |
+| ------- | ------------------------- |
+| V1      | rule_set: [object Object] |
 
 ### UseMethod
 

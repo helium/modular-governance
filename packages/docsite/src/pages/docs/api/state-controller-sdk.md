@@ -127,9 +127,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | Variant           | Fields                   |
 | ----------------- | ------------------------ |
 | Resolved          | choices: [object Object] |
-| EndTimestamp      | endTs: i64               |
+| EndTimestamp      | end_ts: i64              |
 | OffsetFromStartTs | offset: i64              |
-| ChoiceVoteWeight  | weightThreshold: u128    |
+| ChoiceVoteWeight  | weight_threshold: u128   |
 | ChoicePercentage  | percentage: i32          |
 | Top               | n: u16                   |
 | NumResolved       | n: u16                   |

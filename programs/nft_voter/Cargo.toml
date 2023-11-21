@@ -14,8 +14,10 @@ no-idl = []
 no-log-ix-name = []
 cpi = ["no-entrypoint"]
 default = []
+devnet = []
 
 [dependencies]
 anchor-lang = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism", features = ["init-if-needed"] }
 anchor-spl = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism", features = ["token"] }
 proposal = { path = "../proposal", features = ["no-entrypoint", "cpi"] }
+nft-delegation = { path = "../nft_delegation", features = ["cpi"] }

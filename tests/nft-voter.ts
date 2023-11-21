@@ -5,11 +5,17 @@ import {
   PROGRAM_ID as PROPOSAL_PID,
   init as initProposal,
 } from "@helium/proposal-sdk";
+import {
+  PROGRAM_ID as DEL_PID,
+  init as initNftDelegation,
+  delegationKey,
+} from "@helium/nft-delegation-sdk";
 import { Metaplex, walletAdapterIdentity } from "@metaplex-foundation/js";
 import { Keypair, PublicKey } from "@solana/web3.js";
 import { BN } from "bn.js";
 import { expect } from "chai";
 import { NftVoter } from "../target/types/nft_voter";
+import { NftDelegation } from "../target/types/nft_delegation";
 import { Proposal } from "../target/types/proposal";
 import { ensureIdls, makeid } from "./utils";
 
@@ -19,6 +25,8 @@ describe("nft-voter", () => {
   const me = provider.wallet.publicKey;
   let proposalProgram: Program<Proposal>;
   let program: Program<NftVoter>;
+  let delegateProgram: Program<NftDelegation>;
+
   const metaplex = new Metaplex(provider.connection);
   metaplex.use(walletAdapterIdentity(provider.wallet));
 
@@ -33,9 +41,15 @@ describe("nft-voter", () => {
       PROPOSAL_PID,
       anchor.workspace.Proposal.idl
     );
+    delegateProgram = await initNftDelegation(
+      provider,
+      DEL_PID,
+      anchor.workspace.NftDelegation.idl
+    );
   });
 
   describe("with proposal", () => {
+    let delegationConfig: PublicKey | undefined;
     let proposalConfig: PublicKey | undefined;
     let proposal: PublicKey | undefined;
     let nftVoter: PublicKey | undefined;
@@ -68,6 +82,19 @@ describe("nft-voter", () => {
       ).nft.address;
 
       ({
+        pubkeys: { delegationConfig },
+      } = await delegateProgram.methods
+        .initializeDelegationConfigV0({
+          maxDelegationTime: new BN(1000000000000),
+          name: makeid(10),
+          seasons: [new BN(new Date().valueOf() / 1000 + 100000)]
+        })
+        .accounts({
+          authority: me
+        })
+        .rpcAndKeys());
+
+      ({
         pubkeys: { nftVoter },
       } = await program.methods
         .initializeNftVoterV0({
@@ -76,8 +103,10 @@ describe("nft-voter", () => {
         })
         .accounts({
           collection,
+          delegationConfig,
         })
         .rpcAndKeys({ skipPreflight: true }));
+
       ({
         pubkeys: { proposalConfig },
       } = await proposalProgram.methods
@@ -142,13 +171,143 @@ describe("nft-voter", () => {
         .relinquishVoteV0({
           choice: 0,
         })
-        .accounts({ mint, proposal, refund: me, nftVoter })
+        .accounts({ mint, proposal, nftVoter })
         .rpc({ skipPreflight: true });
 
       acct = await proposalProgram.account.proposalV0.fetch(proposal!);
       expect(acct.choices[0].weight.toNumber()).to.eq(0);
       markerA = await program.account.voteMarkerV0.fetchNullable(marker!);
       expect(markerA).to.be.null;
+    });
+
+    describe("with delegation", () => {
+      let delegatee = Keypair.generate();
+
+      beforeEach(async () => {
+        await delegateProgram.methods
+          .delegateV0({
+            expirationTime: new BN(new Date().valueOf() / 1000 + 10000)
+          })
+          .accounts({
+            delegationConfig,
+            asset: mint,
+            recipient: delegatee.publicKey,
+          })
+          .rpc({ skipPreflight: true });
+      });
+
+      it("allows voting on and relinquishing votes on the proposal", async () => {
+        const {
+          pubkeys: { marker },
+        } = await program.methods
+          .delegatedVoteV0({
+            choice: 0,
+          })
+          .accounts({ mint, proposal, nftVoter, owner: delegatee.publicKey })
+          .signers([delegatee])
+          .rpcAndKeys({ skipPreflight: true });
+
+        let acct = await proposalProgram.account.proposalV0.fetch(proposal!);
+        expect(acct.choices[0].weight.toNumber()).to.eq(1);
+        let markerA = await program.account.voteMarkerV0.fetchNullable(marker!);
+        expect(markerA?.choices).to.deep.eq([0]);
+
+        await program.methods
+          .delegatedRelinquishVoteV0({
+            choice: 0,
+          })
+          .accounts({
+            mint,
+            proposal,
+            nftVoter,
+            owner: delegatee.publicKey,
+          })
+          .signers([delegatee])
+          .rpc({ skipPreflight: true });
+
+        acct = await proposalProgram.account.proposalV0.fetch(proposal!);
+        expect(acct.choices[0].weight.toNumber()).to.eq(0);
+        markerA = await program.account.voteMarkerV0.fetchNullable(marker!);
+        expect(markerA).to.be.null;
+      });
+
+      it("allows earlier delegates to change the vote", async () => {
+        const {
+          pubkeys: { marker },
+        } = await program.methods
+          .delegatedVoteV0({
+            choice: 0,
+          })
+          .accounts({
+            mint,
+            proposal,
+            nftVoter,
+            owner: delegatee.publicKey,
+          })
+          .signers([delegatee])
+          .rpcAndKeys({ skipPreflight: true });
+
+        let acct = await proposalProgram.account.proposalV0.fetch(proposal!);
+        expect(acct.choices[0].weight.toNumber()).to.eq(1);
+        let markerA = await program.account.voteMarkerV0.fetchNullable(marker!);
+        expect(markerA?.choices).to.deep.eq([0]);
+        expect(markerA?.delegationIndex).to.eq(1);
+
+        await program.methods
+          .relinquishVoteV0({
+            choice: 0,
+          })
+          .accounts({
+            mint,
+            proposal,
+            nftVoter,
+          })
+          .rpc({ skipPreflight: true });
+
+        acct = await proposalProgram.account.proposalV0.fetch(proposal!);
+        expect(acct.choices[0].weight.toNumber()).to.eq(0);
+        markerA = await program.account.voteMarkerV0.fetchNullable(marker!);
+        expect(markerA).to.be.null;
+
+        await program.methods
+          .voteV0({
+            choice: 1,
+          })
+          .accounts({
+            mint,
+            proposal,
+            nftVoter,
+          })
+          .rpcAndKeys({ skipPreflight: true });
+
+        acct = await proposalProgram.account.proposalV0.fetch(proposal!);
+        expect(acct.choices[1].weight.toNumber()).to.eq(1);
+        markerA = await program.account.voteMarkerV0.fetchNullable(marker!);
+        expect(markerA?.choices).to.deep.eq([1]);
+        expect(markerA?.delegationIndex).to.eq(0);
+      });
+
+      it("allows the original owner to undelegate", async () => {
+        const toUndelegate = delegationKey(delegationConfig!, mint, delegatee.publicKey)[0];
+        const myDelegation = delegationKey(delegationConfig!, mint, PublicKey.default)[0];
+        await delegateProgram.methods
+          .undelegateV0()
+          .accounts({
+            delegation: toUndelegate,
+            prevDelegation: myDelegation,
+            currentDelegation: myDelegation,
+          })
+          .rpc({ skipPreflight: true });
+
+        expect(
+          (
+            await delegateProgram.account.delegationV0.fetch(myDelegation)
+          ).nextOwner.toBase58()
+        ).to.eq(PublicKey.default.toBase58());
+        expect(
+          await delegateProgram.account.delegationV0.fetchNullable(toUndelegate)
+        ).to.be.null;
+      });
     });
   });
 });
