@@ -22,13 +22,12 @@ pub struct InitializeProposalConfigArgsV0 {
 pub struct InitializeProposalConfigV0<'info> {
   #[account(mut)]
   pub payer: Signer<'info>,
-  /// Every proposal config must have an owner to prevent seed collision
   pub owner: Signer<'info>,
   #[account(
     init,
     payer = payer,
     seeds = [b"proposal_config", args.name.as_bytes()],
-    space = 8 + 60 + args.name.len() + ProposalConfigV0::INIT_SPACE,
+    space = 8 + 60 + ProposalConfigV0::INIT_SPACE,
     bump
   )]
   pub proposal_config: Box<Account<'info, ProposalConfigV0>>,

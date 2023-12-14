@@ -28,6 +28,7 @@ pub fn handler(
   ctx: Context<InitializeResolutionSettingsV0>,
   args: InitializeResolutionSettingsArgsV0,
 ) -> Result<()> {
+  args.settings.validate()?;
   ctx
     .accounts
     .resolution_settings
