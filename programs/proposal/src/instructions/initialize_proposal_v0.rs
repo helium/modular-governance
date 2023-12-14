@@ -65,6 +65,7 @@ pub struct InitializeProposalV0<'info> {
 }
 
 pub fn handler(ctx: Context<InitializeProposalV0>, args: InitializeProposalArgsV0) -> Result<()> {
+  require_gt!(args.choices.len(), 0);
   require_gt!(200, args.name.len(), ErrorCode::StringTooLong);
   require_gt!(200, args.uri.len(), ErrorCode::StringTooLong);
   for tag in args.tags.iter() {
