@@ -4,4 +4,6 @@ use anchor_lang::prelude::*;
 pub enum ErrorCode {
   #[msg("Error in arithmetic")]
   ArithmeticError,
+  #[msg("String exceeds limits")]
+  StringTooLong,
 }

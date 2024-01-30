@@ -16,7 +16,7 @@ pub struct InitializeResolutionSettingsV0<'info> {
   #[account(
     init,
     payer = payer,
-    space = 8 + 60 + std::mem::size_of::<ResolutionSettingsV0>() + args.settings.nodes.iter().map(|node| node.size()).sum::<usize>(),
+    space = 8 + 60 + std::mem::size_of::<ResolutionSettingsV0>() + args.name.len() + args.settings.nodes.iter().map(|node| node.size()).sum::<usize>(),
     seeds = [b"resolution_settings", args.name.as_bytes()],
     bump
   )]
@@ -28,6 +28,7 @@ pub fn handler(
   ctx: Context<InitializeResolutionSettingsV0>,
   args: InitializeResolutionSettingsArgsV0,
 ) -> Result<()> {
+  args.settings.validate()?;
   ctx
     .accounts
     .resolution_settings
