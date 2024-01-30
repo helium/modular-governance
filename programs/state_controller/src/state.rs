@@ -219,7 +219,7 @@ impl ResolutionStrategy {
           stack.push(ret)
         }
         ResolutionNode::NumResolved { n } => {
-          let curr = stack.get(0).unwrap();
+          let curr = stack.first().unwrap();
           match curr {
             Some(vec) if vec.len() >= *n as usize => stack.push(Some(vec.clone())),
             _ => stack.push(None),

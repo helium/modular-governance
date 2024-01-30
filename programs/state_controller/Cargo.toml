@@ -19,3 +19,4 @@ default = []
 anchor-lang = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism" }
 anchor-spl = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism" }
 proposal = { path = "../proposal", features = ["no-entrypoint", "cpi"] }
+
