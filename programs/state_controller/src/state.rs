@@ -67,7 +67,7 @@ impl ResolutionNode {
 
   pub fn validate(&self) -> Result<()> {
     match self {
-      ResolutionNode::Resolved { choices } if choices.len() == 0 => {
+      ResolutionNode::Resolved { choices } if choices.is_empty() => {
         Err(error!(ErrorCode::ChoicesEmpty))
       }
       ResolutionNode::EndTimestamp { end_ts } if *end_ts < Clock::get()?.unix_timestamp => {
