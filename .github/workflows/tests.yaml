@@ -91,4 +91,4 @@ jobs:
         env:
           TESTING: true
           TEST: ${{ matrix.test }}
-          ANCHOR_PROVIDER_URL: http://localhost:8899
+          ANCHOR_PROVIDER_URL: http://127.0.0.1:8899
