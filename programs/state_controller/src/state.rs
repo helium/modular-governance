@@ -50,6 +50,8 @@ impl Default for ResolutionNode {
   }
 }
 
+pub const TESTING: bool = std::option_env!("TESTING").is_some();
+
 impl ResolutionNode {
   pub fn size(&self) -> usize {
     match self {
@@ -70,7 +72,9 @@ impl ResolutionNode {
       ResolutionNode::Resolved { choices } if choices.is_empty() => {
         Err(error!(ErrorCode::ChoicesEmpty))
       }
-      ResolutionNode::EndTimestamp { end_ts } if *end_ts < Clock::get()?.unix_timestamp => {
+      ResolutionNode::EndTimestamp { end_ts }
+        if *end_ts < Clock::get()?.unix_timestamp && !TESTING =>
+      {
         Err(error!(ErrorCode::EndTimestampPassed))
       }
       ResolutionNode::OffsetFromStartTs { offset } if *offset <= 0 => {

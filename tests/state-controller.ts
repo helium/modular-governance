@@ -98,7 +98,7 @@ describe("state-controller", () => {
           newState: { voting: {} },
         })
         .accounts({ proposal })
-        .rpc({ skipPreflight: true });
+        .rpc();
     });
 
     describe("with resolved", () => {
@@ -107,7 +107,7 @@ describe("state-controller", () => {
       });
 
       it("resolves to the choice selected", async () => {
-        await program.methods.resolveV0().accounts({ proposal }).rpc({ skipPreflight: true });
+        await program.methods.resolveV0().accounts({ proposal }).rpc();
 
         const acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(acct.state.resolved?.choices).to.deep.eq([1]);
@@ -120,7 +120,7 @@ describe("state-controller", () => {
       });
 
       it("resolves to all choices", async () => {
-        await program.methods.resolveV0().accounts({ proposal }).rpc({ skipPreflight: true });
+        await program.methods.resolveV0().accounts({ proposal }).rpc();
 
         const acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(acct.state.resolved?.choices).to.deep.eq([0, 1]);
@@ -133,7 +133,7 @@ describe("state-controller", () => {
       });
 
       it("not resolve", async () => {
-        await program.methods.resolveV0().accounts({ proposal }).rpc({ skipPreflight: true });
+        await program.methods.resolveV0().accounts({ proposal }).rpc();
 
         const acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(Boolean(acct.state.voting)).to.be.true;
@@ -147,7 +147,7 @@ describe("state-controller", () => {
 
       it("resolves to all choices", async () => {
         await sleep(3000);
-        await program.methods.resolveV0().accounts({ proposal }).rpc({ skipPreflight: true });
+        await program.methods.resolveV0().accounts({ proposal }).rpc();
 
         const acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(acct.state.resolved?.choices).to.deep.eq([0, 1]);
@@ -272,7 +272,7 @@ describe("state-controller", () => {
 
         await sleep(10000);
 
-        await program.methods.resolveV0().accounts({ proposal }).rpc({ skipPreflight: true });
+        await program.methods.resolveV0().accounts({ proposal }).rpc();
 
         acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(acct.state.resolved?.choices).to.deep.eq([1]);
@@ -301,7 +301,7 @@ describe("state-controller", () => {
           .rpc({ skipPreflight: true });
 
         await sleep(10000);
-        await program.methods.resolveV0().accounts({ proposal }).rpc({ skipPreflight: true });
+        await program.methods.resolveV0().accounts({ proposal }).rpc();
 
         acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(acct.state.resolved?.choices).to.deep.eq([]);
@@ -347,7 +347,7 @@ describe("state-controller", () => {
           .rpc({ skipPreflight: true });
 
         await sleep(10000);
-        await program.methods.resolveV0().accounts({ proposal }).rpc({ skipPreflight: true });
+        await program.methods.resolveV0().accounts({ proposal }).rpc();
 
         acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(acct.state.resolved?.choices).to.deep.eq([1]);
