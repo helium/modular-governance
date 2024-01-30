@@ -101,7 +101,7 @@ pub fn handler(ctx: Context<RelinquishVoteV0>, args: RelinquishVoteArgsV0) -> Re
     },
   )?;
 
-  if marker.choices.len() == 0 {
+  if marker.choices.is_empty() {
     marker.close(ctx.accounts.refund.to_account_info())?;
   }
 

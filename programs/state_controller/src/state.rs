@@ -170,7 +170,7 @@ impl ResolutionStrategy {
               .enumerate()
               .flat_map(|(index, choice)| {
                 if threshold == 0 {
-                  return None;
+                  None
                 } else if choice.weight >= threshold {
                   Some(index as u16)
                 } else {
