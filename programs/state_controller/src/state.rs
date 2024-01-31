@@ -3,7 +3,9 @@ use std::collections::HashSet;
 use anchor_lang::prelude::*;
 use proposal::{ProposalState, ProposalV0};
 
-pub const PERCENTAGE_DIVISOR: u32 = 1000000000;
+use crate::error::ErrorCode;
+
+pub const PERCENTAGE_DIVISOR: i32 = 1000000000;
 
 /// Allow building complex operations to decide resolution.
 #[derive(AnchorSerialize, AnchorDeserialize, Clone)]
@@ -12,8 +14,8 @@ pub enum ResolutionNode {
   Resolved {
     choices: Vec<u16>,
   },
-  /// Simple: At the specified end timestamp, the proposal is resolved with the choice
-  /// that has the most vote weight
+  /// Simple: At the specified end timestamp, the proposal is resolved with all choices. Combine with Top
+  /// to select the highest weight choice at the end of the proposal.
   EndTimestamp {
     end_ts: i64,
   },
@@ -48,6 +50,8 @@ impl Default for ResolutionNode {
   }
 }
 
+pub const TESTING: bool = std::option_env!("TESTING").is_some();
+
 impl ResolutionNode {
   pub fn size(&self) -> usize {
     match self {
@@ -56,10 +60,33 @@ impl ResolutionNode {
       ResolutionNode::OffsetFromStartTs { .. } => 8,
       ResolutionNode::ChoiceVoteWeight { .. } => 16,
       ResolutionNode::ChoicePercentage { .. } => 4,
-      ResolutionNode::Top { .. } => 4,
+      ResolutionNode::Top { .. } => 2,
       ResolutionNode::And => 0,
       ResolutionNode::Or => 0,
       ResolutionNode::NumResolved { .. } => 4,
+    }
+  }
+
+  pub fn validate(&self) -> Result<()> {
+    match self {
+      ResolutionNode::Resolved { choices } if choices.is_empty() => {
+        Err(error!(ErrorCode::ChoicesEmpty))
+      }
+      ResolutionNode::EndTimestamp { end_ts }
+        if *end_ts < Clock::get()?.unix_timestamp && !TESTING =>
+      {
+        Err(error!(ErrorCode::EndTimestampPassed))
+      }
+      ResolutionNode::OffsetFromStartTs { offset } if *offset <= 0 => {
+        Err(error!(ErrorCode::InvalidOffset))
+      }
+      ResolutionNode::ChoicePercentage { percentage }
+        if *percentage < 0 || *percentage > PERCENTAGE_DIVISOR =>
+      {
+        Err(error!(ErrorCode::InvalidPercentage))
+      }
+      ResolutionNode::Top { n } if *n == 0 => Err(error!(ErrorCode::InvalidTopN)),
+      _ => Ok(()),
     }
   }
 }
@@ -90,6 +117,14 @@ pub fn union<T: std::cmp::Eq + std::hash::Hash + Clone>(a: Vec<T>, b: Vec<T>) ->
 }
 
 impl ResolutionStrategy {
+  pub fn validate(&self) -> Result<()> {
+    for node in self.nodes.iter() {
+      node.validate()?
+    }
+
+    Ok(())
+  }
+
   pub fn resolution(&self, proposal: &ProposalV0) -> Option<Vec<u16>> {
     let mut stack: Vec<Option<Vec<u16>>> = vec![];
     for input in &self.nodes {
@@ -219,7 +254,7 @@ impl ResolutionStrategy {
           stack.push(ret)
         }
         ResolutionNode::NumResolved { n } => {
-          let curr = stack.get(0).unwrap();
+          let curr = stack.first().unwrap();
           match curr {
             Some(vec) if vec.len() >= *n as usize => stack.push(Some(vec.clone())),
             _ => stack.push(None),

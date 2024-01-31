@@ -48,6 +48,7 @@ pub struct UpdateStateArgsV0 {
 
 /// Allow the owner to update ths state of the proposal when it is not resolved or voting.
 #[derive(Accounts)]
+#[instruction(args: UpdateStateArgsV0)]
 pub struct UpdateStateV0<'info> {
   pub owner: Signer<'info>,
   #[account(
@@ -55,7 +56,12 @@ pub struct UpdateStateV0<'info> {
     owner = proposal_program.key(),
     has_one = owner,
     has_one = proposal_config,
-    constraint = !matches!(proposal.state, CpiProposalState::Voting { .. } | CpiProposalState::Resolved { .. })
+    constraint = match proposal.state {
+      // Voting can only go to state cancelled.
+      CpiProposalState::Voting { .. } => args.new_state == ProposalState::Cancelled,
+      CpiProposalState::Resolved { .. } => false,
+      _ => true
+    }
   )]
   pub proposal: Account<'info, ProposalV0>,
   #[account(

@@ -1,3 +1,4 @@
+use crate::errors::ErrorCode;
 use crate::state::*;
 use anchor_lang::prelude::*;
 
@@ -44,7 +45,16 @@ pub struct InitializeProposalV0<'info> {
     init,
     payer = payer,
     seeds = [b"proposal", namespace.key().as_ref(), &args.seed[..]],
-    space = 8 + 60 + args.seed.len() + ProposalV0::INIT_SPACE + args.choices.len() * Choice::INIT_SPACE,
+    space = 8 + 60 +
+      args.seed.len() +  // Seed length
+      std::mem::size_of::<ProposalV0>() +
+      args.name.len() + // Name
+      args.uri.len() + // Url
+      8 + (2 * args.choices.len()) + // Max space for ProposalState when Resolved
+      args.choices.iter().map(|choice| {
+        std::mem::size_of::<Choice>() + choice.name.len() + choice.uri.as_ref().map_or(0, |uri| uri.len())
+      }).sum::<usize>() +// Space for each choice,
+      4 + args.tags.iter().map(|tag| tag.len()).sum::<usize>(), // tags,
     bump
   )]
   pub proposal: Box<Account<'info, ProposalV0>>,
@@ -55,6 +65,19 @@ pub struct InitializeProposalV0<'info> {
 }
 
 pub fn handler(ctx: Context<InitializeProposalV0>, args: InitializeProposalArgsV0) -> Result<()> {
+  require_gt!(args.choices.len(), 0);
+  require_gt!(200, args.name.len(), ErrorCode::StringTooLong);
+  require_gt!(200, args.uri.len(), ErrorCode::StringTooLong);
+  for tag in args.tags.iter() {
+    require_gt!(200, tag.len(), ErrorCode::StringTooLong);
+  }
+  for choice in args.choices.iter() {
+    require_gt!(200, choice.name.len(), ErrorCode::StringTooLong);
+    if let Some(uri) = &choice.uri {
+      require_gt!(200, uri.len(), ErrorCode::StringTooLong);
+    }
+  }
+
   ctx.accounts.proposal.set_inner(ProposalV0 {
     namespace: ctx.accounts.namespace.key(),
     owner: ctx.accounts.owner.key(),

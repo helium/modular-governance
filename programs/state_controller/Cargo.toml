@@ -1,6 +1,6 @@
 [package]
 name = "state-controller"
-version = "0.1.0"
+version = "0.1.1"
 description = "Created with Anchor"
 edition = "2021"
 
@@ -19,3 +19,4 @@ default = []
 anchor-lang = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism" }
 anchor-spl = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism" }
 proposal = { path = "../proposal", features = ["no-entrypoint", "cpi"] }
+

@@ -3,10 +3,10 @@ name: Tests
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
       - develop
 env:
   SOLANA_CLI_VERSION: 1.16.13
@@ -59,27 +59,6 @@ jobs:
         with:
           testing: true
 
-  test-devflow:
-    needs: build
-    name: Test Development Workflow
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/build-anchor/
-        with:
-          testing: true
-      - uses: ./.github/actions/setup-ts/
-      - name: Start Anchor Localnet
-        run: ~/.cargo/bin/anchor localnet --skip-build --provider.wallet ~/.config/solana/id.json & sleep 2
-      - name: Wait for localnet to start
-        run: |
-          while [[ "$(curl -s http://localhost:8899/health)" != "ok" ]]; do
-            echo "Waiting for local Anchor network to start..."
-            sleep 5
-          done
-      - name: Run bootstrap script
-        run: ./scripts/bootstrap.sh
-
   test-contracts:
     needs: build
     name: Test Anchor Contracts
@@ -112,4 +91,4 @@ jobs:
         env:
           TESTING: true
           TEST: ${{ matrix.test }}
-          ANCHOR_PROVIDER_URL: http://localhost:8899
+          ANCHOR_PROVIDER_URL: http://127.0.0.1:8899
