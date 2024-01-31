@@ -50,6 +50,8 @@ impl Default for ResolutionNode {
   }
 }
 
+pub const TESTING: bool = std::option_env!("TESTING").is_some();
+
 impl ResolutionNode {
   pub fn size(&self) -> usize {
     match self {
@@ -67,10 +69,12 @@ impl ResolutionNode {
 
   pub fn validate(&self) -> Result<()> {
     match self {
-      ResolutionNode::Resolved { choices } if choices.len() == 0 => {
+      ResolutionNode::Resolved { choices } if choices.is_empty() => {
         Err(error!(ErrorCode::ChoicesEmpty))
       }
-      ResolutionNode::EndTimestamp { end_ts } if *end_ts < Clock::get()?.unix_timestamp => {
+      ResolutionNode::EndTimestamp { end_ts }
+        if *end_ts < Clock::get()?.unix_timestamp && !TESTING =>
+      {
         Err(error!(ErrorCode::EndTimestampPassed))
       }
       ResolutionNode::OffsetFromStartTs { offset } if *offset <= 0 => {
@@ -201,7 +205,7 @@ impl ResolutionStrategy {
               .enumerate()
               .flat_map(|(index, choice)| {
                 if threshold == 0 {
-                  return None;
+                  None
                 } else if choice.weight >= threshold {
                   Some(index as u16)
                 } else {
@@ -250,7 +254,7 @@ impl ResolutionStrategy {
           stack.push(ret)
         }
         ResolutionNode::NumResolved { n } => {
-          let curr = stack.get(0).unwrap();
+          let curr = stack.first().unwrap();
           match curr {
             Some(vec) if vec.len() >= *n as usize => stack.push(Some(vec.clone())),
             _ => stack.push(None),

@@ -117,7 +117,7 @@ pub fn handler(
     DataV2 {
       name: String::from("Token Voter Receipts"),
       symbol: String::from("TVR"),
-      uri: args.collection_uri.clone(),
+      uri: args.collection_uri,
       seller_fee_basis_points: 0,
       creators: None,
       collection: None,

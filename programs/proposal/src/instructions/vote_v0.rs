@@ -28,10 +28,7 @@ pub struct VoteV0<'info> {
   #[account(
     mut,
     has_one = proposal_config,
-    constraint = match proposal.state {
-      ProposalState::Voting { .. } => true,
-      _ => false,
-    }
+    constraint = matches!(proposal.state, ProposalState::Voting { .. })
   )]
   pub proposal: Account<'info, ProposalV0>,
   /// CHECK: Checked via has_one
