@@ -3,8 +3,8 @@ import Link from "next/link"
 export default function Showcase() {
     const projects = [
         {
-            title: 'DewiCats',
-            href: 'https://www.dewicats.xyz',
+            title: 'DeWiCats',
+            href: 'https://dewicats.xyz',
             imageUrl:
                 '/showcase/dewicats.jpg',
             category: 'NFT',
