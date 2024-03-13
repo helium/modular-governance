@@ -6,7 +6,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "license": "Apache-2.0",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "React hooks for modular governance",
   "repository": {
     "type": "git",
@@ -36,8 +36,8 @@
     "@helium/account-fetch-cache": "^0.2.17",
     "@helium/account-fetch-cache-hooks": "^0.2.17",
     "@helium/helium-react-hooks": "^0.2.17",
-    "@helium/modular-governance-idls": "^0.0.6",
-    "@helium/organization-sdk": "^0.0.6",
+    "@helium/modular-governance-idls": "^0.0.7",
+    "@helium/organization-sdk": "^0.0.7",
     "@solana/web3.js": "^1.66.2"
   },
   "devDependencies": {
