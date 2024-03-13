@@ -14,7 +14,7 @@ organization_wallet = "orgwPMqJs9xft8UefUdKfyBwg6GDnN6oLhpMaKa6nJg"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
+cluster = "localnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]

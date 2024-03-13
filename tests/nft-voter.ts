@@ -14,8 +14,7 @@ import { Proposal } from "../target/types/proposal";
 import { ensureIdls, makeid } from "./utils";
 
 describe("nft-voter", () => {
-  // Configure the client to use the local cluster.
-  anchor.setProvider(anchor.AnchorProvider.env());
+  anchor.setProvider(anchor.AnchorProvider.local("http://127.0.0.1:8899"));
   const provider = anchor.getProvider() as anchor.AnchorProvider;
   const me = provider.wallet.publicKey;
   let proposalProgram: Program<Proposal>;

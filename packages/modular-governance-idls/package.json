@@ -1,6 +1,6 @@
 {
   "name": "@helium/modular-governance-idls",
-  "version": "0.0.6",
+  "version": "0.0.9",
   "description": "Exported idls",
   "publishConfig": {
     "access": "public",
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.28.0",
-    "@solana/web3.js": "^1.43.4"
+    "@solana/web3.js": "^1.78.4"
   },
   "devDependencies": {
     "ts-loader": "^9.2.3",
