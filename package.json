@@ -1,5 +1,14 @@
 {
   "scripts": {
+    "versionup": "lerna version --force-publish--conventional-commits --no-git-tag-version",
+    "versionup:patch": "lerna version patch --force-publish --conventional-commits --no-git-tag-version",
+    "versionup:minor": "lerna version minor --force-publish --conventional-commits --no-git-tag-version",
+    "versionup:major": "lerna version major --force-publish --conventional-commits --no-git-tag-version",
+    "commit-version": "git add . && git commit -m \"chore(release): publish `node -p 'require(\"./lerna.json\").version'`\"",
+    "postversionup": "npm run commit-version",
+    "postversionup:patch": "npm run commit-version",
+    "postversionup:minor": "npm run commit-version",
+    "postversionup:major": "npm run commit-version",
     "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
     "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check",
     "build": "lerna run --parallel prebuild && tsc --build && yarn generate-idl-docs",
