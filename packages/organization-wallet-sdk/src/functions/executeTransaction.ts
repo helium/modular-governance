@@ -13,8 +13,10 @@ export async function executeTransaction({
 }) {
   const {
     organizationWallet,
+    proposal,
     transaction: { numRwSigners, numRoSigners, numRw, accounts, signerSeeds },
   } = await program.account.choiceTransactionV0.fetch(choiceTransaction);
+
   const signers = new Set((signerSeeds as Buffer[][]).map((seed) => {
     return PublicKey.createProgramAddressSync(
       seed,
@@ -40,6 +42,9 @@ export async function executeTransaction({
     .executeTransactionV0()
     .accounts({
       choiceTransaction,
+      organizationWallet,
+      proposal,
+      wallet,
       // @ts-ignore
       refund: refund || program.provider.wallet.publicKey,
     })
