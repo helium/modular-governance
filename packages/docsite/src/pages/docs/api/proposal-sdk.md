@@ -29,12 +29,12 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 #### Accounts
 
-| Name           | Mutability | Signer | Docs                                                               |
-| -------------- | ---------- | ------ | ------------------------------------------------------------------ |
-| payer          | mut        | yes    |                                                                    |
-| owner          | immut      | yes    | Every proposal config must have an owner to prevent seed collision |
-| proposalConfig | mut        | no     |                                                                    |
-| systemProgram  | immut      | no     |                                                                    |
+| Name           | Mutability | Signer | Docs |
+| -------------- | ---------- | ------ | ---- |
+| payer          | mut        | yes    |      |
+| owner          | immut      | yes    |      |
+| proposalConfig | mut        | no     |      |
+| systemProgram  | immut      | no     |      |
 
 #### Args
 
@@ -159,10 +159,10 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ### ProposalState
 
-| Variant   | Fields                               |
-| --------- | ------------------------------------ |
-| Draft     |                                      |
-| Cancelled |                                      |
-| Voting    | startTs: i64                         |
-| Resolved  | choices: [object Object], endTs: i64 |
-| Custom    | name: string, bin: bytes             |
+| Variant   | Fields                                |
+| --------- | ------------------------------------- |
+| Draft     |                                       |
+| Cancelled |                                       |
+| Voting    | start_ts: i64                         |
+| Resolved  | choices: [object Object], end_ts: i64 |
+| Custom    | name: string, bin: bytes              |

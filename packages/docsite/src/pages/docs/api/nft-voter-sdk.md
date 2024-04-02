@@ -144,9 +144,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ### ProgrammableConfig
 
-| Variant | Fields                   |
-| ------- | ------------------------ |
-| V1      | ruleSet: [object Object] |
+| Variant | Fields                    |
+| ------- | ------------------------- |
+| V1      | rule_set: [object Object] |
 
 ### UseMethod
 
