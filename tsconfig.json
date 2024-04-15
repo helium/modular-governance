@@ -23,7 +23,7 @@
       "path": "./packages/nft-voter-sdk"
     },
     {
-      "path": "./packages/nft-delegation-sdk"
+      "path": "./packages/nft-proxy-sdk"
     },
     {
       "path": "./packages/modular-governance-hooks"

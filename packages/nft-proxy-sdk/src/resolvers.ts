@@ -3,7 +3,7 @@ import { combineResolvers, resolveIndividual } from "@helium/anchor-resolvers";
 import { PublicKey } from "@solana/web3.js";
 import { getAccount } from "@solana/spl-token";
 
-export const nftDelegationResolvers: anchor.CustomAccountResolver<any> =
+export const nftProxyResolvers: anchor.CustomAccountResolver<any> =
   combineResolvers(
     resolveIndividual(
       async ({ path, provider, accounts, idlIx, programId }) => {
@@ -18,7 +18,7 @@ export const nftDelegationResolvers: anchor.CustomAccountResolver<any> =
           ).value[0].address;
         } else if (
           path[path.length - 1] === "owner" &&
-          (idlIx.name === "delegateV0" || idlIx.name === "undelegateV0") &&
+          (idlIx.name === "assignProxyV0" || idlIx.name === "unassignProxyV0") &&
           accounts.tokenAccount &&
           accounts.approver
         ) {
@@ -26,7 +26,7 @@ export const nftDelegationResolvers: anchor.CustomAccountResolver<any> =
             provider.connection,
             accounts.tokenAccount as PublicKey
           );
-          // Primary delegation, owner is default pubkey
+          // Primary proxy, owner is default pubkey
           if (ta.owner.equals(accounts.approver as PublicKey)) {
             return PublicKey.default;
           }

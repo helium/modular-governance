@@ -1,7 +1,7 @@
 use crate::state::*;
 use anchor_lang::prelude::*;
 use anchor_spl::token::Mint;
-use nft_delegation::state::DelegationConfigV0;
+use nft_proxy::state::ProxyConfigV0;
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct InitializeNftVoterArgsV0 {
@@ -15,7 +15,7 @@ pub struct InitializeNftVoterV0<'info> {
   /// CHECK: Payer
   #[account(mut)]
   pub payer: Signer<'info>,
-  pub delegation_config: Option<Account<'info, DelegationConfigV0>>,
+  pub proxy_config: Option<Account<'info, ProxyConfigV0>>,
   #[account(
     init,
     payer = payer,
@@ -29,9 +29,9 @@ pub struct InitializeNftVoterV0<'info> {
 }
 
 pub fn handler(ctx: Context<InitializeNftVoterV0>, args: InitializeNftVoterArgsV0) -> Result<()> {
-  let delegation_config = ctx
+  let proxy_config = ctx
     .accounts
-    .delegation_config
+    .proxy_config
     .clone()
     .map(|k| k.key())
     .unwrap_or_default();
@@ -40,7 +40,7 @@ pub fn handler(ctx: Context<InitializeNftVoterV0>, args: InitializeNftVoterArgsV
     name: args.name,
     authority: args.authority,
     collection: ctx.accounts.collection.key(),
-    delegation_config,
+    proxy_config,
   });
 
   Ok(())

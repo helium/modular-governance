@@ -31,15 +31,15 @@ pub mod nft_voter {
     vote_v0::handler(ctx, args)
   }
 
-  pub fn delegated_relinquish_vote_v0(
-    ctx: Context<DelegatedRelinquishVoteV0>,
+  pub fn proxied_relinquish_vote_v0(
+    ctx: Context<ProxiedRelinquishVoteV0>,
     args: RelinquishVoteArgsV0,
   ) -> Result<()> {
-    delegated_relinquish_vote_v0::handler(ctx, args)
+    proxied_relinquish_vote_v0::handler(ctx, args)
   }
 
-  pub fn delegated_vote_v0(ctx: Context<DelegatedVoteV0>, args: VoteArgsV0) -> Result<()> {
-    delegated_vote_v0::handler(ctx, args)
+  pub fn proxied_vote_v0(ctx: Context<ProxyVoteV0>, args: VoteArgsV0) -> Result<()> {
+    proxied_vote_v0::handler(ctx, args)
   }
 
   pub fn update_nft_voter_v0(ctx: Context<UpdateNftVoterV0>) -> Result<()> {

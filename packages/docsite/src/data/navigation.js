@@ -84,8 +84,6 @@ export const navigation = [
 
       { title: "Proposal", href: "/docs/api/proposal-sdk" },
 
-      { title: "Organizations", href: "/docs/api/organizations-sdk" },
-
       {
         title: "Organization wallet",
         href: "/docs/api/organization-wallet-sdk",
@@ -95,7 +93,7 @@ export const navigation = [
 
       { title: "Nft voter", href: "/docs/api/nft-voter-sdk" },
 
-      { title: "Nft delegation", href: "/docs/api/nft-delegation-sdk" },
+      { title: "Nft proxy", href: "/docs/api/nft-proxy-sdk" },
 
       // DOCS NAVIGATION END
     ],

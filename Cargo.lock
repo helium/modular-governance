@@ -1227,7 +1227,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "nft-delegation"
+name = "nft-proxy"
 version = "0.0.1"
 dependencies = [
  "anchor-lang",
@@ -1241,7 +1241,7 @@ version = "0.1.0"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
- "nft-delegation",
+ "nft-proxy",
  "proposal",
 ]
 

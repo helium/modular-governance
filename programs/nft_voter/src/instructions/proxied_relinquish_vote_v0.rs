@@ -1,13 +1,13 @@
 use crate::{error::ErrorCode, metaplex::MetadataAccount, RelinquishVoteArgsV0};
 use anchor_lang::prelude::*;
 use anchor_spl::token::Mint;
-use nft_delegation::state::DelegationV0;
+use nft_proxy::state::ProxyV0;
 use proposal::{ProposalConfigV0, ProposalV0};
 
 use crate::{nft_voter_seeds, state::*};
 
 #[derive(Accounts)]
-pub struct DelegatedRelinquishVoteV0<'info> {
+pub struct ProxiedRelinquishVoteV0<'info> {
   /// CHECK: You're getting sol why do you care?
   /// Account to receive sol rent_refund if marker is closed
   #[account(mut)]
@@ -32,11 +32,11 @@ pub struct DelegatedRelinquishVoteV0<'info> {
   pub metadata: Box<Account<'info, MetadataAccount>>,
   #[account(
     has_one = owner,
-    constraint = delegation.delegation_config == nft_voter.delegation_config,
-    constraint = delegation.index <= marker.delegation_index,
-    constraint = delegation.expiration_time > Clock::get().unwrap().unix_timestamp,
+    constraint = proxy.proxy_config == nft_voter.proxy_config,
+    constraint = proxy.index <= marker.proxy_index,
+    constraint = proxy.expiration_time > Clock::get().unwrap().unix_timestamp,
   )]
-  pub delegation: Box<Account<'info, DelegationV0>>,
+  pub proxy: Box<Account<'info, ProxyV0>>,
   #[account(
     mut,
     has_one = proposal_config,
@@ -62,7 +62,7 @@ pub struct DelegatedRelinquishVoteV0<'info> {
   pub system_program: Program<'info, System>,
 }
 
-pub fn handler(ctx: Context<DelegatedRelinquishVoteV0>, args: RelinquishVoteArgsV0) -> Result<()> {
+pub fn handler(ctx: Context<ProxiedRelinquishVoteV0>, args: RelinquishVoteArgsV0) -> Result<()> {
   let marker = &mut ctx.accounts.marker;
   marker.proposal = ctx.accounts.proposal.key();
   marker.voter = ctx.accounts.owner.key();

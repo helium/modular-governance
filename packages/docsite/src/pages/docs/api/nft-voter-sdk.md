@@ -13,6 +13,7 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | Name          | Mutability | Signer | Docs |
 | ------------- | ---------- | ------ | ---- |
 | payer         | mut        | yes    |      |
+| proxyConfig   | immut      | no     |      |
 | nftVoter      | mut        | no     |      |
 | collection    | immut      | no     |      |
 | systemProgram | immut      | no     |      |
@@ -75,7 +76,7 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | ---- | ---------- | ---- |
 | args | VoteArgsV0 |      |
 
-### delegatedRelinquishVoteV0
+### proxiedRelinquishVoteV0
 
 #### Accounts
 
@@ -87,7 +88,7 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | owner           | immut      | yes    |                                                        |
 | mint            | immut      | no     |                                                        |
 | metadata        | immut      | no     |                                                        |
-| delegation      | immut      | no     |                                                        |
+| proxy           | immut      | no     |                                                        |
 | proposal        | mut        | no     |                                                        |
 | proposalConfig  | immut      | no     |                                                        |
 | stateController | mut        | no     |                                                        |
@@ -101,7 +102,7 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | ---- | -------------------- | ---- |
 | args | RelinquishVoteArgsV0 |      |
 
-### delegatedVoteV0
+### proxiedVoteV0
 
 #### Accounts
 
@@ -109,7 +110,7 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | --------------- | ---------- | ------ | ---- |
 | payer           | mut        | yes    |      |
 | marker          | mut        | no     |      |
-| delegation      | immut      | no     |      |
+| proxy           | immut      | no     |      |
 | nftVoter        | immut      | no     |      |
 | owner           | immut      | yes    |      |
 | mint            | immut      | no     |      |
@@ -127,29 +128,46 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | ---- | ---------- | ---- |
 | args | VoteArgsV0 |      |
 
+### updateNftVoterV0
+
+#### Accounts
+
+| Name         | Mutability | Signer | Docs |
+| ------------ | ---------- | ------ | ---- |
+| authority    | immut      | yes    |      |
+| proxyConfig  | immut      | no     |      |
+| newAuthority | immut      | no     |      |
+| nftVoter     | immut      | no     |      |
+
+#### Args
+
+| Name | Type | Docs |
+| ---- | ---- | ---- |
+
 ## Accounts
 
 ### NftVoterV0
 
-| Field      | Type      |
-| ---------- | --------- |
-| authority  | publicKey |
-| collection | publicKey |
-| name       | string    |
-| bumpSeed   | u8        |
+| Field       | Type      |
+| ----------- | --------- |
+| authority   | publicKey |
+| collection  | publicKey |
+| name        | string    |
+| bumpSeed    | u8        |
+| proxyConfig | publicKey |
 
 ### VoteMarkerV0
 
-| Field           | Type      |
-| --------------- | --------- |
-| voter           | publicKey |
-| nftVoter        | publicKey |
-| proposal        | publicKey |
-| mint            | publicKey |
-| choices         | u16       |
-| bumpSeed        | u8        |
-| delegationIndex | u16       |
-| rentRefund      | publicKey |
+| Field      | Type      |
+| ---------- | --------- |
+| voter      | publicKey |
+| nftVoter   | publicKey |
+| proposal   | publicKey |
+| mint       | publicKey |
+| choices    | u16       |
+| bumpSeed   | u8        |
+| proxyIndex | u16       |
+| rentRefund | publicKey |
 
 ## Types
 

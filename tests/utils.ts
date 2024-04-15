@@ -1,5 +1,7 @@
 import { execSync } from "child_process";
 
+export const ANCHOR_PATH = process.env.ANCHOR_PATH || "anchor";
+
 export async function ensureIdls() {
   let programs = [
     {
@@ -19,24 +21,28 @@ export async function ensureIdls() {
       pid: "nftvJPn25R8AM52AeQM7TxkN7CpgWvYVVEh5qgHPaQx",
     },
     {
+      name: "nft_proxy",
+      pid: "nprx42sXf5rpVnwBWEdRg1d8tuCWsTuVLys1pRWwE6p",
+    },
+    {
       name: "organization",
       pid: "orgdXvHVLkWgBYerptASkAwkZAE563CJUu717dMNx5f",
     },
     {
       name: "organization_wallet",
-      pid: "orgwPMqJs9xft8UefUdKfyBwg6GDnN6oLhpMaKa6nJg"
-    }
+      pid: "orgwPMqJs9xft8UefUdKfyBwg6GDnN6oLhpMaKa6nJg",
+    },
   ];
   await Promise.all(
     programs.map(async (program) => {
       try {
         execSync(
-          `anchor idl init --filepath ${__dirname}/../target/idl/${program.name}.json ${program.pid}`,
+          `${ANCHOR_PATH} idl init --filepath ${__dirname}/../target/idl/${program.name}.json ${program.pid}`,
           { stdio: "inherit", shell: "/bin/bash" }
         );
       } catch {
         execSync(
-          `anchor idl upgrade --filepath ${__dirname}/../target/idl/${program.name}.json ${program.pid}`,
+          `${ANCHOR_PATH} idl upgrade --filepath ${__dirname}/../target/idl/${program.name}.json ${program.pid}`,
           { stdio: "inherit", shell: "/bin/bash" }
         );
       }

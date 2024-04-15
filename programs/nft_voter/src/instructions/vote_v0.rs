@@ -73,7 +73,7 @@ pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
   marker.voter = ctx.accounts.voter.key();
   marker.nft_voter = ctx.accounts.nft_voter.key();
   marker.mint = ctx.accounts.mint.key();
-  marker.delegation_index = 0;
+  marker.proxy_index = 0;
 
   // Don't allow voting for the same choice twice.
   require!(

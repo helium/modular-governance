@@ -1,13 +1,13 @@
 use crate::{error::ErrorCode, metaplex::MetadataAccount, VoteArgsV0};
 use anchor_lang::prelude::*;
 use anchor_spl::token::Mint;
-use nft_delegation::state::DelegationV0;
+use nft_proxy::state::ProxyV0;
 use proposal::{ProposalConfigV0, ProposalV0};
 
 use crate::{nft_voter_seeds, state::*};
 
 #[derive(Accounts)]
-pub struct DelegatedVoteV0<'info> {
+pub struct ProxyVoteV0<'info> {
   #[account(mut)]
   pub payer: Signer<'info>,
   #[account(
@@ -20,12 +20,12 @@ pub struct DelegatedVoteV0<'info> {
   pub marker: Box<Account<'info, VoteMarkerV0>>,
   #[account(
     has_one = owner,
-    constraint = delegation.delegation_config == nft_voter.delegation_config,
+    constraint = proxy.proxy_config == nft_voter.proxy_config,
     // only the current or earlier delegates can change vote. Or if proposal not set, this was an `init` for the marker
-    constraint = delegation.index <= marker.delegation_index || marker.proposal == Pubkey::default(),
-    constraint = delegation.expiration_time > Clock::get().unwrap().unix_timestamp,
+    constraint = proxy.index <= marker.proxy_index || marker.proposal == Pubkey::default(),
+    constraint = proxy.expiration_time > Clock::get().unwrap().unix_timestamp,
   )]
-  pub delegation: Box<Account<'info, DelegationV0>>,
+  pub proxy: Box<Account<'info, ProxyV0>>,
   pub nft_voter: Box<Account<'info, NftVoterV0>>,
   pub owner: Signer<'info>,
   pub mint: Box<Account<'info, Mint>>,
@@ -61,7 +61,7 @@ pub struct DelegatedVoteV0<'info> {
   pub system_program: Program<'info, System>,
 }
 
-pub fn handler(ctx: Context<DelegatedVoteV0>, args: VoteArgsV0) -> Result<()> {
+pub fn handler(ctx: Context<ProxyVoteV0>, args: VoteArgsV0) -> Result<()> {
   let marker = &mut ctx.accounts.marker;
   if marker.rent_refund == Pubkey::default() {
     marker.rent_refund = ctx.accounts.payer.key();
@@ -71,7 +71,7 @@ pub fn handler(ctx: Context<DelegatedVoteV0>, args: VoteArgsV0) -> Result<()> {
   marker.voter = ctx.accounts.owner.key();
   marker.nft_voter = ctx.accounts.nft_voter.key();
   marker.mint = ctx.accounts.mint.key();
-  marker.delegation_index = ctx.accounts.delegation.index;
+  marker.proxy_index = ctx.accounts.proxy.index;
 
   // Don't allow voting for the same choice twice.
   require!(

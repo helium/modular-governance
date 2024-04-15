@@ -1,12 +1,12 @@
 [package]
-name = "nft-delegation"
+name = "nft-proxy"
 version = "0.0.1"
 description = "Created with Anchor"
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "lib"]
-name = "nft_delegation"
+name = "nft_proxy"
 
 [features]
 no-entrypoint = []

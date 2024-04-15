@@ -1,12 +1,12 @@
 {
-  "name": "@helium/nft-delegation-sdk",
+  "name": "@helium/nft-proxy-sdk",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "license": "Apache-2.0",
   "version": "0.0.9",
-  "description": "Interface to the nft delegation smart contract",
+  "description": "Interface to the nft proxy smart contract",
   "repository": {
     "type": "git",
     "url": "https://github.com/helium/modular-governance"
