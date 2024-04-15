@@ -29,12 +29,12 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 #### Accounts
 
-| Name           | Mutability | Signer | Docs                                                               |
-| -------------- | ---------- | ------ | ------------------------------------------------------------------ |
-| payer          | mut        | yes    |                                                                    |
-| owner          | immut      | yes    | Every proposal config must have an owner to prevent seed collision |
-| proposalConfig | mut        | no     |                                                                    |
-| systemProgram  | immut      | no     |                                                                    |
+| Name           | Mutability | Signer | Docs |
+| -------------- | ---------- | ------ | ---- |
+| payer          | mut        | yes    |      |
+| owner          | immut      | yes    |      |
+| proposalConfig | mut        | no     |      |
+| systemProgram  | immut      | no     |      |
 
 #### Args
 

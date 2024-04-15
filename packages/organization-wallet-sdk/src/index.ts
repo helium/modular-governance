@@ -1,6 +1,6 @@
-import { IdlTypes } from "@coral-xyz/anchor";
+import { CustomAccountResolver, Idl, IdlTypes } from "@coral-xyz/anchor";
 import { OrganizationWallet } from "@helium/modular-governance-idls/lib/types/organization_wallet";
-import { AccountMeta, PublicKey, Transaction, TransactionInstruction } from "@solana/web3.js";
+import { AccountMeta, PublicKey, TransactionInstruction } from "@solana/web3.js";
 
 export * from "./constants";
 export { init } from "./init";
@@ -10,6 +10,9 @@ export { executeTransaction } from "./functions/executeTransaction";
 
 export type CompiledTransactionArgV0 =
   IdlTypes<OrganizationWallet>["CompiledTransactionArgV0"];
+
+export type CustomAccountResolverFactory<T extends Idl> =
+  (programId: PublicKey) => CustomAccountResolver<T>;
 
 export function compileTransaction(
   instructions: TransactionInstruction[],
