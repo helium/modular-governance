@@ -54,7 +54,8 @@ pub struct ProposalConfigV0 {
   /// the vote eagerly. For most use cases, this should just be the owner of the state controller.
   /// WARNING: This program has full authority to set the outcome of votes, make sure you trust it
   pub on_vote_hook: Pubkey,
-  #[max_len(200)]
+  // Limited to 32 because it's used as a seed
+  #[max_len(32)]
   pub name: String,
   pub bump_seed: u8,
 }

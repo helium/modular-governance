@@ -18,7 +18,7 @@ export async function ensureIdls() {
     },
     {
       name: "nft_voter",
-      pid: "nftvJPn25R8AM52AeQM7TxkN7CpgWvYVVEh5qgHPaQx",
+      pid: "nftvLQ5t6xe2nQF1NBmBBmn15ed59tU6vSCkwQNEqdc",
     },
     {
       name: "nft_proxy",

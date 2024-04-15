@@ -1352,7 +1352,7 @@ checksum = "624a8340c38c1b80fd549087862da4ba43e08858af025b236e509b6649fc13d5"
 
 [[package]]
 name = "organization"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
@@ -1470,7 +1470,7 @@ dependencies = [
 
 [[package]]
 name = "proposal"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
@@ -2068,7 +2068,7 @@ dependencies = [
 
 [[package]]
 name = "state-controller"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anchor-lang",
  "anchor-spl",
