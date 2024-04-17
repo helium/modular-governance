@@ -1,11 +1,11 @@
-use crate::state::ProxyConfigV0;
+use crate::state::{ProxyConfigV0, SeasonV0};
 use anchor_lang::prelude::*;
 
 #[derive(AnchorSerialize, AnchorDeserialize)]
 pub struct InitializeProxyConfigArgsV0 {
   pub name: String,
   pub max_proxy_time: i64,
-  pub seasons: Vec<i64>,
+  pub seasons: Vec<SeasonV0>,
 }
 
 #[derive(Accounts)]

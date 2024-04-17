@@ -87,10 +87,15 @@ describe("nft-voter", () => {
         .initializeProxyConfigV0({
           maxProxyTime: new BN(1000000000000),
           name: makeid(10),
-          seasons: [new BN(new Date().valueOf() / 1000 + 100000)]
+          seasons: [
+            {
+              start: new BN(0),
+              end: new BN(new Date().valueOf() / 1000 + 100000),
+            },
+          ],
         })
         .accounts({
-          authority: me
+          authority: me,
         })
         .rpcAndKeys());
 
@@ -186,7 +191,7 @@ describe("nft-voter", () => {
       beforeEach(async () => {
         await proxyProgram.methods
           .assignProxyV0({
-            expirationTime: new BN(new Date().valueOf() / 1000 + 10000)
+            expirationTime: new BN(new Date().valueOf() / 1000 + 10000),
           })
           .accounts({
             proxyConfig,
@@ -288,7 +293,11 @@ describe("nft-voter", () => {
       });
 
       it("allows the original owner to unassign proxy", async () => {
-        const toUnassignProxy = proxyKey(proxyConfig!, mint, proxy.publicKey)[0];
+        const toUnassignProxy = proxyKey(
+          proxyConfig!,
+          mint,
+          proxy.publicKey
+        )[0];
         const myProxy = proxyKey(proxyConfig!, mint, PublicKey.default)[0];
         await proxyProgram.methods
           .unassignProxyV0()

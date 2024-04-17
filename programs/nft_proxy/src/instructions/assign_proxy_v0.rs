@@ -87,9 +87,9 @@ pub fn handler(ctx: Context<AssignProxyV0>, args: AssignProxyArgsV0) -> Result<(
     ErrorCode::ExpirationExceedsMax
   );
 
-  if let Some(current_season_end) = ctx.accounts.proxy_config.get_current_season_end(curr_ts) {
+  if let Some(current_season) = ctx.accounts.proxy_config.get_current_season(curr_ts) {
     require_gt!(
-      current_season_end,
+      current_season.end,
       args.expiration_time,
       ErrorCode::ExpirationExceedsSeasonMax
     );
