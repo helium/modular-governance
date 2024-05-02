@@ -44,7 +44,8 @@ pub struct UnassignProxyV0<'info> {
     close = rent_refund,
     has_one = rent_refund,
     constraint = proxy.index >= current_proxy.index,
-    constraint = proxy.asset == current_proxy.asset
+    constraint = proxy.asset == current_proxy.asset,
+    constraint = proxy.next_owner == Pubkey::default(),
   )]
   pub proxy: Box<Account<'info, ProxyV0>>,
   pub system_program: Program<'info, System>,
