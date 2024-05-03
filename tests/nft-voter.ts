@@ -8,7 +8,7 @@ import {
 import {
   PROGRAM_ID as DEL_PID,
   init as initNftProxy,
-  proxyKey,
+  proxyAssignmentKey,
 } from "@helium/nft-proxy-sdk";
 import { Metaplex, walletAdapterIdentity } from "@metaplex-foundation/js";
 import { Keypair, PublicKey } from "@solana/web3.js";
@@ -202,13 +202,24 @@ describe("nft-voter", () => {
       });
 
       it("allows voting on and relinquishing votes on the proposal", async () => {
+        const proxyAssignment = proxyAssignmentKey(
+          proxyConfig!,
+          mint,
+          proxy.publicKey
+        )[0];
         const {
           pubkeys: { marker },
         } = await program.methods
           .proxiedVoteV0({
             choice: 0,
           })
-          .accounts({ mint, proposal, nftVoter, owner: proxy.publicKey })
+          .accounts({
+            mint,
+            proposal,
+            nftVoter,
+            voter: proxy.publicKey,
+            proxyAssignment,
+          })
           .signers([proxy])
           .rpcAndKeys({ skipPreflight: true });
 
@@ -225,7 +236,8 @@ describe("nft-voter", () => {
             mint,
             proposal,
             nftVoter,
-            owner: proxy.publicKey,
+            voter: proxy.publicKey,
+            proxyAssignment,
           })
           .signers([proxy])
           .rpc({ skipPreflight: true });
@@ -247,7 +259,12 @@ describe("nft-voter", () => {
             mint,
             proposal,
             nftVoter,
-            owner: proxy.publicKey,
+            voter: proxy.publicKey,
+            proxyAssignment: proxyAssignmentKey(
+              proxyConfig!,
+              mint,
+              proxy.publicKey
+            )[0],
           })
           .signers([proxy])
           .rpcAndKeys({ skipPreflight: true });
@@ -293,28 +310,34 @@ describe("nft-voter", () => {
       });
 
       it("allows the original owner to unassign proxy", async () => {
-        const toUnassignProxy = proxyKey(
+        const toUnassignProxy = proxyAssignmentKey(
           proxyConfig!,
           mint,
           proxy.publicKey
         )[0];
-        const myProxy = proxyKey(proxyConfig!, mint, PublicKey.default)[0];
+        const myProxy = proxyAssignmentKey(
+          proxyConfig!,
+          mint,
+          PublicKey.default
+        )[0];
         await proxyProgram.methods
           .unassignProxyV0()
           .accounts({
-            proxy: toUnassignProxy,
-            prevProxy: myProxy,
-            currentProxy: myProxy,
+            proxyAssignment: toUnassignProxy,
+            prevProxyAssignment: myProxy,
+            currentProxyAssignment: myProxy,
           })
           .rpc({ skipPreflight: true });
 
         expect(
           (
-            await proxyProgram.account.proxyV0.fetch(myProxy)
-          ).nextOwner.toBase58()
+            await proxyProgram.account.proxyAssignmentV0.fetch(myProxy)
+          ).nextVoter.toBase58()
         ).to.eq(PublicKey.default.toBase58());
         expect(
-          await proxyProgram.account.proxyV0.fetchNullable(toUnassignProxy)
+          await proxyProgram.account.proxyAssignmentV0.fetchNullable(
+            toUnassignProxy
+          )
         ).to.be.null;
       });
     });

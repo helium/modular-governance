@@ -17,7 +17,7 @@ export const nftProxyResolvers: anchor.CustomAccountResolver<any> =
             )
           ).value[0].address;
         } else if (
-          path[path.length - 1] === "owner" &&
+          path[path.length - 1] === "voter" &&
           (idlIx.name === "assignProxyV0" || idlIx.name === "unassignProxyV0") &&
           accounts.tokenAccount &&
           accounts.approver

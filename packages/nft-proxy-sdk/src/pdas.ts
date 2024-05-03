@@ -11,18 +11,18 @@ export function proxyConfigKey(
   );
 }
 
-export function proxyKey(
+export function proxyAssignmentKey(
   proxyConfig: PublicKey,
   mint: PublicKey,
-  owner: PublicKey,
+  voter: PublicKey,
   programId: PublicKey = PROGRAM_ID
 ): [PublicKey, number] {
   return PublicKey.findProgramAddressSync(
     [
-      Buffer.from("proxy", "utf-8"),
+      Buffer.from("proxy_assignment", "utf-8"),
       proxyConfig.toBuffer(),
       mint.toBuffer(),
-      owner.toBuffer(),
+      voter.toBuffer(),
     ],
     programId
   );

@@ -1,7 +1,7 @@
 use crate::{error::ErrorCode, metaplex::MetadataAccount, RelinquishVoteArgsV0};
 use anchor_lang::prelude::*;
 use anchor_spl::token::Mint;
-use nft_proxy::state::ProxyV0;
+use nft_proxy::state::ProxyAssignmentV0;
 use proposal::{ProposalConfigV0, ProposalV0};
 
 use crate::{nft_voter_seeds, state::*};
@@ -21,7 +21,7 @@ pub struct ProxiedRelinquishVoteV0<'info> {
   )]
   pub marker: Account<'info, VoteMarkerV0>,
   pub nft_voter: Account<'info, NftVoterV0>,
-  pub owner: Signer<'info>,
+  pub voter: Signer<'info>,
   pub mint: Box<Account<'info, Mint>>,
   #[account(
     seeds = ["metadata".as_bytes(), MetadataAccount::owner().as_ref(), mint.key().as_ref()],
@@ -31,12 +31,12 @@ pub struct ProxiedRelinquishVoteV0<'info> {
   )]
   pub metadata: Box<Account<'info, MetadataAccount>>,
   #[account(
-    has_one = owner,
-    constraint = proxy.proxy_config == nft_voter.proxy_config,
-    constraint = proxy.index <= marker.proxy_index,
-    constraint = proxy.expiration_time > Clock::get().unwrap().unix_timestamp,
+    has_one = voter,
+    constraint = proxy_assignment.proxy_config == nft_voter.proxy_config,
+    constraint = proxy_assignment.index <= marker.proxy_index,
+    constraint = proxy_assignment.expiration_time > Clock::get().unwrap().unix_timestamp,
   )]
-  pub proxy: Box<Account<'info, ProxyV0>>,
+  pub proxy_assignment: Box<Account<'info, ProxyAssignmentV0>>,
   #[account(
     mut,
     has_one = proposal_config,
@@ -65,7 +65,7 @@ pub struct ProxiedRelinquishVoteV0<'info> {
 pub fn handler(ctx: Context<ProxiedRelinquishVoteV0>, args: RelinquishVoteArgsV0) -> Result<()> {
   let marker = &mut ctx.accounts.marker;
   marker.proposal = ctx.accounts.proposal.key();
-  marker.voter = ctx.accounts.owner.key();
+  marker.voter = ctx.accounts.voter.key();
 
   require!(
     marker.choices.iter().any(|choice| *choice == args.choice),
@@ -83,7 +83,7 @@ pub fn handler(ctx: Context<ProxiedRelinquishVoteV0>, args: RelinquishVoteArgsV0
     CpiContext::new_with_signer(
       ctx.accounts.proposal_program.to_account_info(),
       proposal::cpi::accounts::VoteV0 {
-        voter: ctx.accounts.owner.to_account_info(),
+        voter: ctx.accounts.voter.to_account_info(),
         vote_controller: ctx.accounts.nft_voter.to_account_info(),
         state_controller: ctx.accounts.state_controller.to_account_info(),
         proposal_config: ctx.accounts.proposal_config.to_account_info(),

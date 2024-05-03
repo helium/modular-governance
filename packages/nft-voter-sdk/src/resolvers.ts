@@ -2,7 +2,7 @@ import { ataResolver, combineResolvers, resolveIndividual } from "@helium/anchor
 import { PROGRAM_ID } from "./constants";
 import * as anchor from "@coral-xyz/anchor";
 import { PublicKey } from "@solana/web3.js";
-import { proxyKey, nftProxyResolvers } from "@helium/nft-proxy-sdk";
+import { proxyAssignmentKey, nftProxyResolvers } from "@helium/nft-proxy-sdk";
 import { init } from ".";
 
 const METADATA_PROGRAM_ID = new PublicKey(
@@ -36,10 +36,10 @@ export const nftVoterResolvers: anchor.CustomAccountResolver<any> = combineResol
         ],
         METADATA_PROGRAM_ID
       )[0];
-    } else if (path[path.length - 1] == "proxy" && accounts.nftVoter && accounts.owner && accounts.mint) {
+    } else if (path[path.length - 1] == "proxy_assignment" && accounts.nftVoter && accounts.owner && accounts.mint) {
       const program = await init(provider as any, programId)
       const nftVoter = await program.account.nftVoterV0.fetch(accounts.nftVoter as PublicKey)
-      return proxyKey(
+      return proxyAssignmentKey(
         nftVoter.proxyConfig,
         accounts.mint as PublicKey,
         accounts.owner as PublicKey,

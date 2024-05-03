@@ -1,7 +1,7 @@
 use crate::{error::ErrorCode, metaplex::MetadataAccount, VoteArgsV0};
 use anchor_lang::prelude::*;
 use anchor_spl::token::Mint;
-use nft_proxy::state::ProxyV0;
+use nft_proxy::state::ProxyAssignmentV0;
 use proposal::{ProposalConfigV0, ProposalV0};
 
 use crate::{nft_voter_seeds, state::*};
@@ -19,15 +19,15 @@ pub struct ProxyVoteV0<'info> {
   )]
   pub marker: Box<Account<'info, VoteMarkerV0>>,
   #[account(
-    has_one = owner,
-    constraint = proxy.proxy_config == nft_voter.proxy_config,
+    has_one = voter,
+    constraint = proxy_assignment.proxy_config == nft_voter.proxy_config,
     // only the current or earlier delegates can change vote. Or if proposal not set, this was an `init` for the marker
-    constraint = proxy.index <= marker.proxy_index || marker.proposal == Pubkey::default(),
-    constraint = proxy.expiration_time > Clock::get().unwrap().unix_timestamp,
+    constraint = proxy_assignment.index <= marker.proxy_index || marker.proposal == Pubkey::default(),
+    constraint = proxy_assignment.expiration_time > Clock::get().unwrap().unix_timestamp,
   )]
-  pub proxy: Box<Account<'info, ProxyV0>>,
+  pub proxy_assignment: Box<Account<'info, ProxyAssignmentV0>>,
   pub nft_voter: Box<Account<'info, NftVoterV0>>,
-  pub owner: Signer<'info>,
+  pub voter: Signer<'info>,
   pub mint: Box<Account<'info, Mint>>,
   #[account(
     seeds = ["metadata".as_bytes(), MetadataAccount::owner().as_ref(), mint.key().as_ref()],
@@ -68,10 +68,10 @@ pub fn handler(ctx: Context<ProxyVoteV0>, args: VoteArgsV0) -> Result<()> {
   }
   marker.proposal = ctx.accounts.proposal.key();
   marker.bump_seed = ctx.bumps["marker"];
-  marker.voter = ctx.accounts.owner.key();
+  marker.voter = ctx.accounts.voter.key();
   marker.nft_voter = ctx.accounts.nft_voter.key();
   marker.mint = ctx.accounts.mint.key();
-  marker.proxy_index = ctx.accounts.proxy.index;
+  marker.proxy_index = ctx.accounts.proxy_assignment.index;
 
   // Don't allow voting for the same choice twice.
   require!(
@@ -90,7 +90,7 @@ pub fn handler(ctx: Context<ProxyVoteV0>, args: VoteArgsV0) -> Result<()> {
     CpiContext::new_with_signer(
       ctx.accounts.proposal_program.to_account_info(),
       proposal::cpi::accounts::VoteV0 {
-        voter: ctx.accounts.owner.to_account_info(),
+        voter: ctx.accounts.voter.to_account_info(),
         vote_controller: ctx.accounts.nft_voter.to_account_info(),
         state_controller: ctx.accounts.state_controller.to_account_info(),
         proposal_config: ctx.accounts.proposal_config.to_account_info(),

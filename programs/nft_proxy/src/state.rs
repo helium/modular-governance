@@ -54,17 +54,17 @@ impl ProxyConfigV0 {
   }
 }
 
-// Forms an on chain linked list of proxys
+// Forms an on chain linked list of proxy voters
 #[account]
 #[derive(Default, InitSpace)]
-pub struct ProxyV0 {
-  pub owner: Pubkey,
+pub struct ProxyAssignmentV0 {
+  pub voter: Pubkey,
   pub proxy_config: Pubkey,
   pub asset: Pubkey,
   // Current index in the proxy chain.
   pub index: u16,
   // If this is the last in the line, Pubkey::default.
-  pub next_owner: Pubkey,
+  pub next_voter: Pubkey,
   // The address of the account that paid for rent. Rent on closing
   // proxys always goes to the key who originally paid for them.
   pub rent_refund: Pubkey,
