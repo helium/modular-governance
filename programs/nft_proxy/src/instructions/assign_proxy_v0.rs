@@ -26,7 +26,7 @@ pub struct AssignProxyV0<'info> {
     constraint = token_account.owner == approver.key() || current_proxy_assignment.voter == approver.key()
   )]
   pub approver: Signer<'info>,
-  /// CHECK: This is the owner of the current proxy. May be the same as approver,
+  /// CHECK: This is the voter of the current proxy. May be the same as approver,
   /// or in the case of a primary proxy (first in the line), Pubkey::default
   #[account(
     constraint = (current_proxy_assignment.index != 0 && current_proxy_assignment.voter == voter.key())
@@ -50,7 +50,7 @@ pub struct AssignProxyV0<'info> {
     seeds = [b"proxy_assignment", proxy_config.key().as_ref(), asset.key().as_ref(), voter.key().as_ref()],
     space = ProxyAssignmentV0::INIT_SPACE + 60,
     bump,
-    // You can only delegate when it is not currently delegated to someone else.
+    // You can only proxy when it is not currently proxied to someone else.
     // Recall the proxy before re-delegating if necessary.
     constraint = current_proxy_assignment.next_voter == Pubkey::default()
   )]
