@@ -303,6 +303,30 @@ describe("organization wallet", () => {
           expect(acct.proposalConfigs[0].equals(otherProposalConfig!)).to.be;
         });
 
+        it("should resize proposal configs", async () => {
+          const proposalConfigs = Array.from({ length: 20 }).map(
+            () => Keypair.generate().publicKey
+          );
+
+          await program.methods
+            .updateOrganizationWalletV0({
+              name: null,
+              proposalConfigs,
+            })
+            .accounts({
+              organizationWallet,
+              organization,
+              authority: me,
+            })
+            .rpc({ skipPreflight: true });
+
+          const acct = await program.account.organizationWalletV0.fetch(
+            organizationWallet!
+          );
+
+          expect(acct.proposalConfigs).to.have.length(proposalConfigs.length);
+        });
+
         it("should fail if not the authority", async () => {
           const authority = Keypair.generate().publicKey;
 

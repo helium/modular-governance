@@ -1,5 +1,5 @@
 use crate::error::ErrorCode;
-use crate::state::OrganizationWalletV0;
+use crate::{resize_to_fit::resize_to_fit, state::OrganizationWalletV0};
 use anchor_lang::prelude::*;
 use organization::state::OrganizationV0;
 
@@ -25,6 +25,7 @@ pub struct UpdateOrganizationWalletV0<'info> {
   )]
   pub organization: Account<'info, OrganizationV0>,
   pub authority: Signer<'info>,
+  pub system_program: Program<'info, System>,
 }
 
 pub fn handler(
@@ -37,5 +38,12 @@ pub fn handler(
   if let Some(proposal_configs) = args.proposal_configs {
     ctx.accounts.organization_wallet.proposal_configs = proposal_configs;
   }
+
+  resize_to_fit(
+    &ctx.accounts.payer.to_account_info(),
+    &ctx.accounts.system_program.to_account_info(),
+    &ctx.accounts.organization_wallet,
+  )?;
+
   Ok(())
 }
