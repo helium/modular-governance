@@ -11,8 +11,6 @@ pub struct UpdateProposalConfigArgsV0 {
 
 #[derive(Accounts)]
 pub struct UpdateProposalConfigV0<'info> {
-  #[account(mut)]
-  pub payer: Signer<'info>,
   #[account(
     mut,
     has_one = authority,
