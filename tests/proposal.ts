@@ -1,7 +1,7 @@
 import * as anchor from "@coral-xyz/anchor";
 import { Program } from "@coral-xyz/anchor";
 import { Proposal } from "../target/types/proposal";
-import { PublicKey } from "@solana/web3.js";
+import { Keypair, PublicKey } from "@solana/web3.js";
 import { PROGRAM_ID, init } from "@helium/proposal-sdk";
 import { expect } from "chai";
 import { makeid } from "./utils";
@@ -20,6 +20,32 @@ describe("proposal", () => {
   });
 
   it("Creates a proposal config", async () => {
+    const voteController = Keypair.generate().publicKey;
+    const stateController = Keypair.generate().publicKey;
+    const onVoteHook = Keypair.generate().publicKey;
+
+    const {
+      pubkeys: { proposalConfig },
+    } = await program.methods
+      .initializeProposalConfigV0({
+        name,
+        voteController,
+        stateController,
+        onVoteHook,
+      })
+      .rpcAndKeys();
+
+    const acct = await program.account.proposalConfigV0.fetch(proposalConfig!);
+
+    expect(acct.voteController.toBase58()).to.eq(voteController.toBase58());
+    expect(acct.stateController.toBase58()).to.eq(stateController.toBase58());
+    expect(acct.onVoteHook.toBase58()).to.eq(onVoteHook.toBase58());
+    expect(acct.authority.toBase58()).to.eq(PublicKey.default.toBase58());
+  });
+
+  it("Creates a proposal config with authority", async () => {
+    const authority = Keypair.generate().publicKey;
+
     const {
       pubkeys: { proposalConfig },
     } = await program.methods
@@ -28,6 +54,7 @@ describe("proposal", () => {
         voteController: me,
         stateController: me,
         onVoteHook: PublicKey.default,
+        authority,
       })
       .rpcAndKeys();
 
@@ -36,6 +63,7 @@ describe("proposal", () => {
     expect(acct.voteController.toBase58()).to.eq(me.toBase58());
     expect(acct.stateController.toBase58()).to.eq(me.toBase58());
     expect(acct.onVoteHook.toBase58()).to.eq(PublicKey.default.toBase58());
+    expect(acct.authority.toBase58()).to.eq(authority.toBase58());
   });
 
   describe("with proposal config", () => {
@@ -49,8 +77,107 @@ describe("proposal", () => {
           voteController: me,
           stateController: me,
           onVoteHook: PublicKey.default,
+          authority: me,
         })
         .rpcAndKeys());
+    });
+
+    it("Updates a proposal config", async () => {
+      const voteController = Keypair.generate().publicKey;
+      const stateController = Keypair.generate().publicKey;
+      const onVoteHook = Keypair.generate().publicKey;
+      const authority = Keypair.generate().publicKey;
+
+      await program.methods
+        .updateProposalConfigV0({
+          voteController,
+          stateController,
+          onVoteHook,
+          authority,
+        })
+        .accounts({ proposalConfig })
+        .rpc();
+
+      const acct = await program.account.proposalConfigV0.fetch(
+        proposalConfig!
+      );
+
+      expect(acct.voteController.toBase58()).to.eq(voteController.toBase58());
+      expect(acct.stateController.toBase58()).to.eq(stateController.toBase58());
+      expect(acct.onVoteHook.toBase58()).to.eq(onVoteHook.toBase58());
+      expect(acct.authority.toBase58()).to.eq(authority.toBase58());
+    });
+
+    it("Updates an arbitrary prop in a proposal config", async () => {
+      const props = [
+        "voteController",
+        "stateController",
+        "onVoteHook",
+        "authority",
+      ];
+      const prop = props[Math.floor(Math.random() * props.length)];
+
+      const pubkey = Keypair.generate().publicKey;
+      const args = Object.fromEntries(
+        props.map((p) => [p, p === prop ? pubkey : null])
+      );
+
+      await program.methods
+        .updateProposalConfigV0(args as any)
+        .accounts({ proposalConfig })
+        .rpc();
+
+      const acct = await program.account.proposalConfigV0.fetch(
+        proposalConfig!
+      );
+
+      for (const p of props) {
+        if (p === prop) {
+          expect(acct[p].toBase58()).to.eq(pubkey.toBase58());
+        } else {
+          if (p === "onVoteHook") {
+            expect(acct[p].toBase58()).to.eq(PublicKey.default.toBase58());
+          } else {
+            expect(acct[p].toBase58()).to.eq(me.toBase58());
+          }
+        }
+      }
+    });
+
+    it("Fails to update a proposal config with a wrong authority", async () => {
+      let logs: string | undefined;
+
+      const authority = Keypair.generate().publicKey;
+
+      await program.methods
+        .updateProposalConfigV0({
+          voteController: null,
+          stateController: null,
+          onVoteHook: null,
+          authority,
+        })
+        .accounts({ proposalConfig })
+        .rpc();
+
+      try {
+        await program.methods
+          .updateProposalConfigV0({
+            voteController: me,
+            stateController: me,
+            onVoteHook: PublicKey.default,
+            authority: me,
+          })
+          .accounts({
+            proposalConfig,
+          })
+          .simulate();
+      } catch (err) {
+        logs = err.simulationResponse?.logs;
+      }
+
+      expect(logs).to.match(
+        /caused by account: proposal_config\..*ConstraintHasOne/
+      );
     });
 
     it("Creates a proposal", async () => {
