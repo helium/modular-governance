@@ -20,7 +20,10 @@ export const proposalResolvers: anchor.CustomAccountResolver<any> = combineResol
         args[0].seed,
         programId
       )[0];
-    } else if (path[path.length - 1] == "owner") {
+    } else if (
+      path[path.length - 1] == "owner" ||
+      path[path.length - 1] == "authority"
+    ) {
       if ((provider as anchor.AnchorProvider).wallet) {
         return (provider as anchor.AnchorProvider).wallet.publicKey;
       }
