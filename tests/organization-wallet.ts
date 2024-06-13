@@ -343,6 +343,8 @@ describe("organization wallet", () => {
             })
             .rpc({ skipPreflight: true });
 
+          let logs: string | undefined;
+
           try {
             await program.methods
               .updateOrganizationWalletV0({
@@ -356,10 +358,12 @@ describe("organization wallet", () => {
               })
               .simulate();
           } catch (err) {
-            expect(err.simulationResponse?.logs).to.match(
-              /caused by account: organization\..*ConstraintHasOne/
-            );
+            logs = err.simulationResponse?.logs;
           }
+
+          expect(logs).to.match(
+            /caused by account: organization\..*ConstraintHasOne/
+          );
         });
 
         it("should fail if wrong organization", async () => {
@@ -375,6 +379,8 @@ describe("organization wallet", () => {
             })
             .rpcAndKeys({ skipPreflight: true });
 
+          let logs: string | undefined;
+
           try {
             await program.methods
               .updateOrganizationWalletV0({
@@ -388,10 +394,12 @@ describe("organization wallet", () => {
               })
               .simulate();
           } catch (err) {
-            expect(err.simulationResponse?.logs).to.match(
-              /caused by account: organization_wallet\..*InvalidOrganization/
-            );
+            logs = err.simulationResponse?.logs;
           }
+
+          expect(logs).to.match(
+            /caused by account: organization_wallet\..*InvalidOrganization/
+          );
         });
       });
     });
