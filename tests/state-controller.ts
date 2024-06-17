@@ -7,12 +7,7 @@ import {
   PROGRAM_ID as PROPOSAL_PID,
   init as initProposal,
 } from "@helium/proposal-sdk";
-import {
-  PROGRAM_ID,
-  SettingsBuilder,
-  init,
-  settings,
-} from "@helium/state-controller-sdk";
+import { PROGRAM_ID, init, settings } from "@helium/state-controller-sdk";
 import { expect } from "chai";
 import { ensureIdls, makeid } from "./utils";
 
@@ -300,6 +295,71 @@ describe("state-controller", () => {
           .rpc({ skipPreflight: true });
 
         await sleep(10000);
+        await program.methods.resolveV0().accounts({ proposal }).rpc();
+
+        acct = await proposalProgram.account.proposalV0.fetch(proposal!);
+        expect(acct.state.resolved?.choices).to.deep.eq([]);
+      });
+    });
+
+    describe("resolved by choice vote weight or offset", () => {
+      before(async () => {
+        nodes = settings()
+          .and(
+            settings().choiceVoteWeight(new anchor.BN(5)),
+            settings().or(
+              settings().numResolved(1),
+              settings().offsetFromStartTs(new anchor.BN(5))
+            )
+          )
+          .build();
+      });
+
+      it("resolves to the max choice when there is enough weight", async () => {
+        await proposalProgram.methods
+          .voteV0({
+            choice: 0,
+            weight: new anchor.BN(3),
+            removeVote: false,
+          })
+          .accounts({ proposal, voter: me })
+          .rpc({ skipPreflight: true });
+
+        await program.methods.resolveV0().accounts({ proposal }).rpc();
+
+        let acct = await proposalProgram.account.proposalV0.fetch(proposal!);
+        expect(Boolean(acct.state.voting)).to.be.true;
+
+        await proposalProgram.methods
+          .voteV0({
+            choice: 1,
+            weight: new anchor.BN(5),
+            removeVote: false,
+          })
+          .accounts({ proposal, voter: me })
+          .rpc({ skipPreflight: true });
+
+        acct = await proposalProgram.account.proposalV0.fetch(proposal!);
+        expect(acct.state.resolved?.choices).to.deep.eq([1]);
+      });
+
+      it("resolves to no choices after offset", async () => {
+        await proposalProgram.methods
+          .voteV0({
+            choice: 0,
+            weight: new anchor.BN(3),
+            removeVote: false,
+          })
+          .accounts({ proposal, voter: me })
+          .rpc({ skipPreflight: true });
+
+        await program.methods.resolveV0().accounts({ proposal }).rpc();
+
+        let acct = await proposalProgram.account.proposalV0.fetch(proposal!);
+        expect(Boolean(acct.state.voting)).to.be.true;
+
+        await sleep(6000);
+
         await program.methods.resolveV0().accounts({ proposal }).rpc();
 
         acct = await proposalProgram.account.proposalV0.fetch(proposal!);
