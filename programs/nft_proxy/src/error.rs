@@ -10,4 +10,10 @@ pub enum ErrorCode {
   ExpirationPast,
   #[msg("The specified expiration time exceeds the expiration of the existing delegatio")]
   ExpirationExceedsPreceedingProxy,
+  #[msg("The seasons are not sorted")]
+  SeasonsNotSorted,
+  #[msg("The data size increase is not valid")]
+  InvalidDataIncrease,
+  #[msg("The expiration time is invalid")]
+  ExpirationTimeInvalid,
 }

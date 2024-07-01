@@ -1,3 +1,4 @@
+use crate::error::ErrorCode;
 use crate::state::{ProxyConfigV0, SeasonV0};
 use anchor_lang::prelude::*;
 
@@ -18,7 +19,7 @@ pub struct InitializeProxyConfigV0<'info> {
   #[account(
     init,
     payer = payer,
-    space = 60 + std::mem::size_of::<ProxyConfigV0>() + args.name.len() + args.seasons.len() * 8,
+    space = 60 + std::mem::size_of::<ProxyConfigV0>() + args.name.len() + args.seasons.len() * 16,
     seeds = [b"proxy_config".as_ref(), args.name.as_bytes()],
     bump
   )]
@@ -30,6 +31,15 @@ pub fn handler(
   ctx: Context<InitializeProxyConfigV0>,
   args: InitializeProxyConfigArgsV0,
 ) -> Result<()> {
+  if !args
+    .seasons
+    .iter()
+    .zip(args.seasons.iter().skip(1))
+    .all(|(a, b)| a.start <= b.start && a.end <= b.end)
+  {
+    return Err(error!(ErrorCode::SeasonsNotSorted));
+  }
+
   ctx.accounts.proxy_config.set_inner(ProxyConfigV0 {
     authority: ctx.accounts.authority.key(),
     name: args.name,

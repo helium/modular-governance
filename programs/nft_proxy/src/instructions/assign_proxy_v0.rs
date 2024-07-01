@@ -75,6 +75,7 @@ pub struct AssignProxyV0<'info> {
 }
 
 pub fn handler(ctx: Context<AssignProxyV0>, args: AssignProxyArgsV0) -> Result<()> {
+  require_gt!(args.expiration_time, 0, ErrorCode::ExpirationTimeInvalid);
   let curr_ts = Clock::get().unwrap().unix_timestamp;
   let total_proxy_time = args
     .expiration_time
@@ -86,6 +87,7 @@ pub fn handler(ctx: Context<AssignProxyV0>, args: AssignProxyArgsV0) -> Result<(
     total_proxy_time,
     ErrorCode::ExpirationExceedsMax
   );
+  require_gt!(total_proxy_time, 0, ErrorCode::ExpirationTimeInvalid);
 
   if let Some(current_season) = ctx.accounts.proxy_config.get_current_season(curr_ts) {
     require_gt!(
