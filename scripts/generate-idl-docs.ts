@@ -106,7 +106,7 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 ## Types
 
 `;
-  types.forEach((type) => {
+  types?.forEach((type) => {
     mdFile += `### ${type.name}
 
 `;

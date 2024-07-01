@@ -9,8 +9,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-
-
 ## [0.0.9](https://github.com/helium/modular-governance/compare/v0.0.8...v0.0.9) (2024-03-13)
 
 **Note:** Version bump only for package modular-governance

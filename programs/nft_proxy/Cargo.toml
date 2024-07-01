@@ -1,12 +1,12 @@
 [package]
-name = "nft-voter"
-version = "0.1.0"
+name = "nft-proxy"
+version = "0.0.1"
 description = "Created with Anchor"
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "lib"]
-name = "nft_voter"
+name = "nft_proxy"
 
 [features]
 no-entrypoint = []
@@ -19,5 +19,4 @@ devnet = []
 [dependencies]
 anchor-lang = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism", features = ["init-if-needed"] }
 anchor-spl = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism", features = ["token"] }
-proposal = { path = "../proposal", features = ["no-entrypoint", "cpi"] }
-nft-proxy = { path = "../nft_proxy", features = ["cpi"] }
+bytemuck = "1.14.0"

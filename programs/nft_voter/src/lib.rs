@@ -30,4 +30,19 @@ pub mod nft_voter {
   pub fn vote_v0(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
     vote_v0::handler(ctx, args)
   }
+
+  pub fn proxied_relinquish_vote_v0(
+    ctx: Context<ProxiedRelinquishVoteV0>,
+    args: RelinquishVoteArgsV0,
+  ) -> Result<()> {
+    proxied_relinquish_vote_v0::handler(ctx, args)
+  }
+
+  pub fn proxied_vote_v0(ctx: Context<ProxyVoteV0>, args: VoteArgsV0) -> Result<()> {
+    proxied_vote_v0::handler(ctx, args)
+  }
+
+  pub fn update_nft_voter_v0(ctx: Context<UpdateNftVoterV0>) -> Result<()> {
+    update_nft_voter_v0::handler(ctx)
+  }
 }

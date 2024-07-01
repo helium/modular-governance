@@ -1,17 +1,13 @@
-use crate::{error::ErrorCode, metaplex::MetadataAccount};
+use crate::{error::ErrorCode, metaplex::MetadataAccount, VoteArgsV0};
 use anchor_lang::prelude::*;
-use anchor_spl::token::{Mint, TokenAccount};
+use anchor_spl::token::Mint;
+use nft_proxy::state::ProxyAssignmentV0;
 use proposal::{ProposalConfigV0, ProposalV0};
 
 use crate::{nft_voter_seeds, state::*};
 
-#[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
-pub struct VoteArgsV0 {
-  pub choice: u16,
-}
-
 #[derive(Accounts)]
-pub struct VoteV0<'info> {
+pub struct ProxyVoteV0<'info> {
   #[account(mut)]
   pub payer: Signer<'info>,
   #[account(
@@ -22,6 +18,14 @@ pub struct VoteV0<'info> {
     bump
   )]
   pub marker: Box<Account<'info, VoteMarkerV0>>,
+  #[account(
+    has_one = voter,
+    constraint = proxy_assignment.proxy_config == nft_voter.proxy_config,
+    // only the current or earlier delegates can change vote. Or if proposal not set, this was an `init` for the marker
+    constraint = proxy_assignment.index <= marker.proxy_index || marker.proposal == Pubkey::default(),
+    constraint = proxy_assignment.expiration_time > Clock::get().unwrap().unix_timestamp,
+  )]
+  pub proxy_assignment: Box<Account<'info, ProxyAssignmentV0>>,
   pub nft_voter: Box<Account<'info, NftVoterV0>>,
   pub voter: Signer<'info>,
   pub mint: Box<Account<'info, Mint>>,
@@ -32,12 +36,6 @@ pub struct VoteV0<'info> {
     constraint = metadata.collection.as_ref().map(|col| col.verified && col.key == nft_voter.collection).unwrap_or_else(|| false)
   )]
   pub metadata: Box<Account<'info, MetadataAccount>>,
-  #[account(
-    associated_token::authority = voter,
-    associated_token::mint = mint,
-    constraint = token_account.amount == 1,
-  )]
-  pub token_account: Box<Account<'info, TokenAccount>>,
   #[account(
     mut,
     has_one = proposal_config,
@@ -63,7 +61,7 @@ pub struct VoteV0<'info> {
   pub system_program: Program<'info, System>,
 }
 
-pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
+pub fn handler(ctx: Context<ProxyVoteV0>, args: VoteArgsV0) -> Result<()> {
   let marker = &mut ctx.accounts.marker;
   if marker.rent_refund == Pubkey::default() {
     marker.rent_refund = ctx.accounts.payer.key();
@@ -73,7 +71,7 @@ pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
   marker.voter = ctx.accounts.voter.key();
   marker.nft_voter = ctx.accounts.nft_voter.key();
   marker.mint = ctx.accounts.mint.key();
-  marker.proxy_index = 0;
+  marker.proxy_index = ctx.accounts.proxy_assignment.index;
 
   // Don't allow voting for the same choice twice.
   require!(

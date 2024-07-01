@@ -93,6 +93,8 @@ export const navigation = [
 
       { title: "Nft voter", href: "/docs/api/nft-voter-sdk" },
 
+      { title: "Nft proxy", href: "/docs/api/nft-proxy-sdk" },
+
       // DOCS NAVIGATION END
     ],
   },

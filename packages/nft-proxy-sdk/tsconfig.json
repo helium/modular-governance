@@ -5,9 +5,6 @@
       "path": "../modular-governance-idls"
     },
     {
-      "path": "../nft-proxy-sdk"
-    },
-    {
       "path": "./tsconfig.cjs.json"
     },
     {
