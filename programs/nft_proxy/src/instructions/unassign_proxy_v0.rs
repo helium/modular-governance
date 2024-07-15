@@ -17,7 +17,10 @@ pub struct UnassignProxyV0<'info> {
   )]
   pub asset: Box<Account<'info, Mint>>,
   #[account(
-    constraint = token_account.owner == approver.key() || current_proxy_assignment.voter == approver.key()
+    constraint = current_proxy_assignment.voter == approver.key() || match token_account.as_ref() {
+      Some(token_account) => token_account.owner == approver.key(),
+      None => false
+    }
   )]
   pub approver: Signer<'info>,
   /// CHECK: This is the voter of the current proxy. May be the same as approver,
@@ -31,7 +34,7 @@ pub struct UnassignProxyV0<'info> {
     constraint = token_account.mint == asset.key(),
     constraint = token_account.amount == 1,
   )]
-  pub token_account: Box<Account<'info, TokenAccount>>,
+  pub token_account: Option<Account<'info, TokenAccount>>,
   #[account(
     has_one = proxy_config,
     has_one = voter,

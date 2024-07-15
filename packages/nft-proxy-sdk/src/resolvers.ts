@@ -9,7 +9,8 @@ export const nftProxyResolvers: anchor.CustomAccountResolver<any> =
       async ({ path, provider, accounts, idlIx, programId }) => {
         if (
           path[path.length - 1] === "tokenAccount" &&
-          accounts.asset
+          accounts.asset &&
+          accounts.tokenAccount !== null
         ) {
           return (
             await provider.connection.getTokenLargestAccounts(
@@ -18,7 +19,8 @@ export const nftProxyResolvers: anchor.CustomAccountResolver<any> =
           ).value[0].address;
         } else if (
           path[path.length - 1] === "voter" &&
-          (idlIx.name === "assignProxyV0" || idlIx.name === "unassignProxyV0") &&
+          (idlIx.name === "assignProxyV0" ||
+            idlIx.name === "unassignProxyV0") &&
           accounts.tokenAccount &&
           accounts.approver
         ) {
