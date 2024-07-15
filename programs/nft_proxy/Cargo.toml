@@ -20,3 +20,4 @@ devnet = []
 anchor-lang = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism", features = ["init-if-needed"] }
 anchor-spl = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism", features = ["token"] }
 bytemuck = "1.14.0"
+
