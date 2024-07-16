@@ -70,7 +70,7 @@ pub struct AssignProxyV0<'info> {
   )]
   pub recipient: AccountInfo<'info>,
   #[account(
-    init,
+    init_if_needed,
     payer = payer,
     seeds = [b"proxy_assignment", proxy_config.key().as_ref(), asset.key().as_ref(), recipient.key().as_ref()],
     space = ProxyAssignmentV0::INIT_SPACE + 60,
@@ -112,7 +112,11 @@ pub fn handler(ctx: Context<AssignProxyV0>, args: AssignProxyArgsV0) -> Result<(
       proxy_config: ctx.accounts.proxy_config.key(),
       voter: ctx.accounts.voter.key(),
       next_voter: ctx.accounts.recipient.key(),
-      rent_refund: ctx.accounts.payer.key(),
+      rent_refund: if ctx.accounts.current_proxy_assignment.rent_refund == Pubkey::default() {
+        ctx.accounts.payer.key()
+      } else {
+        ctx.accounts.current_proxy_assignment.rent_refund
+      },
       bump_seed: ctx.bumps["current_proxy_assignment"],
       expiration_time: if ctx.accounts.current_proxy_assignment.expiration_time > 0 {
         ctx.accounts.current_proxy_assignment.expiration_time
@@ -136,7 +140,11 @@ pub fn handler(ctx: Context<AssignProxyV0>, args: AssignProxyArgsV0) -> Result<(
       proxy_config: ctx.accounts.proxy_config.key(),
       voter: ctx.accounts.recipient.key(),
       next_voter: Pubkey::default(),
-      rent_refund: ctx.accounts.payer.key(),
+      rent_refund: if ctx.accounts.next_proxy_assignment.rent_refund == Pubkey::default() {
+        ctx.accounts.payer.key()
+      } else {
+        ctx.accounts.next_proxy_assignment.rent_refund
+      },
       bump_seed: ctx.bumps["next_proxy_assignment"],
       expiration_time: args.expiration_time,
     });
