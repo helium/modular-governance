@@ -55,7 +55,7 @@ pub struct AssignProxyV0<'info> {
     bump,
     // You can only proxy when it is not currently proxied to someone else.
     // Recall the proxy before re-delegating if necessary.
-    constraint = current_proxy_assignment.next_voter == Pubkey::default() || current_proxy_assignment.next_voter == voter.key()
+    constraint = current_proxy_assignment.next_voter == Pubkey::default() || current_proxy_assignment.next_voter == recipient.key()
   )]
   pub current_proxy_assignment: Box<Account<'info, ProxyAssignmentV0>>,
   /// CHECK: The wallet being delegated to
