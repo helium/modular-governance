@@ -118,7 +118,8 @@ pub fn handler(ctx: Context<AssignProxyV0>, args: AssignProxyArgsV0) -> Result<(
         ctx.accounts.current_proxy_assignment.rent_refund
       },
       bump_seed: ctx.bumps["current_proxy_assignment"],
-      expiration_time: if ctx.accounts.current_proxy_assignment.expiration_time > 0 {
+      // If this is a recursive proxy (ie not the initial proxy), use the existing expiration time
+      expiration_time: if ctx.accounts.current_proxy_assignment.expiration_time > 0 && ctx.accounts.current_proxy_assignment.voter != Pubkey::default() {
         ctx.accounts.current_proxy_assignment.expiration_time
       } else {
         args.expiration_time
