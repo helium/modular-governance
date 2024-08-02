@@ -15,15 +15,11 @@ pub struct UnassignExpiredProxyV0<'info> {
   )]
   pub asset: Box<Account<'info, Mint>>,
   #[account(
-    has_one = proxy_config,
-    has_one = asset,
-  )]
-  pub current_proxy_assignment: Box<Account<'info, ProxyAssignmentV0>>,
-  #[account(
     mut,
     has_one = proxy_config,
+    has_one = asset,
     constraint = prev_proxy_assignment.next_voter == proxy_assignment.voter,
-    constraint = prev_proxy_assignment.asset == current_proxy_assignment.asset,
+    constraint = prev_proxy_assignment.asset == proxy_assignment.asset,
   )]
   pub prev_proxy_assignment: Box<Account<'info, ProxyAssignmentV0>>,
   #[account(
@@ -32,7 +28,6 @@ pub struct UnassignExpiredProxyV0<'info> {
     has_one = proxy_config,
     has_one = rent_refund,
     constraint = proxy_assignment.index >= current_proxy_assignment.index,
-    constraint = proxy_assignment.asset == current_proxy_assignment.asset,
     constraint = proxy_assignment.next_voter == Pubkey::default(),
     constraint = proxy_assignment.expiration_time < Clock::get().unwrap().unix_timestamp @ ErrorCode::ExpirationNotPast,
   )]
