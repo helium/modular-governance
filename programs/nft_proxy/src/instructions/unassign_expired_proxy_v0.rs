@@ -15,11 +15,6 @@ pub struct UnassignExpiredProxyV0<'info> {
   )]
   pub asset: Box<Account<'info, Mint>>,
   #[account(
-    constraint = token_account.mint == asset.key(),
-    constraint = token_account.amount == 1,
-  )]
-  pub token_account: Option<Account<'info, TokenAccount>>,
-  #[account(
     has_one = proxy_config,
     has_one = asset,
   )]
