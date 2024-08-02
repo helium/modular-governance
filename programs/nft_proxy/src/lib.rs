@@ -34,4 +34,8 @@ pub mod nft_proxy {
   ) -> Result<()> {
     update_proxy_config_v0::handler(ctx, args)
   }
+
+  pub fn unassign_expired_proxy_v0(ctx: Context<UnassignExpiredProxyV0>) -> Result<()> {
+    unassign_expired_proxy_v0::handler(ctx)
+  }
 }

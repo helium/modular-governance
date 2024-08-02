@@ -16,4 +16,6 @@ pub enum ErrorCode {
   InvalidDataIncrease,
   #[msg("The expiration time is invalid")]
   ExpirationTimeInvalid,
+  #[msg("The specified expiration time has not passed")]
+  ExpirationNotPast,
 }
