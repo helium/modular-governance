@@ -9,7 +9,6 @@ pub struct UnassignExpiredProxyV0<'info> {
   /// CHECK: Receiving rent for closing
   #[account(mut)]
   pub rent_refund: AccountInfo<'info>,
-  pub asset: Box<Account<'info, Mint>>,
   #[account(
     mut,
     has_one = proxy_config,
