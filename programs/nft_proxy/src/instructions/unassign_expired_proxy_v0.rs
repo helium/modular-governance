@@ -9,10 +9,6 @@ pub struct UnassignExpiredProxyV0<'info> {
   /// CHECK: Receiving rent for closing
   #[account(mut)]
   pub rent_refund: AccountInfo<'info>,
-  #[account(
-    constraint = asset.supply == 1,
-    constraint = asset.decimals == 0
-  )]
   pub asset: Box<Account<'info, Mint>>,
   #[account(
     mut,
@@ -27,7 +23,7 @@ pub struct UnassignExpiredProxyV0<'info> {
     close = rent_refund,
     has_one = proxy_config,
     has_one = rent_refund,
-    constraint = proxy_assignment.index >= current_proxy_assignment.index,
+    constraint = proxy_assignment.index > prev_proxy_assignment.index,
     constraint = proxy_assignment.next_voter == Pubkey::default(),
     constraint = proxy_assignment.expiration_time < Clock::get().unwrap().unix_timestamp @ ErrorCode::ExpirationNotPast,
   )]
