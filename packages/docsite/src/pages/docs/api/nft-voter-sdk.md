@@ -85,10 +85,10 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | rentRefund      | mut        | no     | Account to receive sol rent_refund if marker is closed |
 | marker          | mut        | no     |                                                        |
 | nftVoter        | immut      | no     |                                                        |
-| owner           | immut      | yes    |                                                        |
+| voter           | immut      | yes    |                                                        |
 | mint            | immut      | no     |                                                        |
 | metadata        | immut      | no     |                                                        |
-| proxy           | immut      | no     |                                                        |
+| proxyAssignment | immut      | no     |                                                        |
 | proposal        | mut        | no     |                                                        |
 | proposalConfig  | immut      | no     |                                                        |
 | stateController | mut        | no     |                                                        |
@@ -110,9 +110,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | --------------- | ---------- | ------ | ---- |
 | payer           | mut        | yes    |      |
 | marker          | mut        | no     |      |
-| proxy           | immut      | no     |      |
+| proxyAssignment | immut      | no     |      |
 | nftVoter        | immut      | no     |      |
-| owner           | immut      | yes    |      |
+| voter           | immut      | yes    |      |
 | mint            | immut      | no     |      |
 | metadata        | immut      | no     |      |
 | proposal        | mut        | no     |      |
@@ -216,9 +216,9 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ### ProgrammableConfig
 
-| Variant | Fields                    |
-| ------- | ------------------------- |
-| V1      | rule_set: [object Object] |
+| Variant | Fields                   |
+| ------- | ------------------------ |
+| V1      | ruleSet: [object Object] |
 
 ### UseMethod
 
