@@ -12,7 +12,6 @@ pub struct UnassignExpiredProxyV0<'info> {
   #[account(
     mut,
     has_one = proxy_config,
-    has_one = asset,
     constraint = prev_proxy_assignment.next_voter == proxy_assignment.voter,
     constraint = prev_proxy_assignment.asset == proxy_assignment.asset,
   )]
