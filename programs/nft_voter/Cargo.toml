@@ -21,3 +21,4 @@ anchor-lang = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix
 anchor-spl = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism", features = ["token"] }
 proposal = { path = "../proposal", features = ["no-entrypoint", "cpi"] }
 nft-proxy = { path = "../nft_proxy", features = ["cpi"] }
+time = "0.3.36"

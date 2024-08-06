@@ -21,3 +21,4 @@ anchor-lang = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix
 anchor-spl = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism" }
 proposal = { path = "../proposal", features = ["no-entrypoint", "cpi"] }
 organization = { path = "../organization", features = ["no-entrypoint", "cpi"] }
+time = "0.3.36"
