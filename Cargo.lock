@@ -1253,6 +1253,7 @@ dependencies = [
  "anchor-spl",
  "nft-proxy",
  "proposal",
+ "serde",
  "time",
 ]
 
@@ -2225,6 +2226,7 @@ dependencies = [
  "anchor-lang",
  "anchor-spl",
  "proposal",
+ "serde",
  "time",
 ]
 
