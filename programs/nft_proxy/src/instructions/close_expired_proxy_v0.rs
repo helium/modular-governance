@@ -1,5 +1,5 @@
 use crate::error::ErrorCode;
-use anchor_lang::{prelude::*, solana_program::lamports};
+use anchor_lang::prelude::*;
 
 use crate::state::*;
 
