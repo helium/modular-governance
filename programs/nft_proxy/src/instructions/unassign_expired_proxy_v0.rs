@@ -11,7 +11,6 @@ pub struct UnassignExpiredProxyV0<'info> {
   pub rent_refund: AccountInfo<'info>,
   #[account(
     mut,
-    has_one = proxy_config,
     constraint = prev_proxy_assignment.next_voter == proxy_assignment.voter,
     constraint = prev_proxy_assignment.asset == proxy_assignment.asset,
   )]
@@ -19,14 +18,12 @@ pub struct UnassignExpiredProxyV0<'info> {
   #[account(
     mut,
     close = rent_refund,
-    has_one = proxy_config,
     has_one = rent_refund,
     constraint = proxy_assignment.index > prev_proxy_assignment.index,
     constraint = proxy_assignment.next_voter == Pubkey::default(),
     constraint = proxy_assignment.expiration_time < Clock::get().unwrap().unix_timestamp @ ErrorCode::ExpirationNotPast,
   )]
   pub proxy_assignment: Box<Account<'info, ProxyAssignmentV0>>,
-  pub proxy_config: Box<Account<'info, ProxyConfigV0>>,
   pub system_program: Program<'info, System>,
 }
 
