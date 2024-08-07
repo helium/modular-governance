@@ -94,8 +94,22 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | rentRefund          | mut        | no     |      |
 | prevProxyAssignment | mut        | no     |      |
 | proxyAssignment     | mut        | no     |      |
-| proxyConfig         | immut      | no     |      |
 | systemProgram       | immut      | no     |      |
+
+#### Args
+
+| Name | Type | Docs |
+| ---- | ---- | ---- |
+
+### closeExpiredProxyV0
+
+#### Accounts
+
+| Name            | Mutability | Signer | Docs |
+| --------------- | ---------- | ------ | ---- |
+| rentRefund      | mut        | no     |      |
+| proxyAssignment | mut        | no     |      |
+| systemProgram   | immut      | no     |      |
 
 #### Args
 

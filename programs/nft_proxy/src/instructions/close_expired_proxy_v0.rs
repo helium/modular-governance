@@ -21,6 +21,6 @@ pub struct CloseExpiredProxyV0<'info> {
   pub system_program: Program<'info, System>,
 }
 
-pub fn handler(ctx: Context<CloseExpiredProxyV0>) -> Result<()> {
+pub fn handler(_ctx: Context<CloseExpiredProxyV0>) -> Result<()> {
   Ok(())
 }
