@@ -8,6 +8,7 @@ pub struct NftVoterV0 {
   #[max_len(32)]
   pub name: String,
   pub bump_seed: u8,
+  pub proxy_config: Pubkey,
 }
 
 #[account]
@@ -19,6 +20,11 @@ pub struct VoteMarkerV0 {
   pub mint: Pubkey,
   pub choices: Vec<u16>,
   pub bump_seed: u8,
+  // Keep track of which proxy index voted on this marker,
+  // earlier delegators can override
+  pub proxy_index: u16,
+  // Ensure the refund goes to whoever paid to create the marker when closing
+  pub rent_refund: Pubkey,
 }
 
 #[macro_export]

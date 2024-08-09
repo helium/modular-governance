@@ -13,6 +13,7 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | Name          | Mutability | Signer | Docs |
 | ------------- | ---------- | ------ | ---- |
 | payer         | mut        | yes    |      |
+| proxyConfig   | immut      | no     |      |
 | nftVoter      | mut        | no     |      |
 | collection    | immut      | no     |      |
 | systemProgram | immut      | no     |      |
@@ -29,7 +30,7 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 | Name            | Mutability | Signer | Docs                                              |
 | --------------- | ---------- | ------ | ------------------------------------------------- |
-| refund          | mut        | no     | Account to receive sol refund if marker is closed |
+| rentRefund      | mut        | no     | Account to receive sol refund if marker is closed |
 | marker          | mut        | no     |                                                   |
 | nftVoter        | immut      | no     |                                                   |
 | voter           | immut      | yes    |                                                   |
@@ -75,27 +76,98 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | ---- | ---------- | ---- |
 | args | VoteArgsV0 |      |
 
+### proxiedRelinquishVoteV0
+
+#### Accounts
+
+| Name            | Mutability | Signer | Docs                                                   |
+| --------------- | ---------- | ------ | ------------------------------------------------------ |
+| rentRefund      | mut        | no     | Account to receive sol rent_refund if marker is closed |
+| marker          | mut        | no     |                                                        |
+| nftVoter        | immut      | no     |                                                        |
+| voter           | immut      | yes    |                                                        |
+| mint            | immut      | no     |                                                        |
+| metadata        | immut      | no     |                                                        |
+| proxyAssignment | immut      | no     |                                                        |
+| proposal        | mut        | no     |                                                        |
+| proposalConfig  | immut      | no     |                                                        |
+| stateController | mut        | no     |                                                        |
+| onVoteHook      | immut      | no     |                                                        |
+| proposalProgram | immut      | no     |                                                        |
+| systemProgram   | immut      | no     |                                                        |
+
+#### Args
+
+| Name | Type                 | Docs |
+| ---- | -------------------- | ---- |
+| args | RelinquishVoteArgsV0 |      |
+
+### proxiedVoteV0
+
+#### Accounts
+
+| Name            | Mutability | Signer | Docs |
+| --------------- | ---------- | ------ | ---- |
+| payer           | mut        | yes    |      |
+| marker          | mut        | no     |      |
+| proxyAssignment | immut      | no     |      |
+| nftVoter        | immut      | no     |      |
+| voter           | immut      | yes    |      |
+| mint            | immut      | no     |      |
+| metadata        | immut      | no     |      |
+| proposal        | mut        | no     |      |
+| proposalConfig  | immut      | no     |      |
+| stateController | mut        | no     |      |
+| onVoteHook      | immut      | no     |      |
+| proposalProgram | immut      | no     |      |
+| systemProgram   | immut      | no     |      |
+
+#### Args
+
+| Name | Type       | Docs |
+| ---- | ---------- | ---- |
+| args | VoteArgsV0 |      |
+
+### updateNftVoterV0
+
+#### Accounts
+
+| Name         | Mutability | Signer | Docs |
+| ------------ | ---------- | ------ | ---- |
+| authority    | immut      | yes    |      |
+| proxyConfig  | immut      | no     |      |
+| newAuthority | immut      | no     |      |
+| nftVoter     | immut      | no     |      |
+
+#### Args
+
+| Name | Type | Docs |
+| ---- | ---- | ---- |
+
 ## Accounts
 
 ### NftVoterV0
 
-| Field      | Type      |
-| ---------- | --------- |
-| authority  | publicKey |
-| collection | publicKey |
-| name       | string    |
-| bumpSeed   | u8        |
+| Field       | Type      |
+| ----------- | --------- |
+| authority   | publicKey |
+| collection  | publicKey |
+| name        | string    |
+| bumpSeed    | u8        |
+| proxyConfig | publicKey |
 
 ### VoteMarkerV0
 
-| Field    | Type      |
-| -------- | --------- |
-| voter    | publicKey |
-| nftVoter | publicKey |
-| proposal | publicKey |
-| mint     | publicKey |
-| choices  | u16       |
-| bumpSeed | u8        |
+| Field      | Type      |
+| ---------- | --------- |
+| voter      | publicKey |
+| nftVoter   | publicKey |
+| proposal   | publicKey |
+| mint       | publicKey |
+| choices    | u16       |
+| bumpSeed   | u8        |
+| proxyIndex | u16       |
+| rentRefund | publicKey |
 
 ## Types
 
