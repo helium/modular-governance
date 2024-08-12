@@ -543,8 +543,8 @@
   resolved "https://registry.yarnpkg.com/@helium/anchor-resolvers/-/anchor-resolvers-0.2.21.tgz#8cd13bca3e7af83ffff3ab754dcf9f788d26e57e"
   integrity sha512-rz3GJaULGmokjrq63v4sy683PMUkL31jrK5wVX01tzCYbI1woC9vISoPd3oSSuauZqQXdBhhQ49GKrpzi49JbA==
   dependencies:
-    "@solana/spl-token" "^0.3.8"
-    "@solana/web3.js" "^1.78.4"
+    "@solana/spl-token" "^0.3.6"
+    "@solana/web3.js" "^1.43.4"
 
 "@helium/anchor-resolvers@^0.4.3":
   version "0.4.3"
@@ -575,6 +575,14 @@
     bs58 "^4.0.1"
     pako "^2.0.3"
     react-async-hook "^4.0.0"
+
+"@helium/modular-governance-idls@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@helium/modular-governance-idls/-/modular-governance-idls-0.0.10.tgz#8384cdca7c44949cbe33c776b44cca668a704315"
+  integrity sha512-fMDYhCnU18uCKzkeD8pFED3ubkKzeqw58EUZt7Qk4mxWQGM4KJ3qd1L9dp5jh9F4pVWohZ2d5EK5VqakC8JVGg==
+  dependencies:
+    "@coral-xyz/anchor" "^0.28.0"
+    "@solana/web3.js" "^1.78.4"
 
 "@helium/spl-utils@^0.4.3":
   version "0.4.3"
@@ -2777,15 +2785,6 @@ axios@^1.0.0:
   integrity sha512-/hDJGff6/c7u0hDkvkGxR/oy6CbCs8ziCsC7SqmhjfozqiJGc8Z11wrv9z9lYfY4K8l+H9TpjcMDX0xOZmx+RA==
   dependencies:
     follow-redirects "^1.15.4"
-    form-data "^4.0.0"
-    proxy-from-env "^1.1.0"
-
-axios@^1.5.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.6.0.tgz#f1e5292f26b2fd5c2e66876adc5b06cdbd7d2102"
-  integrity sha512-EZ1DYihju9pwVB+jg67ogm+Tmqc6JmhamRN6I4Zt8DfZu5lbcQGw3ozH9lFejSJgs/ibaef3A9PMXPLeefFGJg==
-  dependencies:
-    follow-redirects "^1.15.0"
     form-data "^4.0.0"
     proxy-from-env "^1.1.0"
 

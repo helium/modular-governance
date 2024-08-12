@@ -61,6 +61,24 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | Name | Type | Docs |
 | ---- | ---- | ---- |
 
+### updateOrganizationWalletV0
+
+#### Accounts
+
+| Name               | Mutability | Signer | Docs |
+| ------------------ | ---------- | ------ | ---- |
+| payer              | mut        | yes    |      |
+| organizationWallet | mut        | no     |      |
+| organization       | immut      | no     |      |
+| authority          | immut      | yes    |      |
+| systemProgram      | immut      | no     |      |
+
+#### Args
+
+| Name | Type                           | Docs |
+| ---- | ------------------------------ | ---- |
+| args | UpdateOrganizationWalletArgsV0 |      |
+
 ## Accounts
 
 ### OrganizationWalletV0
@@ -135,6 +153,13 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | allowExecutionOffset   | u32                      |
 | disableExecutionOffset | u32                      |
 | transaction            | CompiledTransactionArgV0 |
+
+### UpdateOrganizationWalletArgsV0
+
+| Field           | Type            |
+| --------------- | --------------- |
+| name            | string          |
+| proposalConfigs | [object Object] |
 
 ### CompiledInstructionV0
 
