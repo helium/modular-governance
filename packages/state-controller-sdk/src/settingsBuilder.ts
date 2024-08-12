@@ -71,7 +71,7 @@ export class SettingsBuilder {
 
   or(left: SettingsBuilder, right: SettingsBuilder): SettingsBuilder {
     this.nodes = this.nodes.concat(...left.build(), ...right.build(), {
-      and: {},
+      or: {},
     });
     return this;
   }

@@ -15,6 +15,7 @@ pub struct InitializeProposalConfigArgsV0 {
   /// Optional program that will be called with `on_vote_v0` after every vote
   /// Defaults to the owner of `resolution_settings`, which allows it to reactively call resolve_v0
   pub on_vote_hook: Pubkey,
+  pub authority: Pubkey,
 }
 
 #[derive(Accounts)]
@@ -44,6 +45,7 @@ pub fn handler(
     state_controller: args.state_controller,
     on_vote_hook: args.on_vote_hook,
     bump_seed: ctx.bumps["proposal_config"],
+    authority: args.authority,
   });
   Ok(())
 }

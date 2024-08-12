@@ -30,4 +30,11 @@ pub mod organization_wallet {
   pub fn execute_transaction_v0(ctx: Context<ExecuteTransactionV0>) -> Result<()> {
     execute_transaction_v0::handler(ctx)
   }
+
+  pub fn update_organization_wallet_v0(
+    ctx: Context<UpdateOrganizationWalletV0>,
+    args: UpdateOrganizationWalletArgsV0,
+  ) -> Result<()> {
+    update_organization_wallet_v0::handler(ctx, args)
+  }
 }

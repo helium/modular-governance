@@ -4,6 +4,7 @@ import { Proposal } from "../target/types/proposal";
 import { Organization } from "../target/types/organization";
 import { OrganizationWallet } from "../target/types/organization_wallet";
 import {
+  Keypair,
   PublicKey,
   SystemProgram,
   TransactionInstruction,
@@ -235,6 +236,171 @@ describe("organization wallet", () => {
             choiceTransaction: choiceTransaction!,
           })
         ).rpc({ skipPreflight: true });
+      });
+
+      describe("update_organization_wallet_v0", () => {
+        let otherName;
+        let otherProposalConfig: PublicKey | undefined;
+
+        beforeEach(async () => {
+          otherName = makeid(10);
+
+          ({
+            pubkeys: { proposalConfig: otherProposalConfig },
+          } = await proposalProgram.methods
+            .initializeProposalConfigV0({
+              name: otherName,
+              voteController: me,
+              stateController: me,
+              onVoteHook: PublicKey.default,
+            })
+            .rpcAndKeys({ skipPreflight: true }));
+        });
+
+        it("should update the name", async () => {
+          await program.methods
+            .updateOrganizationWalletV0({
+              name: otherName,
+              proposalConfigs: null,
+            })
+            .accounts({
+              organizationWallet,
+              organization,
+              authority: me,
+            })
+            .rpc({ skipPreflight: true });
+
+          const acct = await program.account.organizationWalletV0.fetch(
+            organizationWallet!
+          );
+
+          expect(acct.index).to.eq(0);
+          expect(acct.name).to.eq(otherName);
+          expect(acct.proposalConfigs).to.have.length(1);
+          expect(acct.proposalConfigs[0].equals(proposalConfig!)).to.be;
+        });
+
+        it("should update proposal configs", async () => {
+          await program.methods
+            .updateOrganizationWalletV0({
+              name: null,
+              proposalConfigs: [otherProposalConfig!],
+            })
+            .accounts({
+              organizationWallet,
+              organization,
+              authority: me,
+            })
+            .rpc({ skipPreflight: true });
+
+          const acct = await program.account.organizationWalletV0.fetch(
+            organizationWallet!
+          );
+
+          expect(acct.index).to.eq(0);
+          expect(acct.name).to.eq("My Wallet");
+          expect(acct.proposalConfigs).to.have.length(1);
+          expect(acct.proposalConfigs[0].equals(otherProposalConfig!)).to.be;
+        });
+
+        it("should resize proposal configs", async () => {
+          const proposalConfigs = Array.from({ length: 20 }).map(
+            () => Keypair.generate().publicKey
+          );
+
+          await program.methods
+            .updateOrganizationWalletV0({
+              name: null,
+              proposalConfigs,
+            })
+            .accounts({
+              organizationWallet,
+              organization,
+              authority: me,
+            })
+            .rpc({ skipPreflight: true });
+
+          const acct = await program.account.organizationWalletV0.fetch(
+            organizationWallet!
+          );
+
+          expect(acct.proposalConfigs).to.have.length(proposalConfigs.length);
+        });
+
+        it("should fail if not the authority", async () => {
+          const authority = Keypair.generate().publicKey;
+
+          await organizationProgram.methods
+            .updateOrganizationV0({
+              authority,
+              defaultProposalConfig: null,
+              proposalProgram: null,
+              uri: null,
+            })
+            .accounts({
+              organization,
+              authority: me,
+            })
+            .rpc({ skipPreflight: true });
+
+          let logs: string | undefined;
+
+          try {
+            await program.methods
+              .updateOrganizationWalletV0({
+                name: otherName,
+                proposalConfigs: [otherProposalConfig!],
+              })
+              .accounts({
+                organizationWallet,
+                organization,
+                authority: me,
+              })
+              .simulate();
+          } catch (err) {
+            logs = err.simulationResponse?.logs;
+          }
+
+          expect(logs).to.match(
+            /caused by account: organization\..*ConstraintHasOne/
+          );
+        });
+
+        it("should fail if wrong organization", async () => {
+          const {
+            pubkeys: { organization: otherOrganization },
+          } = await organizationProgram.methods
+            .initializeOrganizationV0({
+              name: otherName,
+              authority: me,
+              defaultProposalConfig: proposalConfig!,
+              proposalProgram: proposalProgram.programId,
+              uri: "https://example.com",
+            })
+            .rpcAndKeys({ skipPreflight: true });
+
+          let logs: string | undefined;
+
+          try {
+            await program.methods
+              .updateOrganizationWalletV0({
+                name: otherName,
+                proposalConfigs: [otherProposalConfig!],
+              })
+              .accounts({
+                organizationWallet,
+                organization: otherOrganization,
+                authority: me,
+              })
+              .simulate();
+          } catch (err) {
+            logs = err.simulationResponse?.logs;
+          }
+
+          expect(logs).to.match(
+            /caused by account: organization_wallet\..*InvalidOrganization/
+          );
+        });
       });
     });
   });

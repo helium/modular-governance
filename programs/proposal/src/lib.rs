@@ -34,6 +34,13 @@ pub mod proposal {
   pub fn update_state_v0(ctx: Context<UpdateStateV0>, args: UpdateStateArgsV0) -> Result<()> {
     update_state_v0::handler(ctx, args)
   }
+
+  pub fn update_proposal_config_v0(
+    ctx: Context<UpdateProposalConfigV0>,
+    args: UpdateProposalConfigArgsV0,
+  ) -> Result<()> {
+    update_proposal_config_v0::handler(ctx, args)
+  }
 }
 
 #[derive(Accounts)]

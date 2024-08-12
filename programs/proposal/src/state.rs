@@ -58,6 +58,7 @@ pub struct ProposalConfigV0 {
   #[max_len(32)]
   pub name: String,
   pub bump_seed: u8,
+  pub authority: Pubkey,
 }
 
 #[account]
