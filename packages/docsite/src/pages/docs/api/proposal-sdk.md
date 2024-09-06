@@ -185,10 +185,10 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ### ProposalState
 
-| Variant   | Fields                               |
-| --------- | ------------------------------------ |
-| Draft     |                                      |
-| Cancelled |                                      |
-| Voting    | startTs: i64                         |
-| Resolved  | choices: [object Object], endTs: i64 |
-| Custom    | name: string, bin: bytes             |
+| Variant   | Fields                                |
+| --------- | ------------------------------------- |
+| Draft     |                                       |
+| Cancelled |                                       |
+| Voting    | start_ts: i64                         |
+| Resolved  | choices: [object Object], end_ts: i64 |
+| Custom    | name: string, bin: bytes              |
