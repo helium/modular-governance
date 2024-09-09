@@ -64,15 +64,17 @@ pub struct VoteV0<'info> {
 }
 
 pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
-  msg!("I started");
   let marker = &mut ctx.accounts.marker;
+  if marker.rent_refund == Pubkey::default() {
+    marker.rent_refund = ctx.accounts.payer.key();
+  }
   marker.proposal = ctx.accounts.proposal.key();
   marker.bump_seed = ctx.bumps["marker"];
   marker.voter = ctx.accounts.voter.key();
   marker.nft_voter = ctx.accounts.nft_voter.key();
   marker.mint = ctx.accounts.mint.key();
+  marker.proxy_index = 0;
 
-  msg!("I set");
   // Don't allow voting for the same choice twice.
   require!(
     marker.choices.iter().all(|choice| *choice != args.choice),
@@ -85,7 +87,6 @@ pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
   );
 
   marker.choices.push(args.choice);
-  msg!("I vote");
 
   proposal::cpi::vote_v0(
     CpiContext::new_with_signer(

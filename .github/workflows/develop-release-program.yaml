@@ -36,6 +36,7 @@ jobs:
           echo "programs_with_changes=$json" >> $GITHUB_OUTPUT
   build_programs:
     needs: [detect_changed_programs]
+    continue-on-error: true
     runs-on: ubuntu-latest
     if: needs.detect_changed_programs.outputs.programs_with_changes != '[]' && needs.detect_changed_programs.outputs.programs_with_changes != ''
     strategy:
@@ -103,6 +104,7 @@ jobs:
 
 
   publish_programs:
+    continue-on-error: true
     needs: [detect_changed_programs, build_programs]
     runs-on: ubuntu-latest
     if: needs.detect_changed_programs.outputs.programs_with_changes != '[]' && needs.detect_changed_programs.outputs.programs_with_changes != ''

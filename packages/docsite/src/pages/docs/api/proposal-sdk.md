@@ -77,6 +77,21 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | ---- | ----------------- | ---- |
 | args | UpdateStateArgsV0 |      |
 
+### updateProposalConfigV0
+
+#### Accounts
+
+| Name           | Mutability | Signer | Docs |
+| -------------- | ---------- | ------ | ---- |
+| proposalConfig | mut        | no     |      |
+| authority      | immut      | yes    |      |
+
+#### Args
+
+| Name | Type                       | Docs |
+| ---- | -------------------------- | ---- |
+| args | UpdateProposalConfigArgsV0 |      |
+
 ## Accounts
 
 ### ProposalConfigV0
@@ -88,6 +103,7 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | onVoteHook      | publicKey |
 | name            | string    |
 | bumpSeed        | u8        |
+| authority       | publicKey |
 
 ### ProposalV0
 
@@ -116,6 +132,7 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | voteController  | publicKey |
 | stateController | publicKey |
 | onVoteHook      | publicKey |
+| authority       | publicKey |
 
 ### ChoiceArg
 
@@ -134,6 +151,15 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | maxChoicesPerVoter | u16       |
 | choices            | ChoiceArg |
 | tags               | string    |
+
+### UpdateProposalConfigArgsV0
+
+| Field           | Type      |
+| --------------- | --------- |
+| voteController  | publicKey |
+| stateController | publicKey |
+| onVoteHook      | publicKey |
+| authority       | publicKey |
 
 ### UpdateStateArgsV0
 
