@@ -32,6 +32,7 @@ describe("proposal", () => {
         voteController,
         stateController,
         onVoteHook,
+        authority: me,
       })
       .rpcAndKeys();
 
@@ -171,7 +172,7 @@ describe("proposal", () => {
             proposalConfig,
           })
           .simulate();
-      } catch (err) {
+      } catch (err: any) {
         logs = err.simulationResponse?.logs;
       }
 

@@ -42,6 +42,12 @@ pub enum ResolutionNode {
   },
   And,
   Or,
+  Not {
+    choice_name: String,
+  },
+  TotalWeight {
+    weight_threshold: u128,
+  },
 }
 
 impl Default for ResolutionNode {
@@ -61,9 +67,11 @@ impl ResolutionNode {
       ResolutionNode::ChoiceVoteWeight { .. } => 16,
       ResolutionNode::ChoicePercentage { .. } => 4,
       ResolutionNode::Top { .. } => 2,
-      ResolutionNode::And => 0,
-      ResolutionNode::Or => 0,
+      ResolutionNode::And => 1,
+      ResolutionNode::Or => 1,
       ResolutionNode::NumResolved { .. } => 4,
+      ResolutionNode::Not { choice_name } => 4 + choice_name.len(),
+      ResolutionNode::TotalWeight { .. } => 16,
     }
   }
 
@@ -178,10 +186,13 @@ impl ResolutionStrategy {
             .collect(),
         )),
         ResolutionNode::ChoicePercentage { percentage } => {
-          let total_weight = proposal
-            .choices
+          let remaining_choices = stack
+            .first()
+            .and_then(|i| i.clone())
+            .unwrap_or((0..proposal.choices.len() as u16).collect::<Vec<u16>>());
+          let total_weight = remaining_choices
             .iter()
-            .map(|choice| choice.weight)
+            .map(|choice| proposal.choices[*choice as usize].weight)
             .sum::<u128>();
           let threshold = total_weight
             .checked_mul(*percentage as u128)
@@ -258,6 +269,36 @@ impl ResolutionStrategy {
           match curr {
             Some(vec) if vec.len() >= *n as usize => stack.push(Some(vec.clone())),
             _ => stack.push(None),
+          }
+        }
+        ResolutionNode::Not { choice_name } => {
+          let vec = proposal
+            .choices
+            .iter()
+            .enumerate()
+            .filter(|(_, choice)| choice.name != *choice_name)
+            .collect::<Vec<_>>();
+
+          stack.push(Some(vec.iter().map(|(index, _)| *index as u16).collect()))
+        }
+        ResolutionNode::TotalWeight { weight_threshold } => {
+          let total_weight = proposal
+            .choices
+            .iter()
+            .map(|choice| choice.weight)
+            .sum::<u128>();
+          if total_weight >= *weight_threshold {
+            stack.push(Some(
+              proposal
+                .choices
+                .iter()
+                .enumerate()
+                .filter(|(_, choice)| choice.weight >= *weight_threshold)
+                .map(|(index, _)| index as u16)
+                .collect(),
+            ))
+          } else {
+            stack.push(None)
           }
         }
       }

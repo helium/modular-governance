@@ -72,6 +72,7 @@ describe("organization", () => {
           voteController: me,
           stateController: me,
           onVoteHook: PublicKey.default,
+          authority: me,
         })
         .rpcAndKeys());
 

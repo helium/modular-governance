@@ -82,6 +82,7 @@ describe("organization wallet", () => {
           voteController: me,
           stateController: me,
           onVoteHook: PublicKey.default,
+          authority: me,
         })
         .rpcAndKeys());
 
@@ -239,7 +240,7 @@ describe("organization wallet", () => {
       });
 
       describe("update_organization_wallet_v0", () => {
-        let otherName;
+        let otherName: string;
         let otherProposalConfig: PublicKey | undefined;
 
         beforeEach(async () => {
@@ -253,6 +254,7 @@ describe("organization wallet", () => {
               voteController: me,
               stateController: me,
               onVoteHook: PublicKey.default,
+              authority: me,
             })
             .rpcAndKeys({ skipPreflight: true }));
         });
@@ -357,7 +359,7 @@ describe("organization wallet", () => {
                 authority: me,
               })
               .simulate();
-          } catch (err) {
+          } catch (err: any) {
             logs = err.simulationResponse?.logs;
           }
 
@@ -393,7 +395,7 @@ describe("organization wallet", () => {
                 authority: me,
               })
               .simulate();
-          } catch (err) {
+          } catch (err: any) {
             logs = err.simulationResponse?.logs;
           }
 

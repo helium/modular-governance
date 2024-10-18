@@ -23,6 +23,20 @@ export class SettingsBuilder {
     return this;
   }
 
+  not(choiceName: string): SettingsBuilder {
+    this.nodes.push({
+      not: { choiceName },
+    });
+    return this;
+  }
+
+  totalWeight(weightThreshold: BN): SettingsBuilder {
+    this.nodes.push({
+      totalWeight: { weightThreshold },
+    });
+    return this;
+  }
+
   offsetFromStartTs(offset: BN): SettingsBuilder {
     this.nodes.push({
       offsetFromStartTs: { offset },

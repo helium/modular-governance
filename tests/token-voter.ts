@@ -71,6 +71,7 @@ describe("token-voter", () => {
           voteController: tokenVoter!,
           stateController: me,
           onVoteHook: PublicKey.default,
+          authority: me,
         })
         .rpcAndKeys({ skipPreflight: true }));
       ({
