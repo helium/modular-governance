@@ -69,6 +69,17 @@ export class SettingsBuilder {
     return this;
   }
 
+  /// If the percentage is a number, auto convert to PERCENTAGE_DIVISOR. Otherwise use the BN
+  choicePercentageOfCurrent(percentage: BN | number): SettingsBuilder {
+    if (typeof percentage === "number") {
+      percentage = new BN((percentage / 100) * PERCENTAGE_DIVISOR);
+    }
+    this.nodes.push({
+      choicePercentageOfCurrent: { percentage },
+    });
+    return this;
+  }
+
   top(n: number = 1): SettingsBuilder {
     this.nodes.push({
       top: { n },

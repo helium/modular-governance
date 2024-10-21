@@ -41,7 +41,7 @@ describe("proposal", () => {
     expect(acct.voteController.toBase58()).to.eq(voteController.toBase58());
     expect(acct.stateController.toBase58()).to.eq(stateController.toBase58());
     expect(acct.onVoteHook.toBase58()).to.eq(onVoteHook.toBase58());
-    expect(acct.authority.toBase58()).to.eq(PublicKey.default.toBase58());
+    expect(acct.authority.toBase58()).to.eq(me.toBase58());
   });
 
   it("Creates a proposal config with authority", async () => {

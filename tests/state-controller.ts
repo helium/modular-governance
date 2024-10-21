@@ -428,7 +428,7 @@ describe("state-controller", () => {
                 settings().totalWeight(new anchor.BN(5)),
                 settings().and(
                   settings().not("Abstain"),
-                  settings().choicePercentage(66.6)
+                  settings().choicePercentageOfCurrent(66.6)
                 )
               ),
               settings().top()

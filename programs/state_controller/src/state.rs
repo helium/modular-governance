@@ -48,6 +48,13 @@ pub enum ResolutionNode {
   TotalWeight {
     weight_threshold: u128,
   },
+  /// The choice has this percentage (i32 / PERCENTAGE_DIVISOR)
+  /// This is different than ChoicePercentage as it operates based off of the
+  /// current set of choices on the stack, not all of the proposals choices.
+  /// This is useful for use cases like Abstain, where you need a % excluding abstain.
+  ChoicePercentageOfCurrent {
+    percentage: i32,
+  },
 }
 
 impl Default for ResolutionNode {
@@ -66,6 +73,7 @@ impl ResolutionNode {
       ResolutionNode::OffsetFromStartTs { .. } => 8,
       ResolutionNode::ChoiceVoteWeight { .. } => 16,
       ResolutionNode::ChoicePercentage { .. } => 4,
+      ResolutionNode::ChoicePercentageOfCurrent { .. } => 4,
       ResolutionNode::Top { .. } => 2,
       ResolutionNode::And => 1,
       ResolutionNode::Or => 1,
@@ -89,6 +97,11 @@ impl ResolutionNode {
         Err(error!(ErrorCode::InvalidOffset))
       }
       ResolutionNode::ChoicePercentage { percentage }
+        if *percentage < 0 || *percentage > PERCENTAGE_DIVISOR =>
+      {
+        Err(error!(ErrorCode::InvalidPercentage))
+      }
+      ResolutionNode::ChoicePercentageOfCurrent { percentage }
         if *percentage < 0 || *percentage > PERCENTAGE_DIVISOR =>
       {
         Err(error!(ErrorCode::InvalidPercentage))
@@ -186,6 +199,45 @@ impl ResolutionStrategy {
             .collect(),
         )),
         ResolutionNode::ChoicePercentage { percentage } => {
+          let total_weight = proposal
+            .choices
+            .iter()
+            .map(|choice| choice.weight)
+            .sum::<u128>();
+          let threshold = total_weight
+            .checked_mul(*percentage as u128)
+            .unwrap()
+            .checked_div(PERCENTAGE_DIVISOR as u128)
+            .map(|result| {
+              let remainder = total_weight
+                .checked_mul(*percentage as u128)
+                .unwrap()
+                .checked_rem(PERCENTAGE_DIVISOR as u128)
+                .unwrap();
+              result
+                .checked_add(if remainder > 0 { 1 } else { 0 })
+                .unwrap()
+            })
+            .unwrap();
+          let ret = Some(
+            proposal
+              .choices
+              .iter()
+              .enumerate()
+              .flat_map(|(index, choice)| {
+                if threshold == 0 {
+                  None
+                } else if choice.weight >= threshold {
+                  Some(index as u16)
+                } else {
+                  None
+                }
+              })
+              .collect(),
+          );
+          stack.push(ret)
+        }
+        ResolutionNode::ChoicePercentageOfCurrent { percentage } => {
           let remaining_choices = stack
             .last()
             .and_then(|i| i.clone())
