@@ -122,7 +122,7 @@ describe("state-controller", () => {
         await program.methods.resolveV0().accounts({ proposal }).rpc();
 
         const acct = await proposalProgram.account.proposalV0.fetch(proposal!);
-        expect(acct.state.resolved?.choices).to.deep.eq([0, 1]);
+        expect(acct.state.resolved?.choices).to.deep.eq([0, 1, 2]);
       });
     });
 
@@ -149,7 +149,7 @@ describe("state-controller", () => {
         await program.methods.resolveV0().accounts({ proposal }).rpc();
 
         const acct = await proposalProgram.account.proposalV0.fetch(proposal!);
-        expect(acct.state.resolved?.choices).to.deep.eq([0, 1]);
+        expect(acct.state.resolved?.choices).to.deep.eq([0, 1, 2]);
       });
     });
 
