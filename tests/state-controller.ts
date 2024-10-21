@@ -42,7 +42,7 @@ describe("state-controller", () => {
     let proposal: PublicKey | undefined;
     let resolutionSettings: PublicKey | undefined;
     beforeEach(async () => {
-      // await ensureIdls();
+      await ensureIdls();
 
       ({
         pubkeys: { resolutionSettings },
@@ -460,7 +460,7 @@ describe("state-controller", () => {
           .rpc({ skipPreflight: true });
 
         await sleep(10000);
-        await program.methods.resolveV0().accounts({ proposal }).rpc();
+        console.log("txid", await program.methods.resolveV0().accounts({ proposal }).rpc());
 
         acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(acct.state.resolved?.choices).to.deep.eq([1]);

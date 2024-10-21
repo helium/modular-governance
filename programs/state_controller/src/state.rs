@@ -187,13 +187,15 @@ impl ResolutionStrategy {
         )),
         ResolutionNode::ChoicePercentage { percentage } => {
           let remaining_choices = stack
-            .first()
+            .last()
             .and_then(|i| i.clone())
             .unwrap_or((0..proposal.choices.len() as u16).collect::<Vec<u16>>());
+
           let total_weight = remaining_choices
             .iter()
             .map(|choice| proposal.choices[*choice as usize].weight)
             .sum::<u128>();
+
           let threshold = total_weight
             .checked_mul(*percentage as u128)
             .unwrap()
@@ -209,15 +211,15 @@ impl ResolutionStrategy {
                 .unwrap()
             })
             .unwrap();
-          let ret = Some(
-            proposal
-              .choices
+
+          let ret: Option<Vec<u16>> = Some(
+            remaining_choices
               .iter()
               .enumerate()
               .flat_map(|(index, choice)| {
                 if threshold == 0 {
                   None
-                } else if choice.weight >= threshold {
+                } else if proposal.choices[*choice as usize].weight >= threshold {
                   Some(index as u16)
                 } else {
                   None
@@ -225,19 +227,27 @@ impl ResolutionStrategy {
               })
               .collect(),
           );
+
           stack.push(ret)
         }
         ResolutionNode::Top { n } => {
-          let mut vec = proposal.choices.iter().enumerate().collect::<Vec<_>>();
+          let mut remaining_choices = stack
+            .last()
+            .and_then(|i| i.clone())
+            .unwrap_or((0..proposal.choices.len() as u16).collect::<Vec<u16>>())
+            .clone();
 
-          vec.sort_by(|(_, a), (_, b)| b.weight.cmp(&a.weight));
+          remaining_choices.sort_by(|a, b| {
+            proposal.choices[*b as usize]
+              .weight
+              .cmp(&proposal.choices[*a as usize].weight)
+          });
 
           stack.push(Some(
-            vec
-              .iter()
-              .map(|(index, _)| *index as u16)
+            remaining_choices
+              .into_iter()
               .take(*n as usize)
-              .collect(),
+              .collect::<Vec<_>>(),
           ))
         }
         ResolutionNode::And => {
@@ -293,7 +303,6 @@ impl ResolutionStrategy {
                 .choices
                 .iter()
                 .enumerate()
-                .filter(|(_, choice)| choice.weight >= *weight_threshold)
                 .map(|(index, _)| index as u16)
                 .collect(),
             ))
