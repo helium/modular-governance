@@ -62,6 +62,7 @@ describe("state-controller", () => {
           voteController: me,
           stateController: resolutionSettings!,
           onVoteHook: PROGRAM_ID,
+          authority: me,
         })
         .rpcAndKeys({ skipPreflight: true }));
       ({
@@ -79,6 +80,10 @@ describe("state-controller", () => {
             },
             {
               name: "No",
+              uri: null,
+            },
+            {
+              name: "Abstain",
               uri: null,
             },
           ],
@@ -117,7 +122,7 @@ describe("state-controller", () => {
         await program.methods.resolveV0().accounts({ proposal }).rpc();
 
         const acct = await proposalProgram.account.proposalV0.fetch(proposal!);
-        expect(acct.state.resolved?.choices).to.deep.eq([0, 1]);
+        expect(acct.state.resolved?.choices).to.deep.eq([0, 1, 2]);
       });
     });
 
@@ -144,7 +149,7 @@ describe("state-controller", () => {
         await program.methods.resolveV0().accounts({ proposal }).rpc();
 
         const acct = await proposalProgram.account.proposalV0.fetch(proposal!);
-        expect(acct.state.resolved?.choices).to.deep.eq([0, 1]);
+        expect(acct.state.resolved?.choices).to.deep.eq([0, 1, 2]);
       });
     });
 
@@ -407,6 +412,55 @@ describe("state-controller", () => {
 
         await sleep(10000);
         await program.methods.resolveV0().accounts({ proposal }).rpc();
+
+        acct = await proposalProgram.account.proposalV0.fetch(proposal!);
+        expect(acct.state.resolved?.choices).to.deep.eq([1]);
+      });
+    });
+
+    describe("helium IOT flavor governance", () => {
+      before(async () => {
+        nodes = settings()
+          .and(
+            settings().offsetFromStartTs(new anchor.BN(5)),
+            settings().and(
+              settings().and(
+                settings().totalWeight(new anchor.BN(5)),
+                settings().and(
+                  settings().not("Abstain"),
+                  settings().choicePercentageOfCurrent(66.6)
+                )
+              ),
+              settings().top()
+            )
+          )
+          .build();
+      });
+
+      it("resolves to the max choice when there is enough weight", async () => {
+        await proposalProgram.methods
+          .voteV0({
+            choice: 1,
+            weight: new anchor.BN(2),
+            removeVote: false,
+          })
+          .accounts({ proposal, voter: me })
+          .rpc({ skipPreflight: true });
+
+        let acct = await proposalProgram.account.proposalV0.fetch(proposal!);
+        expect(Boolean(acct.state.voting)).to.be.true;
+
+        await proposalProgram.methods
+          .voteV0({
+            choice: 2,
+            weight: new anchor.BN(5),
+            removeVote: false,
+          })
+          .accounts({ proposal, voter: me })
+          .rpc({ skipPreflight: true });
+
+        await sleep(10000);
+        console.log("txid", await program.methods.resolveV0().accounts({ proposal }).rpc());
 
         acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(acct.state.resolved?.choices).to.deep.eq([1]);
