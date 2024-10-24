@@ -124,14 +124,17 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ### ResolutionNode
 
-| Variant           | Fields                   |
-| ----------------- | ------------------------ |
-| Resolved          | choices: [object Object] |
-| EndTimestamp      | end_ts: i64              |
-| OffsetFromStartTs | offset: i64              |
-| ChoiceVoteWeight  | weight_threshold: u128   |
-| ChoicePercentage  | percentage: i32          |
-| Top               | n: u16                   |
-| NumResolved       | n: u16                   |
-| And               |                          |
-| Or                |                          |
+| Variant                   | Fields                   |
+| ------------------------- | ------------------------ |
+| Resolved                  | choices: [object Object] |
+| EndTimestamp              | end_ts: i64              |
+| OffsetFromStartTs         | offset: i64              |
+| ChoiceVoteWeight          | weight_threshold: u128   |
+| ChoicePercentage          | percentage: i32          |
+| Top                       | n: u16                   |
+| NumResolved               | n: u16                   |
+| And                       |                          |
+| Or                        |                          |
+| Not                       | choice_name: string      |
+| TotalWeight               | weight_threshold: u128   |
+| ChoicePercentageOfCurrent | percentage: i32          |
