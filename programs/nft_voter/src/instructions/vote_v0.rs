@@ -1,9 +1,8 @@
-use crate::{error::ErrorCode, metaplex::MetadataAccount};
 use anchor_lang::prelude::*;
 use anchor_spl::token::{Mint, TokenAccount};
 use proposal::{ProposalConfigV0, ProposalV0};
 
-use crate::{nft_voter_seeds, state::*};
+use crate::{error::ErrorCode, metaplex::MetadataAccount, nft_voter_seeds, state::*};
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct VoteArgsV0 {
@@ -17,7 +16,7 @@ pub struct VoteV0<'info> {
   #[account(
     init_if_needed,
     payer = payer,
-    space = 8 + 60 + std::mem::size_of::<VoteMarkerV0>(),
+    space = 8 + 60 + std::mem::size_of::<VoteMarkerV0>() + 2 * proposal.choices.len(),
     seeds = [b"marker", nft_voter.key().as_ref(), mint.key().as_ref(), proposal.key().as_ref()],
     bump
   )]
