@@ -1,11 +1,17 @@
-use crate::metaplex::{
-  create_master_edition_v3, create_metadata_accounts_v3, CollectionDetails, CreateMasterEditionV3,
-  CreateMetadataAccountsV3, DataV2, Metadata,
-};
-use crate::{state::*, token_voter_seeds};
 use anchor_lang::prelude::*;
-use anchor_spl::associated_token::AssociatedToken;
-use anchor_spl::token::{self, Mint, MintTo, Token, TokenAccount};
+use anchor_spl::{
+  associated_token::AssociatedToken,
+  token::{self, Mint, MintTo, Token, TokenAccount},
+};
+
+use crate::{
+  metaplex::{
+    create_master_edition_v3, create_metadata_accounts_v3, CollectionDetails,
+    CreateMasterEditionV3, CreateMetadataAccountsV3, DataV2, Metadata,
+  },
+  state::*,
+  token_voter_seeds,
+};
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct InitializeTokenVoterArgsV0 {
@@ -23,7 +29,7 @@ pub struct InitializeTokenVoterV0<'info> {
   #[account(
     init,
     payer = payer,
-    space = 8 + 60 + std::mem::size_of::<TokenVoterV0>(),
+    space = 8 + 60 + std::mem::size_of::<TokenVoterV0>() + 4 + args.name.len(),
     seeds = [b"token_voter", args.name.as_bytes()],
     bump
   )]

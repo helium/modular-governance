@@ -1,7 +1,8 @@
-use crate::state::*;
 use anchor_lang::prelude::*;
 use anchor_spl::token::Mint;
 use nft_proxy::state::ProxyConfigV0;
+
+use crate::state::*;
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct InitializeNftVoterArgsV0 {
@@ -19,7 +20,7 @@ pub struct InitializeNftVoterV0<'info> {
   #[account(
     init,
     payer = payer,
-    space = 8 + 60 + std::mem::size_of::<NftVoterV0>(),
+    space = 8 + 60 + std::mem::size_of::<NftVoterV0>() + 4 + args.name.len(),
     seeds = [b"nft_voter", args.name.as_bytes()],
     bump
   )]

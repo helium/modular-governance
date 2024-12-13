@@ -1,10 +1,9 @@
-use crate::{error::ErrorCode, metaplex::MetadataAccount, VoteArgsV0};
 use anchor_lang::prelude::*;
 use anchor_spl::token::Mint;
 use nft_proxy::state::ProxyAssignmentV0;
 use proposal::{ProposalConfigV0, ProposalV0};
 
-use crate::{nft_voter_seeds, state::*};
+use crate::{error::ErrorCode, metaplex::MetadataAccount, nft_voter_seeds, state::*, VoteArgsV0};
 
 #[derive(Accounts)]
 pub struct ProxyVoteV0<'info> {
@@ -13,7 +12,7 @@ pub struct ProxyVoteV0<'info> {
   #[account(
     init_if_needed,
     payer = payer,
-    space = 8 + 60 + std::mem::size_of::<VoteMarkerV0>(),
+    space = 8 + 60 + std::mem::size_of::<VoteMarkerV0>() + 2 * proposal.choices.len(),
     seeds = [b"marker", nft_voter.key().as_ref(), mint.key().as_ref(), proposal.key().as_ref()],
     bump
   )]
@@ -24,6 +23,7 @@ pub struct ProxyVoteV0<'info> {
     // only the current or earlier delegates can change vote. Or if proposal not set, this was an `init` for the marker
     constraint = proxy_assignment.index <= marker.proxy_index || marker.proposal == Pubkey::default(),
     constraint = proxy_assignment.expiration_time > Clock::get().unwrap().unix_timestamp,
+    constraint = proxy_assignment.asset == mint.key(),
   )]
   pub proxy_assignment: Box<Account<'info, ProxyAssignmentV0>>,
   pub nft_voter: Box<Account<'info, NftVoterV0>>,

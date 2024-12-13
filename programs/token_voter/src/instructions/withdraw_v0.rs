@@ -1,10 +1,14 @@
-use crate::metaplex::{burn, Burn, Metadata};
-use crate::receipt_seeds;
-use crate::state::*;
 use anchor_lang::prelude::*;
-use anchor_spl::associated_token::AssociatedToken;
-use anchor_spl::token::{self, CloseAccount, Transfer};
-use anchor_spl::token::{Mint, Token, TokenAccount};
+use anchor_spl::{
+  associated_token::AssociatedToken,
+  token::{self, CloseAccount, Mint, Token, TokenAccount, Transfer},
+};
+
+use crate::{
+  metaplex::{burn, Burn, Metadata},
+  receipt_seeds,
+  state::*,
+};
 
 #[derive(Accounts)]
 pub struct WithdrawV0<'info> {
@@ -62,7 +66,6 @@ pub struct WithdrawV0<'info> {
 
   #[account(
     mut,
-    close = refund,
     associated_token::authority = receipt,
     associated_token::mint = deposit_mint,
   )]
