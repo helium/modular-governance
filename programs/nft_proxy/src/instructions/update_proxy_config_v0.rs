@@ -1,7 +1,10 @@
-use crate::error::ErrorCode;
-use crate::resize_to_fit::resize_to_fit;
-use crate::state::{ProxyConfigV0, SeasonV0};
 use anchor_lang::prelude::*;
+
+use crate::{
+  error::ErrorCode,
+  resize_to_fit::resize_to_fit,
+  state::{ProxyConfigV0, SeasonV0},
+};
 
 #[derive(AnchorSerialize, AnchorDeserialize)]
 pub struct UpdateProxyConfigArgsV0 {
@@ -15,7 +18,7 @@ pub struct UpdateProxyConfigV0<'info> {
   #[account(mut)]
   pub payer: Signer<'info>,
   /// CHECK: The authority of this config
-  pub authority: AccountInfo<'info>,
+  pub authority: Signer<'info>,
   #[account(
     mut,
     has_one = authority
