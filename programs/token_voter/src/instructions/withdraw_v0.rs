@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 use anchor_spl::{
   associated_token::AssociatedToken,
-  metadata::{burn_nft, BurnNft, Metadata},
+  metadata::{burn_nft, mpl_token_metadata, BurnNft, Metadata},
   token::{self, CloseAccount, Mint, Token, TokenAccount, Transfer},
 };
 
@@ -40,8 +40,8 @@ pub struct WithdrawV0<'info> {
 
   #[account(
     mut,
-    seeds = ["metadata".as_bytes(), token_metadata_program.key().as_ref(), mint.key().as_ref()],
-    seeds::program = token_metadata_program.key(),
+    seeds = ["metadata".as_bytes(),  mpl_token_metadata::ID.as_ref(), mint.key().as_ref()],
+    seeds::program = mpl_token_metadata::ID,
     bump,
   )]
   /// CHECK: Checked by cpi
@@ -49,8 +49,8 @@ pub struct WithdrawV0<'info> {
   /// CHECK: Handled by cpi
   #[account(
     mut,
-    seeds = ["metadata".as_bytes(), token_metadata_program.key().as_ref(), mint.key().as_ref(), "edition".as_bytes()],
-    seeds::program = token_metadata_program.key(),
+    seeds = ["metadata".as_bytes(),  mpl_token_metadata::ID.as_ref(), mint.key().as_ref(), "edition".as_bytes()],
+    seeds::program = mpl_token_metadata::ID,
     bump,
   )]
   pub master_edition: UncheckedAccount<'info>,
@@ -88,7 +88,6 @@ pub struct WithdrawV0<'info> {
   pub token_program: Program<'info, Token>,
   pub associated_token_program: Program<'info, AssociatedToken>,
   pub token_metadata_program: Program<'info, Metadata>,
-  pub rent: Sysvar<'info, Rent>,
 }
 
 impl<'info> WithdrawV0<'info> {
@@ -127,7 +126,10 @@ pub fn handler(ctx: Context<WithdrawV0>) -> Result<()> {
   let signer_seeds: &[&[&[u8]]] = &[receipt_seeds!(ctx.accounts.receipt)];
 
   burn_nft(
-    ctx.accounts.burn_nft_ctx(),
+    ctx
+      .accounts
+      .burn_nft_ctx()
+      .with_remaining_accounts(vec![ctx.accounts.collection_metadata.to_account_info()]),
     Some(ctx.accounts.collection_metadata.key()),
   )?;
   token::transfer(

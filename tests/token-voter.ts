@@ -143,7 +143,11 @@ describe("token-voter", () => {
       it("allows withdrawing tokens", async () => {
         await program.methods
           .withdrawV0()
-          .accountsPartial({ receipt, refund: me })
+          .accountsPartial({
+            receipt: receipt!,
+            refund: me,
+            payer: me,
+          })
           .rpc({ skipPreflight: true });
 
         expect(await program.account.receiptV0.fetchNullable(receipt!)).to.be
@@ -157,7 +161,11 @@ describe("token-voter", () => {
           .voteV0({
             choice: 0,
           })
-          .accountsPartial({ receipt, proposal })
+          .accounts({
+            receipt: receipt!,
+            proposal: proposal!,
+            proposalProgram: proposalProgram.programId,
+          })
           .rpcAndKeys({ skipPreflight: true });
 
         let acct = await proposalProgram.account.proposalV0.fetch(proposal!);
