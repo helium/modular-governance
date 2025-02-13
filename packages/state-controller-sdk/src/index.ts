@@ -19,14 +19,13 @@ export async function init(
     idl = await Program.fetchIdl(programId, provider);
     // This is an Anchor 0.30+ IDL. Return the old IDLs
     // @ts-ignore
-    if (!idl || idl?.address) {
+    if (!idl || !idl?.address) {
       idl = IDL as any;
     }
   }
 
   const stateController = new Program<StateController>(
     idl as StateController,
-    programId,
     provider,
     undefined,
     () => stateControllerResolvers
@@ -36,45 +35,90 @@ export async function init(
 }
 
 const IDL = {
-  version: "0.1.2",
-  name: "state_controller",
+  address: "stcfiqW3fwD9QCd8Bqr1NBLrs7dftZHBQe7RiMMA4aM",
+  metadata: {
+    name: "state_controller",
+    version: "0.1.2",
+    spec: "0.1.0",
+    description: "Created with Anchor",
+  },
   instructions: [
     {
-      name: "onVoteV0",
+      name: "initialize_resolution_settings_v0",
+      discriminator: [87, 126, 140, 66, 245, 25, 95, 181],
       accounts: [
         {
-          name: "voter",
-          isMut: false,
-          isSigner: false,
+          name: "payer",
+          writable: true,
+          signer: true,
         },
         {
-          name: "voteController",
-          isMut: false,
-          isSigner: true,
+          name: "resolution_settings",
+          writable: true,
+          pda: {
+            seeds: [
+              {
+                kind: "const",
+                value: [
+                  114, 101, 115, 111, 108, 117, 116, 105, 111, 110, 95, 115,
+                  101, 116, 116, 105, 110, 103, 115,
+                ],
+              },
+              {
+                kind: "arg",
+                path: "args.name",
+              },
+            ],
+          },
         },
         {
-          name: "stateController",
-          isMut: true,
-          isSigner: false,
-        },
-        {
-          name: "proposal",
-          isMut: false,
-          isSigner: false,
-          relations: ["proposal_config"],
-        },
-        {
-          name: "proposalConfig",
-          isMut: false,
-          isSigner: false,
-          relations: ["state_controller", "vote_controller"],
+          name: "system_program",
+          address: "11111111111111111111111111111111",
         },
       ],
       args: [
         {
           name: "args",
           type: {
-            defined: "VoteArgsV0",
+            defined: {
+              name: "InitializeResolutionSettingsArgsV0",
+            },
+          },
+        },
+      ],
+    },
+    {
+      name: "on_vote_v0",
+      discriminator: [140, 62, 3, 226, 87, 248, 128, 33],
+      accounts: [
+        {
+          name: "voter",
+        },
+        {
+          name: "vote_controller",
+          signer: true,
+          relations: ["proposal_config"],
+        },
+        {
+          name: "state_controller",
+          writable: true,
+          relations: ["proposal_config"],
+        },
+        {
+          name: "proposal",
+        },
+        {
+          name: "proposal_config",
+          relations: ["proposal"],
+        },
+      ],
+      args: [
+        {
+          name: "args",
+          type: {
+            defined: {
+              name: "VoteArgsV0",
+            },
           },
         },
       ],
@@ -85,143 +129,138 @@ const IDL = {
       },
     },
     {
-      name: "initializeResolutionSettingsV0",
+      name: "resolve_v0",
+      discriminator: [245, 242, 15, 52, 90, 76, 188, 125],
       accounts: [
         {
-          name: "payer",
-          isMut: true,
-          isSigner: true,
-        },
-        {
-          name: "resolutionSettings",
-          isMut: true,
-          isSigner: false,
-          pda: {
-            seeds: [
-              {
-                kind: "const",
-                type: "string",
-                value: "resolution_settings",
-              },
-              {
-                kind: "arg",
-                type: {
-                  defined: "InitializeResolutionSettingsArgsV0",
-                },
-                path: "args.name",
-              },
-            ],
-          },
-        },
-        {
-          name: "systemProgram",
-          isMut: false,
-          isSigner: false,
-        },
-      ],
-      args: [
-        {
-          name: "args",
-          type: {
-            defined: "InitializeResolutionSettingsArgsV0",
-          },
-        },
-      ],
-    },
-    {
-      name: "updateStateV0",
-      accounts: [
-        {
-          name: "owner",
-          isMut: false,
-          isSigner: true,
-        },
-        {
-          name: "proposal",
-          isMut: true,
-          isSigner: false,
-          relations: ["owner", "proposal_config"],
-        },
-        {
-          name: "proposalConfig",
-          isMut: false,
-          isSigner: false,
-          relations: ["state_controller"],
-        },
-        {
-          name: "stateController",
-          isMut: false,
-          isSigner: false,
-        },
-        {
-          name: "proposalProgram",
-          isMut: false,
-          isSigner: false,
-        },
-      ],
-      args: [
-        {
-          name: "args",
-          type: {
-            defined: "UpdateStateArgsV0",
-          },
-        },
-      ],
-    },
-    {
-      name: "resolveV0",
-      accounts: [
-        {
-          name: "stateController",
-          isMut: true,
-          isSigner: false,
-        },
-        {
-          name: "proposal",
-          isMut: true,
-          isSigner: false,
+          name: "state_controller",
+          writable: true,
           relations: ["proposal_config"],
         },
         {
-          name: "proposalConfig",
-          isMut: false,
-          isSigner: false,
-          relations: ["state_controller"],
+          name: "proposal",
+          writable: true,
         },
         {
-          name: "proposalProgram",
-          isMut: false,
-          isSigner: false,
+          name: "proposal_config",
+          relations: ["proposal"],
+        },
+        {
+          name: "proposal_program",
         },
       ],
       args: [],
     },
+    {
+      name: "update_state_v0",
+      discriminator: [234, 64, 38, 223, 224, 216, 29, 82],
+      accounts: [
+        {
+          name: "owner",
+          signer: true,
+          relations: ["proposal"],
+        },
+        {
+          name: "proposal",
+          writable: true,
+        },
+        {
+          name: "proposal_config",
+          relations: ["proposal"],
+        },
+        {
+          name: "state_controller",
+          relations: ["proposal_config"],
+        },
+        {
+          name: "proposal_program",
+        },
+      ],
+      args: [
+        {
+          name: "args",
+          type: {
+            defined: {
+              name: "UpdateStateArgsV0",
+            },
+          },
+        },
+      ],
+    },
   ],
   accounts: [
     {
-      name: "resolutionSettingsV0",
+      name: "ProposalConfigV0",
+      discriminator: [162, 41, 210, 200, 205, 177, 228, 11],
+    },
+    {
+      name: "ProposalV0",
+      discriminator: [254, 194, 16, 171, 214, 20, 192, 81],
+    },
+    {
+      name: "ResolutionSettingsV0",
+      discriminator: [169, 38, 51, 69, 190, 118, 10, 130],
+    },
+  ],
+  errors: [
+    {
+      code: 6000,
+      name: "ProposalAlreadyResolved",
+      msg: "Proposal was already resolved. Call resolve_v0",
+    },
+    {
+      code: 6001,
+      name: "ChoicesEmpty",
+      msg: "Resolved choices must not be empty",
+    },
+    {
+      code: 6002,
+      name: "EndTimestampPassed",
+      msg: "End timestamp has already passed",
+    },
+    {
+      code: 6003,
+      name: "InvalidOffset",
+      msg: "Offset must be a positive integer",
+    },
+    {
+      code: 6004,
+      name: "InvalidPercentage",
+      msg: "Percentage may not be less than 0 or greater than PERCENTAGE_DIVISOR",
+    },
+    {
+      code: 6005,
+      name: "InvalidTopN",
+      msg: "Top n must be greater than 0",
+    },
+  ],
+  types: [
+    {
+      name: "Choice",
       type: {
         kind: "struct",
         fields: [
+          {
+            name: "weight",
+            docs: [
+              "Total vote weight behind this choice. u128 to support u64 tokens multiplied by a large multiplier (as in helium)",
+            ],
+            type: "u128",
+          },
           {
             name: "name",
             type: "string",
           },
           {
-            name: "settings",
+            name: "uri",
+            docs: ["Any other data that you may want to put in here"],
             type: {
-              defined: "ResolutionStrategy",
+              option: "string",
             },
-          },
-          {
-            name: "bumpSeed",
-            type: "u8",
           },
         ],
       },
     },
-  ],
-  types: [
     {
       name: "InitializeResolutionSettingsArgsV0",
       type: {
@@ -234,94 +273,125 @@ const IDL = {
           {
             name: "settings",
             type: {
-              defined: "ResolutionStrategy",
+              defined: {
+                name: "ResolutionStrategy",
+              },
             },
           },
         ],
       },
     },
     {
-      name: "VoteArgsV0",
+      name: "ProposalConfigV0",
       type: {
         kind: "struct",
         fields: [
           {
-            name: "choice",
+            name: "vote_controller",
+            docs: ["Signer that controls voting and vote weights"],
+            type: "pubkey",
+          },
+          {
+            name: "state_controller",
+            docs: [
+              "Signer that controls the transitions of `ProposalState`",
+              "You can either use the default `state-controller` smart contract",
+              "Or you can implement a program that calls the `resolve_v0` method.",
+              "The vote can only be resolved when this `resolution_settings` PDA signs `resolve_v0`. This allows",
+              "you to trigger resolution on either (a) a vote, (b) a timestamp, or (c) some custom trigger with clockwork",
+            ],
+            type: "pubkey",
+          },
+          {
+            name: "on_vote_hook",
+            docs: [
+              "Optional program that will be called with `on_vote_v0` after every vote. This allows you to resolve",
+              "the vote eagerly. For most use cases, this should just be the owner of the state controller.",
+              "WARNING: This program has full authority to set the outcome of votes, make sure you trust it",
+            ],
+            type: "pubkey",
+          },
+          {
+            name: "name",
+            type: "string",
+          },
+          {
+            name: "bump_seed",
+            type: "u8",
+          },
+          {
+            name: "authority",
+            type: "pubkey",
+          },
+        ],
+      },
+    },
+    {
+      name: "ProposalV0",
+      type: {
+        kind: "struct",
+        fields: [
+          {
+            name: "namespace",
+            type: "pubkey",
+          },
+          {
+            name: "owner",
+            type: "pubkey",
+          },
+          {
+            name: "state",
+            type: {
+              defined: {
+                name: "proposal::state::ProposalState",
+              },
+            },
+          },
+          {
+            name: "created_at",
+            type: "i64",
+          },
+          {
+            name: "proposal_config",
+            type: "pubkey",
+          },
+          {
+            name: "max_choices_per_voter",
+            docs: ["Allows for multiple selection votes"],
             type: "u16",
           },
           {
-            name: "weight",
-            type: "u128",
+            name: "seed",
+            type: "bytes",
           },
           {
-            name: "removeVote",
-            docs: ["This is a remove operation"],
-            type: "bool",
+            name: "name",
+            type: "string",
           },
-        ],
-      },
-    },
-    {
-      name: "UpdateStateArgsV0",
-      type: {
-        kind: "struct",
-        fields: [
           {
-            name: "newState",
+            name: "uri",
+            docs: ["URI to json containing name, description, etc"],
+            type: "string",
+          },
+          {
+            name: "tags",
             type: {
-              defined: "ProposalState",
+              vec: "string",
             },
           },
-        ],
-      },
-    },
-    {
-      name: "ResolutionStrategy",
-      docs: [
-        "Reverse polish notation calculator",
-        "https://en.wikipedia.org/wiki/Reverse_Polish_notation",
-        "Do this to have a flat structure since rust doesn't like unbounded nesting of types",
-      ],
-      type: {
-        kind: "struct",
-        fields: [
           {
-            name: "nodes",
+            name: "choices",
             type: {
               vec: {
-                defined: "ResolutionNode",
+                defined: {
+                  name: "Choice",
+                },
               },
             },
           },
-        ],
-      },
-    },
-    {
-      name: "ProposalState",
-      type: {
-        kind: "enum",
-        variants: [
           {
-            name: "Draft",
-          },
-          {
-            name: "Cancelled",
-          },
-          {
-            name: "Voting",
-          },
-          {
-            name: "Custom",
-            fields: [
-              {
-                name: "name",
-                type: "string",
-              },
-              {
-                name: "bin",
-                type: "bytes",
-              },
-            ],
+            name: "bump_seed",
+            type: "u8",
           },
         ],
       },
@@ -433,37 +503,170 @@ const IDL = {
         ],
       },
     },
-  ],
-  errors: [
     {
-      code: 6000,
-      name: "ProposalAlreadyResolved",
-      msg: "Proposal was already resolved. Call resolve_v0",
+      name: "ResolutionSettingsV0",
+      type: {
+        kind: "struct",
+        fields: [
+          {
+            name: "name",
+            type: "string",
+          },
+          {
+            name: "settings",
+            type: {
+              defined: {
+                name: "ResolutionStrategy",
+              },
+            },
+          },
+          {
+            name: "bump_seed",
+            type: "u8",
+          },
+        ],
+      },
     },
     {
-      code: 6001,
-      name: "ChoicesEmpty",
-      msg: "Resolved choices must not be empty",
+      name: "ResolutionStrategy",
+      docs: [
+        "Reverse polish notation calculator",
+        "https://en.wikipedia.org/wiki/Reverse_Polish_notation",
+        "Do this to have a flat structure since rust doesn't like unbounded nesting of types",
+      ],
+      type: {
+        kind: "struct",
+        fields: [
+          {
+            name: "nodes",
+            type: {
+              vec: {
+                defined: {
+                  name: "ResolutionNode",
+                },
+              },
+            },
+          },
+        ],
+      },
     },
     {
-      code: 6002,
-      name: "EndTimestampPassed",
-      msg: "End timestamp has already passed",
+      name: "UpdateStateArgsV0",
+      type: {
+        kind: "struct",
+        fields: [
+          {
+            name: "new_state",
+            type: {
+              defined: {
+                name: "state_controller::instructions::update_state_v0::ProposalState",
+              },
+            },
+          },
+        ],
+      },
     },
     {
-      code: 6003,
-      name: "InvalidOffset",
-      msg: "Offset must be a positive integer",
+      name: "VoteArgsV0",
+      type: {
+        kind: "struct",
+        fields: [
+          {
+            name: "choice",
+            type: "u16",
+          },
+          {
+            name: "weight",
+            type: "u128",
+          },
+          {
+            name: "remove_vote",
+            docs: ["This is a remove operation"],
+            type: "bool",
+          },
+        ],
+      },
     },
     {
-      code: 6004,
-      name: "InvalidPercentage",
-      msg: "Percentage may not be less than 0 or greater than PERCENTAGE_DIVISOR",
+      name: "proposal::state::ProposalState",
+      type: {
+        kind: "enum",
+        variants: [
+          {
+            name: "Draft",
+          },
+          {
+            name: "Cancelled",
+          },
+          {
+            name: "Voting",
+            fields: [
+              {
+                name: "start_ts",
+                type: "i64",
+              },
+            ],
+          },
+          {
+            name: "Resolved",
+            fields: [
+              {
+                name: "choices",
+                type: {
+                  vec: "u16",
+                },
+              },
+              {
+                name: "end_ts",
+                type: "i64",
+              },
+            ],
+          },
+          {
+            name: "Custom",
+            fields: [
+              {
+                name: "name",
+                type: "string",
+              },
+              {
+                name: "bin",
+                type: "bytes",
+              },
+            ],
+          },
+        ],
+      },
     },
     {
-      code: 6005,
-      name: "InvalidTopN",
-      msg: "Top n must be greater than 0",
+      name: "state_controller::instructions::update_state_v0::ProposalState",
+      type: {
+        kind: "enum",
+        variants: [
+          {
+            name: "Draft",
+          },
+          {
+            name: "Cancelled",
+          },
+          {
+            name: "Voting",
+          },
+          {
+            name: "Custom",
+            fields: [
+              {
+                name: "name",
+                type: "string",
+              },
+              {
+                name: "bin",
+                type: "bytes",
+              },
+            ],
+          },
+        ],
+      },
     },
   ],
 };

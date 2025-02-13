@@ -4,7 +4,6 @@ declare_id!("nftvLQ5t6xe2nQF1NBmBBmn15ed59tU6vSCkwQNEqdc");
 
 pub mod error;
 pub mod instructions;
-pub mod metaplex;
 pub mod state;
 
 pub use instructions::*;

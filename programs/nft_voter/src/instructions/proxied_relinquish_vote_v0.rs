@@ -1,11 +1,12 @@
 use anchor_lang::prelude::*;
-use anchor_spl::token::Mint;
+use anchor_spl::{
+  metadata::{mpl_token_metadata, MetadataAccount},
+  token::Mint,
+};
 use nft_proxy::state::ProxyAssignmentV0;
 use proposal::{ProposalConfigV0, ProposalV0};
 
-use crate::{
-  error::ErrorCode, metaplex::MetadataAccount, nft_voter_seeds, state::*, RelinquishVoteArgsV0,
-};
+use crate::{error::ErrorCode, nft_voter_seeds, state::*, RelinquishVoteArgsV0};
 
 #[derive(Accounts)]
 pub struct ProxiedRelinquishVoteV0<'info> {
@@ -26,7 +27,7 @@ pub struct ProxiedRelinquishVoteV0<'info> {
   pub mint: Box<Account<'info, Mint>>,
   #[account(
     seeds = ["metadata".as_bytes(), MetadataAccount::owner().as_ref(), mint.key().as_ref()],
-    seeds::program = MetadataAccount::owner(),
+    seeds::program = mpl_token_metadata::ID,
     bump,
     constraint = metadata.collection.as_ref().map(|col| col.verified && col.key == nft_voter.collection).unwrap_or_else(|| false)
   )]

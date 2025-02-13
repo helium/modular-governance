@@ -9,6 +9,7 @@ crate-type = ["cdylib", "lib"]
 name = "organization_wallet"
 
 [features]
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build", "proposal/idl-build", "organization/idl-build"]
 no-entrypoint = []
 no-idl = []
 no-log-ix-name = []
@@ -17,8 +18,7 @@ default = []
 devnet = []
 
 [dependencies]
-anchor-lang = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism", features = ["init-if-needed"] }
-anchor-spl = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism" }
+anchor-lang = { workspace = true }
+anchor-spl = { workspace = true }
 proposal = { path = "../proposal", features = ["no-entrypoint", "cpi"] }
 organization = { path = "../organization", features = ["no-entrypoint", "cpi"] }
-time = "0.3.36"

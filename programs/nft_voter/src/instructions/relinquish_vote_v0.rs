@@ -1,9 +1,11 @@
-use crate::{error::ErrorCode, metaplex::MetadataAccount};
 use anchor_lang::prelude::*;
-use anchor_spl::token::{Mint, TokenAccount};
+use anchor_spl::{
+  metadata::{mpl_token_metadata, MetadataAccount},
+  token::{Mint, TokenAccount},
+};
 use proposal::{ProposalConfigV0, ProposalV0};
 
-use crate::{nft_voter_seeds, state::*};
+use crate::{error::ErrorCode, nft_voter_seeds, state::*};
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct RelinquishVoteArgsV0 {
@@ -28,8 +30,8 @@ pub struct RelinquishVoteV0<'info> {
   pub voter: Signer<'info>,
   pub mint: Box<Account<'info, Mint>>,
   #[account(
-    seeds = ["metadata".as_bytes(), MetadataAccount::owner().as_ref(), mint.key().as_ref()],
-    seeds::program = MetadataAccount::owner(),
+    seeds = ["metadata".as_bytes(), mpl_token_metadata::ID.as_ref(), mint.key().as_ref()],
+    seeds::program = mpl_token_metadata::ID,
     bump,
     constraint = metadata.collection.as_ref().map(|col| col.verified && col.key == nft_voter.collection).unwrap_or_else(|| false)
   )]

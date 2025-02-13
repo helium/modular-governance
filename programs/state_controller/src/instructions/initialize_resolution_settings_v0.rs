@@ -1,5 +1,6 @@
-use crate::state::*;
 use anchor_lang::prelude::*;
+
+use crate::state::*;
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct InitializeResolutionSettingsArgsV0 {
@@ -33,7 +34,7 @@ pub fn handler(
     .accounts
     .resolution_settings
     .set_inner(ResolutionSettingsV0 {
-      bump_seed: ctx.bumps["resolution_settings"],
+      bump_seed: ctx.bumps.resolution_settings,
       settings: args.settings,
       name: args.name,
     });

@@ -40,11 +40,8 @@ export async function executeTransaction({
 
   return program.methods
     .executeTransactionV0()
-    .accounts({
+    .accountsPartial({
       choiceTransaction,
-      organizationWallet,
-      proposal,
-      wallet,
       // @ts-ignore
       refund: refund || program.provider.wallet.publicKey,
     })

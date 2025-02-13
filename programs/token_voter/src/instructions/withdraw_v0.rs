@@ -1,14 +1,11 @@
 use anchor_lang::prelude::*;
 use anchor_spl::{
   associated_token::AssociatedToken,
+  metadata::{burn_nft, BurnNft, Metadata},
   token::{self, CloseAccount, Mint, Token, TokenAccount, Transfer},
 };
 
-use crate::{
-  metaplex::{burn, Burn, Metadata},
-  receipt_seeds,
-  state::*,
-};
+use crate::{receipt_seeds, state::*};
 
 #[derive(Accounts)]
 pub struct WithdrawV0<'info> {
@@ -95,14 +92,14 @@ pub struct WithdrawV0<'info> {
 }
 
 impl<'info> WithdrawV0<'info> {
-  fn burn_nft_ctx(&self) -> CpiContext<'_, '_, '_, 'info, Burn<'info>> {
-    let cpi_accounts = Burn {
+  fn burn_nft_ctx(&self) -> CpiContext<'_, '_, '_, 'info, BurnNft<'info>> {
+    let cpi_accounts = BurnNft {
       metadata: self.metadata.to_account_info(),
       owner: self.owner.to_account_info(),
       mint: self.mint.to_account_info(),
-      token_account: self.receipt_token_account.to_account_info(),
-      master_edition_account: self.master_edition.to_account_info(),
-      collection: self.collection_metadata.to_account_info(),
+      token: self.receipt_token_account.to_account_info(),
+      edition: self.master_edition.to_account_info(),
+      spl_token: self.token_program.to_account_info(),
     };
     CpiContext::new(self.token_metadata_program.to_account_info(), cpi_accounts)
   }
@@ -129,7 +126,10 @@ impl<'info> WithdrawV0<'info> {
 pub fn handler(ctx: Context<WithdrawV0>) -> Result<()> {
   let signer_seeds: &[&[&[u8]]] = &[receipt_seeds!(ctx.accounts.receipt)];
 
-  burn(ctx.accounts.burn_nft_ctx())?;
+  burn_nft(
+    ctx.accounts.burn_nft_ctx(),
+    Some(ctx.accounts.collection_metadata.key()),
+  )?;
   token::transfer(
     ctx
       .accounts

@@ -64,7 +64,7 @@ pub struct VoteV0<'info> {
 pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
   let marker = &mut ctx.accounts.marker;
   marker.proposal = ctx.accounts.proposal.key();
-  marker.bump_seed = ctx.bumps["marker"];
+  marker.bump_seed = ctx.bumps.marker;
   marker.voter = ctx.accounts.voter.key();
   marker.mint = ctx.accounts.mint.key();
   marker.token_voter = ctx.accounts.token_voter.key();

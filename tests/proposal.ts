@@ -96,7 +96,7 @@ describe("proposal", () => {
           onVoteHook,
           authority,
         })
-        .accounts({ proposalConfig })
+        .accountsPartial({ proposalConfig })
         .rpc();
 
       const acct = await program.account.proposalConfigV0.fetch(
@@ -125,7 +125,7 @@ describe("proposal", () => {
 
       await program.methods
         .updateProposalConfigV0(args as any)
-        .accounts({ proposalConfig })
+        .accountsPartial({ proposalConfig })
         .rpc();
 
       const acct = await program.account.proposalConfigV0.fetch(
@@ -157,7 +157,7 @@ describe("proposal", () => {
           onVoteHook: null,
           authority,
         })
-        .accounts({ proposalConfig })
+        .accountsPartial({ proposalConfig })
         .rpc();
 
       try {
@@ -168,7 +168,7 @@ describe("proposal", () => {
             onVoteHook: PublicKey.default,
             authority: me,
           })
-          .accounts({
+          .accountsPartial({
             proposalConfig,
           })
           .simulate();
@@ -202,7 +202,7 @@ describe("proposal", () => {
           ],
           tags: ["test", "tags"],
         })
-        .accounts({ proposalConfig })
+        .accountsPartial({ proposalConfig })
         .rpcAndKeys();
 
       const acct = await program.account.proposalV0.fetch(proposal!);
@@ -239,7 +239,7 @@ describe("proposal", () => {
               ],
               tags: ["test", "tags"],
             })
-            .accounts({ proposalConfig })
+            .accountsPartial({ proposalConfig })
             .rpcAndKeys()
         ).pubkeys.proposal!;
       });
@@ -253,7 +253,7 @@ describe("proposal", () => {
               },
             },
           })
-          .accounts({ proposal })
+          .accountsPartial({ proposal })
           .rpc();
         await program.methods
           .voteV0({
@@ -261,7 +261,7 @@ describe("proposal", () => {
             weight: new anchor.BN(2),
             removeVote: false,
           })
-          .accounts({ proposal, voter: me })
+          .accountsPartial({ proposal, voter: me })
           .rpc({ skipPreflight: true });
 
         let acct = await program.account.proposalV0.fetch(proposal);
@@ -273,7 +273,7 @@ describe("proposal", () => {
             weight: new anchor.BN(1),
             removeVote: true,
           })
-          .accounts({ proposal, voter: me })
+          .accountsPartial({ proposal, voter: me })
           .rpc();
 
         acct = await program.account.proposalV0.fetch(proposal);
@@ -285,7 +285,7 @@ describe("proposal", () => {
           .updateStateV0({
             newState: { custom: { name: "hello", bin: Buffer.from([]) } },
           })
-          .accounts({ proposal })
+          .accountsPartial({ proposal })
           .rpc({ skipPreflight: true });
 
         const acct = await program.account.proposalV0.fetch(proposal);

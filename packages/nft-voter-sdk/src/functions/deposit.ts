@@ -58,7 +58,7 @@ export async function deposit({
     .preInstructions(
       await createMintInstructions(program.provider, 0, receipt, receipt, mintKeypair)
     )
-    .accounts({
+    .accountsPartial({
       tokenVoter,
       mint: mintKeypair.publicKey,
       recipient,

@@ -91,7 +91,7 @@ beforeEach(async () => {
         ],
         tags: ["test", "tags"],
       })
-      .accounts({ proposalConfig })
+      .accountsPartial({ proposalConfig })
       .rpcAndKeys();
 
     const acct = await program.account.proposalV0.fetch(proposal!);
@@ -133,7 +133,7 @@ beforeEach(async () => {
         ],
         tags: ["test", "tags"],
       })
-      .accounts({ proposalConfig })
+      .accountsPartial({ proposalConfig })
       .rpcAndKeys()
   ).pubkeys.proposal!
 })
@@ -148,7 +148,7 @@ beforeEach(async () => {
           weight: new anchor.BN(2),
           removeVote: false,
         })
-        .accounts({ proposal, voter: me })
+        .accountsPartial({ proposal, voter: me })
         .rpc({ skipPreflight: true });
 
       let acct = await program.account.proposalV0.fetch(proposal);
@@ -160,7 +160,7 @@ beforeEach(async () => {
           weight: new anchor.BN(1),
           removeVote: true,
         })
-        .accounts({ proposal, voter: me })
+        .accountsPartial({ proposal, voter: me })
         .rpc();
 
       acct = await program.account.proposalV0.fetch(proposal);
@@ -177,7 +177,7 @@ beforeEach(async () => {
         .updateStateV0({
           newState: { custom: { state: "hello" } },
         })
-        .accounts({ proposal })
+        .accountsPartial({ proposal })
         .rpc({ skipPreflight: true });
 
 

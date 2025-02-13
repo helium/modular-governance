@@ -17,14 +17,13 @@ export async function init(
     idl = await Program.fetchIdl(programId, provider);
     // This is an Anchor 0.30+ IDL. Return the old IDLs
     // @ts-ignore
-    if (!idl || idl?.address) {
+    if (!idl || !idl?.address) {
       idl = IDL as any;
     }
   }
 
   const tokenVoter = new Program<NftProxy>(
     idl as NftProxy,
-    programId,
     provider,
     undefined,
     () => nftProxyResolvers
@@ -34,121 +33,65 @@ export async function init(
 }
 
 const IDL = {
-  version: "0.0.1",
-  name: "nft_proxy",
+  address: "nprx42sXf5rpVnwBWEdRg1d8tuCWsTuVLys1pRWwE6p",
+  metadata: {
+    name: "nft_proxy",
+    version: "0.0.2",
+    spec: "0.1.0",
+    description: "Created with Anchor",
+  },
   instructions: [
     {
-      name: "initializeProxyConfigV0",
+      name: "assign_proxy_v0",
+      discriminator: [107, 214, 197, 124, 248, 222, 169, 25],
       accounts: [
         {
           name: "payer",
-          isMut: true,
-          isSigner: true,
-        },
-        {
-          name: "authority",
-          isMut: false,
-          isSigner: false,
-        },
-        {
-          name: "proxyConfig",
-          isMut: true,
-          isSigner: false,
-          pda: {
-            seeds: [
-              {
-                kind: "const",
-                type: "string",
-                value: "proxy_config",
-              },
-              {
-                kind: "arg",
-                type: {
-                  defined: "InitializeProxyConfigArgsV0",
-                },
-                path: "args.name",
-              },
-            ],
-          },
-        },
-        {
-          name: "systemProgram",
-          isMut: false,
-          isSigner: false,
-        },
-      ],
-      args: [
-        {
-          name: "args",
-          type: {
-            defined: "InitializeProxyConfigArgsV0",
-          },
-        },
-      ],
-    },
-    {
-      name: "assignProxyV0",
-      accounts: [
-        {
-          name: "payer",
-          isMut: true,
-          isSigner: true,
+          writable: true,
+          signer: true,
         },
         {
           name: "asset",
-          isMut: false,
-          isSigner: false,
         },
         {
           name: "approver",
-          isMut: false,
-          isSigner: true,
+          signer: true,
         },
         {
           name: "voter",
-          isMut: false,
-          isSigner: false,
           docs: [
             "or in the case of a primary proxy (first in the line), Pubkey::default",
           ],
         },
         {
-          name: "tokenAccount",
-          isMut: false,
-          isSigner: false,
-          isOptional: true,
+          name: "token_account",
+          optional: true,
         },
         {
-          name: "proxyConfig",
-          isMut: false,
-          isSigner: false,
+          name: "proxy_config",
         },
         {
-          name: "currentProxyAssignment",
-          isMut: true,
-          isSigner: false,
+          name: "current_proxy_assignment",
+          writable: true,
           pda: {
             seeds: [
               {
                 kind: "const",
-                type: "string",
-                value: "proxy_assignment",
+                value: [
+                  112, 114, 111, 120, 121, 95, 97, 115, 115, 105, 103, 110, 109,
+                  101, 110, 116,
+                ],
               },
               {
                 kind: "account",
-                type: "publicKey",
-                account: "ProxyConfigV0",
                 path: "proxy_config",
               },
               {
                 kind: "account",
-                type: "publicKey",
-                account: "Mint",
                 path: "asset",
               },
               {
                 kind: "account",
-                type: "publicKey",
                 path: "voter",
               },
             ],
@@ -156,348 +99,237 @@ const IDL = {
         },
         {
           name: "recipient",
-          isMut: false,
-          isSigner: false,
         },
         {
-          name: "nextProxyAssignment",
-          isMut: true,
-          isSigner: false,
+          name: "next_proxy_assignment",
+          writable: true,
           pda: {
             seeds: [
               {
                 kind: "const",
-                type: "string",
-                value: "proxy_assignment",
+                value: [
+                  112, 114, 111, 120, 121, 95, 97, 115, 115, 105, 103, 110, 109,
+                  101, 110, 116,
+                ],
               },
               {
                 kind: "account",
-                type: "publicKey",
-                account: "ProxyConfigV0",
                 path: "proxy_config",
               },
               {
                 kind: "account",
-                type: "publicKey",
-                account: "Mint",
                 path: "asset",
               },
               {
                 kind: "account",
-                type: "publicKey",
                 path: "recipient",
               },
             ],
           },
         },
         {
-          name: "systemProgram",
-          isMut: false,
-          isSigner: false,
+          name: "system_program",
+          address: "11111111111111111111111111111111",
         },
       ],
       args: [
         {
           name: "args",
           type: {
-            defined: "AssignProxyArgsV0",
+            defined: {
+              name: "AssignProxyArgsV0",
+            },
           },
         },
       ],
     },
     {
-      name: "unassignProxyV0",
+      name: "close_expired_proxy_v0",
+      discriminator: [21, 151, 28, 156, 29, 184, 97, 58],
       accounts: [
         {
-          name: "rentRefund",
-          isMut: true,
-          isSigner: false,
+          name: "rent_refund",
+          writable: true,
+          relations: ["proxy_assignment"],
         },
         {
-          name: "asset",
-          isMut: false,
-          isSigner: false,
+          name: "proxy_assignment",
+          writable: true,
         },
         {
-          name: "approver",
-          isMut: false,
-          isSigner: true,
-        },
-        {
-          name: "voter",
-          isMut: false,
-          isSigner: false,
-          docs: [
-            "or in the case of a primary proxy (first in the line), Pubkey::default",
-          ],
-        },
-        {
-          name: "tokenAccount",
-          isMut: false,
-          isSigner: false,
-          isOptional: true,
-        },
-        {
-          name: "currentProxyAssignment",
-          isMut: false,
-          isSigner: false,
-          relations: ["proxy_config", "voter", "asset"],
-        },
-        {
-          name: "prevProxyAssignment",
-          isMut: true,
-          isSigner: false,
-          relations: ["proxy_config"],
-        },
-        {
-          name: "proxyAssignment",
-          isMut: true,
-          isSigner: false,
-          relations: ["proxy_config", "rent_refund"],
-        },
-        {
-          name: "proxyConfig",
-          isMut: false,
-          isSigner: false,
-        },
-        {
-          name: "systemProgram",
-          isMut: false,
-          isSigner: false,
+          name: "system_program",
+          address: "11111111111111111111111111111111",
         },
       ],
       args: [],
     },
     {
-      name: "updateProxyConfigV0",
+      name: "initialize_proxy_config_v0",
+      discriminator: [8, 242, 247, 214, 208, 16, 189, 129],
       accounts: [
         {
           name: "payer",
-          isMut: true,
-          isSigner: true,
+          writable: true,
+          signer: true,
         },
         {
           name: "authority",
-          isMut: false,
-          isSigner: false,
         },
         {
-          name: "proxyConfig",
-          isMut: true,
-          isSigner: false,
-          relations: ["authority"],
+          name: "proxy_config",
+          writable: true,
+          pda: {
+            seeds: [
+              {
+                kind: "const",
+                value: [
+                  112, 114, 111, 120, 121, 95, 99, 111, 110, 102, 105, 103,
+                ],
+              },
+              {
+                kind: "arg",
+                path: "args.name",
+              },
+            ],
+          },
         },
         {
-          name: "systemProgram",
-          isMut: false,
-          isSigner: false,
+          name: "system_program",
+          address: "11111111111111111111111111111111",
         },
       ],
       args: [
         {
           name: "args",
           type: {
-            defined: "UpdateProxyConfigArgsV0",
+            defined: {
+              name: "InitializeProxyConfigArgsV0",
+            },
           },
         },
       ],
     },
     {
-      name: "unassignExpiredProxyV0",
+      name: "unassign_expired_proxy_v0",
+      discriminator: [165, 221, 241, 128, 213, 85, 107, 20],
       accounts: [
         {
-          name: "rentRefund",
-          isMut: true,
-          isSigner: false,
+          name: "rent_refund",
+          writable: true,
+          relations: ["proxy_assignment"],
         },
         {
-          name: "prevProxyAssignment",
-          isMut: true,
-          isSigner: false,
+          name: "prev_proxy_assignment",
+          writable: true,
         },
         {
-          name: "proxyAssignment",
-          isMut: true,
-          isSigner: false,
-          relations: ["rent_refund"],
+          name: "proxy_assignment",
+          writable: true,
         },
         {
-          name: "systemProgram",
-          isMut: false,
-          isSigner: false,
+          name: "system_program",
+          address: "11111111111111111111111111111111",
         },
       ],
       args: [],
     },
     {
-      name: "closeExpiredProxyV0",
+      name: "unassign_proxy_v0",
+      discriminator: [23, 104, 235, 220, 139, 184, 41, 221],
       accounts: [
         {
-          name: "rentRefund",
-          isMut: true,
-          isSigner: false,
+          name: "rent_refund",
+          writable: true,
+          relations: ["proxy_assignment"],
         },
         {
-          name: "proxyAssignment",
-          isMut: true,
-          isSigner: false,
-          relations: ["rent_refund"],
+          name: "asset",
+          relations: ["current_proxy_assignment"],
         },
         {
-          name: "systemProgram",
-          isMut: false,
-          isSigner: false,
+          name: "approver",
+          signer: true,
+        },
+        {
+          name: "voter",
+          docs: [
+            "or in the case of a primary proxy (first in the line), Pubkey::default",
+          ],
+          relations: ["current_proxy_assignment"],
+        },
+        {
+          name: "token_account",
+          optional: true,
+        },
+        {
+          name: "current_proxy_assignment",
+        },
+        {
+          name: "prev_proxy_assignment",
+          writable: true,
+        },
+        {
+          name: "proxy_assignment",
+          writable: true,
+        },
+        {
+          name: "proxy_config",
+          relations: [
+            "current_proxy_assignment",
+            "prev_proxy_assignment",
+            "proxy_assignment",
+          ],
+        },
+        {
+          name: "system_program",
+          address: "11111111111111111111111111111111",
         },
       ],
       args: [],
+    },
+    {
+      name: "update_proxy_config_v0",
+      discriminator: [165, 218, 143, 105, 41, 163, 178, 225],
+      accounts: [
+        {
+          name: "payer",
+          writable: true,
+          signer: true,
+        },
+        {
+          name: "authority",
+          signer: true,
+          relations: ["proxy_config"],
+        },
+        {
+          name: "proxy_config",
+          writable: true,
+        },
+        {
+          name: "system_program",
+          address: "11111111111111111111111111111111",
+        },
+      ],
+      args: [
+        {
+          name: "args",
+          type: {
+            defined: {
+              name: "UpdateProxyConfigArgsV0",
+            },
+          },
+        },
+      ],
     },
   ],
   accounts: [
     {
-      name: "proxyConfigV0",
-      type: {
-        kind: "struct",
-        fields: [
-          {
-            name: "authority",
-            type: "publicKey",
-          },
-          {
-            name: "name",
-            type: "string",
-          },
-          {
-            name: "maxProxyTime",
-            type: "i64",
-          },
-          {
-            name: "seasons",
-            type: {
-              vec: {
-                defined: "SeasonV0",
-              },
-            },
-          },
-        ],
-      },
+      name: "ProxyAssignmentV0",
+      discriminator: [196, 152, 78, 155, 132, 136, 147, 55],
     },
     {
-      name: "proxyAssignmentV0",
-      type: {
-        kind: "struct",
-        fields: [
-          {
-            name: "voter",
-            type: "publicKey",
-          },
-          {
-            name: "proxyConfig",
-            type: "publicKey",
-          },
-          {
-            name: "asset",
-            type: "publicKey",
-          },
-          {
-            name: "index",
-            type: "u16",
-          },
-          {
-            name: "nextVoter",
-            type: "publicKey",
-          },
-          {
-            name: "rentRefund",
-            type: "publicKey",
-          },
-          {
-            name: "expirationTime",
-            type: "i64",
-          },
-          {
-            name: "bumpSeed",
-            type: "u8",
-          },
-        ],
-      },
-    },
-  ],
-  types: [
-    {
-      name: "AssignProxyArgsV0",
-      type: {
-        kind: "struct",
-        fields: [
-          {
-            name: "expirationTime",
-            type: "i64",
-          },
-        ],
-      },
-    },
-    {
-      name: "InitializeProxyConfigArgsV0",
-      type: {
-        kind: "struct",
-        fields: [
-          {
-            name: "name",
-            type: "string",
-          },
-          {
-            name: "maxProxyTime",
-            type: "i64",
-          },
-          {
-            name: "seasons",
-            type: {
-              vec: {
-                defined: "SeasonV0",
-              },
-            },
-          },
-        ],
-      },
-    },
-    {
-      name: "UpdateProxyConfigArgsV0",
-      type: {
-        kind: "struct",
-        fields: [
-          {
-            name: "maxProxyTime",
-            type: {
-              option: "i64",
-            },
-          },
-          {
-            name: "seasons",
-            type: {
-              option: {
-                vec: {
-                  defined: "SeasonV0",
-                },
-              },
-            },
-          },
-        ],
-      },
-    },
-    {
-      name: "SeasonV0",
-      type: {
-        kind: "struct",
-        fields: [
-          {
-            name: "start",
-            type: "i64",
-          },
-          {
-            name: "end",
-            type: "i64",
-          },
-        ],
-      },
+      name: "ProxyConfigV0",
+      discriminator: [187, 22, 143, 173, 201, 68, 34, 64],
     },
   ],
   errors: [
@@ -540,6 +372,158 @@ const IDL = {
       code: 6007,
       name: "ExpirationNotPast",
       msg: "The specified expiration time has not passed",
+    },
+  ],
+  types: [
+    {
+      name: "AssignProxyArgsV0",
+      type: {
+        kind: "struct",
+        fields: [
+          {
+            name: "expiration_time",
+            type: "i64",
+          },
+        ],
+      },
+    },
+    {
+      name: "InitializeProxyConfigArgsV0",
+      type: {
+        kind: "struct",
+        fields: [
+          {
+            name: "name",
+            type: "string",
+          },
+          {
+            name: "max_proxy_time",
+            type: "i64",
+          },
+          {
+            name: "seasons",
+            type: {
+              vec: {
+                defined: {
+                  name: "SeasonV0",
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      name: "ProxyAssignmentV0",
+      type: {
+        kind: "struct",
+        fields: [
+          {
+            name: "voter",
+            type: "pubkey",
+          },
+          {
+            name: "proxy_config",
+            type: "pubkey",
+          },
+          {
+            name: "asset",
+            type: "pubkey",
+          },
+          {
+            name: "index",
+            type: "u16",
+          },
+          {
+            name: "next_voter",
+            type: "pubkey",
+          },
+          {
+            name: "rent_refund",
+            type: "pubkey",
+          },
+          {
+            name: "expiration_time",
+            type: "i64",
+          },
+          {
+            name: "bump_seed",
+            type: "u8",
+          },
+        ],
+      },
+    },
+    {
+      name: "ProxyConfigV0",
+      type: {
+        kind: "struct",
+        fields: [
+          {
+            name: "authority",
+            type: "pubkey",
+          },
+          {
+            name: "name",
+            type: "string",
+          },
+          {
+            name: "max_proxy_time",
+            type: "i64",
+          },
+          {
+            name: "seasons",
+            type: {
+              vec: {
+                defined: {
+                  name: "SeasonV0",
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      name: "SeasonV0",
+      type: {
+        kind: "struct",
+        fields: [
+          {
+            name: "start",
+            type: "i64",
+          },
+          {
+            name: "end",
+            type: "i64",
+          },
+        ],
+      },
+    },
+    {
+      name: "UpdateProxyConfigArgsV0",
+      type: {
+        kind: "struct",
+        fields: [
+          {
+            name: "max_proxy_time",
+            type: {
+              option: "i64",
+            },
+          },
+          {
+            name: "seasons",
+            type: {
+              option: {
+                vec: {
+                  defined: {
+                    name: "SeasonV0",
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
     },
   ],
 };
