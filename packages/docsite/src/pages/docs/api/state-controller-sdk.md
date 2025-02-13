@@ -6,121 +6,132 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ## Instructions
 
-### onVoteV0
+### initialize_resolution_settings_v0
 
 #### Accounts
 
-| Name            | Mutability | Signer | Docs |
-| --------------- | ---------- | ------ | ---- |
-| voter           | immut      | no     |      |
-| voteController  | immut      | yes    |      |
-| stateController | mut        | no     |      |
-| proposal        | immut      | no     |      |
-| proposalConfig  | immut      | no     |      |
+| Name                | Mutability | Signer | Docs |
+| ------------------- | ---------- | ------ | ---- |
+| payer               | immut      | no     |      |
+| resolution_settings | immut      | no     |      |
+| system_program      | immut      | no     |      |
 
 #### Args
 
-| Name | Type       | Docs |
-| ---- | ---------- | ---- |
-| args | VoteArgsV0 |      |
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-### initializeResolutionSettingsV0
+### on_vote_v0
 
 #### Accounts
 
-| Name               | Mutability | Signer | Docs |
-| ------------------ | ---------- | ------ | ---- |
-| payer              | mut        | yes    |      |
-| resolutionSettings | mut        | no     |      |
-| systemProgram      | immut      | no     |      |
+| Name             | Mutability | Signer | Docs |
+| ---------------- | ---------- | ------ | ---- |
+| voter            | immut      | no     |      |
+| vote_controller  | immut      | no     |      |
+| state_controller | immut      | no     |      |
+| proposal         | immut      | no     |      |
+| proposal_config  | immut      | no     |      |
 
 #### Args
 
-| Name | Type                               | Docs |
-| ---- | ---------------------------------- | ---- |
-| args | InitializeResolutionSettingsArgsV0 |      |
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-### updateStateV0
-
-#### Accounts
-
-| Name            | Mutability | Signer | Docs |
-| --------------- | ---------- | ------ | ---- |
-| owner           | immut      | yes    |      |
-| proposal        | mut        | no     |      |
-| proposalConfig  | immut      | no     |      |
-| stateController | immut      | no     |      |
-| proposalProgram | immut      | no     |      |
-
-#### Args
-
-| Name | Type              | Docs |
-| ---- | ----------------- | ---- |
-| args | UpdateStateArgsV0 |      |
-
-### resolveV0
+### resolve_v0
 
 #### Accounts
 
-| Name            | Mutability | Signer | Docs |
-| --------------- | ---------- | ------ | ---- |
-| stateController | mut        | no     |      |
-| proposal        | mut        | no     |      |
-| proposalConfig  | immut      | no     |      |
-| proposalProgram | immut      | no     |      |
+| Name             | Mutability | Signer | Docs |
+| ---------------- | ---------- | ------ | ---- |
+| state_controller | immut      | no     |      |
+| proposal         | immut      | no     |      |
+| proposal_config  | immut      | no     |      |
+| proposal_program | immut      | no     |      |
 
 #### Args
 
 | Name | Type | Docs |
 | ---- | ---- | ---- |
 
+### update_state_v0
+
+#### Accounts
+
+| Name             | Mutability | Signer | Docs |
+| ---------------- | ---------- | ------ | ---- |
+| owner            | immut      | no     |      |
+| proposal         | immut      | no     |      |
+| proposal_config  | immut      | no     |      |
+| state_controller | immut      | no     |      |
+| proposal_program | immut      | no     |      |
+
+#### Args
+
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
+
 ## Accounts
+
+### ProposalConfigV0
+
+undefined
+
+### ProposalV0
+
+undefined
 
 ### ResolutionSettingsV0
 
-| Field    | Type               |
-| -------- | ------------------ |
-| name     | string             |
-| settings | ResolutionStrategy |
-| bumpSeed | u8                 |
+undefined
 
 ## Types
 
+### Choice
+
+| Field  | Type   |
+| ------ | ------ |
+| weight | u128   |
+| name   | string |
+| uri    | string |
+
 ### InitializeResolutionSettingsArgsV0
 
-| Field    | Type               |
-| -------- | ------------------ |
-| name     | string             |
-| settings | ResolutionStrategy |
+| Field    | Type            |
+| -------- | --------------- |
+| name     | string          |
+| settings | [object Object] |
 
-### VoteArgsV0
+### ProposalConfigV0
 
-| Field      | Type |
-| ---------- | ---- |
-| choice     | u16  |
-| weight     | u128 |
-| removeVote | bool |
+| Field            | Type   |
+| ---------------- | ------ |
+| vote_controller  | pubkey |
+| state_controller | pubkey |
+| on_vote_hook     | pubkey |
+| name             | string |
+| bump_seed        | u8     |
+| authority        | pubkey |
 
-### UpdateStateArgsV0
+### ProposalV0
 
-| Field    | Type          |
-| -------- | ------------- |
-| newState | ProposalState |
-
-### ResolutionStrategy
-
-| Field | Type           |
-| ----- | -------------- |
-| nodes | ResolutionNode |
-
-### ProposalState
-
-| Variant   | Fields                   |
-| --------- | ------------------------ |
-| Draft     |                          |
-| Cancelled |                          |
-| Voting    |                          |
-| Custom    | name: string, bin: bytes |
+| Field                 | Type            |
+| --------------------- | --------------- |
+| namespace             | pubkey          |
+| owner                 | pubkey          |
+| state                 | [object Object] |
+| created_at            | i64             |
+| proposal_config       | pubkey          |
+| max_choices_per_voter | u16             |
+| seed                  | bytes           |
+| name                  | string          |
+| uri                   | string          |
+| tags                  | string          |
+| choices               | [object Object] |
+| bump_seed             | u8              |
 
 ### ResolutionNode
 
@@ -138,3 +149,50 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | Not                       | choice_name: string      |
 | TotalWeight               | weight_threshold: u128   |
 | ChoicePercentageOfCurrent | percentage: i32          |
+
+### ResolutionSettingsV0
+
+| Field     | Type            |
+| --------- | --------------- |
+| name      | string          |
+| settings  | [object Object] |
+| bump_seed | u8              |
+
+### ResolutionStrategy
+
+| Field | Type            |
+| ----- | --------------- |
+| nodes | [object Object] |
+
+### UpdateStateArgsV0
+
+| Field     | Type            |
+| --------- | --------------- |
+| new_state | [object Object] |
+
+### VoteArgsV0
+
+| Field       | Type |
+| ----------- | ---- |
+| choice      | u16  |
+| weight      | u128 |
+| remove_vote | bool |
+
+### proposal::state::ProposalState
+
+| Variant   | Fields                                |
+| --------- | ------------------------------------- |
+| Draft     |                                       |
+| Cancelled |                                       |
+| Voting    | start_ts: i64                         |
+| Resolved  | choices: [object Object], end_ts: i64 |
+| Custom    | name: string, bin: bytes              |
+
+### state_controller::instructions::update_state_v0::ProposalState
+
+| Variant   | Fields                   |
+| --------- | ------------------------ |
+| Draft     |                          |
+| Cancelled |                          |
+| Voting    |                          |
+| Custom    | name: string, bin: bytes |
