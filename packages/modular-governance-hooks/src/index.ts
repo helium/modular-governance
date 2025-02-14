@@ -10,19 +10,15 @@ import { proposalKey } from "@helium/organization-sdk";
 import { useMemo } from "react";
 
 export const useProposalConfig = (key: PublicKey | undefined) =>
-  // @ts-ignore
   useAnchorAccount<Proposal, "proposalConfigV0">(key, "proposalConfigV0");
 
 export const useProposal = (key: PublicKey | undefined) =>
-  // @ts-ignore
   useAnchorAccount<Proposal, "proposalV0">(key, "proposalV0");
 
 export const useOrganization = (key: PublicKey | undefined) =>
-  // @ts-ignore
   useAnchorAccount<Organization, "organizationV0">(key, "organizationV0");
 
 export const useResolutionSettings = (key: PublicKey | undefined) =>
-  // @ts-ignore
   useAnchorAccount<StateController, "resolutionSettingsV0">(
     key,
     "resolutionSettingsV0"
@@ -35,14 +31,11 @@ export const useOrganizationProposals = (
 
   const proposalKeys = useMemo(
     () =>
-      // @ts-ignore
       Array(organization?.numProposals)
         .fill(0)
         .map((_, index) => proposalKey(organizationKey, index)[0])
         .reverse(),
-    // @ts-ignore
     [organization?.numProposals]
   );
-  // @ts-ignore
   return useAnchorAccounts<Proposal, "proposalV0">(proposalKeys, "proposalV0");
 };
