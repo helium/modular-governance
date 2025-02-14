@@ -139,7 +139,6 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | token_program            | immut      | no     |      |
 | associated_token_program | immut      | no     |      |
 | token_metadata_program   | immut      | no     |      |
-| rent                     | immut      | no     |      |
 
 #### Args
 
