@@ -155,6 +155,7 @@ describe("token-voter", () => {
       });
 
       it("allows voting on and relinquishing votes on the proposal", async () => {
+        console.log("vote")
         const {
           pubkeys: { marker },
         } = await program.methods
@@ -162,6 +163,7 @@ describe("token-voter", () => {
             choice: 0,
           })
           .accounts({
+            payer: me,
             receipt: receipt!,
             proposal: proposal!,
             proposalProgram: proposalProgram.programId,
@@ -177,7 +179,13 @@ describe("token-voter", () => {
           .relinquishVoteV0({
             choice: 0,
           })
-          .accountsPartial({ receipt, proposal, refund: me })
+          .accountsPartial({
+            marker: marker!,
+            receipt: receipt!,
+            proposal: proposal!,
+            refund: me,
+            proposalProgram: proposalProgram.programId,
+          })
           .rpc({ skipPreflight: true });
 
         acct = await proposalProgram.account.proposalV0.fetch(proposal!);
