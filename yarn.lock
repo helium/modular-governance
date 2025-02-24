@@ -539,19 +539,19 @@
   dependencies:
     client-only "^0.0.1"
 
-"@helium/account-fetch-cache-hooks@^0.10.0-alpha.0":
-  version "0.10.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@helium/account-fetch-cache-hooks/-/account-fetch-cache-hooks-0.10.0-alpha.0.tgz#02679f810f259e5359ee1591c5a14f0f77a80bb1"
-  integrity sha512-sYNSR2QZxSdNQq3RsQOjHjcOPqbdy/VJplrYGUANogl/l5mZ1+LjE696Q6KZsKqYRf+dHpvhiSjrjuCWA2qRZQ==
+"@helium/account-fetch-cache-hooks@^0.10.0-alpha.3":
+  version "0.10.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/@helium/account-fetch-cache-hooks/-/account-fetch-cache-hooks-0.10.0-alpha.3.tgz#7c993fb93e9b1c2bd453ae645c5e05a73abc95b8"
+  integrity sha512-jWNP9ELXSD/6bzB5lm1ksi2m3tMDufTUefCd7TTeqnC53nJ9vajaRy7F3GVisBQVQu3pQJyEDKi11zUXAxGdqg==
   dependencies:
-    "@helium/account-fetch-cache" "^0.10.0-alpha.0"
+    "@helium/account-fetch-cache" "^0.10.0-alpha.3"
     "@solana/web3.js" "^1.91.1"
     react-async-hook "^4.0.0"
 
-"@helium/account-fetch-cache@0.10.0-alpha.0", "@helium/account-fetch-cache@^0.10.0-alpha.0":
-  version "0.10.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@helium/account-fetch-cache/-/account-fetch-cache-0.10.0-alpha.0.tgz#b5801eadde66767c8b3e661b7624b45f69c30ec8"
-  integrity sha512-HhACYFI/PPyEsIKRADYwQp7CUA9PvuCyjpO76I8G7lYWAiC6ZC+/Uw52M+liB2wuRyYKN+ph7I55C07VhKlinQ==
+"@helium/account-fetch-cache@0.10.0-alpha.3", "@helium/account-fetch-cache@^0.10.0-alpha.3":
+  version "0.10.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/@helium/account-fetch-cache/-/account-fetch-cache-0.10.0-alpha.3.tgz#04a8a21690c2c45f1040f32045176fa6676fd905"
+  integrity sha512-TwaoBQ7yNc79XzsTo+lya4yqpNMjachf0EmWyz3hP0btMYCL7HVuRnkC/YOQ8SUl/g5h26zv09DiSGaqgG8KFA==
   dependencies:
     "@solana/web3.js" "^1.91.1"
 
@@ -603,14 +603,14 @@
     "@solana/spl-token" "^0.3.8"
     "@solana/web3.js" "^1.78.4"
 
-"@helium/helium-react-hooks@^0.10.0-alpha.0":
-  version "0.10.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@helium/helium-react-hooks/-/helium-react-hooks-0.10.0-alpha.0.tgz#bd1c32bb017f44355959f6772cb6289150e9cce7"
-  integrity sha512-t6syDSckd5wHsle7lqZzU8NxettgL6eZt2l8796QBFCgn96GsemgoCezsdUqY6BH1CkFxamNnJ4NtsSLPv1i/Q==
+"@helium/helium-react-hooks@^0.10.0-alpha.3":
+  version "0.10.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/@helium/helium-react-hooks/-/helium-react-hooks-0.10.0-alpha.3.tgz#37ad8ed137e55c516bd09f1e089bbcebfde65498"
+  integrity sha512-R8XXnSy+y2Z7rwdnaa+zW+wJcOM/q8etaD1LquecdKBLN5PJrdVHaiQOjudjpUCyFJx5oQN202LJ0uvI/XSZVg==
   dependencies:
     "@coral-xyz/anchor" "^0.30.1"
-    "@helium/account-fetch-cache" "^0.10.0-alpha.0"
-    "@helium/account-fetch-cache-hooks" "^0.10.0-alpha.0"
+    "@helium/account-fetch-cache" "^0.10.0-alpha.3"
+    "@helium/account-fetch-cache-hooks" "^0.10.0-alpha.3"
     "@solana/spl-token" "^0.3.8"
     "@solana/web3.js" "^1.91.1"
     bs58 "^4.0.1"

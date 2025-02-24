@@ -21,3 +21,5 @@ devnet = []
 anchor-lang = { workspace = true }
 anchor-spl = { workspace = true }
 vote-hook-interface = { path = "../vote_hook_interface", features = ["no-entrypoint", "cpi"] }
+tuktuk-program = { workspace = true }
+
