@@ -116,6 +116,16 @@ undefined
 | bump_seed        | u8     |
 | authority        | pubkey |
 
+### ProposalState
+
+| Variant   | Fields                                |
+| --------- | ------------------------------------- |
+| Draft     |                                       |
+| Cancelled |                                       |
+| Voting    | start_ts: i64                         |
+| Resolved  | choices: [object Object], end_ts: i64 |
+| Custom    | name: string, bin: bytes              |
+
 ### ProposalV0
 
 | Field                 | Type            |
@@ -177,22 +187,3 @@ undefined
 | choice      | u16  |
 | weight      | u128 |
 | remove_vote | bool |
-
-### proposal::state::ProposalState
-
-| Variant   | Fields                                |
-| --------- | ------------------------------------- |
-| Draft     |                                       |
-| Cancelled |                                       |
-| Voting    | start_ts: i64                         |
-| Resolved  | choices: [object Object], end_ts: i64 |
-| Custom    | name: string, bin: bytes              |
-
-### state_controller::instructions::update_state_v0::ProposalState
-
-| Variant   | Fields                   |
-| --------- | ------------------------ |
-| Draft     |                          |
-| Cancelled |                          |
-| Voting    |                          |
-| Custom    | name: string, bin: bytes |
