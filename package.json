@@ -29,7 +29,7 @@
   ],
   "private": true,
   "dependencies": {
-    "@coral-xyz/anchor": "^0.30.1",
+    "@coral-xyz/anchor": "^0.31.0",
     "@helium/anchor-resolvers": "^0.10.0-alpha.6",
     "@helium/spl-utils": "^0.10.0-alpha.6",
     "@metaplex-foundation/js": "^0.19.4",
