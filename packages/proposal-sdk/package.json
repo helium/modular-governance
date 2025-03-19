@@ -5,7 +5,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "license": "Apache-2.0",
-  "version": "0.1.4",
+  "version": "0.1.5-alpha.0",
   "description": "Interface to the proposal smart contract",
   "repository": {
     "type": "git",
@@ -33,7 +33,7 @@
   "dependencies": {
     "@coral-xyz/anchor": "^0.31.0",
     "@helium/anchor-resolvers": "^0.10.0-alpha.6",
-    "@helium/modular-governance-idls": "^0.1.4"
+    "@helium/modular-governance-idls": "^0.1.5-alpha.0"
   },
   "devDependencies": {
     "git-format-staged": "^2.1.3",
