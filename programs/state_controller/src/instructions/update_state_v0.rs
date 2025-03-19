@@ -50,7 +50,7 @@ pub fn handler(ctx: Context<UpdateStateV0>, args: UpdateStateArgsV0) -> Result<(
       &[resolution_setting_seeds!(ctx.accounts.state_controller)],
     ),
     CpiUpdateStateArgsV0 {
-      new_state: args.new_state.into(),
+      new_state: args.new_state,
     },
   )?;
 
