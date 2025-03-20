@@ -94,7 +94,11 @@ describe("state-controller", () => {
 
       await program.methods
         .updateStateV0({
-          newState: { voting: {} },
+          newState: {
+            voting: {
+              startTs: new anchor.BN(Date.now() / 1000),
+            },
+          },
         })
         .accountsPartial({ proposal })
         .rpc();
@@ -460,7 +464,10 @@ describe("state-controller", () => {
           .rpc({ skipPreflight: true });
 
         await sleep(10000);
-        console.log("txid", await program.methods.resolveV0().accountsPartial({ proposal }).rpc());
+        console.log(
+          "txid",
+          await program.methods.resolveV0().accountsPartial({ proposal }).rpc()
+        );
 
         acct = await proposalProgram.account.proposalV0.fetch(proposal!);
         expect(acct.state.resolved?.choices).to.deep.eq([1]);
