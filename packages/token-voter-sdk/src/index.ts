@@ -21,7 +21,6 @@ export async function init(
 
   const tokenVoter = new Program<TokenVoter>(
     idl as TokenVoter,
-    programId,
     provider,
     undefined,
     () => tokenVoterResolvers

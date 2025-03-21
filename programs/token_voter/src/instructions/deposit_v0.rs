@@ -1,15 +1,18 @@
-use crate::metaplex::{
-  create_master_edition_v3, create_metadata_accounts_v3, verify_sized_collection_item, Collection,
-  CreateMasterEditionV3, CreateMetadataAccountsV3, DataV2, Metadata, VerifySizedCollectionItem,
-};
-use crate::receipt_seeds;
-use crate::state::*;
-use crate::token_voter_seeds;
-use anchor_lang::prelude::*;
-use anchor_spl::associated_token::AssociatedToken;
-use anchor_spl::token::{self, Transfer};
-use anchor_spl::token::{Mint, MintTo, Token, TokenAccount};
 use std::mem::size_of;
+
+use anchor_lang::prelude::*;
+use anchor_spl::{
+  associated_token::AssociatedToken,
+  metadata::{
+    create_master_edition_v3, create_metadata_accounts_v3,
+    mpl_token_metadata::types::{Collection, DataV2},
+    verify_sized_collection_item, CreateMasterEditionV3, CreateMetadataAccountsV3, Metadata,
+    VerifySizedCollectionItem,
+  },
+  token::{self, Mint, MintTo, Token, TokenAccount, Transfer},
+};
+
+use crate::{receipt_seeds, state::*, token_voter_seeds};
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct DepositArgsV0 {
@@ -138,7 +141,7 @@ pub fn handler(ctx: Context<DepositV0>, args: DepositArgsV0) -> Result<()> {
   ctx.accounts.receipt.set_inner(ReceiptV0 {
     token_voter: ctx.accounts.token_voter.key(),
     mint: ctx.accounts.mint.key(),
-    bump_seed: ctx.bumps["receipt"],
+    bump_seed: ctx.bumps.receipt,
     amount: args.amount,
     num_active_votes: 0,
   });

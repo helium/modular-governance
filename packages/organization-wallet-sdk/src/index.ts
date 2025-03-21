@@ -9,7 +9,7 @@ export * from "./resolvers";
 export { executeTransaction } from "./functions/executeTransaction";
 
 export type CompiledTransactionArgV0 =
-  IdlTypes<OrganizationWallet>["CompiledTransactionArgV0"];
+  IdlTypes<OrganizationWallet>["compiledTransactionArgV0"];
 
 export type CustomAccountResolverFactory<T extends Idl> =
   (programId: PublicKey) => CustomAccountResolver<T>;

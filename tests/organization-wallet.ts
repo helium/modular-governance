@@ -108,7 +108,7 @@ describe("organization wallet", () => {
           name: "My Wallet",
           proposalConfigs: [proposalConfig!],
         })
-        .accounts({
+        .accountsPartial({
           organization,
         })
         .rpcAndKeys({ skipPreflight: true });
@@ -140,7 +140,7 @@ describe("organization wallet", () => {
             name: "My Wallet",
             proposalConfigs: [proposalConfig!],
           })
-          .accounts({
+          .accountsPartial({
             organization,
           })
           .rpcAndKeys({ skipPreflight: true }));
@@ -163,7 +163,7 @@ describe("organization wallet", () => {
             ],
             tags: ["test", "tags"],
           })
-          .accounts({ organization })
+          .accountsPartial({ organization })
           .rpcAndKeys({ skipPreflight: true }));
       });
 
@@ -209,7 +209,7 @@ describe("organization wallet", () => {
             disableExecutionOffset: 60 * 60 * 24 * 7,
           })
           .remainingAccounts(remainingAccounts)
-          .accounts({
+          .accountsPartial({
             proposal,
             organizationWallet,
           })
@@ -226,7 +226,7 @@ describe("organization wallet", () => {
               },
             },
           })
-          .accounts({
+          .accountsPartial({
             proposal,
           })
           .rpc({ skipPreflight: true });
@@ -265,7 +265,7 @@ describe("organization wallet", () => {
               name: otherName,
               proposalConfigs: null,
             })
-            .accounts({
+            .accountsPartial({
               organizationWallet,
               organization,
               authority: me,
@@ -288,7 +288,7 @@ describe("organization wallet", () => {
               name: null,
               proposalConfigs: [otherProposalConfig!],
             })
-            .accounts({
+            .accountsPartial({
               organizationWallet,
               organization,
               authority: me,
@@ -315,7 +315,7 @@ describe("organization wallet", () => {
               name: null,
               proposalConfigs,
             })
-            .accounts({
+            .accountsPartial({
               organizationWallet,
               organization,
               authority: me,
@@ -339,7 +339,7 @@ describe("organization wallet", () => {
               proposalProgram: null,
               uri: null,
             })
-            .accounts({
+            .accountsPartial({
               organization,
               authority: me,
             })
@@ -353,7 +353,7 @@ describe("organization wallet", () => {
                 name: otherName,
                 proposalConfigs: [otherProposalConfig!],
               })
-              .accounts({
+              .accountsPartial({
                 organizationWallet,
                 organization,
                 authority: me,
@@ -389,7 +389,7 @@ describe("organization wallet", () => {
                 name: otherName,
                 proposalConfigs: [otherProposalConfig!],
               })
-              .accounts({
+              .accountsPartial({
                 organizationWallet,
                 organization: otherOrganization,
                 authority: me,

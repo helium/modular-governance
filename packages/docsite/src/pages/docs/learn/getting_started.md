@@ -90,7 +90,7 @@ const {
     ],
     tags: ["test", "tags"],
   })
-  .accounts({ proposalConfig })
+  .accountsPartial({ proposalConfig })
   .rpcAndKeys();
 ```
 
@@ -112,7 +112,7 @@ await proposalProgram.methods
       },
     },
   })
-  .accounts({ proposal })
+  .accountsPartial({ proposal })
   .rpc();
 ```
 
@@ -130,7 +130,7 @@ await proposalProgram.methods
       },
     },
   })
-  .accounts({ proposal })
+  .accountsPartial({ proposal })
   .rpc();
 ```
 
@@ -148,7 +148,7 @@ await proposalProgram.methods
     removeVote: false,
   })
   // The voter is used for indexing, associating votes with wallets. This is more strictly enforced by vote controllers
-  .accounts({ proposal, voter: provider.wallet.publicKey })
+  .accountsPartial({ proposal, voter: provider.wallet.publicKey })
   .rpc();
 ```
 
@@ -202,7 +202,7 @@ var {
     ],
     tags: ['test', 'tags'],
   })
-  .accounts({ organization, proposalConfig })
+  .accountsPartial({ organization, proposalConfig })
 ```
 
 Now we can fetch the proposal we just created:
@@ -225,7 +225,7 @@ await proposalProgram.methods
       },
     },
   })
-  .accounts({ proposal })
+  .accountsPartial({ proposal })
   .rpc();
 await proposalProgram.methods
   .voteV0({
@@ -233,7 +233,7 @@ await proposalProgram.methods
     weight: new anchor.BN(2),
     removeVote: false,
   })
-  .accounts({ proposal, voter: provider.wallet.publicKey })
+  .accountsPartial({ proposal, voter: provider.wallet.publicKey })
 ```
 
 ## State Controllers
@@ -321,7 +321,7 @@ await stateControllerProgram.methods
   .updateStateV0({
     newState: { voting: {} },
   })
-  .accounts({ proposal })
+  .accountsPartial({ proposal })
   .rpc();
 ```
 
@@ -338,7 +338,7 @@ await proposalProgram.methods
     weight: new anchor.BN(100),
     removeVote: false,
   })
-  .accounts({ proposal, voter: provider.wallet.publicKey })
+  .accountsPartial({ proposal, voter: provider.wallet.publicKey })
   .rpc();
 ```
 
@@ -386,7 +386,7 @@ const {
   .preInstructions([
     ComputeBudgetProgram.setComputeUnitLimit({ units: 500000 }),
   ])
-  .accounts({
+  .accountsPartial({
     mint,
   })
   .rpcAndKeys()
@@ -426,7 +426,7 @@ const {
     ],
     tags: ["test", "tags"],
   })
-  .accounts({ proposalConfig })
+  .accountsPartial({ proposalConfig })
   .rpcAndKeys());
 
 await proposalProgram.methods
@@ -437,7 +437,7 @@ await proposalProgram.methods
       },
     },
   })
-  .accounts({ proposal })
+  .accountsPartial({ proposal })
   .rpc();
 ```
 
@@ -466,7 +466,7 @@ await voteControllerProgram.methods
   .voteV0({
     choice: 0,
   })
-  .accounts({ receipt, proposal })
+  .accountsPartial({ receipt, proposal })
   .rpcAndKeys()
 ```
 
@@ -478,7 +478,7 @@ await voteControllerProgram.methods
     choice: 0,
   })
   // Refund specifies a rent refund destination
-  .accounts({ receipt, proposal, refund: me })
+  .accountsPartial({ receipt, proposal, refund: me })
   .rpc();
 ```
 
@@ -486,7 +486,7 @@ Now we can withdraw:
 ```js
 await voteControllerProgram.methods
   .withdrawV0()
-  .accounts({ receipt, refund: me })
+  .accountsPartial({ receipt, refund: me })
   .rpc()
 ```
 
@@ -520,7 +520,7 @@ const {
     name: "First Org Wallet",
     proposalConfigs: [proposalConfig!],
   })
-  .accounts({
+  .accountsPartial({
     organization,
   })
   .rpcAndKeys();
@@ -552,7 +552,7 @@ const {
     disableExecutionOffset: 60 * 60 * 24 * 7,
   })
   .remainingAccounts(remainingAccounts)
-  .accounts({
+  .accountsPartial({
     proposal,
     organizationWallet,
   })

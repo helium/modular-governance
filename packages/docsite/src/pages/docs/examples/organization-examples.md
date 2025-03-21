@@ -121,7 +121,7 @@ beforeEach(async () => {
         ],
         tags: ["test", "tags"],
       })
-      .accounts({ organization })
+      .accountsPartial({ organization })
       .rpcAndKeys({ skipPreflight: true });
 
     const acct = await proposalProgram.account.proposalV0.fetch(proposal!);

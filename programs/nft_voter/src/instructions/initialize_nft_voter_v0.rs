@@ -37,7 +37,7 @@ pub fn handler(ctx: Context<InitializeNftVoterV0>, args: InitializeNftVoterArgsV
     .map(|k| k.key())
     .unwrap_or_default();
   ctx.accounts.nft_voter.set_inner(NftVoterV0 {
-    bump_seed: ctx.bumps["nft_voter"],
+    bump_seed: ctx.bumps.nft_voter,
     name: args.name,
     authority: args.authority,
     collection: ctx.accounts.collection.key(),

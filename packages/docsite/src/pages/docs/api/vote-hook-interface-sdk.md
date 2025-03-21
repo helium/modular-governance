@@ -6,23 +6,23 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ## Instructions
 
-### onVoteV0
+### on_vote_v0
 
 #### Accounts
 
-| Name            | Mutability | Signer | Docs |
-| --------------- | ---------- | ------ | ---- |
-| voter           | immut      | no     |      |
-| voteController  | immut      | yes    |      |
-| stateController | mut        | no     |      |
-| proposal        | immut      | yes    |      |
-| proposalConfig  | immut      | no     |      |
+| Name             | Mutability | Signer | Docs |
+| ---------------- | ---------- | ------ | ---- |
+| voter            | immut      | no     |      |
+| vote_controller  | immut      | no     |      |
+| state_controller | immut      | no     |      |
+| proposal         | immut      | no     |      |
+| proposal_config  | immut      | no     |      |
 
 #### Args
 
-| Name | Type       | Docs |
-| ---- | ---------- | ---- |
-| args | VoteArgsV0 |      |
+| Name   | Type            | Docs |
+| ------ | --------------- | ---- |
+| \_args | [object Object] |      |
 
 ## Accounts
 
@@ -30,8 +30,8 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ### VoteArgsV0
 
-| Field      | Type |
-| ---------- | ---- |
-| choice     | u16  |
-| weight     | u128 |
-| removeVote | bool |
+| Field       | Type |
+| ----------- | ---- |
+| choice      | u16  |
+| weight      | u128 |
+| remove_vote | bool |

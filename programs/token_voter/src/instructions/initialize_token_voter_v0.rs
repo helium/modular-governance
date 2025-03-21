@@ -1,17 +1,15 @@
 use anchor_lang::prelude::*;
 use anchor_spl::{
   associated_token::AssociatedToken,
+  metadata::{
+    create_master_edition_v3, create_metadata_accounts_v3,
+    mpl_token_metadata::types::{CollectionDetails, DataV2},
+    CreateMasterEditionV3, CreateMetadataAccountsV3, Metadata,
+  },
   token::{self, Mint, MintTo, Token, TokenAccount},
 };
 
-use crate::{
-  metaplex::{
-    create_master_edition_v3, create_metadata_accounts_v3, CollectionDetails,
-    CreateMasterEditionV3, CreateMetadataAccountsV3, DataV2, Metadata,
-  },
-  state::*,
-  token_voter_seeds,
-};
+use crate::{state::*, token_voter_seeds};
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct InitializeTokenVoterArgsV0 {
@@ -91,7 +89,7 @@ pub fn handler(
   args: InitializeTokenVoterArgsV0,
 ) -> Result<()> {
   ctx.accounts.token_voter.set_inner(TokenVoterV0 {
-    bump_seed: ctx.bumps["token_voter"],
+    bump_seed: ctx.bumps.token_voter,
     name: args.name,
     authority: args.authority,
     deposit_mint: ctx.accounts.mint.key(),

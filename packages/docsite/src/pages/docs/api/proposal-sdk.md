@@ -6,133 +6,111 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ## Instructions
 
-### initializeProposalV0
-
-#### Accounts
-
-| Name           | Mutability | Signer | Docs                                                           |
-| -------------- | ---------- | ------ | -------------------------------------------------------------- |
-| payer          | mut        | yes    |                                                                |
-| namespace      | immut      | yes    | Every proposal must have a namespace to prevent seed collision |
-| proposal       | mut        | no     |                                                                |
-| owner          | immut      | no     |                                                                |
-| proposalConfig | immut      | no     |                                                                |
-| systemProgram  | immut      | no     |                                                                |
-
-#### Args
-
-| Name | Type                     | Docs |
-| ---- | ------------------------ | ---- |
-| args | InitializeProposalArgsV0 |      |
-
-### initializeProposalConfigV0
-
-#### Accounts
-
-| Name           | Mutability | Signer | Docs |
-| -------------- | ---------- | ------ | ---- |
-| payer          | mut        | yes    |      |
-| owner          | immut      | yes    |      |
-| proposalConfig | mut        | no     |      |
-| systemProgram  | immut      | no     |      |
-
-#### Args
-
-| Name | Type                           | Docs |
-| ---- | ------------------------------ | ---- |
-| args | InitializeProposalConfigArgsV0 |      |
-
-### voteV0
+### initialize_proposal_config_v0
 
 #### Accounts
 
 | Name            | Mutability | Signer | Docs |
 | --------------- | ---------- | ------ | ---- |
-| voteController  | immut      | yes    |      |
-| voter           | immut      | no     |      |
-| stateController | mut        | no     |      |
-| proposalConfig  | immut      | no     |      |
-| proposal        | mut        | no     |      |
-| onVoteHook      | immut      | no     |      |
+| payer           | immut      | no     |      |
+| owner           | immut      | no     |      |
+| proposal_config | immut      | no     |      |
+| system_program  | immut      | no     |      |
 
 #### Args
 
-| Name | Type       | Docs |
-| ---- | ---------- | ---- |
-| args | VoteArgsV0 |      |
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-### updateStateV0
+### initialize_proposal_v0
+
+#### Accounts
+
+| Name            | Mutability | Signer | Docs                                                           |
+| --------------- | ---------- | ------ | -------------------------------------------------------------- |
+| payer           | immut      | no     |                                                                |
+| namespace       | immut      | no     | Every proposal must have a namespace to prevent seed collision |
+| proposal        | immut      | no     |                                                                |
+| owner           | immut      | no     |                                                                |
+| proposal_config | immut      | no     |                                                                |
+| system_program  | immut      | no     |                                                                |
+
+#### Args
+
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
+
+### update_proposal_config_v0
 
 #### Accounts
 
 | Name            | Mutability | Signer | Docs |
 | --------------- | ---------- | ------ | ---- |
-| stateController | immut      | yes    |      |
-| proposal        | mut        | no     |      |
-| proposalConfig  | immut      | no     |      |
+| proposal_config | immut      | no     |      |
+| authority       | immut      | no     |      |
 
 #### Args
 
-| Name | Type              | Docs |
-| ---- | ----------------- | ---- |
-| args | UpdateStateArgsV0 |      |
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-### updateProposalConfigV0
+### update_state_v0
 
 #### Accounts
 
-| Name           | Mutability | Signer | Docs |
-| -------------- | ---------- | ------ | ---- |
-| proposalConfig | mut        | no     |      |
-| authority      | immut      | yes    |      |
+| Name             | Mutability | Signer | Docs |
+| ---------------- | ---------- | ------ | ---- |
+| state_controller | immut      | no     |      |
+| proposal         | immut      | no     |      |
+| proposal_config  | immut      | no     |      |
 
 #### Args
 
-| Name | Type                       | Docs |
-| ---- | -------------------------- | ---- |
-| args | UpdateProposalConfigArgsV0 |      |
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
+
+### vote_v0
+
+#### Accounts
+
+| Name             | Mutability | Signer | Docs |
+| ---------------- | ---------- | ------ | ---- |
+| vote_controller  | immut      | no     |      |
+| voter            | immut      | no     |      |
+| state_controller | immut      | no     |      |
+| proposal_config  | immut      | no     |      |
+| proposal         | immut      | no     |      |
+| on_vote_hook     | immut      | no     |      |
+
+#### Args
+
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
 ## Accounts
 
 ### ProposalConfigV0
 
-| Field           | Type      |
-| --------------- | --------- |
-| voteController  | publicKey |
-| stateController | publicKey |
-| onVoteHook      | publicKey |
-| name            | string    |
-| bumpSeed        | u8        |
-| authority       | publicKey |
+undefined
 
 ### ProposalV0
 
-| Field              | Type          |
-| ------------------ | ------------- |
-| namespace          | publicKey     |
-| owner              | publicKey     |
-| state              | ProposalState |
-| createdAt          | i64           |
-| proposalConfig     | publicKey     |
-| maxChoicesPerVoter | u16           |
-| seed               | bytes         |
-| name               | string        |
-| uri                | string        |
-| tags               | string        |
-| choices            | Choice        |
-| bumpSeed           | u8            |
+undefined
 
 ## Types
 
-### InitializeProposalConfigArgsV0
+### Choice
 
-| Field           | Type      |
-| --------------- | --------- |
-| name            | string    |
-| voteController  | publicKey |
-| stateController | publicKey |
-| onVoteHook      | publicKey |
-| authority       | publicKey |
+| Field  | Type   |
+| ------ | ------ |
+| weight | u128   |
+| name   | string |
+| uri    | string |
 
 ### ChoiceArg
 
@@ -143,45 +121,35 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ### InitializeProposalArgsV0
 
-| Field              | Type      |
-| ------------------ | --------- |
-| seed               | bytes     |
-| name               | string    |
-| uri                | string    |
-| maxChoicesPerVoter | u16       |
-| choices            | ChoiceArg |
-| tags               | string    |
+| Field                 | Type            |
+| --------------------- | --------------- |
+| seed                  | bytes           |
+| name                  | string          |
+| uri                   | string          |
+| max_choices_per_voter | u16             |
+| choices               | [object Object] |
+| tags                  | string          |
 
-### UpdateProposalConfigArgsV0
+### InitializeProposalConfigArgsV0
 
-| Field           | Type      |
-| --------------- | --------- |
-| voteController  | publicKey |
-| stateController | publicKey |
-| onVoteHook      | publicKey |
-| authority       | publicKey |
+| Field            | Type   |
+| ---------------- | ------ |
+| name             | string |
+| vote_controller  | pubkey |
+| state_controller | pubkey |
+| on_vote_hook     | pubkey |
+| authority        | pubkey |
 
-### UpdateStateArgsV0
+### ProposalConfigV0
 
-| Field    | Type          |
-| -------- | ------------- |
-| newState | ProposalState |
-
-### VoteArgsV0
-
-| Field      | Type |
-| ---------- | ---- |
-| choice     | u16  |
-| weight     | u128 |
-| removeVote | bool |
-
-### Choice
-
-| Field  | Type   |
-| ------ | ------ |
-| weight | u128   |
-| name   | string |
-| uri    | string |
+| Field            | Type   |
+| ---------------- | ------ |
+| vote_controller  | pubkey |
+| state_controller | pubkey |
+| on_vote_hook     | pubkey |
+| name             | string |
+| bump_seed        | u8     |
+| authority        | pubkey |
 
 ### ProposalState
 
@@ -192,3 +160,43 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | Voting    | start_ts: i64                         |
 | Resolved  | choices: [object Object], end_ts: i64 |
 | Custom    | name: string, bin: bytes              |
+
+### ProposalV0
+
+| Field                 | Type            |
+| --------------------- | --------------- |
+| namespace             | pubkey          |
+| owner                 | pubkey          |
+| state                 | [object Object] |
+| created_at            | i64             |
+| proposal_config       | pubkey          |
+| max_choices_per_voter | u16             |
+| seed                  | bytes           |
+| name                  | string          |
+| uri                   | string          |
+| tags                  | string          |
+| choices               | [object Object] |
+| bump_seed             | u8              |
+
+### UpdateProposalConfigArgsV0
+
+| Field            | Type   |
+| ---------------- | ------ |
+| vote_controller  | pubkey |
+| state_controller | pubkey |
+| on_vote_hook     | pubkey |
+| authority        | pubkey |
+
+### UpdateStateArgsV0
+
+| Field     | Type            |
+| --------- | --------------- |
+| new_state | [object Object] |
+
+### VoteArgsV0
+
+| Field       | Type |
+| ----------- | ---- |
+| choice      | u16  |
+| weight      | u128 |
+| remove_vote | bool |

@@ -1,7 +1,7 @@
 name: Deploy Programs to devnet
 
 env:
-  SOLANA_CLI_VERSION: 1.16.13
+  SOLANA_CLI_VERSION: 2.1.6
   NODE_VERSION: 18.12.1
 
 on:
@@ -51,7 +51,7 @@ jobs:
         run: |
           find programs -type f -name '*.rs' -exec sed -i "s/b\"nJWGUMOK\"/b\"devnethelium5\"/g" {} \;
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Cache Toml Cli
         id: cache-toml-cli
         with:

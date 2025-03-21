@@ -20,7 +20,6 @@ export async function init(
 
   const tokenVoter = new Program<NftVoter>(
     idl as NftVoter,
-    programId,
     provider,
     undefined,
     () => nftVoterResolvers

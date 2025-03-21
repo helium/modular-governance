@@ -83,7 +83,7 @@ beforeEach(async () => {
       name,
       authority: me,
     })
-    .accounts({
+    .accountsPartial({
       collection,
     })
     .rpcAndKeys({ skipPreflight: true }))
@@ -117,7 +117,7 @@ beforeEach(async () => {
       ],
       tags: ["test", "tags"],
     })
-    .accounts({ proposalConfig })
+    .accountsPartial({ proposalConfig })
     .rpcAndKeys({ skipPreflight: true }))
 
   await proposalProgram.methods
@@ -128,7 +128,7 @@ beforeEach(async () => {
         },
       },
     })
-    .accounts({ proposal })
+    .accountsPartial({ proposal })
     .rpc()
 })
 ```
@@ -142,7 +142,7 @@ beforeEach(async () => {
       .voteV0({
         choice: 0,
       })
-      .accounts({ mint, proposal, nftVoter })
+      .accountsPartial({ mint, proposal, nftVoter })
       .rpcAndKeys({ skipPreflight: true });
 
     let acct = await proposalProgram.account.proposalV0.fetch(proposal!);
@@ -154,7 +154,7 @@ beforeEach(async () => {
       .relinquishVoteV0({
         choice: 0,
       })
-      .accounts({ mint, proposal, refund: me, nftVoter })
+      .accountsPartial({ mint, proposal, refund: me, nftVoter })
       .rpc({ skipPreflight: true });
 
     acct = await proposalProgram.account.proposalV0.fetch(proposal!);

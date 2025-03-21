@@ -9,6 +9,7 @@ crate-type = ["cdylib", "lib"]
 name = "vote_hook_interface"
 
 [features]
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
 no-entrypoint = []
 no-idl = []
 no-log-ix-name = []
@@ -17,6 +18,5 @@ default = []
 devnet = []
 
 [dependencies]
-anchor-lang = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism" }
-anchor-spl = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism" }
-time = "0.3.36"
+anchor-lang = { workspace = true }
+anchor-spl = { workspace = true }

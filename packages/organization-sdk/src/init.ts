@@ -13,14 +13,13 @@ export async function init(
     idl = await Program.fetchIdl(programId, provider);
     // This is an Anchor 0.30+ IDL. Return the old IDLs
     // @ts-ignore
-    if (!idl || idl?.address) {
+    if (!idl || !idl?.address) {
       idl = IDL as any;
     }
   }
 
   const organizations = new Program<Organization>(
     idl as Organization,
-    programId,
     provider,
     undefined,
     () => organizationsResolvers
@@ -30,127 +29,126 @@ export async function init(
 }
 
 const IDL = {
-  version: "0.1.1",
-  name: "organization",
+  address: "orgdXvHVLkWgBYerptASkAwkZAE563CJUu717dMNx5f",
+  metadata: {
+    name: "organization",
+    version: "0.1.1",
+    spec: "0.1.0",
+    description: "Created with Anchor",
+  },
   instructions: [
     {
-      name: "initializeOrganizationV0",
+      name: "initialize_organization_v0",
+      discriminator: [44, 42, 174, 217, 128, 72, 101, 49],
       accounts: [
         {
           name: "payer",
-          isMut: true,
-          isSigner: true,
+          writable: true,
+          signer: true,
         },
         {
           name: "organization",
-          isMut: true,
-          isSigner: false,
+          writable: true,
           pda: {
             seeds: [
               {
                 kind: "const",
-                type: "string",
-                value: "organization",
+                value: [
+                  111, 114, 103, 97, 110, 105, 122, 97, 116, 105, 111, 110,
+                ],
               },
               {
                 kind: "arg",
-                type: {
-                  defined: "InitializeOrganizationArgsV0",
-                },
                 path: "args.name",
               },
             ],
           },
         },
         {
-          name: "systemProgram",
-          isMut: false,
-          isSigner: false,
+          name: "system_program",
+          address: "11111111111111111111111111111111",
         },
       ],
       args: [
         {
           name: "args",
           type: {
-            defined: "InitializeOrganizationArgsV0",
+            defined: {
+              name: "InitializeOrganizationArgsV0",
+            },
           },
         },
       ],
     },
     {
-      name: "initializeProposalV0",
+      name: "initialize_proposal_v0",
+      discriminator: [63, 235, 9, 201, 163, 171, 206, 33],
       accounts: [
         {
           name: "payer",
-          isMut: true,
-          isSigner: true,
+          writable: true,
+          signer: true,
         },
         {
           name: "authority",
-          isMut: false,
-          isSigner: true,
+          signer: true,
+          relations: ["organization"],
         },
         {
           name: "owner",
-          isMut: false,
-          isSigner: false,
         },
         {
           name: "proposal",
-          isMut: true,
-          isSigner: false,
+          writable: true,
         },
         {
-          name: "proposalConfig",
-          isMut: false,
-          isSigner: false,
+          name: "proposal_config",
         },
         {
           name: "organization",
-          isMut: true,
-          isSigner: false,
-          relations: ["proposal_program", "authority"],
+          writable: true,
         },
         {
-          name: "proposalProgram",
-          isMut: false,
-          isSigner: false,
+          name: "proposal_program",
+          relations: ["organization"],
         },
         {
-          name: "systemProgram",
-          isMut: false,
-          isSigner: false,
+          name: "system_program",
+          address: "11111111111111111111111111111111",
         },
       ],
       args: [
         {
           name: "args",
           type: {
-            defined: "InitializeProposalArgsV0",
+            defined: {
+              name: "InitializeProposalArgsV0",
+            },
           },
         },
       ],
     },
     {
-      name: "updateOrganizationV0",
+      name: "update_organization_v0",
+      discriminator: [38, 56, 42, 100, 134, 77, 32, 44],
       accounts: [
         {
           name: "organization",
-          isMut: true,
-          isSigner: false,
-          relations: ["authority"],
+          writable: true,
         },
         {
           name: "authority",
-          isMut: false,
-          isSigner: true,
+          signer: true,
+          relations: ["organization"],
         },
       ],
       args: [
         {
           name: "args",
           type: {
-            defined: "UpdateOrganizationArgsV0",
+            defined: {
+              name: "UpdateOrganizationArgsV0",
+            },
           },
         },
       ],
@@ -158,72 +156,11 @@ const IDL = {
   ],
   accounts: [
     {
-      name: "organizationV0",
-      type: {
-        kind: "struct",
-        fields: [
-          {
-            name: "numProposals",
-            type: "u32",
-          },
-          {
-            name: "authority",
-            docs: ["Authority to create proposals under this organization"],
-            type: "publicKey",
-          },
-          {
-            name: "defaultProposalConfig",
-            type: "publicKey",
-          },
-          {
-            name: "proposalProgram",
-            type: "publicKey",
-          },
-          {
-            name: "name",
-            type: "string",
-          },
-          {
-            name: "uri",
-            type: "string",
-          },
-          {
-            name: "bumpSeed",
-            type: "u8",
-          },
-        ],
-      },
+      name: "OrganizationV0",
+      discriminator: [243, 189, 126, 191, 59, 72, 255, 68],
     },
   ],
   types: [
-    {
-      name: "InitializeOrganizationArgsV0",
-      type: {
-        kind: "struct",
-        fields: [
-          {
-            name: "name",
-            type: "string",
-          },
-          {
-            name: "authority",
-            type: "publicKey",
-          },
-          {
-            name: "defaultProposalConfig",
-            type: "publicKey",
-          },
-          {
-            name: "proposalProgram",
-            type: "publicKey",
-          },
-          {
-            name: "uri",
-            type: "string",
-          },
-        ],
-      },
-    },
     {
       name: "ChoiceArg",
       type: {
@@ -244,6 +181,34 @@ const IDL = {
       },
     },
     {
+      name: "InitializeOrganizationArgsV0",
+      type: {
+        kind: "struct",
+        fields: [
+          {
+            name: "name",
+            type: "string",
+          },
+          {
+            name: "authority",
+            type: "pubkey",
+          },
+          {
+            name: "default_proposal_config",
+            type: "pubkey",
+          },
+          {
+            name: "proposal_program",
+            type: "pubkey",
+          },
+          {
+            name: "uri",
+            type: "string",
+          },
+        ],
+      },
+    },
+    {
       name: "InitializeProposalArgsV0",
       type: {
         kind: "struct",
@@ -257,14 +222,16 @@ const IDL = {
             type: "string",
           },
           {
-            name: "maxChoicesPerVoter",
+            name: "max_choices_per_voter",
             type: "u16",
           },
           {
             name: "choices",
             type: {
               vec: {
-                defined: "ChoiceArg",
+                defined: {
+                  name: "ChoiceArg",
+                },
               },
             },
           },
@@ -278,6 +245,43 @@ const IDL = {
       },
     },
     {
+      name: "OrganizationV0",
+      type: {
+        kind: "struct",
+        fields: [
+          {
+            name: "num_proposals",
+            type: "u32",
+          },
+          {
+            name: "authority",
+            docs: ["Authority to create proposals under this organization"],
+            type: "pubkey",
+          },
+          {
+            name: "default_proposal_config",
+            type: "pubkey",
+          },
+          {
+            name: "proposal_program",
+            type: "pubkey",
+          },
+          {
+            name: "name",
+            type: "string",
+          },
+          {
+            name: "uri",
+            type: "string",
+          },
+          {
+            name: "bump_seed",
+            type: "u8",
+          },
+        ],
+      },
+    },
+    {
       name: "UpdateOrganizationArgsV0",
       type: {
         kind: "struct",
@@ -285,19 +289,19 @@ const IDL = {
           {
             name: "authority",
             type: {
-              option: "publicKey",
+              option: "pubkey",
             },
           },
           {
-            name: "defaultProposalConfig",
+            name: "default_proposal_config",
             type: {
-              option: "publicKey",
+              option: "pubkey",
             },
           },
           {
-            name: "proposalProgram",
+            name: "proposal_program",
             type: {
-              option: "publicKey",
+              option: "pubkey",
             },
           },
           {
