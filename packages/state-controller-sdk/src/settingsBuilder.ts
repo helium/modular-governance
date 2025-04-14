@@ -23,6 +23,20 @@ export class SettingsBuilder {
     return this;
   }
 
+  not(choiceName: string): SettingsBuilder {
+    this.nodes.push({
+      not: { choiceName },
+    });
+    return this;
+  }
+
+  totalWeight(weightThreshold: BN): SettingsBuilder {
+    this.nodes.push({
+      totalWeight: { weightThreshold },
+    });
+    return this;
+  }
+
   offsetFromStartTs(offset: BN): SettingsBuilder {
     this.nodes.push({
       offsetFromStartTs: { offset },
@@ -51,6 +65,17 @@ export class SettingsBuilder {
     }
     this.nodes.push({
       choicePercentage: { percentage },
+    });
+    return this;
+  }
+
+  /// If the percentage is a number, auto convert to PERCENTAGE_DIVISOR. Otherwise use the BN
+  choicePercentageOfCurrent(percentage: BN | number): SettingsBuilder {
+    if (typeof percentage === "number") {
+      percentage = new BN((percentage / 100) * PERCENTAGE_DIVISOR);
+    }
+    this.nodes.push({
+      choicePercentageOfCurrent: { percentage },
     });
     return this;
   }

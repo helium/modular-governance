@@ -1,6 +1,7 @@
-use crate::state::*;
 use anchor_lang::prelude::*;
 use organization::state::OrganizationV0;
+
+use crate::state::*;
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct InitializeOrganizationWalletArgsV0 {
@@ -54,7 +55,7 @@ pub fn handler(
       index: args.index,
       wallet_bump_seed: wallet_bump,
       proposal_configs: args.proposal_configs,
-      bump_seed: ctx.bumps["organization_wallet"],
+      bump_seed: ctx.bumps.organization_wallet,
     });
   Ok(())
 }

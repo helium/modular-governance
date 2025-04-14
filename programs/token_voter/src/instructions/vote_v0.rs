@@ -1,9 +1,8 @@
-use crate::error::ErrorCode;
 use anchor_lang::prelude::*;
 use anchor_spl::token::{Mint, TokenAccount};
 use proposal::{ProposalConfigV0, ProposalV0};
 
-use crate::{state::*, token_voter_seeds};
+use crate::{error::ErrorCode, state::*, token_voter_seeds};
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct VoteArgsV0 {
@@ -17,7 +16,7 @@ pub struct VoteV0<'info> {
   #[account(
     init_if_needed,
     payer = payer,
-    space = 8 + 60 + std::mem::size_of::<VoteMarkerV0>(),
+    space = 8 + 60 + std::mem::size_of::<VoteMarkerV0>() + 2 * proposal.choices.len(),
     seeds = [b"marker", token_voter.key().as_ref(), mint.key().as_ref(), proposal.key().as_ref()],
     bump
   )]
@@ -65,7 +64,7 @@ pub struct VoteV0<'info> {
 pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
   let marker = &mut ctx.accounts.marker;
   marker.proposal = ctx.accounts.proposal.key();
-  marker.bump_seed = ctx.bumps["marker"];
+  marker.bump_seed = ctx.bumps.marker;
   marker.voter = ctx.accounts.voter.key();
   marker.mint = ctx.accounts.mint.key();
   marker.token_voter = ctx.accounts.token_voter.key();

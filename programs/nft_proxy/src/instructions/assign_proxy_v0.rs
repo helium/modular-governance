@@ -1,8 +1,10 @@
-use crate::error::ErrorCode;
 use anchor_lang::prelude::*;
 use anchor_spl::token::{Mint, TokenAccount};
 
-use crate::state::{ProxyAssignmentV0, ProxyConfigV0};
+use crate::{
+  error::ErrorCode,
+  state::{ProxyAssignmentV0, ProxyConfigV0},
+};
 
 #[derive(AnchorSerialize, AnchorDeserialize)]
 pub struct AssignProxyArgsV0 {
@@ -117,7 +119,7 @@ pub fn handler(ctx: Context<AssignProxyV0>, args: AssignProxyArgsV0) -> Result<(
       } else {
         ctx.accounts.current_proxy_assignment.rent_refund
       },
-      bump_seed: ctx.bumps["current_proxy_assignment"],
+      bump_seed: ctx.bumps.current_proxy_assignment,
       // If this is a recursive proxy (ie not the initial proxy), use the existing expiration time
       expiration_time: if ctx.accounts.current_proxy_assignment.expiration_time > 0
         && ctx.accounts.current_proxy_assignment.voter != Pubkey::default()
@@ -148,7 +150,7 @@ pub fn handler(ctx: Context<AssignProxyV0>, args: AssignProxyArgsV0) -> Result<(
       } else {
         ctx.accounts.next_proxy_assignment.rent_refund
       },
-      bump_seed: ctx.bumps["next_proxy_assignment"],
+      bump_seed: ctx.bumps.next_proxy_assignment,
       expiration_time: args.expiration_time,
     });
 

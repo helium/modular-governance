@@ -6,140 +6,139 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ## Instructions
 
-### initializeTokenVoterV0
+### deposit_v0
 
 #### Accounts
 
-| Name                   | Mutability | Signer | Docs |
-| ---------------------- | ---------- | ------ | ---- |
-| payer                  | mut        | yes    |      |
-| tokenVoter             | mut        | no     |      |
-| collection             | mut        | no     |      |
-| metadata               | mut        | no     |      |
-| masterEdition          | mut        | no     |      |
-| tokenAccount           | mut        | no     |      |
-| mint                   | immut      | no     |      |
-| rent                   | immut      | no     |      |
-| tokenProgram           | immut      | no     |      |
-| associatedTokenProgram | immut      | no     |      |
-| tokenMetadataProgram   | immut      | no     |      |
-| systemProgram          | immut      | no     |      |
+| Name                      | Mutability | Signer | Docs |
+| ------------------------- | ---------- | ------ | ---- |
+| token_voter               | immut      | no     |      |
+| collection                | immut      | no     |      |
+| collection_metadata       | immut      | no     |      |
+| collection_master_edition | immut      | no     |      |
+| receipt                   | immut      | no     |      |
+| mint                      | immut      | no     |      |
+| metadata                  | immut      | no     |      |
+| master_edition            | immut      | no     |      |
+| receipt_token_account     | immut      | no     |      |
+| recipient                 | immut      | no     |      |
+| vault                     | immut      | no     |      |
+| token_account             | immut      | no     |      |
+| payer                     | immut      | no     |      |
+| deposit_mint              | immut      | no     |      |
+| system_program            | immut      | no     |      |
+| token_program             | immut      | no     |      |
+| associated_token_program  | immut      | no     |      |
+| token_metadata_program    | immut      | no     |      |
+| rent                      | immut      | no     |      |
 
 #### Args
 
-| Name | Type                       | Docs |
-| ---- | -------------------------- | ---- |
-| args | InitializeTokenVoterArgsV0 |      |
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-### depositV0
+### initialize_token_voter_v0
 
 #### Accounts
 
-| Name                    | Mutability | Signer | Docs |
-| ----------------------- | ---------- | ------ | ---- |
-| tokenVoter              | immut      | no     |      |
-| collection              | immut      | no     |      |
-| collectionMetadata      | mut        | no     |      |
-| collectionMasterEdition | mut        | no     |      |
-| receipt                 | mut        | no     |      |
-| mint                    | mut        | no     |      |
-| metadata                | mut        | no     |      |
-| masterEdition           | mut        | no     |      |
-| receiptTokenAccount     | mut        | no     |      |
-| recipient               | immut      | no     |      |
-| vault                   | mut        | no     |      |
-| tokenAccount            | mut        | no     |      |
-| payer                   | mut        | yes    |      |
-| depositMint             | immut      | no     |      |
-| systemProgram           | immut      | no     |      |
-| tokenProgram            | immut      | no     |      |
-| associatedTokenProgram  | immut      | no     |      |
-| tokenMetadataProgram    | immut      | no     |      |
-| rent                    | immut      | no     |      |
+| Name                     | Mutability | Signer | Docs |
+| ------------------------ | ---------- | ------ | ---- |
+| payer                    | immut      | no     |      |
+| token_voter              | immut      | no     |      |
+| collection               | immut      | no     |      |
+| metadata                 | immut      | no     |      |
+| master_edition           | immut      | no     |      |
+| token_account            | immut      | no     |      |
+| mint                     | immut      | no     |      |
+| rent                     | immut      | no     |      |
+| token_program            | immut      | no     |      |
+| associated_token_program | immut      | no     |      |
+| token_metadata_program   | immut      | no     |      |
+| system_program           | immut      | no     |      |
 
 #### Args
 
-| Name | Type          | Docs |
-| ---- | ------------- | ---- |
-| args | DepositArgsV0 |      |
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-### relinquishVoteV0
+### relinquish_vote_v0
 
 #### Accounts
 
-| Name            | Mutability | Signer | Docs                                              |
-| --------------- | ---------- | ------ | ------------------------------------------------- |
-| refund          | mut        | no     | Account to receive sol refund if marker is closed |
-| marker          | mut        | no     |                                                   |
-| tokenVoter      | immut      | no     |                                                   |
-| voter           | immut      | yes    |                                                   |
-| receipt         | mut        | no     |                                                   |
-| mint            | immut      | no     |                                                   |
-| tokenAccount    | immut      | no     |                                                   |
-| proposal        | mut        | no     |                                                   |
-| proposalConfig  | immut      | no     |                                                   |
-| stateController | mut        | no     |                                                   |
-| onVoteHook      | immut      | no     |                                                   |
-| proposalProgram | immut      | no     |                                                   |
-| systemProgram   | immut      | no     |                                                   |
+| Name             | Mutability | Signer | Docs                                              |
+| ---------------- | ---------- | ------ | ------------------------------------------------- |
+| refund           | immut      | no     | Account to receive sol refund if marker is closed |
+| marker           | immut      | no     |                                                   |
+| token_voter      | immut      | no     |                                                   |
+| voter            | immut      | no     |                                                   |
+| receipt          | immut      | no     |                                                   |
+| mint             | immut      | no     |                                                   |
+| token_account    | immut      | no     |                                                   |
+| proposal         | immut      | no     |                                                   |
+| proposal_config  | immut      | no     |                                                   |
+| state_controller | immut      | no     |                                                   |
+| on_vote_hook     | immut      | no     |                                                   |
+| proposal_program | immut      | no     |                                                   |
+| system_program   | immut      | no     |                                                   |
 
 #### Args
 
-| Name | Type                 | Docs |
-| ---- | -------------------- | ---- |
-| args | RelinquishVoteArgsV0 |      |
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-### voteV0
+### vote_v0
 
 #### Accounts
 
-| Name            | Mutability | Signer | Docs |
-| --------------- | ---------- | ------ | ---- |
-| payer           | mut        | yes    |      |
-| marker          | mut        | no     |      |
-| tokenVoter      | immut      | no     |      |
-| voter           | immut      | yes    |      |
-| receipt         | mut        | no     |      |
-| mint            | immut      | no     |      |
-| tokenAccount    | immut      | no     |      |
-| proposal        | mut        | no     |      |
-| proposalConfig  | immut      | no     |      |
-| stateController | mut        | no     |      |
-| onVoteHook      | immut      | no     |      |
-| proposalProgram | immut      | no     |      |
-| systemProgram   | immut      | no     |      |
+| Name             | Mutability | Signer | Docs |
+| ---------------- | ---------- | ------ | ---- |
+| payer            | immut      | no     |      |
+| marker           | immut      | no     |      |
+| token_voter      | immut      | no     |      |
+| voter            | immut      | no     |      |
+| receipt          | immut      | no     |      |
+| mint             | immut      | no     |      |
+| token_account    | immut      | no     |      |
+| proposal         | immut      | no     |      |
+| proposal_config  | immut      | no     |      |
+| state_controller | immut      | no     |      |
+| on_vote_hook     | immut      | no     |      |
+| proposal_program | immut      | no     |      |
+| system_program   | immut      | no     |      |
 
 #### Args
 
-| Name | Type       | Docs |
-| ---- | ---------- | ---- |
-| args | VoteArgsV0 |      |
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-### withdrawV0
+### withdraw_v0
 
 #### Accounts
 
-| Name                   | Mutability | Signer | Docs |
-| ---------------------- | ---------- | ------ | ---- |
-| tokenVoter             | immut      | no     |      |
-| collection             | immut      | no     |      |
-| collectionMetadata     | mut        | no     |      |
-| receipt                | mut        | no     |      |
-| mint                   | mut        | no     |      |
-| metadata               | mut        | no     |      |
-| masterEdition          | mut        | no     |      |
-| receiptTokenAccount    | mut        | no     |      |
-| vault                  | mut        | no     |      |
-| tokenAccount           | mut        | no     |      |
-| payer                  | mut        | yes    |      |
-| refund                 | mut        | no     |      |
-| owner                  | immut      | yes    |      |
-| depositMint            | immut      | no     |      |
-| systemProgram          | immut      | no     |      |
-| tokenProgram           | immut      | no     |      |
-| associatedTokenProgram | immut      | no     |      |
-| tokenMetadataProgram   | immut      | no     |      |
-| rent                   | immut      | no     |      |
+| Name                     | Mutability | Signer | Docs |
+| ------------------------ | ---------- | ------ | ---- |
+| token_voter              | immut      | no     |      |
+| collection               | immut      | no     |      |
+| collection_metadata      | immut      | no     |      |
+| receipt                  | immut      | no     |      |
+| mint                     | immut      | no     |      |
+| metadata                 | immut      | no     |      |
+| master_edition           | immut      | no     |      |
+| receipt_token_account    | immut      | no     |      |
+| vault                    | immut      | no     |      |
+| token_account            | immut      | no     |      |
+| payer                    | immut      | no     |      |
+| refund                   | immut      | no     |      |
+| owner                    | immut      | no     |      |
+| deposit_mint             | immut      | no     |      |
+| system_program           | immut      | no     |      |
+| token_program            | immut      | no     |      |
+| associated_token_program | immut      | no     |      |
+| token_metadata_program   | immut      | no     |      |
 
 #### Args
 
@@ -148,53 +147,98 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ## Accounts
 
-### TokenVoterV0
+### ProposalConfigV0
 
-| Field       | Type      |
-| ----------- | --------- |
-| authority   | publicKey |
-| depositMint | publicKey |
-| collection  | publicKey |
-| name        | string    |
-| bumpSeed    | u8        |
+undefined
+
+### ProposalV0
+
+undefined
 
 ### ReceiptV0
 
-| Field          | Type      |
-| -------------- | --------- |
-| tokenVoter     | publicKey |
-| mint           | publicKey |
-| amount         | u64       |
-| numActiveVotes | u64       |
-| bumpSeed       | u8        |
+undefined
+
+### TokenVoterV0
+
+undefined
 
 ### VoteMarkerV0
 
-| Field      | Type      |
-| ---------- | --------- |
-| voter      | publicKey |
-| tokenVoter | publicKey |
-| proposal   | publicKey |
-| mint       | publicKey |
-| choices    | u16       |
-| bumpSeed   | u8        |
+undefined
 
 ## Types
 
+### Choice
+
+| Field  | Type   |
+| ------ | ------ |
+| weight | u128   |
+| name   | string |
+| uri    | string |
+
 ### DepositArgsV0
 
-| Field       | Type   |
-| ----------- | ------ |
-| amount      | u64    |
-| metadataUri | string |
+| Field        | Type   |
+| ------------ | ------ |
+| amount       | u64    |
+| metadata_uri | string |
 
 ### InitializeTokenVoterArgsV0
 
-| Field         | Type      |
-| ------------- | --------- |
-| name          | string    |
-| authority     | publicKey |
-| collectionUri | string    |
+| Field          | Type   |
+| -------------- | ------ |
+| name           | string |
+| authority      | pubkey |
+| collection_uri | string |
+
+### ProposalConfigV0
+
+| Field            | Type   |
+| ---------------- | ------ |
+| vote_controller  | pubkey |
+| state_controller | pubkey |
+| on_vote_hook     | pubkey |
+| name             | string |
+| bump_seed        | u8     |
+| authority        | pubkey |
+
+### ProposalState
+
+| Variant   | Fields                                |
+| --------- | ------------------------------------- |
+| Draft     |                                       |
+| Cancelled |                                       |
+| Voting    | start_ts: i64                         |
+| Resolved  | choices: [object Object], end_ts: i64 |
+| Custom    | name: string, bin: bytes              |
+
+### ProposalV0
+
+| Field                 | Type            |
+| --------------------- | --------------- |
+| namespace             | pubkey          |
+| owner                 | pubkey          |
+| state                 | [object Object] |
+| created_at            | i64             |
+| proposal_config       | pubkey          |
+| max_choices_per_voter | u16             |
+| seed                  | bytes           |
+| name                  | string          |
+| uri                   | string          |
+| tags                  | string          |
+| choices               | [object Object] |
+| bump_seed             | u8              |
+
+### ReceiptV0
+
+| Field            | Type   |
+| ---------------- | ------ |
+| token_voter      | pubkey |
+| mint             | pubkey |
+| amount           | u64    |
+| num_active_votes | u64    |
+| bump_seed        | u8     |
 
 ### RelinquishVoteArgsV0
 
@@ -202,22 +246,29 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | ------ | ---- |
 | choice | u16  |
 
+### TokenVoterV0
+
+| Field        | Type   |
+| ------------ | ------ |
+| authority    | pubkey |
+| deposit_mint | pubkey |
+| collection   | pubkey |
+| name         | string |
+| bump_seed    | u8     |
+
 ### VoteArgsV0
 
 | Field  | Type |
 | ------ | ---- |
 | choice | u16  |
 
-### UseMethod
+### VoteMarkerV0
 
-| Variant  | Fields |
-| -------- | ------ |
-| Burn     |        |
-| Multiple |        |
-| Single   |        |
-
-### CollectionDetails
-
-| Variant | Fields    |
-| ------- | --------- |
-| V1      | size: u64 |
+| Field       | Type   |
+| ----------- | ------ |
+| voter       | pubkey |
+| token_voter | pubkey |
+| proposal    | pubkey |
+| mint        | pubkey |
+| choices     | u16    |
+| bump_seed   | u8     |

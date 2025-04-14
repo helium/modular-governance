@@ -9,7 +9,7 @@ on:
       - main
       - develop
 env:
-  SOLANA_CLI_VERSION: 1.16.13
+  SOLANA_CLI_VERSION: 2.1.6
   NODE_VERSION: 18.12.1
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup/
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Cache Cargo registry + index
         id: cache-cargo-build
         with:
@@ -31,7 +31,7 @@ jobs:
           key: cargo-${{ runner.os }}-cargo-build-${{ hashFiles('**/Cargo.lock') }}
       - run: cargo build --locked
       - run: cargo fmt -- --check
-      - run: cargo clippy --all-targets -- -D warnings -A clippy::result_large_err -A clippy::too_many_arguments -A clippy::uninlined-format-args -A ambiguous_glob_reexports
+      - run: cargo clippy --all-targets -- -D warnings -A unexpected-cfgs -A clippy::result_large_err -A clippy::too_many_arguments -A clippy::uninlined-format-args -A ambiguous_glob_reexports
 
   test-unit:
     name: Rust Unit Tests
@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup/
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Cache Cargo registry + index
         id: cache-cargo-build
         with:

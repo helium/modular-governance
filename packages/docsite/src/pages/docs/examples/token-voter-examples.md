@@ -67,7 +67,7 @@ beforeEach(async () => {
     .preInstructions([
       ComputeBudgetProgram.setComputeUnitLimit({ units: 500000 }),
     ])
-    .accounts({
+    .accountsPartial({
       mint,
     })
     .rpcAndKeys({ skipPreflight: true }))
@@ -101,7 +101,7 @@ beforeEach(async () => {
       ],
       tags: ["test", "tags"],
     })
-    .accounts({ proposalConfig })
+    .accountsPartial({ proposalConfig })
     .rpcAndKeys({ skipPreflight: true }))
 
   await proposalProgram.methods
@@ -112,7 +112,7 @@ beforeEach(async () => {
         },
       },
     })
-    .accounts({ proposal })
+    .accountsPartial({ proposal })
     .rpc()
 })
 ```
@@ -161,7 +161,7 @@ beforeEach(async () => {
 ```typescript
         await program.methods
         .withdrawV0()
-        .accounts({ receipt, refund: me })
+        .accountsPartial({ receipt, refund: me })
         .rpc({ skipPreflight: true });
 
       expect(await program.account.receiptV0.fetchNullable(receipt!)).to.be.null
@@ -179,7 +179,7 @@ beforeEach(async () => {
         .voteV0({
           choice: 0,
         })
-        .accounts({ receipt, proposal })
+        .accountsPartial({ receipt, proposal })
         .rpcAndKeys({ skipPreflight: true });
 
       let acct = await proposalProgram.account.proposalV0.fetch(proposal!);
@@ -191,7 +191,7 @@ beforeEach(async () => {
         .relinquishVoteV0({
           choice: 0,
         })
-        .accounts({ receipt, proposal, refund: me })
+        .accountsPartial({ receipt, proposal, refund: me })
         .rpc({ skipPreflight: true });
 
       acct = await proposalProgram.account.proposalV0.fetch(proposal!);

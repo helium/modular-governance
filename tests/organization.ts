@@ -72,6 +72,7 @@ describe("organization", () => {
           voteController: me,
           stateController: me,
           onVoteHook: PublicKey.default,
+          authority: me,
         })
         .rpcAndKeys());
 
@@ -96,7 +97,7 @@ describe("organization", () => {
           proposalProgram: me,
           authority: PublicKey.default,
         })
-        .accounts({ organization })
+        .accountsPartial({ organization })
         .rpc({ skipPreflight: true });
 
       const acct = await program.account.organizationV0.fetch(organization!);
@@ -126,7 +127,7 @@ describe("organization", () => {
           ],
           tags: ["test", "tags"],
         })
-        .accounts({ organization })
+        .accountsPartial({ organization })
         .rpcAndKeys({ skipPreflight: true });
 
       const acct = await proposalProgram.account.proposalV0.fetch(proposal!);
@@ -167,7 +168,7 @@ describe("organization", () => {
             ],
             tags: ["test", "tags"],
           })
-          .accounts({ organization })
+          .accountsPartial({ organization })
           .rpcAndKeys({ skipPreflight: true }));
         await proposalProgram.methods
           .updateStateV0({
@@ -177,7 +178,7 @@ describe("organization", () => {
               },
             },
           })
-          .accounts({ proposal })
+          .accountsPartial({ proposal })
           .rpc();
       });
       it("allows voting on the proposal", async () => {
@@ -187,7 +188,7 @@ describe("organization", () => {
             weight: new anchor.BN(1),
             removeVote: false,
           })
-          .accounts({ proposal, voter: me })
+          .accountsPartial({ proposal, voter: me })
           .rpc({ skipPreflight: true });
       });
     });

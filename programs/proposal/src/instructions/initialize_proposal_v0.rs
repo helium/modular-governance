@@ -1,6 +1,6 @@
-use crate::errors::ErrorCode;
-use crate::state::*;
 use anchor_lang::prelude::*;
+
+use crate::{errors::ErrorCode, state::*};
 
 #[derive(InitSpace, AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct ChoiceArg {
@@ -90,7 +90,7 @@ pub fn handler(ctx: Context<InitializeProposalV0>, args: InitializeProposalArgsV
     name: args.name,
     uri: args.uri,
     choices: args.choices.into_iter().map(|c| c.into()).collect(),
-    bump_seed: ctx.bumps["proposal"],
+    bump_seed: ctx.bumps.proposal,
   });
   Ok(())
 }

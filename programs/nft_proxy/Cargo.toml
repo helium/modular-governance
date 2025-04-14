@@ -1,6 +1,6 @@
 [package]
 name = "nft-proxy"
-version = "0.0.1"
+version = "0.0.2"
 description = "Created with Anchor"
 edition = "2021"
 
@@ -9,6 +9,7 @@ crate-type = ["cdylib", "lib"]
 name = "nft_proxy"
 
 [features]
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
 no-entrypoint = []
 no-idl = []
 no-log-ix-name = []
@@ -17,8 +18,7 @@ default = []
 devnet = []
 
 [dependencies]
-anchor-lang = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism", features = ["init-if-needed"] }
-anchor-spl = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism", features = ["token"] }
+anchor-lang = { workspace = true }
+anchor-spl = { workspace = true }
 bytemuck = "1.14.0"
-time = "0.3.36"
 

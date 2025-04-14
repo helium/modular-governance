@@ -1,7 +1,7 @@
 name: Deploy Programs to devnet
 
 env:
-  SOLANA_CLI_VERSION: 1.16.13
+  SOLANA_CLI_VERSION: 2.1.6
   NODE_VERSION: 18.12.1
 
 on:
@@ -51,7 +51,7 @@ jobs:
         run: |
           find programs -type f -name '*.rs' -exec sed -i "s/b\"nJWGUMOK\"/b\"devnethelium5\"/g" {} \;
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         name: Cache Toml Cli
         id: cache-toml-cli
         with:
@@ -90,13 +90,13 @@ jobs:
           program-id: ${{ env.PROGRAM_ID }}
 
       - name: Store so files
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{matrix.program}}-so
           path: |
             ./target/deploy/${{env.PROGRAM_NAME}}.so
       - name: Store idl files
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{matrix.program}}-idl
           path: |
@@ -129,12 +129,12 @@ jobs:
           PROGRAM: ${{ matrix.program }}
 
       - name: Download a so files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: ${{matrix.program}}-so
           path: ./target/deploy/
       - name: Download idl files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: ${{matrix.program}}-idl
           path: ./target/idl/
@@ -148,7 +148,7 @@ jobs:
           program-id: ${{ env.PROGRAM_ID }}
           buffer-authority: ${{ secrets.DEVNET_MULTISIG_VAULT }}
       - name: Squads program upgrade
-        uses: helium/squads-program-upgrade@v0.3.1
+        uses: helium/squads-program-upgrade@v0.3.3
         with:
           network-url: "https://api.devnet.solana.com"
           program-multisig: ${{ secrets.DEVNET_MULTISIG }}

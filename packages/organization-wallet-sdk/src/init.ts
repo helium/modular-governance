@@ -15,7 +15,6 @@ export async function init(
 
   const organizationWalletProgram = new Program<OrganizationWallet>(
     idl as OrganizationWallet,
-    programId,
     provider,
     undefined,
     () => organizationWalletResolvers(programId)

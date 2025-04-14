@@ -94,7 +94,7 @@ describe("nft-voter", () => {
             },
           ],
         })
-        .accounts({
+        .accountsPartial({
           authority: me,
         })
         .rpcAndKeys());
@@ -106,7 +106,7 @@ describe("nft-voter", () => {
           name,
           authority: me,
         })
-        .accounts({
+        .accountsPartial({
           collection,
           proxyConfig,
         })
@@ -120,6 +120,7 @@ describe("nft-voter", () => {
           voteController: nftVoter!,
           stateController: me,
           onVoteHook: PublicKey.default,
+          authority: me,
         })
         .rpcAndKeys({ skipPreflight: true }));
       ({
@@ -142,7 +143,7 @@ describe("nft-voter", () => {
           ],
           tags: ["test", "tags"],
         })
-        .accounts({ proposalConfig })
+        .accountsPartial({ proposalConfig, owner: me, namespace: me, payer: me })
         .rpcAndKeys({ skipPreflight: true }));
 
       await proposalProgram.methods
@@ -153,7 +154,7 @@ describe("nft-voter", () => {
             },
           },
         })
-        .accounts({ proposal })
+        .accountsPartial({ proposal })
         .rpc();
     });
 
@@ -164,7 +165,7 @@ describe("nft-voter", () => {
         .voteV0({
           choice: 0,
         })
-        .accounts({ mint, proposal, nftVoter })
+        .accountsPartial({ mint, proposal, nftVoter })
         .rpcAndKeys({ skipPreflight: true });
 
       let acct = await proposalProgram.account.proposalV0.fetch(proposal!);
@@ -176,7 +177,7 @@ describe("nft-voter", () => {
         .relinquishVoteV0({
           choice: 0,
         })
-        .accounts({ mint, proposal, nftVoter })
+        .accountsPartial({ mint, proposal, nftVoter })
         .rpc({ skipPreflight: true });
 
       acct = await proposalProgram.account.proposalV0.fetch(proposal!);
@@ -193,7 +194,7 @@ describe("nft-voter", () => {
           .assignProxyV0({
             expirationTime: new BN(new Date().valueOf() / 1000 + 10000),
           })
-          .accounts({
+          .accountsPartial({
             proxyConfig,
             asset: mint,
             recipient: proxy.publicKey,
@@ -213,7 +214,7 @@ describe("nft-voter", () => {
           .proxiedVoteV0({
             choice: 0,
           })
-          .accounts({
+          .accountsPartial({
             mint,
             proposal,
             nftVoter,
@@ -232,7 +233,7 @@ describe("nft-voter", () => {
           .proxiedRelinquishVoteV0({
             choice: 0,
           })
-          .accounts({
+          .accountsPartial({
             mint,
             proposal,
             nftVoter,
@@ -255,7 +256,7 @@ describe("nft-voter", () => {
           .proxiedVoteV0({
             choice: 0,
           })
-          .accounts({
+          .accountsPartial({
             mint,
             proposal,
             nftVoter,
@@ -279,7 +280,7 @@ describe("nft-voter", () => {
           .relinquishVoteV0({
             choice: 0,
           })
-          .accounts({
+          .accountsPartial({
             mint,
             proposal,
             nftVoter,
@@ -295,7 +296,7 @@ describe("nft-voter", () => {
           .voteV0({
             choice: 1,
           })
-          .accounts({
+          .accountsPartial({
             mint,
             proposal,
             nftVoter,
@@ -322,7 +323,7 @@ describe("nft-voter", () => {
         )[0];
         await proxyProgram.methods
           .unassignProxyV0()
-          .accounts({
+          .accountsPartial({
             proxyAssignment: toUnassignProxy,
             prevProxyAssignment: myProxy,
             currentProxyAssignment: myProxy,

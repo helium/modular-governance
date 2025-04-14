@@ -1,45 +1,10 @@
-use crate::resolution_setting_seeds;
-use crate::state::*;
 use anchor_lang::prelude::*;
-use proposal::ProposalConfigV0;
-use proposal::ProposalState as CpiProposalState;
-use proposal::ProposalV0;
 use proposal::{
   cpi::{accounts::UpdateStateV0 as CpiUpdateStateV0, update_state_v0},
-  UpdateStateArgsV0 as CpiUpdateStateArgsV0,
+  ProposalConfigV0, ProposalState, ProposalV0, UpdateStateArgsV0 as CpiUpdateStateArgsV0,
 };
 
-#[derive(AnchorSerialize, AnchorDeserialize, Clone, Default, PartialEq)]
-pub enum ProposalState {
-  // Allow drafting proposal, in this state can add instructions and such to it
-  #[default]
-  Draft,
-  Cancelled,
-  Voting,
-  /// Allow voting controller to set to a custom state,
-  /// this allows for the implementation of more complex
-  /// states like Vetoed, drafts, signing off, etc.
-  /// This could have been an int, but then UIs would need to understand
-  /// the calling contract to grab an enum from it. Rather just have something clean
-  /// even though it takes a bit more space.
-  Custom {
-    name: String,
-    bin: Vec<u8>,
-  },
-}
-
-impl From<ProposalState> for CpiProposalState {
-  fn from(value: ProposalState) -> Self {
-    match value {
-      ProposalState::Draft => CpiProposalState::Draft,
-      ProposalState::Cancelled => CpiProposalState::Cancelled,
-      ProposalState::Voting => CpiProposalState::Voting {
-        start_ts: Clock::get().unwrap().unix_timestamp,
-      },
-      ProposalState::Custom { name, bin } => CpiProposalState::Custom { name, bin },
-    }
-  }
-}
+use crate::{resolution_setting_seeds, state::*};
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone, Default)]
 pub struct UpdateStateArgsV0 {
@@ -58,8 +23,8 @@ pub struct UpdateStateV0<'info> {
     has_one = proposal_config,
     constraint = match proposal.state {
       // Voting can only go to state cancelled.
-      CpiProposalState::Voting { .. } => args.new_state == ProposalState::Cancelled,
-      CpiProposalState::Resolved { .. } => false,
+      ProposalState::Voting { .. } => args.new_state == ProposalState::Cancelled,
+      ProposalState::Resolved { .. } => false,
       _ => true
     }
   )]
@@ -85,7 +50,7 @@ pub fn handler(ctx: Context<UpdateStateV0>, args: UpdateStateArgsV0) -> Result<(
       &[resolution_setting_seeds!(ctx.accounts.state_controller)],
     ),
     CpiUpdateStateArgsV0 {
-      new_state: args.new_state.into(),
+      new_state: args.new_state,
     },
   )?;
 

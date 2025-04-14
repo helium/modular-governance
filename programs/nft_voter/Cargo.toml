@@ -9,6 +9,7 @@ crate-type = ["cdylib", "lib"]
 name = "nft_voter"
 
 [features]
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build", "proposal/idl-build", "nft-proxy/idl-build"]
 no-entrypoint = []
 no-idl = []
 no-log-ix-name = []
@@ -18,9 +19,8 @@ devnet = []
 serde-feature = ["serde"]
 
 [dependencies]
-anchor-lang = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism", features = ["init-if-needed"] }
-anchor-spl = { git = "https://github.com/ChewingGlass/anchor", branch = "bugfix/cpi-polymorphism", features = ["token"] }
+anchor-lang = { workspace = true }
+anchor-spl = { workspace = true }
 proposal = { path = "../proposal", features = ["no-entrypoint", "cpi"] }
 nft-proxy = { path = "../nft_proxy", features = ["cpi"] }
 serde = { version = "1.0", features = ["derive"], optional = true }
-time = "0.3.36"

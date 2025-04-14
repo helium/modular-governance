@@ -59,7 +59,7 @@ describe("token-voter", () => {
         .preInstructions([
           ComputeBudgetProgram.setComputeUnitLimit({ units: 500000 }),
         ])
-        .accounts({
+        .accountsPartial({
           mint,
         })
         .rpcAndKeys({ skipPreflight: true }));
@@ -71,6 +71,7 @@ describe("token-voter", () => {
           voteController: tokenVoter!,
           stateController: me,
           onVoteHook: PublicKey.default,
+          authority: me,
         })
         .rpcAndKeys({ skipPreflight: true }));
       ({
@@ -93,7 +94,7 @@ describe("token-voter", () => {
           ],
           tags: ["test", "tags"],
         })
-        .accounts({ proposalConfig })
+        .accountsPartial({ proposalConfig })
         .rpcAndKeys({ skipPreflight: true }));
 
       await proposalProgram.methods
@@ -104,7 +105,7 @@ describe("token-voter", () => {
             },
           },
         })
-        .accounts({ proposal })
+        .accountsPartial({ proposal })
         .rpc();
     });
 
@@ -142,7 +143,11 @@ describe("token-voter", () => {
       it("allows withdrawing tokens", async () => {
         await program.methods
           .withdrawV0()
-          .accounts({ receipt, refund: me })
+          .accountsPartial({
+            receipt: receipt!,
+            refund: me,
+            payer: me,
+          })
           .rpc({ skipPreflight: true });
 
         expect(await program.account.receiptV0.fetchNullable(receipt!)).to.be
@@ -150,13 +155,19 @@ describe("token-voter", () => {
       });
 
       it("allows voting on and relinquishing votes on the proposal", async () => {
+        console.log("vote")
         const {
           pubkeys: { marker },
         } = await program.methods
           .voteV0({
             choice: 0,
           })
-          .accounts({ receipt, proposal })
+          .accounts({
+            payer: me,
+            receipt: receipt!,
+            proposal: proposal!,
+            proposalProgram: proposalProgram.programId,
+          })
           .rpcAndKeys({ skipPreflight: true });
 
         let acct = await proposalProgram.account.proposalV0.fetch(proposal!);
@@ -168,7 +179,13 @@ describe("token-voter", () => {
           .relinquishVoteV0({
             choice: 0,
           })
-          .accounts({ receipt, proposal, refund: me })
+          .accountsPartial({
+            marker: marker!,
+            receipt: receipt!,
+            proposal: proposal!,
+            refund: me,
+            proposalProgram: proposalProgram.programId,
+          })
           .rpc({ skipPreflight: true });
 
         acct = await proposalProgram.account.proposalV0.fetch(proposal!);

@@ -6,162 +6,163 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ## Instructions
 
-### initializeProxyConfigV0
+### assign_proxy_v0
 
 #### Accounts
 
-| Name          | Mutability | Signer | Docs |
-| ------------- | ---------- | ------ | ---- |
-| payer         | mut        | yes    |      |
-| authority     | immut      | no     |      |
-| proxyConfig   | mut        | no     |      |
-| systemProgram | immut      | no     |      |
+| Name                     | Mutability | Signer | Docs                                                                   |
+| ------------------------ | ---------- | ------ | ---------------------------------------------------------------------- |
+| payer                    | immut      | no     |                                                                        |
+| asset                    | immut      | no     |                                                                        |
+| approver                 | immut      | no     |                                                                        |
+| voter                    | immut      | no     | or in the case of a primary proxy (first in the line), Pubkey::default |
+| token_account            | immut      | no     |                                                                        |
+| proxy_config             | immut      | no     |                                                                        |
+| current_proxy_assignment | immut      | no     |                                                                        |
+| recipient                | immut      | no     |                                                                        |
+| next_proxy_assignment    | immut      | no     |                                                                        |
+| system_program           | immut      | no     |                                                                        |
 
 #### Args
 
-| Name | Type                        | Docs |
-| ---- | --------------------------- | ---- |
-| args | InitializeProxyConfigArgsV0 |      |
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-### assignProxyV0
-
-#### Accounts
-
-| Name                   | Mutability | Signer | Docs                                                                   |
-| ---------------------- | ---------- | ------ | ---------------------------------------------------------------------- |
-| payer                  | mut        | yes    |                                                                        |
-| asset                  | immut      | no     |                                                                        |
-| approver               | immut      | yes    |                                                                        |
-| voter                  | immut      | no     | or in the case of a primary proxy (first in the line), Pubkey::default |
-| tokenAccount           | immut      | no     |                                                                        |
-| proxyConfig            | immut      | no     |                                                                        |
-| currentProxyAssignment | mut        | no     |                                                                        |
-| recipient              | immut      | no     |                                                                        |
-| nextProxyAssignment    | mut        | no     |                                                                        |
-| systemProgram          | immut      | no     |                                                                        |
-
-#### Args
-
-| Name | Type              | Docs |
-| ---- | ----------------- | ---- |
-| args | AssignProxyArgsV0 |      |
-
-### unassignProxyV0
+### close_expired_proxy_v0
 
 #### Accounts
 
-| Name                   | Mutability | Signer | Docs                                                                   |
-| ---------------------- | ---------- | ------ | ---------------------------------------------------------------------- |
-| rentRefund             | mut        | no     |                                                                        |
-| asset                  | immut      | no     |                                                                        |
-| approver               | immut      | yes    |                                                                        |
-| voter                  | immut      | no     | or in the case of a primary proxy (first in the line), Pubkey::default |
-| tokenAccount           | immut      | no     |                                                                        |
-| currentProxyAssignment | immut      | no     |                                                                        |
-| prevProxyAssignment    | mut        | no     |                                                                        |
-| proxyAssignment        | mut        | no     |                                                                        |
-| proxyConfig            | immut      | no     |                                                                        |
-| systemProgram          | immut      | no     |                                                                        |
+| Name             | Mutability | Signer | Docs |
+| ---------------- | ---------- | ------ | ---- |
+| rent_refund      | immut      | no     |      |
+| proxy_assignment | immut      | no     |      |
+| system_program   | immut      | no     |      |
 
 #### Args
 
 | Name | Type | Docs |
 | ---- | ---- | ---- |
 
-### updateProxyConfigV0
+### initialize_proxy_config_v0
 
 #### Accounts
 
-| Name          | Mutability | Signer | Docs |
-| ------------- | ---------- | ------ | ---- |
-| payer         | mut        | yes    |      |
-| authority     | immut      | no     |      |
-| proxyConfig   | mut        | no     |      |
-| systemProgram | immut      | no     |      |
+| Name           | Mutability | Signer | Docs |
+| -------------- | ---------- | ------ | ---- |
+| payer          | immut      | no     |      |
+| authority      | immut      | no     |      |
+| proxy_config   | immut      | no     |      |
+| system_program | immut      | no     |      |
 
 #### Args
 
-| Name | Type                    | Docs |
-| ---- | ----------------------- | ---- |
-| args | UpdateProxyConfigArgsV0 |      |
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
-### unassignExpiredProxyV0
+### unassign_expired_proxy_v0
 
 #### Accounts
 
-| Name                | Mutability | Signer | Docs |
-| ------------------- | ---------- | ------ | ---- |
-| rentRefund          | mut        | no     |      |
-| prevProxyAssignment | mut        | no     |      |
-| proxyAssignment     | mut        | no     |      |
-| systemProgram       | immut      | no     |      |
+| Name                  | Mutability | Signer | Docs |
+| --------------------- | ---------- | ------ | ---- |
+| rent_refund           | immut      | no     |      |
+| prev_proxy_assignment | immut      | no     |      |
+| proxy_assignment      | immut      | no     |      |
+| system_program        | immut      | no     |      |
+
+#### Args
+
+| Name | Type | Docs |
+| ---- | ---- | ---- |
+
+### unassign_proxy_v0
+
+#### Accounts
+
+| Name                     | Mutability | Signer | Docs                                                                   |
+| ------------------------ | ---------- | ------ | ---------------------------------------------------------------------- |
+| rent_refund              | immut      | no     |                                                                        |
+| asset                    | immut      | no     |                                                                        |
+| approver                 | immut      | no     |                                                                        |
+| voter                    | immut      | no     | or in the case of a primary proxy (first in the line), Pubkey::default |
+| token_account            | immut      | no     |                                                                        |
+| current_proxy_assignment | immut      | no     |                                                                        |
+| prev_proxy_assignment    | immut      | no     |                                                                        |
+| proxy_assignment         | immut      | no     |                                                                        |
+| proxy_config             | immut      | no     |                                                                        |
+| system_program           | immut      | no     |                                                                        |
 
 #### Args
 
 | Name | Type | Docs |
 | ---- | ---- | ---- |
 
-### closeExpiredProxyV0
+### update_proxy_config_v0
 
 #### Accounts
 
-| Name            | Mutability | Signer | Docs |
-| --------------- | ---------- | ------ | ---- |
-| rentRefund      | mut        | no     |      |
-| proxyAssignment | mut        | no     |      |
-| systemProgram   | immut      | no     |      |
+| Name           | Mutability | Signer | Docs |
+| -------------- | ---------- | ------ | ---- |
+| payer          | immut      | no     |      |
+| authority      | immut      | no     |      |
+| proxy_config   | immut      | no     |      |
+| system_program | immut      | no     |      |
 
 #### Args
 
-| Name | Type | Docs |
-| ---- | ---- | ---- |
+| Name | Type            | Docs |
+| ---- | --------------- | ---- |
+| args | [object Object] |      |
 
 ## Accounts
 
-### ProxyConfigV0
-
-| Field        | Type      |
-| ------------ | --------- |
-| authority    | publicKey |
-| name         | string    |
-| maxProxyTime | i64       |
-| seasons      | SeasonV0  |
-
 ### ProxyAssignmentV0
 
-| Field          | Type      |
-| -------------- | --------- |
-| voter          | publicKey |
-| proxyConfig    | publicKey |
-| asset          | publicKey |
-| index          | u16       |
-| nextVoter      | publicKey |
-| rentRefund     | publicKey |
-| expirationTime | i64       |
-| bumpSeed       | u8        |
+undefined
+
+### ProxyConfigV0
+
+undefined
 
 ## Types
 
 ### AssignProxyArgsV0
 
-| Field          | Type |
-| -------------- | ---- |
-| expirationTime | i64  |
+| Field           | Type |
+| --------------- | ---- |
+| expiration_time | i64  |
 
 ### InitializeProxyConfigArgsV0
 
-| Field        | Type     |
-| ------------ | -------- |
-| name         | string   |
-| maxProxyTime | i64      |
-| seasons      | SeasonV0 |
+| Field          | Type            |
+| -------------- | --------------- |
+| name           | string          |
+| max_proxy_time | i64             |
+| seasons        | [object Object] |
 
-### UpdateProxyConfigArgsV0
+### ProxyAssignmentV0
 
-| Field        | Type            |
-| ------------ | --------------- |
-| maxProxyTime | i64             |
-| seasons      | [object Object] |
+| Field           | Type   |
+| --------------- | ------ |
+| voter           | pubkey |
+| proxy_config    | pubkey |
+| asset           | pubkey |
+| index           | u16    |
+| next_voter      | pubkey |
+| rent_refund     | pubkey |
+| expiration_time | i64    |
+| bump_seed       | u8     |
+
+### ProxyConfigV0
+
+| Field          | Type            |
+| -------------- | --------------- |
+| authority      | pubkey          |
+| name           | string          |
+| max_proxy_time | i64             |
+| seasons        | [object Object] |
 
 ### SeasonV0
 
@@ -169,3 +170,10 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 | ----- | ---- |
 | start | i64  |
 | end   | i64  |
+
+### UpdateProxyConfigArgsV0
+
+| Field          | Type            |
+| -------------- | --------------- |
+| max_proxy_time | i64             |
+| seasons        | [object Object] |
