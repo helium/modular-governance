@@ -109,7 +109,7 @@
   resolved "https://registry.yarnpkg.com/@coral-xyz/anchor-errors/-/anchor-errors-0.31.0.tgz#dfc7329fca152b598842f68175efe5000825b51b"
   integrity sha512-SUERksFSQ+4F11hkROIwHq4mcoSMXJxwVWLoklefi4dU679zVWFVcTq6O7otvjY8wlUaRXeE+iYcQWZTw2ll6w==
 
-"@coral-xyz/anchor@0.28.0", "@coral-xyz/anchor@^0.28.0":
+"@coral-xyz/anchor@0.28.0":
   version "0.28.0"
   resolved "https://registry.yarnpkg.com/@coral-xyz/anchor/-/anchor-0.28.0.tgz#8345c3c9186a91f095f704d7b90cd256f7e8b2dc"
   integrity sha512-kQ02Hv2ZqxtWP30WN1d4xxT4QqlOXYDxmEd3k/bbneqhV3X5QMO4LAtoUFs7otxyivOgoqam5Il5qx81FuI4vw==
@@ -611,6 +611,14 @@
     "@solana/spl-token" "^0.3.8"
     "@solana/web3.js" "^1.91.1"
 
+"@helium/anchor-resolvers@^0.10.15":
+  version "0.10.15"
+  resolved "https://registry.yarnpkg.com/@helium/anchor-resolvers/-/anchor-resolvers-0.10.15.tgz#f24d66c8c648bcb7763bf2ddb2586afaba02081a"
+  integrity sha512-pUtu/z3iGpdBu8r7kIED+MrJuxoarzaETC16ohm0yRzWlzxveDCnGHAjrglOcUtX83gtkuO/WoSCREa+5+Vomw==
+  dependencies:
+    "@solana/spl-token" "^0.3.8"
+    "@solana/web3.js" "^1.91.1"
+
 "@helium/helium-react-hooks@^0.10.0-alpha.3":
   version "0.10.0-alpha.6"
   resolved "https://registry.yarnpkg.com/@helium/helium-react-hooks/-/helium-react-hooks-0.10.0-alpha.6.tgz#8078b5dfbe45935f21ad3dcec1a346610d659a9f"
@@ -624,14 +632,6 @@
     bs58 "^4.0.1"
     pako "^2.0.3"
     react-async-hook "^4.0.0"
-
-"@helium/modular-governance-idls@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@helium/modular-governance-idls/-/modular-governance-idls-0.0.10.tgz#8384cdca7c44949cbe33c776b44cca668a704315"
-  integrity sha512-fMDYhCnU18uCKzkeD8pFED3ubkKzeqw58EUZt7Qk4mxWQGM4KJ3qd1L9dp5jh9F4pVWohZ2d5EK5VqakC8JVGg==
-  dependencies:
-    "@coral-xyz/anchor" "^0.28.0"
-    "@solana/web3.js" "^1.78.4"
 
 "@helium/spl-utils@^0.10.0-alpha.6":
   version "0.10.0-alpha.6"
