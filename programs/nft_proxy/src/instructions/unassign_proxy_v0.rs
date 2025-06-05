@@ -65,5 +65,12 @@ pub struct UnassignProxyV0<'info> {
 pub fn handler(ctx: Context<UnassignProxyV0>) -> Result<()> {
   ctx.accounts.prev_proxy_assignment.next_voter = Pubkey::default();
 
+  if ctx.accounts.prev_proxy_assignment.index == 0 {
+    ctx
+      .accounts
+      .prev_proxy_assignment
+      .close(ctx.accounts.rent_refund.to_account_info())?;
+  }
+
   Ok(())
 }

@@ -331,10 +331,8 @@ describe("nft-voter", () => {
           .rpc({ skipPreflight: true });
 
         expect(
-          (
-            await proxyProgram.account.proxyAssignmentV0.fetch(myProxy)
-          ).nextVoter.toBase58()
-        ).to.eq(PublicKey.default.toBase58());
+          await proxyProgram.account.proxyAssignmentV0.fetchNullable(myProxy)
+        ).to.be.null;
         expect(
           await proxyProgram.account.proxyAssignmentV0.fetchNullable(
             toUnassignProxy
