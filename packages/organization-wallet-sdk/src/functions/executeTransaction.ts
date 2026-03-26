@@ -1,4 +1,4 @@
-import { Program } from "@coral-xyz/anchor";
+import { Program } from "@anchor-lang/core";
 import { OrganizationWallet } from "@helium/modular-governance-idls/lib/types/organization_wallet";
 import { PublicKey } from "@solana/web3.js";
 

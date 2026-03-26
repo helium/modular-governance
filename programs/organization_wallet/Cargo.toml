@@ -20,5 +20,9 @@ devnet = []
 [dependencies]
 anchor-lang = { workspace = true }
 anchor-spl = { workspace = true }
+solana-program = { workspace = true }
 proposal = { path = "../proposal", features = ["no-entrypoint", "cpi"] }
 organization = { path = "../organization", features = ["no-entrypoint", "cpi"] }
+
+[lints]
+workspace = true

@@ -1,5 +1,5 @@
 import { TokenVoter } from "@helium/modular-governance-idls/lib/types/token_voter";
-import { BN, Program } from "@coral-xyz/anchor";
+import { BN, Program } from "@anchor-lang/core";
 import { Keypair, PublicKey, SystemProgram } from "@solana/web3.js";
 import { receiptKey } from "../pdas";
 import {

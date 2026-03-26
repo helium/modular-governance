@@ -10,7 +10,7 @@ use crate::state::{ProxyAssignmentV0, ProxyConfigV0};
 pub struct UnassignProxyV0<'info> {
   /// CHECK: Receiving rent for closing
   #[account(mut)]
-  pub rent_refund: AccountInfo<'info>,
+  pub rent_refund: UncheckedAccount<'info>,
   #[account(
     constraint = asset.supply == 1,
     constraint = asset.decimals == 0
@@ -29,7 +29,7 @@ pub struct UnassignProxyV0<'info> {
     constraint = (current_proxy_assignment.index != 0 && current_proxy_assignment.voter == voter.key())
              || (current_proxy_assignment.index == 0 && voter.key() == Pubkey::default())
   )]
-  pub voter: AccountInfo<'info>,
+  pub voter: UncheckedAccount<'info>,
   #[account(
     constraint = token_account.mint == asset.key(),
     constraint = token_account.amount == 1,

@@ -1,5 +1,5 @@
-import * as anchor from "@coral-xyz/anchor";
-import { Program } from "@coral-xyz/anchor";
+import * as anchor from "@anchor-lang/core";
+import { Program } from "@anchor-lang/core";
 import { Proposal } from "../target/types/proposal";
 import { Keypair, PublicKey } from "@solana/web3.js";
 import { PROGRAM_ID, init } from "@helium/proposal-sdk";

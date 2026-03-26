@@ -15,10 +15,10 @@ pub struct VoteArgsV0 {
 pub struct VoteV0<'info> {
   pub vote_controller: Signer<'info>,
   /// CHECK: Just for indexing
-  pub voter: AccountInfo<'info>,
+  pub voter: UncheckedAccount<'info>,
   /// CHECK: Checked via cpi to the on vote hook, and has_ones
   #[account(mut)]
-  pub state_controller: AccountInfo<'info>,
+  pub state_controller: UncheckedAccount<'info>,
   #[account(
       has_one = on_vote_hook,
       has_one = state_controller,
@@ -32,7 +32,7 @@ pub struct VoteV0<'info> {
   )]
   pub proposal: Account<'info, ProposalV0>,
   /// CHECK: Checked via has_one
-  pub on_vote_hook: AccountInfo<'info>,
+  pub on_vote_hook: UncheckedAccount<'info>,
 }
 
 pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
@@ -54,13 +54,13 @@ pub fn handler(ctx: Context<VoteV0>, args: VoteArgsV0) -> Result<()> {
     msg!("Calling on vote hook {}", ctx.accounts.on_vote_hook.key());
     let resolution_status = on_vote_v0(
       CpiContext::new_with_signer(
-        ctx.accounts.on_vote_hook.clone(),
+        ctx.accounts.on_vote_hook.key(),
         OnVoteV0 {
-          voter: ctx.accounts.voter.to_account_info().clone(),
-          vote_controller: ctx.accounts.vote_controller.to_account_info().clone(),
-          state_controller: ctx.accounts.state_controller.clone(),
-          proposal: ctx.accounts.proposal.to_account_info().clone(),
-          proposal_config: ctx.accounts.proposal_config.to_account_info().clone(),
+          voter: ctx.accounts.voter.to_account_info(),
+          vote_controller: ctx.accounts.vote_controller.to_account_info(),
+          state_controller: ctx.accounts.state_controller.to_account_info(),
+          proposal: ctx.accounts.proposal.to_account_info(),
+          proposal_config: ctx.accounts.proposal_config.to_account_info(),
         },
         &[proposal_seeds!(ctx.accounts.proposal)],
       ),

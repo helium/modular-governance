@@ -15,7 +15,7 @@ pub struct InitializeProxyConfigV0<'info> {
   #[account(mut)]
   pub payer: Signer<'info>,
   /// CHECK: The authority of this config
-  pub authority: AccountInfo<'info>,
+  pub authority: UncheckedAccount<'info>,
   #[account(
     init,
     payer = payer,

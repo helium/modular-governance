@@ -26,7 +26,7 @@
     "prebuild": "npm run clean && npm run package"
   },
   "dependencies": {
-    "@coral-xyz/anchor": "^0.31.0",
+    "@anchor-lang/core": "^1.0.0-rc.5",
     "@solana/web3.js": "^1.78.4"
   },
   "devDependencies": {

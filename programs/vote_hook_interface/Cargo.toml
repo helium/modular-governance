@@ -20,3 +20,6 @@ devnet = []
 [dependencies]
 anchor-lang = { workspace = true }
 anchor-spl = { workspace = true }
+
+[lints]
+workspace = true

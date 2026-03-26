@@ -11,8 +11,9 @@ nft_voter = "nftvLQ5t6xe2nQF1NBmBBmn15ed59tU6vSCkwQNEqdc"
 organization = "orgdXvHVLkWgBYerptASkAwkZAE563CJUu717dMNx5f"
 organization_wallet = "orgwPMqJs9xft8UefUdKfyBwg6GDnN6oLhpMaKa6nJg"
 
-[registry]
-url = "https://api.apr.dev"
+[toolchain]
+anchor_version = "1.0.0-rc.5"
+solana_version = "3.1.10"
 
 [provider]
 cluster = "localnet"

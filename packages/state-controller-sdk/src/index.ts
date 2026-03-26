@@ -1,5 +1,5 @@
 import { StateController } from "@helium/modular-governance-idls/lib/types/state_controller";
-import { AnchorProvider, Idl, Program } from "@coral-xyz/anchor";
+import { AnchorProvider, Idl, Program } from "@anchor-lang/core";
 import { PublicKey } from "@solana/web3.js";
 import { PROGRAM_ID } from "./constants";
 import { stateControllerResolvers } from "./resolvers";

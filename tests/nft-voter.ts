@@ -1,5 +1,5 @@
-import * as anchor from "@coral-xyz/anchor";
-import { Program } from "@coral-xyz/anchor";
+import * as anchor from "@anchor-lang/core";
+import { Program } from "@anchor-lang/core";
 import { PROGRAM_ID, init } from "@helium/nft-voter-sdk";
 import {
   PROGRAM_ID as PROPOSAL_PID,

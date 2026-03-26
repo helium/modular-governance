@@ -80,7 +80,7 @@ impl<'info> InitializeTokenVoterV0<'info> {
       to: self.token_account.to_account_info(),
       authority: self.token_voter.to_account_info(),
     };
-    CpiContext::new(self.token_program.to_account_info(), cpi_accounts)
+    CpiContext::new(Token::id(), cpi_accounts)
   }
 }
 
@@ -102,19 +102,15 @@ pub fn handler(
 
   create_metadata_accounts_v3(
     CpiContext::new_with_signer(
-      ctx
-        .accounts
-        .token_metadata_program
-        .to_account_info()
-        .clone(),
+      Metadata::id(),
       CreateMetadataAccountsV3 {
-        metadata: ctx.accounts.metadata.to_account_info().clone(),
-        mint: ctx.accounts.collection.to_account_info().clone(),
-        mint_authority: ctx.accounts.token_voter.to_account_info().clone(),
-        payer: ctx.accounts.payer.to_account_info().clone(),
-        update_authority: ctx.accounts.token_voter.to_account_info().clone(),
-        system_program: ctx.accounts.system_program.to_account_info().clone(),
-        rent: ctx.accounts.rent.to_account_info().clone(),
+        metadata: ctx.accounts.metadata.to_account_info(),
+        mint: ctx.accounts.collection.to_account_info(),
+        mint_authority: ctx.accounts.token_voter.to_account_info(),
+        payer: ctx.accounts.payer.to_account_info(),
+        update_authority: ctx.accounts.token_voter.to_account_info(),
+        system_program: ctx.accounts.system_program.to_account_info(),
+        rent: ctx.accounts.rent.to_account_info(),
       },
       signer_seeds,
     ),
@@ -134,21 +130,17 @@ pub fn handler(
 
   create_master_edition_v3(
     CpiContext::new_with_signer(
-      ctx
-        .accounts
-        .token_metadata_program
-        .to_account_info()
-        .clone(),
+      Metadata::id(),
       CreateMasterEditionV3 {
-        edition: ctx.accounts.master_edition.to_account_info().clone(),
-        mint: ctx.accounts.collection.to_account_info().clone(),
-        update_authority: ctx.accounts.token_voter.to_account_info().clone(),
-        mint_authority: ctx.accounts.token_voter.to_account_info().clone(),
-        metadata: ctx.accounts.metadata.to_account_info().clone(),
-        payer: ctx.accounts.payer.to_account_info().clone(),
-        token_program: ctx.accounts.token_program.to_account_info().clone(),
-        system_program: ctx.accounts.system_program.to_account_info().clone(),
-        rent: ctx.accounts.rent.to_account_info().clone(),
+        edition: ctx.accounts.master_edition.to_account_info(),
+        mint: ctx.accounts.collection.to_account_info(),
+        update_authority: ctx.accounts.token_voter.to_account_info(),
+        mint_authority: ctx.accounts.token_voter.to_account_info(),
+        metadata: ctx.accounts.metadata.to_account_info(),
+        payer: ctx.accounts.payer.to_account_info(),
+        token_program: ctx.accounts.token_program.to_account_info(),
+        system_program: ctx.accounts.system_program.to_account_info(),
+        rent: ctx.accounts.rent.to_account_info(),
       },
       signer_seeds,
     ),

@@ -85,15 +85,7 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 undefined
 
-### OrganizationV0
-
-undefined
-
 ### OrganizationWalletV0
-
-undefined
-
-### ProposalV0
 
 undefined
 

@@ -20,5 +20,9 @@ devnet = []
 [dependencies]
 anchor-lang = { workspace = true }
 anchor-spl = { workspace = true }
+solana-program = { workspace = true }
 bytemuck = "1.14.0"
 
+
+[lints]
+workspace = true

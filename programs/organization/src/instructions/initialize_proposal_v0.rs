@@ -46,9 +46,9 @@ pub struct InitializeProposalV0<'info> {
       bump,
     )]
   /// CHECK: Checked via cpi
-  pub proposal: AccountInfo<'info>,
+  pub proposal: UncheckedAccount<'info>,
   /// CHECK: Checked via cpi
-  pub proposal_config: AccountInfo<'info>,
+  pub proposal_config: UncheckedAccount<'info>,
   #[account(
       mut,
       has_one = proposal_program,
@@ -66,7 +66,7 @@ pub struct InitializeProposalV0<'info> {
 pub fn handler(ctx: Context<InitializeProposalV0>, args: InitializeProposalArgsV0) -> Result<()> {
   cpi_initialize_proposal(
     CpiContext::new_with_signer(
-      ctx.accounts.proposal_program.to_account_info(),
+      ctx.accounts.proposal_program.key(),
       CpiInitializeProposal {
         namespace: ctx.accounts.organization.to_account_info(),
         owner: ctx.accounts.owner.to_account_info(),

@@ -25,7 +25,7 @@ pub struct ResolveV0<'info> {
   )]
   pub proposal_config: Account<'info, ProposalConfigV0>,
   /// CHECK: Checked via `owner` on proposal
-  pub proposal_program: AccountInfo<'info>,
+  pub proposal_program: UncheckedAccount<'info>,
 }
 
 pub fn handler(ctx: Context<ResolveV0>) -> Result<()> {
@@ -33,11 +33,11 @@ pub fn handler(ctx: Context<ResolveV0>) -> Result<()> {
   if let Some(resolution) = ctx.accounts.state_controller.settings.resolution(&proposal) {
     update_state_v0(
       CpiContext::new_with_signer(
-        ctx.accounts.proposal_program.to_account_info().clone(),
+        ctx.accounts.proposal_program.key(),
         UpdateStateV0 {
-          state_controller: ctx.accounts.state_controller.to_account_info().clone(),
-          proposal: ctx.accounts.proposal.to_account_info().clone(),
-          proposal_config: ctx.accounts.proposal_config.to_account_info().clone(),
+          state_controller: ctx.accounts.state_controller.to_account_info(),
+          proposal: ctx.accounts.proposal.to_account_info(),
+          proposal_config: ctx.accounts.proposal_config.to_account_info(),
         },
         &[resolution_setting_seeds!(ctx.accounts.state_controller)],
       ),

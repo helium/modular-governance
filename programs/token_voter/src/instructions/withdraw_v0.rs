@@ -100,7 +100,7 @@ impl<'info> WithdrawV0<'info> {
       edition: self.master_edition.to_account_info(),
       spl_token: self.token_program.to_account_info(),
     };
-    CpiContext::new(self.token_metadata_program.to_account_info(), cpi_accounts)
+    CpiContext::new(Metadata::id(), cpi_accounts)
   }
 
   fn withdraw_transfer_ctx(&self) -> CpiContext<'_, '_, '_, 'info, Transfer<'info>> {
@@ -109,7 +109,7 @@ impl<'info> WithdrawV0<'info> {
       to: self.token_account.to_account_info(),
       authority: self.receipt.to_account_info(),
     };
-    CpiContext::new(self.token_program.to_account_info(), cpi_accounts)
+    CpiContext::new(Token::id(), cpi_accounts)
   }
 
   fn withdraw_close_ctx(&self) -> CpiContext<'_, '_, '_, 'info, CloseAccount<'info>> {
@@ -118,7 +118,7 @@ impl<'info> WithdrawV0<'info> {
       account: self.vault.to_account_info(),
       destination: self.refund.to_account_info(),
     };
-    CpiContext::new(self.token_program.to_account_info(), cpi_accounts)
+    CpiContext::new(Token::id(), cpi_accounts)
   }
 }
 
