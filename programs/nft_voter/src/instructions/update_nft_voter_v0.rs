@@ -7,7 +7,7 @@ pub struct UpdateNftVoterV0<'info> {
   pub authority: Signer<'info>,
   pub proxy_config: Option<Account<'info, ProxyConfigV0>>,
   /// CHECK: Set if setting the new auth
-  pub new_authority: Option<AccountInfo<'info>>,
+  pub new_authority: Option<UncheckedAccount<'info>>,
   #[account(
     has_one = authority
   )]

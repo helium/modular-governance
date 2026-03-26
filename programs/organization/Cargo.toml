@@ -21,3 +21,6 @@ devnet = []
 anchor-lang = { workspace = true }
 anchor-spl = { workspace = true }
 proposal = { path = "../proposal", features = ["no-entrypoint", "cpi"] }
+
+[lints]
+workspace = true

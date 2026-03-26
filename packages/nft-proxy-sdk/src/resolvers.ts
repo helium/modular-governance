@@ -1,4 +1,4 @@
-import * as anchor from "@coral-xyz/anchor";
+import * as anchor from "@anchor-lang/core";
 import { combineResolvers, resolveIndividual } from "@helium/anchor-resolvers";
 import { PublicKey } from "@solana/web3.js";
 import { getAccount } from "@solana/spl-token";

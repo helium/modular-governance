@@ -37,7 +37,7 @@ pub struct AssignProxyV0<'info> {
     constraint = (current_proxy_assignment.index != 0 && current_proxy_assignment.voter == voter.key())
              || (current_proxy_assignment.index == 0 && voter.key() == Pubkey::default())
   )]
-  pub voter: AccountInfo<'info>,
+  pub voter: UncheckedAccount<'info>,
   #[account(
     constraint = token_account.mint == asset.key(),
     constraint = token_account.amount == 1,
@@ -70,7 +70,7 @@ pub struct AssignProxyV0<'info> {
       None => true
     }
   )]
-  pub recipient: AccountInfo<'info>,
+  pub recipient: UncheckedAccount<'info>,
   #[account(
     init_if_needed,
     payer = payer,

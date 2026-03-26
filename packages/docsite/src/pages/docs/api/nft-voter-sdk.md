@@ -150,22 +150,6 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 undefined
 
-### ProposalConfigV0
-
-undefined
-
-### ProposalV0
-
-undefined
-
-### ProxyAssignmentV0
-
-undefined
-
-### ProxyConfigV0
-
-undefined
-
 ### VoteMarkerV0
 
 undefined

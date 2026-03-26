@@ -1,8 +1,8 @@
 use crate::error::ErrorCode;
 use crate::{state::*, wallet_seeds};
-use anchor_lang::solana_program::instruction::Instruction;
-use anchor_lang::{prelude::*, solana_program};
+use anchor_lang::prelude::*;
 use proposal::{ProposalState, ProposalV0};
+use solana_program::{instruction::Instruction, program::invoke_signed};
 
 #[derive(Accounts)]
 pub struct ExecuteTransactionV0<'info> {
@@ -118,7 +118,7 @@ pub fn handler(ctx: Context<ExecuteTransactionV0>) -> Result<()> {
         is_writable: acct.is_writable,
       })
     }
-    solana_program::program::invoke_signed(
+    invoke_signed(
       &Instruction {
         program_id: *ctx.remaining_accounts[ix.program_id_index as usize].key,
         accounts: account_infos,

@@ -8,7 +8,7 @@ use crate::state::*;
 pub struct UnassignExpiredProxyV0<'info> {
   /// CHECK: Receiving rent for closing
   #[account(mut)]
-  pub rent_refund: AccountInfo<'info>,
+  pub rent_refund: UncheckedAccount<'info>,
   #[account(
     mut,
     constraint = prev_proxy_assignment.next_voter == proxy_assignment.voter,

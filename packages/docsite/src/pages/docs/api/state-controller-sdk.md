@@ -76,14 +76,6 @@ If you are looking for a quick start guide, check out the [Getting Started](/doc
 
 ## Accounts
 
-### ProposalConfigV0
-
-undefined
-
-### ProposalV0
-
-undefined
-
 ### ResolutionSettingsV0
 
 undefined

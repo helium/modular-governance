@@ -13,7 +13,7 @@ pub struct ProxiedRelinquishVoteV0<'info> {
   /// CHECK: You're getting sol why do you care?
   /// Account to receive sol rent_refund if marker is closed
   #[account(mut)]
-  pub rent_refund: AccountInfo<'info>,
+  pub rent_refund: UncheckedAccount<'info>,
   #[account(
     mut,
     seeds = [b"marker", nft_voter.key().as_ref(), mint.key().as_ref(), proposal.key().as_ref()],
@@ -54,14 +54,14 @@ pub struct ProxiedRelinquishVoteV0<'info> {
   pub proposal_config: Account<'info, ProposalConfigV0>,
   /// CHECK: Checked via cpi
   #[account(mut)]
-  pub state_controller: AccountInfo<'info>,
+  pub state_controller: UncheckedAccount<'info>,
   /// CHECK: Checked via has_one
-  pub on_vote_hook: AccountInfo<'info>,
+  pub on_vote_hook: UncheckedAccount<'info>,
   /// CHECK: Checked via constraint
   #[account(
     constraint = *proposal.to_account_info().owner == proposal_program.key()
   )]
-  pub proposal_program: AccountInfo<'info>,
+  pub proposal_program: UncheckedAccount<'info>,
   pub system_program: Program<'info, System>,
 }
 
@@ -84,7 +84,7 @@ pub fn handler(ctx: Context<ProxiedRelinquishVoteV0>, args: RelinquishVoteArgsV0
 
   proposal::cpi::vote_v0(
     CpiContext::new_with_signer(
-      ctx.accounts.proposal_program.to_account_info(),
+      ctx.accounts.proposal_program.key(),
       proposal::cpi::accounts::VoteV0 {
         voter: ctx.accounts.voter.to_account_info(),
         vote_controller: ctx.accounts.nft_voter.to_account_info(),

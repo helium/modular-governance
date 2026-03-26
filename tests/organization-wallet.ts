@@ -1,5 +1,5 @@
-import * as anchor from "@coral-xyz/anchor";
-import { Program } from "@coral-xyz/anchor";
+import * as anchor from "@anchor-lang/core";
+import { Program } from "@anchor-lang/core";
 import { Proposal } from "../target/types/proposal";
 import { Organization } from "../target/types/organization";
 import { OrganizationWallet } from "../target/types/organization_wallet";

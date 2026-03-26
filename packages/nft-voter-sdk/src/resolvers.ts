@@ -1,6 +1,6 @@
 import { ataResolver, combineResolvers, resolveIndividual } from "@helium/anchor-resolvers";
 import { PROGRAM_ID } from "./constants";
-import * as anchor from "@coral-xyz/anchor";
+import * as anchor from "@anchor-lang/core";
 import { PublicKey } from "@solana/web3.js";
 import { proxyAssignmentKey, nftProxyResolvers } from "@helium/nft-proxy-sdk";
 import { init } from ".";

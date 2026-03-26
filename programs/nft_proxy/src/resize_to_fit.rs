@@ -1,10 +1,9 @@
 use crate::error::ErrorCode;
 use std::io::Write;
 
-use anchor_lang::{
-  prelude::*,
-  solana_program::{entrypoint::MAX_PERMITTED_DATA_INCREASE, program::invoke, system_instruction},
-};
+use anchor_lang::prelude::*;
+use anchor_lang::solana_program::{program::invoke, system_instruction};
+use solana_program::account_info::MAX_PERMITTED_DATA_INCREASE;
 
 pub struct IgnoreWriter {
   pub total: usize,
@@ -48,7 +47,7 @@ pub fn resize_to_fit<'info, T: AccountSerialize + AccountDeserialize + Owner + C
     ],
   )?;
 
-  account.to_account_info().realloc(new_size, false)?;
+  account.to_account_info().resize(new_size)?;
 
   Ok(())
 }

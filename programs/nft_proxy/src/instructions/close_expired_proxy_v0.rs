@@ -8,7 +8,7 @@ use crate::state::*;
 pub struct CloseExpiredProxyV0<'info> {
   /// CHECK: Receiving rent for closing
   #[account(mut)]
-  pub rent_refund: AccountInfo<'info>,
+  pub rent_refund: UncheckedAccount<'info>,
   #[account(
     mut,
     close = rent_refund,

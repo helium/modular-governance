@@ -1,4 +1,4 @@
-import { CustomAccountResolver, Idl, IdlTypes } from "@coral-xyz/anchor";
+import { CustomAccountResolver, Idl, IdlTypes } from "@anchor-lang/core";
 import { OrganizationWallet } from "@helium/modular-governance-idls/lib/types/organization_wallet";
 import { AccountMeta, PublicKey, TransactionInstruction } from "@solana/web3.js";
 
